@@ -6,7 +6,7 @@ Main function:
 (       For each number less than the input
 ƒ1      Call function 1 (returns false if the number is divisible by another number)
         Implicit end loop
-?       If the last value is true (if f1 never returned False and the input is not 0)
+?       If the last value is true (if f1 never returned false and the input is not 0)
 p       Push 'p' to the stack
         Implicit output.
 
@@ -16,3 +16,5 @@ Function 1:
 ¿       If the last value is false (if the quotient is 0)
 f       Push 'f' (false value) to the stack
 :       Return the last value of the stack
+
+Note: The program can be golfed to 8 bytes as "(%¿f:)?p". It was left at 11 bytes for readability.

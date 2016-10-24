@@ -45,7 +45,8 @@ be executed for each one.
 
 ## Loops
 Loops iterate over a function. The return stacks of the function will not returned until the loop is finished executing,
-and will be concatenated before being returned.
+and will be concatenated before being returned. If the loop has a closing brace, the functions inside the loop are
+implicitly converted into an abstract function.
 
 - '?(': Iterates for as long as the conditional is true. Conditional defaults to '?'. If the preceding token is numeric,
         or the last item on the stack is numeric, iterates n times instead, pushing and popping n from the stack each loop.
