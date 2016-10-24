@@ -5,7 +5,7 @@ able to write complex programs easily, an ability that other golfing languages d
 # Definitions
 
 ## Functions
-Functions are declared by creating a new line in the Nylon code. Functions can be called using ƒn, where n is the line
+Functions are declared by creating a new line in the Nylon code. Functions can be called using "ƒn", where n is the line
 on which the function is declared.
 
 Functions operate on a new stack that contains only the arguments passed to it. Functions contain a return stack which
@@ -18,8 +18,8 @@ current stack.
 - '!': Terminates the function.
 
 ## Arguments
-Arguments are passed to functions using "Ma ". More than one argument must be delineated by a comma (eg. "Ma,a,a "). If the
-arguments are type-distinguishable (eg. Number,String), the comma can be removed.
+Arguments are passed to functions using "ƒa ". More than one argument must be delineated by a comma (eg. "ƒa,a,a "). If
+the arguments are type-distinguishable (eg. Number,String), the comma can be removed.
 
 If the argument is numeric, a-z may represent 0-25 and A-Z may represent 26-51. Numeric arguments also take numbers.
 If the argument is a string, [a-zA-Z ] map to their respective characters. "..." delineates a String literal.
