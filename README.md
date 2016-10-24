@@ -40,8 +40,8 @@ a FunctionSkip object to emulate being an if statement.
 - '¡': Pushes a FunctionSkip object to the stack.
 
 ## Switches
-Switches will execute a function of a list of functions given an argument. If given a number or a character, it will
-execute the nth function. If given a String, that string will be converted into a list of characters and the switch will
+Switches will execute a function in a list of functions given an argument. If given a number or a character, it will
+execute the nth function. If given a string, that string will be converted into a list of characters and the switch will
 be executed for each one.
 
 - '§f... ': Creates a switch with any number of functions.
@@ -49,12 +49,12 @@ be executed for each one.
 ## Loops
 Loops iterate over a function. The return stacks of the function will not returned until the loop is finished executing,
 and will be concatenated before being returned. If the loop has a closing brace, the functions between the braces are
-implicitly converted into an abstract function to be called by the loop.
+implicitly converted into an lambda function to be called by the loop.
 
 - '?(': Iterates for as long as the conditional is true. Conditional defaults to '?'. If the preceding token is not a
         conditional, and the last item on the stack is numeric, iterates n times instead, pushing and popping n from the
         stack each loop.
-- 's{': Iterates for each item in a stack. Stack defaults to the current stack.
+- 's{': Iterates for each item in a stack or list. Defaults to the current stack.
 
 ## Function Flags
 The start of a function may contain any number of Function Flags. Rather than push a string to the stack, these
@@ -62,8 +62,8 @@ flags change how certain things work. To push a string at the beginning of a fun
 
 - 'i': Turns off implicit input.
 - 'I': Turns on implicit input. (default)
-- 'o': Turns off implicit output/returning.
-- 'O': Turns on implicit output/returning. (default)
+- 'o': Turns off implicit output (Also affects returning).
+- 'O': Turns on implicit output (Also affects returning). (default)
 - 'R': Keeps function arguments on the stack, rather than removing them.
 - 'r': Removes function arguments from the stack. (default)
 - 'Z': The function flags for this function will affect sub functions (must be first flag).
@@ -87,8 +87,8 @@ By default, all elements present when the program ends are printed to stdout.
 # Builtin Functions
 
 ## Math Functions
-- '+': Takes two arguments and returns the sum. If only one argument is present, increments it by one.
-- '-': Takes two arguments and returns the difference. If only one argument is present, decrements it by one.
+- '+': Takes two arguments and returns the sum. If only one argument is present, increments it.
+- '-': Takes two arguments and returns the difference. If only one argument is present, decrements it.
 - '*': Takes two arguments and returns the product.
 - '/': Takes two arguments and returns the quotient.
 - '%': Takes two arguments and returns the remainder.
