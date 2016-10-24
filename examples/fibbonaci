@@ -1,6 +1,6 @@
-Fibbonaci: "R1 1(+" (6 bytes):
+Fibbonaci: "R1 1T(+" (7 bytes):
 R       Flag: Keep function arguments on the stack
 1 1     Pushes two 1s to the stack
-(       While the last stack item is true
+T(      While the last stack item is true
 +       Adds the two last items on the stack and pushes the output
         Implicit output

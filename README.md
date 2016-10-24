@@ -12,6 +12,11 @@ Functions operate on a new stack that contains only the arguments passed to it. 
 is returned when the function terminates. If no function uses the return stack, the return stack is appended to the
 current stack.
 
+To require a number of arguments to call the function, precede the function definition with 0-9. Precede the function
+with '.' to take all arguments from the stack.
+
+Functions will implicitly return all non-argument values on the stack.
+
 - '[...]': Creates a new abstract function to be called by loops and if statements.
 - ';': Pushes the function stack to the return stack.
 - ':': Pushes the top element of the function stack to the return stack.
@@ -43,7 +48,7 @@ Loops iterate over a function. The return stacks of the function will not return
 and will be concatenated before being returned.
 
 - '?(': Iterates for as long as the conditional is true. Conditional defaults to '?'. If the preceding token is numeric,
-        iterates n times instead.
+        or the last item on the stack is numeric, iterates n times instead, pushing and popping n from the stack each loop.
 - 's{': Iterates for each item in a stack. Stack defaults to the current stack.
 
 ## Function Flags

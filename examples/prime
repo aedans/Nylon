@@ -1,0 +1,18 @@
+Prime: (Outputs the number followed by p if prime, else simply outputs the number)
+"(ƒ1?p
+2%?f:" (11 bytes):
+Main function:
+        Implicit input
+(       For each number less than the input
+ƒ1      Call function 1 (returns false if the number is divisible by another number)
+        Implicit end loop
+?       If the last value is true (if f1 never returned False and the input is not 0)
+p       Push 'p' to the stack
+        Implicit output.
+
+Function 1:
+2       Require 2 arguments
+%       Push the quotent of the two arguments
+¿       If the last value is false (if the quotient is 0)
+f       Push 'f' (false value) to the stack
+:       Return the last value of the stack
