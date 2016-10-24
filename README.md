@@ -18,7 +18,7 @@ current stack.
 - '!': Terminates the function.
 
 ## Arguments
-Arguments are passed to monads using "Ma ". More than one argument must be delineated by a comma (eg. "Ma,a,a "). If the
+Arguments are passed to functions using "Ma ". More than one argument must be delineated by a comma (eg. "Ma,a,a "). If the
 arguments are type-distinguishable (eg. Number,String), the comma can be removed.
 
 If the argument is numeric, a-z may represent 0-25 and A-Z may represent 26-51. Numeric arguments also take numbers.
@@ -48,7 +48,7 @@ and will be concatenated before being returned.
 
 ## Function Flags
 The start of a function may contain any number of Function Flags ([a-zA-Z]). Rather than push a string to the stack, these
-flags change how certain things work. Function flags affect all functions called until the function ends.
+flags change how certain things work
 
 - 'a': Turns off implicit output.
 - 'A': Turns on implicit output. (default)
@@ -58,12 +58,13 @@ flags change how certain things work. Function flags affect all functions called
 - 'O': Turns on implicit output. (default)
 - 'R': Keeps function arguments on the stack, rather than removing them.
 - 'r': Removes function arguments from the stack. (default)
-- 'z': The function flags for this function do not affect sub functions (must be first flag).
+- 'Z': The function flags for this function will affect sub functions (must be first flag).
 
 ## Aliases
 Aliases are defined above the 0th function using a symbol followed by any number of characters. Before running the program,
 all instances of the symbol are replaced with the characters. Aliases are applied top to bottom, and are not applied on
-themselves. If aliases are used, the 0th function must start with ';'.
+themselves. All lines containing aliases must start with '!', and any number of aliases may be on that line, separated by
+spaces.
 
 ## GOTOs
 - '^n': Moves to the nth function in the current function.
