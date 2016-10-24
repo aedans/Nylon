@@ -63,7 +63,7 @@ flags change how certain things work
 ## Aliases
 Aliases are defined above the 0th function using a symbol followed by any number of characters. Before running the program,
 all instances of the symbol are replaced with the characters. Aliases are applied top to bottom, and are not applied on
-themselves. All lines containing aliases must start with '!', and any number of aliases may be on that line, separated by
+themselves. eAll lines containing aliases must start with '!', and any number of aliases may be on that line, separated by
 spaces.
 
 ## GOTOs
