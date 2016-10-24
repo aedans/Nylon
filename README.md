@@ -1,32 +1,33 @@
-Nylon is stack based, interpreted, Functional programming language designed to compete with Jelly, 05AB1E, MATL, and
-others in golfing challenges. It is designed to have small programs while still being able to do complex tasks easily
-easily, an ability that other golfing languages do not have.
+Nylon is stack based, interpreted, functional programming language designed to compete with Jelly, 05AB1E, MATL, and
+others in golfing challenges. It is designed to have small programs while still being able to do complex tasks easily,
+an ability that other golfing languages do not have.
 
 # Definitions
-
-## Functions
-Functions are declared by creating a new line in the Nylon code. Functions can be called using "ƒn", where n is the line
-on which the function is declared.
-
-Functions operate on a new stack that contains only the arguments passed to it. Functions contain a return stack which
-is returned when the function terminates. If no function uses the return stack, the return stack is appended to the
-current stack.
-
-To require a number of arguments to call the function, precede the function definition with 0-9. Precede the function
-with '.' to take all arguments from the stack.
-
-Functions will implicitly return all non-argument values on the stack.
-
-- '[...]': Creates a new abstract function to be called by loops and if statements.
-- ';': Pushes the function stack to the return stack.
-- ':': Pushes the top element of the function stack to the return stack.
-- '!': Terminates the function.
 
 ## Arguments
 Arguments are passed to functions via the stack. Before the function is called, all arguments must be pushed to the stack
 that the function will read from.
 
-If an argument is numeric, a-z may represent 0-25 and A-Z may represent 26-51. Numeric arguments also take numbers.
+If an argument is numeric, a-z may represent 10-35 and A-Z may represent 36-61. Numeric arguments also take numbers.
+
+## Functions
+Functions are declared by creating a new line in the Nylon code. Functions can be called using the 'ƒ' function, which
+takes in an integer n and calls the function on line n.
+
+Functions operate on a new stack that contains only the arguments passed to it. Functions contain a return stack which
+is returned when the function terminates. If no function uses the return stack, the return stack is appended to the
+stack of the function that called the function.
+
+To require a number of arguments to call the function, precede the function definition with 0-9. Precede the function
+with '.' to take all arguments from the stack. Precede the function with ',' to keep the function from creating a new
+stack.
+
+Functions will implicitly return all non-argument values on the stack.
+
+- ';': Pushes the function stack to the return stack.
+- ':': Pushes the top element of the function stack to the return stack.
+- '!': Terminates the function.
+- '[...]': Creates a function lambda.
 
 ## If Statements
 If Statements are functions that push a FunctionSkip object to the stack. If a FunctionSkip object is present when a
@@ -44,8 +45,8 @@ be executed for each one.
 
 ## Loops
 Loops iterate over a function. The return stacks of the function will not returned until the loop is finished executing,
-and will be concatenated before being returned. If the loop has a closing brace, the functions inside the loop are
-implicitly converted into an abstract function.
+and will be concatenated before being returned. If the loop has a closing brace, the functions between the braces are
+implicitly converted into an abstract function to be called by the loop.
 
 - '?(': Iterates for as long as the conditional is true. Conditional defaults to '?'. If the preceding token is not a
         conditional, and the last item on the stack is numeric, iterates n times instead, pushing and popping n from the
@@ -53,13 +54,13 @@ implicitly converted into an abstract function.
 - 's{': Iterates for each item in a stack. Stack defaults to the current stack.
 
 ## Function Flags
-The start of a function may contain any number of Function Flags ([a-zA-Z]). Rather than push a string to the stack, these
-flags change how certain things work
+The start of a function may contain any number of Function Flags. Rather than push a string to the stack, these
+flags change how certain things work. To push a string at the beginning of a function, precede the string with a space.
 
 - 'i': Turns off implicit input.
 - 'I': Turns on implicit input. (default)
-- 'o': Turns off implicit output.
-- 'O': Turns on implicit output. (default)
+- 'o': Turns off implicit output/returning.
+- 'O': Turns on implicit output/returning. (default)
 - 'R': Keeps function arguments on the stack, rather than removing them.
 - 'r': Removes function arguments from the stack. (default)
 - 'Z': The function flags for this function will affect sub functions (must be first flag).
@@ -67,11 +68,12 @@ flags change how certain things work
 ## Aliases
 Aliases are defined above the 0th function using a symbol followed by any number of characters. Before running the program,
 all instances of the symbol are replaced with the characters. Aliases are applied top to bottom, and are not applied on
-themselves. All lines containing aliases must start with '!', and any number of aliases may be on that line, separated by
-spaces.
+themselves. All lines containing aliases must start with '!', and any number of aliases may be on that line, deliniated
+by spaces.
 
 ## GOTOs
-- '^n': Moves to the nth function in the current function.
+- '^': Takes an argument n and moves to the nth function of the current function (numbers and strings are treated as
+        one function).
 
 ## Implicit Input
 By default, when the program is called, all arguments are pushed onto the stack in order.
@@ -82,9 +84,10 @@ By default, all elements present when the program ends are printed to stdout.
 # Builtin Functions
 
 ## Math Functions
-- '+': Returns the sum of two objects.
-- '-': Returns the difference of two objects.
-- '*': Returns the product of two objects.
-- '/': Returns the quotient of two objects.
-- '%': Returns the remainder of two objects.
-- '^': Returns the power of two objects.
+- '+': Takes two arguments and returns the sum. If only one argument is present, increments it by one.
+- '-': Takes two arguments and returns the difference. If only one argument is present, decrements it by one.
+- '*': Takes two arguments and returns the product.
+- '/': Takes two arguments and returns the quotient.
+- '%': Takes two arguments and returns the remainder.
+- '^': Takes two arguments and returns the power.
+- '²': Takes an argument and returns the square.
