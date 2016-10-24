@@ -90,4 +90,3 @@ By default, all elements present when the program ends are printed to stdout.
 - '/': Takes two arguments and returns the quotient.
 - '%': Takes two arguments and returns the remainder.
 - '^': Takes two arguments and returns the power.
-- '²': Takes an argument and returns the square.
