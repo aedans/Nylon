@@ -1,4 +1,4 @@
-Nylon is stack based, interpreted, Object Oriented programming language programmed in Java. It is designed to compete 
+Nylon is stack based, interpreted, Functional programming language programmed in Java. It is designed to compete
 with Jelly, 05AB1E, MATL, and others in golfing challenges. Nylon is designed to have small programs while still being
 able to write complex programs easily, an ability that other golfing languages do not have.
 
