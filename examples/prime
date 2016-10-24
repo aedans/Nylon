@@ -1,11 +1,11 @@
 Prime: (Outputs the number followed by p if prime, else simply outputs the number)
-"(1ƒ?p
-2%¿f:" (11 bytes):
+"(1ƒ)?p
+2%¿f:" (12 bytes):
 Main function:
         Implicit input
 (       For each number less than the input
 1ƒ      Call function 1 (returns false if the number is divisible by another number)
-        Implicit end loop
+)       End loop
 ?       If the last value is true (if f1 never returned false and the input is not 0)
 p       Push 'p' to the stack
         Implicit output
@@ -17,4 +17,4 @@ Function 1:
 f       Push 'f' (false value) to the stack
 :       Return the last value of the stack
 
-Note: The program can be golfed to 8 bytes as "(%¿f:)?p". It was left at 11 bytes for readability.
+Note: The program can be golfed to 8 bytes as "(%¿f:)?p". It was left at 12 bytes for readability.
