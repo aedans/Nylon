@@ -2,6 +2,7 @@ package nylon.functions;
 
 import nylon.NylonRuntime;
 import nylon.exceptions.NylonRuntimeException;
+import nylon.objects.FunctionSkip;
 import nylon.objects.NylonObject;
 
 import java.util.LinkedList;
@@ -47,7 +48,11 @@ public class NylonSrcFunction extends NylonFunction {
             throws NylonRuntimeException {
         returnStack.addAll(args);
         for (NylonFunction nylonFunction : functions){
-            returnStack.addAll(nylonFunction.apply(returnStack));
+            if (returnStack.size() == 0 || returnStack.getLast().getClass() != FunctionSkip.class) {
+                returnStack.addAll(nylonFunction.apply(returnStack));
+            } else {
+                returnStack.removeLast();
+            }
         }
     }
 }

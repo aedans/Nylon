@@ -2,6 +2,8 @@ package nylon.functions;
 
 import nylon.NylonRuntime;
 import nylon.exceptions.NylonRuntimeException;
+import nylon.functions.ifstatements.IsObjectFalse;
+import nylon.functions.ifstatements.IsObjectTrue;
 import nylon.functions.math.*;
 import nylon.objects.NylonObject;
 
@@ -23,6 +25,10 @@ public final class FunctionDictionary {
         functionHashMap.put('/', new Divide());
         functionHashMap.put('%', new Modulo());
         functionHashMap.put('^', new PowerOf());
+
+        functionHashMap.put('?', new IsObjectTrue());
+        functionHashMap.put('¿', new IsObjectFalse());
+
         functionHashMap.put(' ', new NylonFunction(0) {
             @Override
             protected void applyImpl(LinkedList<NylonObject> args, LinkedList<NylonObject> returnStack)

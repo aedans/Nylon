@@ -24,7 +24,7 @@ public class PowerOf extends NylonFunction {
         else if (args.size() == 1)
             throw new NylonRuntimeException("Cannot exponentiate one argument.");
         else if (args.size() == 2)
-            returnStack.add(new NylonInteger((int) Math.pow(args.getFirst().toInteger(), args.getLast().toInteger())));
+            returnStack.add(new NylonInteger((int) Math.pow(args.getLast().toInteger(), args.getFirst().toInteger())));
         else
             // Should never hit
             throw new NylonRuntimeException("Internal error: Too many arguments given.");

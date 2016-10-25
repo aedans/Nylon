@@ -13,6 +13,8 @@ public interface NylonObject {
 
     int toInteger() throws NylonRuntimeException;
 
+    boolean toBoolean() throws NylonRuntimeException;
+
     NylonObject increment() throws NylonRuntimeException;
 
     NylonObject decrement() throws NylonRuntimeException;

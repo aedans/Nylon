@@ -25,6 +25,11 @@ public class NylonInteger implements NylonObject {
     }
 
     @Override
+    public boolean toBoolean() {
+        return this.value != 0;
+    }
+
+    @Override
     public NylonInteger increment() {
         this.value++;
         return this;
