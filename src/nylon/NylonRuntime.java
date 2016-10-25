@@ -21,7 +21,7 @@ public class NylonRuntime implements Runnable {
 
     public NylonRuntime(String src) throws NylonRuntimeException {
         for (String s : src.split("\n")){
-            if (s.startsWith("!")){
+            if (s.startsWith("=")){
                 for (String a : s.split(" ")){
                     src = src.replace(String.valueOf(a.charAt(0)), a.substring(1));
                 }
