@@ -11,7 +11,7 @@ Use java -jar [jarpath] -r [filename] to run a file with the Nylon interpreter.
 Arguments are passed to functions via the stack. Before the function is called, all arguments must be pushed to the stack
 that the function will read from.
 
-If an argument is numeric, a-z may represent 10-35 and A-Z may represent 36-61. Numeric arguments also take numbers.
+Numeric arguments take both number and characters.
 
 ## Functions
 Functions are declared by creating a new line in the Nylon code. Functions can be called using the 'ƒ' function, which

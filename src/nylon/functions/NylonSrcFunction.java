@@ -35,7 +35,10 @@ public class NylonSrcFunction extends NylonFunction {
                     if (!Character.isAlphabetic(src.charAt(i)))
                         break;
                 }
-                functions.add(new PushStringFunction(src.substring(j, i)));
+                if (i == j+1)
+                    functions.add(new PushCharacterFunction(src.charAt(j)));
+                else
+                    functions.add(new PushStringFunction(src.substring(j, i)));
                 i--;
                 continue;
             }
