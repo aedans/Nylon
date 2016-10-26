@@ -17,4 +17,4 @@ Function 1:
 f       Push 'f' (false value) to the stack
         Implicit return
 
-Note: The program can be golfed to 7 bytes as "(%¿f)?p". It was left at 12 bytes for readability.
+Note: The program can be golfed to 7 bytes as "(%¿f)?p". It was left at 11 bytes for readability.
