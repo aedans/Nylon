@@ -12,22 +12,15 @@ The Nylon language operates exclusively on stacks, with one stack allocated per 
 
 ## Constants
 
-Nylon supports five constant types: longs, doubles, characters, strings, and functions (Note that booleans can be stored using characters and strings). Each constant can be pushed to the stack via a native function. When Nylon compiles, all constants in the source code are replaced with functions that take no arguments and push the constant to the stack. Constants can be created as follows:
-
-Longs:
-<pre>
-1
-445
-3E13
-11E20
-</pre>
+Nylon supports four constant types: doubles, characters, strings, and functions (Note that booleans can be stored using characters and strings, t/f & true/false respectively). Each constant can be pushed to the stack via a native function. When Nylon compiles, all constants in the source code are replaced with functions that take no arguments and push the constant to the stack. Constants can be created as follows:
 
 Doubles:
 <pre>
-1.0
+1
 225.4234
 3E199
 </pre>
+
 Characters:
 <pre>
 a

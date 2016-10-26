@@ -20,9 +20,18 @@ public class NylonString implements NylonObject {
     }
 
     @Override
-    public long toLong() throws NylonRuntimeException {
+    public int toInteger() throws NylonRuntimeException {
         try {
             return Integer.parseInt(value);
+        } catch (Exception e){
+            throw new NylonRuntimeException("Could not convert string object to integer (string \"" + value + "\"");
+        }
+    }
+
+    @Override
+    public double toDouble() throws NylonRuntimeException {
+        try {
+            return Double.parseDouble(value);
         } catch (Exception e){
             throw new NylonRuntimeException("Could not convert string object to integer (string \"" + value + "\"");
         }
@@ -53,7 +62,7 @@ public class NylonString implements NylonObject {
     }
 
     @Override
-    public NylonObject clone() {
+    public NylonString clone() {
         return new NylonString(value);
     }
 

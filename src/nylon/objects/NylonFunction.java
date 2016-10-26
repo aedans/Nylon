@@ -66,7 +66,12 @@ public abstract class NylonFunction implements NylonObject {
     }
 
     @Override
-    public long toLong() throws NylonRuntimeException {
+    public int toInteger() throws NylonRuntimeException {
+        throw new NylonRuntimeException("Cannot convert a NylonFunction to a long.");
+    }
+
+    @Override
+    public double toDouble() throws NylonRuntimeException {
         throw new NylonRuntimeException("Cannot convert a NylonFunction to a long.");
     }
 
@@ -106,7 +111,7 @@ public abstract class NylonFunction implements NylonObject {
     }
 
     @Override
-    public NylonObject clone() {
+    public NylonFunction clone() {
         return new NylonFunction(args) {
             @Override
             protected void applyImpl(LinkedList<NylonObject> args, LinkedList<NylonObject> returnStack)

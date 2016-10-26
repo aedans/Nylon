@@ -11,7 +11,9 @@ public interface NylonObject extends Cloneable<NylonObject> {
     @Override
     String toString();
 
-    long toLong() throws NylonRuntimeException;
+    int toInteger() throws NylonRuntimeException;
+
+    double toDouble() throws NylonRuntimeException;
 
     boolean toBoolean() throws NylonRuntimeException;
 

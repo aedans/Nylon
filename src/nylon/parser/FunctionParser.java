@@ -5,8 +5,8 @@ import nylon.NylonRuntime;
 import nylon.exceptions.NylonRuntimeException;
 import nylon.functions.*;
 import nylon.objects.NylonCharacter;
+import nylon.objects.NylonDouble;
 import nylon.objects.NylonFunction;
-import nylon.objects.NylonLong;
 import nylon.objects.NylonString;
 
 import java.util.LinkedList;
@@ -37,7 +37,7 @@ public final class FunctionParser {
                     break;
             }
             return new Pair<>(
-                    i-1, new PushNylonObjectFunction<>(new NylonLong(Long.parseLong(src.substring(j, i))))
+                    i-1, new PushNylonObjectFunction<>(new NylonDouble(Double.parseDouble(src.substring(j, i))))
             );
         }
         // If the character is [a-zA-Z]

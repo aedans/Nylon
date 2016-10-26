@@ -14,7 +14,12 @@ public class FunctionSkipObject implements NylonObject {
     }
 
     @Override
-    public long toLong() {
+    public int toInteger() {
+        return 0;
+    }
+
+    @Override
+    public double toDouble() throws NylonRuntimeException {
         return 0;
     }
 

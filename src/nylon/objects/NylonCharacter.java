@@ -20,7 +20,12 @@ public class NylonCharacter implements NylonObject {
     }
 
     @Override
-    public long toLong() {
+    public int toInteger() {
+        return value;
+    }
+
+    @Override
+    public double toDouble() throws NylonRuntimeException {
         return value;
     }
 
@@ -47,11 +52,11 @@ public class NylonCharacter implements NylonObject {
 
     @Override
     public NylonObject concatenate(NylonObject nylonObject) throws NylonRuntimeException {
-        return new NylonLong(nylonObject.toLong() + this.value);
+        return new NylonCharacter((char) (nylonObject.toInteger() + this.value));
     }
 
     @Override
-    public NylonObject clone() {
+    public NylonCharacter clone() {
         return new NylonCharacter(value);
     }
 

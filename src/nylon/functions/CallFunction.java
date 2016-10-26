@@ -23,7 +23,7 @@ class CallFunction extends NylonFunction {
     @Override
     protected void applyImpl(LinkedList<NylonObject> args, LinkedList<NylonObject> returnStack)
             throws NylonRuntimeException {
-        returnStack.addAll(nylonRuntime.getFunction((int) args.removeLast().toLong()).apply(args));
+        returnStack.addAll(nylonRuntime.getFunction(args.removeLast().toInteger()).apply(args));
     }
 
 }
