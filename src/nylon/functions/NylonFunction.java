@@ -24,30 +24,38 @@ public abstract class NylonFunction {
             superStack.removeLast();
             return superStack;
         }
+        LinkedList<NylonObject> functionStack = new LinkedList<>();
         if (args >= 0) {
-            LinkedList<NylonObject> returnStack = new LinkedList<>();
             if (superStack.size() >= args) {
                 LinkedList<NylonObject> args = new LinkedList<>();
                 for (int i = 0; i < this.args; i++) {
                     args.add(superStack.removeLast());
                 }
-                this.applyImpl(args, returnStack);
+                this.applyImpl(args, functionStack);
             } else {
                 LinkedList<NylonObject> args = (LinkedList<NylonObject>) superStack.clone();
                 superStack.clear();
-                this.applyImpl(args, returnStack);
+                this.applyImpl(args, functionStack);
             }
-            return returnStack;
         } else if (args == -1) {
             superStack.clear();
-            LinkedList<NylonObject> returnStack = new LinkedList<>();
-            this.applyImpl((LinkedList<NylonObject>) superStack.clone(), returnStack);
-            return returnStack;
+            this.applyImpl((LinkedList<NylonObject>) superStack.clone(), functionStack);
         } else {
-            LinkedList<NylonObject> returnStack = new LinkedList<>();
-            this.applyImpl(superStack, returnStack);
-            return returnStack;
+            this.applyImpl(superStack, functionStack);
         }
+        LinkedList<NylonObject> returnStack = new LinkedList<>();
+        if (functionStack.size() != 0) {
+            Class clazz = functionStack.getLast().getClass();
+            NylonObject object;
+            while (functionStack.size() != 0) {
+                object = functionStack.removeLast();
+                if (object.getClass() == clazz)
+                    returnStack.add(object);
+                else
+                    break;
+            }
+        }
+        return returnStack;
     }
 
     protected abstract void applyImpl(LinkedList<NylonObject> args, LinkedList<NylonObject> returnStack)
