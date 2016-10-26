@@ -55,23 +55,6 @@ public final class FunctionParser {
                 functions.add(new NylonSrcFunction(runtime, src.substring(j, i), -1));
                 continue;
             }
-            if (src.charAt(i) == '(') {
-                int depth = 1, j = i + 1;
-                for (i = j; i < src.length(); i++) {
-                    if (src.charAt(i) == '(')
-                        depth++;
-                    if (src.charAt(i) == ')')
-                        depth--;
-                    if (depth == 0)
-                        break;
-                }
-                if (depth == 0){
-
-                } else {
-
-                }
-                continue;
-            }
             functions.add(runtime.getFunctionDictionary().get(runtime, src.charAt(i)));
         }
         return functions;
