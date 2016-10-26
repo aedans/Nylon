@@ -10,11 +10,11 @@ import java.util.LinkedList;
  * Created by Aedan Smith.
  */
 
-class PushLongFunction extends NylonFunction {
+public class PushLongFunction extends NylonFunction {
 
     private long toPush;
 
-    PushLongFunction(long toPush) {
+    public PushLongFunction(long toPush) {
         super(0);
         this.toPush = toPush;
     }

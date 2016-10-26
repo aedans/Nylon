@@ -10,11 +10,11 @@ import java.util.LinkedList;
  * Created by Aedan Smith.
  */
 
-class PushCharacterFunction extends NylonFunction {
+public class PushCharacterFunction extends NylonFunction {
 
     private char c;
 
-    PushCharacterFunction(char c) {
+    public PushCharacterFunction(char c) {
         super(0);
         this.c = c;
     }

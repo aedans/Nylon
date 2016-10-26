@@ -23,7 +23,7 @@ public class Main {
             }
         }
 
-        if (Objects.equals(args[0], "-f")){
+        if (Objects.equals(args[0], "-f") && args.length >= 2){
             final String[] content = {""};
             new BufferedReader(new FileReader(args[1])).lines().forEach(s -> content[0] += s + '\n');
             NylonRuntime nylonRuntime = new NylonRuntime(content[0].trim());
