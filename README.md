@@ -28,7 +28,6 @@ Doubles:
 225.4234
 3E199
 </pre>
-E
 Characters:
 <pre>
 a
@@ -131,7 +130,7 @@ be executed for each one.
 
 - '§f...]': Creates a switch with any number of functions.
 
-Example 1:
+Example:
 
 <pre>
 §5 4 3 2 1]a
@@ -148,8 +147,6 @@ Loops iterate over a function. The return stacks of the function will not return
 - 'f(': Iterates for as long as a conditional is true. Conditional defaults to '?'. If the preceding token is not a conditional, and the last item on the stack is numeric, iterates n times instead, pushing and popping n from the stack each loop.
 - 's{': Iterates for each item in a stack or list. Defaults to the current stack.
 
-// TODO: Examples
-
 ## Function Flags
 The start of a function may contain any number of Function Flags. Rather than push a string to the stack, these flags change how certain things work. To push a string at the beginning of a function, precede the string with a space.
 
@@ -160,8 +157,6 @@ The start of a function may contain any number of Function Flags. Rather than pu
 - 'r': Removes function arguments from the stack. (default)
 - 'R': Keeps function arguments on the stack, rather than removing them.
 - 'Z': The function flags for this function will affect sub functions (must be first flag).
-
-// TODO: Examples
 
 ## Aliases
 Aliases are defined above the 0th function using a symbol followed by any number of characters. Before running the program, all instances of the symbol are replaced with the characters. Aliases are applied top to bottom, and are not applied on themselves. All lines containing aliases must start with '=', and any number of aliases may be on that line, delineated by spaces.
