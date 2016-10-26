@@ -16,8 +16,8 @@ public class NylonSrcFunction extends NylonFunction {
 
     private LinkedList<NylonFunction> functions = new LinkedList<>();
 
-    public NylonSrcFunction(NylonRuntime nylonRuntime, String src) throws NylonRuntimeException {
-        super(0); // TODO Allow modifiable arguments
+    public NylonSrcFunction(NylonRuntime nylonRuntime, String src, int args) throws NylonRuntimeException {
+        super(args);
         for (int i = 0; i < src.length(); i++) {
             if (Character.isDigit(src.charAt(i))){
                 int j = i;
@@ -43,6 +43,19 @@ public class NylonSrcFunction extends NylonFunction {
                 i--;
                 continue;
             }
+            if (src.charAt(i) == '['){
+                int depth = 1, j = i+1;
+                for (i = j; i < src.length(); i++) {
+                    if (src.charAt(i) == '[')
+                        depth++;
+                    if (src.charAt(i) == ']')
+                        depth--;
+                    if (depth == 0)
+                        break;
+                }
+                functions.add(new NylonSrcFunction(nylonRuntime, src.substring(j, i), -1));
+                continue;
+            }
             functions.add(FunctionDictionary.get(nylonRuntime, src.charAt(i)));
         }
     }
@@ -51,8 +64,9 @@ public class NylonSrcFunction extends NylonFunction {
     protected void applyImpl(LinkedList<NylonObject> args, LinkedList<NylonObject> returnStack)
             throws NylonRuntimeException {
         returnStack.addAll(args);
-        for (NylonFunction nylonFunction : functions){
-            returnStack.addAll(nylonFunction.apply(returnStack));
+        for (NylonFunction function : functions){
+            returnStack.addAll(function.apply(returnStack));
         }
     }
+
 }

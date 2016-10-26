@@ -22,8 +22,9 @@ public abstract class NylonFunction {
     public LinkedList<NylonObject> apply(LinkedList<NylonObject> superStack) throws NylonRuntimeException {
         if (superStack.size() != 0 && superStack.getLast().getClass() == FunctionSkip.class) {
             superStack.removeLast();
-            return superStack;
+            return new LinkedList<>();
         }
+
         LinkedList<NylonObject> functionStack = new LinkedList<>();
         if (args >= 0) {
             if (superStack.size() >= args) {
@@ -33,16 +34,16 @@ public abstract class NylonFunction {
                 }
                 this.applyImpl(args, functionStack);
             } else {
-                LinkedList<NylonObject> args = (LinkedList<NylonObject>) superStack.clone();
+                this.applyImpl((LinkedList<NylonObject>) superStack.clone(), functionStack);
                 superStack.clear();
-                this.applyImpl(args, functionStack);
             }
         } else if (args == -1) {
-            superStack.clear();
             this.applyImpl((LinkedList<NylonObject>) superStack.clone(), functionStack);
+            superStack.clear();
         } else {
             this.applyImpl(superStack, functionStack);
         }
+
         LinkedList<NylonObject> returnStack = new LinkedList<>();
         if (functionStack.size() != 0) {
             Class clazz = functionStack.getLast().getClass();

@@ -29,7 +29,7 @@ public class NylonRuntime implements Runnable {
             }
         }
         for (String s : src.split("\n")){
-            this.nylonFunctions.add(new NylonSrcFunction(this, s));
+            this.nylonFunctions.add(new NylonSrcFunction(this, s, 0));
         }
         for (int i = 0; i < 52; i++) {
             this.stacks[i] = new LinkedList<>();
