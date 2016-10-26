@@ -46,7 +46,7 @@ public class NylonRuntime implements Runnable {
     @Override
     public void run() {
         try {
-            this.getFunction(0).apply(new LinkedList<>()).forEach(System.out::print);
+            this.getFunction(0).apply(new LinkedList<>()).forEach(System.out::println);
         } catch (NylonRuntimeException e){
             e.printStackTrace(System.out);
         } catch (Exception e){

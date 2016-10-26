@@ -4,6 +4,7 @@ import javafx.util.Pair;
 import nylon.NylonRuntime;
 import nylon.exceptions.NylonRuntimeException;
 import nylon.functions.*;
+import nylon.functions.loops.WhileLoop;
 import nylon.objects.NylonCharacter;
 import nylon.objects.NylonDouble;
 import nylon.objects.NylonFunction;
@@ -68,8 +69,29 @@ public final class FunctionParser {
                     break;
             }
             return new Pair<>(
-                    i, new NylonSrcFunction(runtime, src.substring(j, i), -1)
+                    i, new NylonSrcFunction(runtime, src.substring(j, i), -2)
             );
+        }
+        if (src.charAt(i) == '(') {
+            int depth = 1, j = i + 1;
+            for (i = j; i < src.length(); i++) {
+                if (src.charAt(i) == '(')
+                    depth++;
+                if (src.charAt(i) == ')')
+                    depth--;
+                if (depth == 0)
+                    break;
+            }
+            if (depth == 0){
+                return new Pair<>(
+                        i, new WhileLoop(new NylonSrcFunction(runtime, src.substring(j, i), -2))
+                );
+            } else {
+                Pair<Integer, NylonFunction> pair = parseFunction(runtime, src, j);
+                return new Pair<>(
+                        pair.getKey(), new WhileLoop(pair.getValue())
+                );
+            }
         }
         if (src.charAt(i) == '@') {
             Pair<Integer, NylonFunction> pair = parseFunction(runtime, src, i + 1);
