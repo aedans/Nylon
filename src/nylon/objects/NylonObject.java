@@ -11,7 +11,7 @@ public interface NylonObject {
     @Override
     String toString();
 
-    int toInteger() throws NylonRuntimeException;
+    long toLong() throws NylonRuntimeException;
 
     boolean toBoolean() throws NylonRuntimeException;
 

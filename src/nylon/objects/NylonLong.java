@@ -6,11 +6,11 @@ import nylon.exceptions.NylonRuntimeException;
  * Created by Aedan Smith.
  */
 
-public class NylonInteger implements NylonObject {
+public class NylonLong implements NylonObject {
 
-    private int value;
+    private long value;
 
-    public NylonInteger(int value) {
+    public NylonLong(long value) {
         this.value = value;
     }
 
@@ -20,7 +20,7 @@ public class NylonInteger implements NylonObject {
     }
 
     @Override
-    public int toInteger() {
+    public long toLong() {
         return this.value;
     }
 
@@ -30,20 +30,20 @@ public class NylonInteger implements NylonObject {
     }
 
     @Override
-    public NylonInteger increment() {
+    public NylonLong increment() {
         this.value++;
         return this;
     }
 
     @Override
-    public NylonInteger decrement() {
+    public NylonLong decrement() {
         this.value--;
         return this;
     }
 
     @Override
     public NylonObject concatenate(NylonObject nylonObject) throws NylonRuntimeException {
-        return new NylonInteger(this.value + nylonObject.toInteger());
+        return new NylonLong(this.value + nylonObject.toLong());
     }
 
 }

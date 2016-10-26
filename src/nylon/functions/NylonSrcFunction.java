@@ -5,6 +5,7 @@ import nylon.exceptions.NylonRuntimeException;
 import nylon.objects.FunctionSkip;
 import nylon.objects.NylonObject;
 
+import javax.lang.model.type.NullType;
 import java.util.LinkedList;
 
 /**
@@ -24,7 +25,7 @@ public class NylonSrcFunction extends NylonFunction {
                     if (!Character.isDigit(src.charAt(i)))
                         break;
                 }
-                functions.add(new PushIntegerFunction(Integer.parseInt(src.substring(j, i))));
+                functions.add(new PushLongFunction(Integer.parseInt(src.substring(j, i))));
                 i--;
                 continue;
             }
@@ -51,11 +52,7 @@ public class NylonSrcFunction extends NylonFunction {
             throws NylonRuntimeException {
         returnStack.addAll(args);
         for (NylonFunction nylonFunction : functions){
-            if (returnStack.size() == 0 || returnStack.getLast().getClass() != FunctionSkip.class) {
-                returnStack.addAll(nylonFunction.apply(returnStack));
-            } else {
-                returnStack.removeLast();
-            }
+            returnStack.addAll(nylonFunction.apply(returnStack));
         }
     }
 }

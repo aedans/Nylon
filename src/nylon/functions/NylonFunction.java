@@ -1,6 +1,7 @@
 package nylon.functions;
 
 import nylon.exceptions.NylonRuntimeException;
+import nylon.objects.FunctionSkip;
 import nylon.objects.NylonObject;
 
 import java.util.LinkedList;
@@ -19,6 +20,10 @@ public abstract class NylonFunction {
 
     @SuppressWarnings("unchecked")
     public LinkedList<NylonObject> apply(LinkedList<NylonObject> superStack) throws NylonRuntimeException {
+        if (superStack.size() != 0 && superStack.getLast().getClass() == FunctionSkip.class) {
+            superStack.removeLast();
+            return superStack;
+        }
         if (args >= 0) {
             LinkedList<NylonObject> returnStack = new LinkedList<>();
             if (superStack.size() >= args) {
@@ -33,18 +38,24 @@ public abstract class NylonFunction {
                 this.applyImpl(args, returnStack);
             }
             return returnStack;
-        } else if (args == -1){
+        } else if (args == -1) {
             superStack.clear();
             LinkedList<NylonObject> returnStack = new LinkedList<>();
             this.applyImpl((LinkedList<NylonObject>) superStack.clone(), returnStack);
             return returnStack;
         } else {
-            this.applyImpl(superStack, superStack);
-            return superStack;
+            LinkedList<NylonObject> returnStack = new LinkedList<>();
+            this.applyImpl(superStack, returnStack);
+            return returnStack;
         }
     }
 
     protected abstract void applyImpl(LinkedList<NylonObject> args, LinkedList<NylonObject> returnStack)
             throws NylonRuntimeException;
+
+    @Override
+    public String toString() {
+        return this.getClass().getSimpleName();
+    }
 
 }

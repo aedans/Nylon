@@ -14,7 +14,7 @@ public class FunctionSkip implements NylonObject {
     }
 
     @Override
-    public int toInteger() {
+    public long toLong() {
         return 0;
     }
 

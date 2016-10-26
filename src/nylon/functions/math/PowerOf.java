@@ -2,7 +2,7 @@ package nylon.functions.math;
 
 import nylon.exceptions.NylonRuntimeException;
 import nylon.functions.NylonFunction;
-import nylon.objects.NylonInteger;
+import nylon.objects.NylonLong;
 import nylon.objects.NylonObject;
 
 import java.util.LinkedList;
@@ -24,7 +24,7 @@ public class PowerOf extends NylonFunction {
         else if (args.size() == 1)
             throw new NylonRuntimeException("Cannot exponentiate one argument.");
         else if (args.size() == 2)
-            returnStack.add(new NylonInteger((int) Math.pow(args.getLast().toInteger(), args.getFirst().toInteger())));
+            returnStack.add(new NylonLong((int) Math.pow(args.getLast().toLong(), args.getFirst().toLong())));
         else
             // Should never hit
             throw new NylonRuntimeException("Internal error: Too many arguments given.");

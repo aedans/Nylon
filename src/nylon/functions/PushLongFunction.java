@@ -1,7 +1,7 @@
 package nylon.functions;
 
 import nylon.exceptions.NylonRuntimeException;
-import nylon.objects.NylonInteger;
+import nylon.objects.NylonLong;
 import nylon.objects.NylonObject;
 
 import java.util.LinkedList;
@@ -10,11 +10,11 @@ import java.util.LinkedList;
  * Created by Aedan Smith.
  */
 
-class PushIntegerFunction extends NylonFunction {
+class PushLongFunction extends NylonFunction {
 
-    private int toPush;
+    private long toPush;
 
-    PushIntegerFunction(int toPush) {
+    PushLongFunction(long toPush) {
         super(0);
         this.toPush = toPush;
     }
@@ -22,7 +22,7 @@ class PushIntegerFunction extends NylonFunction {
     @Override
     protected void applyImpl(LinkedList<NylonObject> args, LinkedList<NylonObject> returnStack)
             throws NylonRuntimeException {
-        returnStack.add(new NylonInteger(toPush));
+        returnStack.add(new NylonLong(toPush));
     }
 
 }

@@ -20,7 +20,7 @@ public class NylonString implements NylonObject {
     }
 
     @Override
-    public int toInteger() throws NylonRuntimeException {
+    public long toLong() throws NylonRuntimeException {
         try {
             return Integer.parseInt(value);
         } catch (Exception e){

@@ -20,7 +20,7 @@ public class NylonCharacter implements NylonObject {
     }
 
     @Override
-    public int toInteger() {
+    public long toLong() {
         return value;
     }
 
@@ -47,6 +47,6 @@ public class NylonCharacter implements NylonObject {
 
     @Override
     public NylonObject concatenate(NylonObject nylonObject) throws NylonRuntimeException {
-        return new NylonInteger(nylonObject.toInteger() + this.value);
+        return new NylonLong(nylonObject.toLong() + this.value);
     }
 }

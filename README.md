@@ -11,7 +11,7 @@ Use java -jar [jarpath] -r [filename] to run a file with the Nylon interpreter.
 Arguments are passed to functions via the stack. Before the function is called, all arguments must be pushed to the stack
 that the function will read from.
 
-Numeric arguments take both number and characters.
+Numeric arguments take both number and c.
 
 ## Functions
 Functions are declared by creating a new line in the Nylon code. Functions can be called using the 'ƒ' function, which
@@ -82,7 +82,8 @@ by spaces.
 By default, when the program is called, all arguments are pushed onto the stack in order.
 
 ## Implicit Output
-By default, all elements present when the program ends are printed to stdout.
+By default, when the function terminates, the function returns all consecutive matching objects starting from the top
+of the stack.
 
 # Builtin Functions
 
