@@ -5,6 +5,7 @@ import nylon.NylonRuntime;
 import nylon.exceptions.NylonRuntimeException;
 import nylon.functions.*;
 import nylon.objects.NylonCharacter;
+import nylon.objects.NylonFunction;
 import nylon.objects.NylonLong;
 import nylon.objects.NylonString;
 
@@ -19,14 +20,15 @@ public final class FunctionParser {
     public static LinkedList<NylonFunction> parse(NylonRuntime runtime, String src) throws NylonRuntimeException {
         LinkedList<NylonFunction> functions = new LinkedList<>();
         for (int i = 0; i < src.length(); i++) {
-            Pair<Integer, NylonFunction> pair = parseNextFunction(runtime, src, i);
-            functions.add(pair.getValue());
+            Pair<Integer, NylonFunction> pair = parseFunction(runtime, src, i);
+            if (pair.getValue() != null)
+                functions.add(pair.getValue());
             i = pair.getKey();
         }
         return functions;
     }
 
-    private static Pair<Integer, NylonFunction> parseNextFunction(NylonRuntime runtime, String src, int i)
+    private static Pair<Integer, NylonFunction> parseFunction(NylonRuntime runtime, String src, int i)
             throws NylonRuntimeException {
         if (Character.isDigit(src.charAt(i))) {
             int j = i;
@@ -66,7 +68,13 @@ public final class FunctionParser {
                     break;
             }
             return new Pair<>(
-                    i-1, new NylonSrcFunction(runtime, src.substring(j, i), -1)
+                    i, new NylonSrcFunction(runtime, src.substring(j, i), -1)
+            );
+        }
+        if (src.charAt(i) == '@') {
+            Pair<Integer, NylonFunction> pair = parseFunction(runtime, src, i + 1);
+            return new Pair<>(
+                    pair.getKey(), new PushNylonObjectFunction<>(pair.getValue())
             );
         }
         return new Pair<>(

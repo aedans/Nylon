@@ -2,6 +2,7 @@ package nylon.functions;
 
 import nylon.NylonRuntime;
 import nylon.exceptions.NylonRuntimeException;
+import nylon.objects.NylonFunction;
 import nylon.objects.NylonObject;
 import nylon.parser.FunctionParser;
 
@@ -27,6 +28,11 @@ public class NylonSrcFunction extends NylonFunction {
         for (NylonFunction function : functions) {
             returnStack.addAll(function.apply(returnStack));
         }
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + functions.toString();
     }
 
 }

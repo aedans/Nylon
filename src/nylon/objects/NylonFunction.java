@@ -1,8 +1,6 @@
-package nylon.functions;
+package nylon.objects;
 
 import nylon.exceptions.NylonRuntimeException;
-import nylon.objects.FunctionSkipObject;
-import nylon.objects.NylonObject;
 
 import java.util.LinkedList;
 
@@ -51,7 +49,7 @@ public abstract class NylonFunction implements NylonObject {
             while (functionStack.size() != 0) {
                 object = functionStack.removeLast();
                 if (object.getClass() == clazz)
-                    returnStack.add(object);
+                    returnStack.addFirst(object);
                 else
                     break;
             }
@@ -89,6 +87,21 @@ public abstract class NylonFunction implements NylonObject {
 
     @Override
     public NylonObject concatenate(NylonObject nylonObject) throws NylonRuntimeException {
+        if (nylonObject instanceof NylonFunction){
+            return new NylonFunction(args) {
+                @Override
+                protected void applyImpl(LinkedList<NylonObject> args, LinkedList<NylonObject> returnStack)
+                        throws NylonRuntimeException {
+                    NylonFunction.this.applyImpl(args, returnStack);
+                    returnStack.addAll(((NylonFunction) nylonObject).apply(returnStack));
+                }
+
+                @Override
+                public String toString() {
+                    return "ConcatenatedFunction[" + NylonFunction.this.toString() + ", " + nylonObject.toString() + "]";
+                }
+            };
+        }
         throw new NylonRuntimeException("Cannot concatenate a NylonFunctions.");
     }
 
@@ -99,6 +112,11 @@ public abstract class NylonFunction implements NylonObject {
             protected void applyImpl(LinkedList<NylonObject> args, LinkedList<NylonObject> returnStack)
                     throws NylonRuntimeException {
                 NylonFunction.this.applyImpl(args, returnStack);
+            }
+
+            @Override
+            public String toString() {
+                return NylonFunction.this.toString();
             }
         };
     }

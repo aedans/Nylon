@@ -1,7 +1,7 @@
 package nylon.functions.ifstatements;
 
 import nylon.exceptions.NylonRuntimeException;
-import nylon.functions.NylonFunction;
+import nylon.objects.NylonFunction;
 import nylon.objects.FunctionSkipObject;
 import nylon.objects.NylonObject;
 

@@ -5,6 +5,7 @@ import nylon.exceptions.NylonRuntimeException;
 import nylon.functions.ifstatements.IsObjectFalse;
 import nylon.functions.ifstatements.IsObjectTrue;
 import nylon.functions.math.*;
+import nylon.objects.NylonFunction;
 import nylon.objects.NylonObject;
 
 import java.util.HashMap;
@@ -29,17 +30,15 @@ public class FunctionDictionary {
         functionHashMap.put('?', new IsObjectTrue());
         functionHashMap.put('¿', new IsObjectFalse());
 
-        functionHashMap.put(' ', new NylonFunction(0) {
-            @Override
-            protected void applyImpl(LinkedList<NylonObject> args, LinkedList<NylonObject> returnStack)
-                    throws NylonRuntimeException {}
-        });
+        functionHashMap.put(':', new PopTop());
     }
 
     public NylonFunction get(NylonRuntime runtime, char key) throws NylonRuntimeException {
         switch (key){
             case 'ƒ':
                 return new CallFunction(runtime);
+            case ' ':
+                return null;
             default:
                 NylonFunction nylonFunction = functionHashMap.get(key);
                 if (nylonFunction != null)

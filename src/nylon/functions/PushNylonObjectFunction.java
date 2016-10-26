@@ -1,6 +1,7 @@
 package nylon.functions;
 
 import nylon.exceptions.NylonRuntimeException;
+import nylon.objects.NylonFunction;
 import nylon.objects.NylonObject;
 
 import java.util.LinkedList;
@@ -22,6 +23,11 @@ public class PushNylonObjectFunction<T extends NylonObject> extends NylonFunctio
     protected void applyImpl(LinkedList<NylonObject> args, LinkedList<NylonObject> returnStack)
             throws NylonRuntimeException {
         returnStack.add(t.clone());
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + "[" + t.toString() + "]";
     }
 
 }

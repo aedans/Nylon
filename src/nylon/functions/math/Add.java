@@ -1,7 +1,7 @@
 package nylon.functions.math;
 
 import nylon.exceptions.NylonRuntimeException;
-import nylon.functions.NylonFunction;
+import nylon.objects.NylonFunction;
 import nylon.objects.NylonObject;
 
 import java.util.LinkedList;
@@ -24,7 +24,7 @@ public class Add extends NylonFunction {
         else if (args.size() == 1)
             returnStack.add(args.getFirst().increment());
         else if (args.size() == 2)
-            returnStack.add(args.getFirst().concatenate(args.getLast()));
+            returnStack.add(args.getLast().concatenate(args.getFirst()));
         else
             // Should never hit
             throw new NylonRuntimeException("Internal error: Too many arguments given.");

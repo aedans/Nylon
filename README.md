@@ -100,3 +100,8 @@ of the stack.
 ## If Statements
 - '?': Takes an arguments and pushes a FunctionSkip object to the stack if it's false.
 - '¿': Takes an arguments and pushes a FunctionSkip object to the stack if it's true.
+
+## Others
+
+- ':': Pops the top argument of the stack. If the top argument is a function, calls that function instead. If the stack
+        is empty, pushes ':' to the stack.

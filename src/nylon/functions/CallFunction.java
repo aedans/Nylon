@@ -2,6 +2,7 @@ package nylon.functions;
 
 import nylon.NylonRuntime;
 import nylon.exceptions.NylonRuntimeException;
+import nylon.objects.NylonFunction;
 import nylon.objects.NylonObject;
 
 import java.util.LinkedList;
