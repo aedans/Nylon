@@ -1,17 +1,56 @@
-Nylon is stack based, interpreted, functional programming language designed to compete with Jelly, 05AB1E, MATL, and
-others in golfing challenges. It is designed to have small programs while still being able to do complex tasks easily,
-an ability that other golfing languages do not have.
+Nylon is stack based, interpreted, functional programming language designed to compete with Jelly, 05AB1E, MATL, and others in golfing challenges. It is designed to have small programs while still being able to do complex tasks easily, an ability that other golfing languages do not have.
 
-The Nylon interpreter can be used by downloading and running the jar via your OS' terminal.
-Use java -jar [jarpath] -r [filename] to run a file with the Nylon interpreter.
+The Nylon interpreter can be used by downloading and running the jar via your OS' terminal. Use java -jar [jarpath] -r [filename] to run a file with the Nylon interpreter.
 
 Note that the interpreter is not yet finished, and any functionality described may not yet be implemented.
 
 # Definitions
 
+## Stacks
+
+The Nylon language operates exclusively on stacks, with one stack allocated per function. Stacks in Nylon are represented as linked lists; pushing an object appends it to the linked list, and popping an object removes it.
+
+## Constants
+
+Nylon supports five constant types: longs, doubles, characters, strings, and functions (Note that booleans can be stored using characters and strings). Each constant can be pushed to the stack via a native function. When Nylon compiles, all constants in the source code are replaced with functions that take no arguments and push the constant to the stack. Constants can be created as follows:
+
+Longs:
+<pre>
+1
+445
+3E13
+11E20
+</pre>
+
+Doubles:
+<pre>
+1.0
+225.4234
+3E199
+</pre>
+E
+Characters:
+<pre>
+a
+\?
+</pre>
+
+Strings:
+<pre>
+asdf
+"????"
+"\"?????\""
+</pre>
+
+Functions:
+<pre>
+@abcd
+@+
+@[+-*/]
+</pre>
+
 ## Arguments
-Arguments are passed to functions via the stack. Before the function is called, all arguments must be pushed to the stack
-that the function will read from.
+Arguments are variables that are passed to functions via the stack. Before the function is called, all arguments must be pushed to the stack that the function will read from.
 
 Numeric arguments take both numbers and characters.
 
@@ -36,33 +75,83 @@ A function can be pushed to stack to be accessed by other functions using '@'.
 - '!': Terminates the function.
 - '[...]': Creates a function lambda.
 
+Example 1:
+<pre>
+1ƒabc
+2ƒ;
+abc;
+
+Output: "abcabc"
+</pre>
+
+Example 2:
+<pre>
+1ƒƒƒ
+2;
+3;abc;;;
+
+Output: "abc"
+</pre>
+
 ## If Statements
-If Statements are functions that push a FunctionSkip object to the stack. If a FunctionSkip object is present when a
-function is called, the FunctionSkip object is removed and the function call is ignored. Normal functions may return
-a FunctionSkip object to emulate being an if statement.
+If Statements are functions that push a FunctionSkip object to the stack. If a FunctionSkip object is present when a function is called, the FunctionSkip object is removed and the function call is ignored. Normal functions may return a FunctionSkip object to emulate being an if statement.
 
 - '¡': Pushes a FunctionSkip object to the stack.
+
+Example 1:
+<pre>
+true?abc
+
+Output: "abc"
+
+false?abc
+
+Output: ""
+</pre>
+
+Example 2:
+<pre>
+¡abc
+
+Output: ""
+</pre>
+
+Example 3:
+<pre>
+1ƒa b c
+¡¡
+
+Output: "c"
+</pre>
 
 ## Switches
 Switches will execute a function in a list of functions given an argument. If given a number or a character, it will
 execute the nth function. If given a string, that string will be converted into a list of characters and the switch will
 be executed for each one.
 
-- '§f... ': Creates a switch with any number of functions.
+- '§f...]': Creates a switch with any number of functions.
+
+Example 1:
+
+<pre>
+§5 4 3 2 1]a
+
+Input: "1", Output: "5a"
+Input: "3", Output: "3a"
+Input: "5", Output: "1a"
+Input: "6", Output: "a"
+</pre>
 
 ## Loops
-Loops iterate over a function. The return stacks of the function will not returned until the loop is finished executing,
-and will be concatenated before being returned. If the loop has a closing brace, the functions between the braces are
-implicitly converted into an lambda function to be called by the loop.
+Loops iterate over a function. The return stacks of the function will not returned until the loop is finished executing, and will be concatenated before being returned. If the loop has a closing brace, the functions between the braces are implicitly converted into an lambda function to be called by the loop.
 
-- '?(': Iterates for as long as the conditional is true. Conditional defaults to '?'. If the preceding token is not a
-        conditional, and the last item on the stack is numeric, iterates n times instead, pushing and popping n from the
-        stack each loop.
+- 'f(': Iterates for as long as a conditional is true. Conditional defaults to '?'. If the preceding token is not a conditional, and the last item on the stack is numeric, iterates n times instead, pushing and popping n from the stack each loop.
 - 's{': Iterates for each item in a stack or list. Defaults to the current stack.
 
+// TODO: Examples
+
 ## Function Flags
-The start of a function may contain any number of Function Flags. Rather than push a string to the stack, these
-flags change how certain things work. To push a string at the beginning of a function, precede the string with a space.
+The start of a function may contain any number of Function Flags. Rather than push a string to the stack, these flags change how certain things work. To push a string at the beginning of a function, precede the string with a space.
 
 - 'i': Turns off implicit input.
 - 'I': Turns on implicit input. (default)
@@ -72,22 +161,40 @@ flags change how certain things work. To push a string at the beginning of a fun
 - 'R': Keeps function arguments on the stack, rather than removing them.
 - 'Z': The function flags for this function will affect sub functions (must be first flag).
 
-## Aliases
-Aliases are defined above the 0th function using a symbol followed by any number of characters. Before running the program,
-all instances of the symbol are replaced with the characters. Aliases are applied top to bottom, and are not applied on
-themselves. All lines containing aliases must start with '=', and any number of aliases may be on that line, delineated
-by spaces.
+// TODO: Examples
 
-## GOTOs
-- '^': Takes an argument n and moves to the nth function of the current function (numbers and strings are treated as
-        one function).
+## Aliases
+Aliases are defined above the 0th function using a symbol followed by any number of characters. Before running the program, all instances of the symbol are replaced with the characters. Aliases are applied top to bottom, and are not applied on themselves. All lines containing aliases must start with '=', and any number of aliases may be on that line, delineated by spaces.
+
+Example 1:
+<pre>
+=?123
+???
+
+Output: "123123123"
+</pre>
+
+Example 2:
+<pre>
+=1123
+=@111
+@
+
+Output: "123123123"
+</pre>
 
 ## Implicit Input
 By default, when the program is called, all arguments are pushed onto the stack in order.
 
 ## Implicit Output
-By default, when the function terminates, the function returns all consecutive matching objects starting from the top
-of the stack.
+By default, when the function terminates, the function returns all consecutive matching objects starting from the top of the stack.
+
+Example:
+<pre>
+123a b c
+
+Output: "abc"
+</pre>
 
 # Builtin Functions
 
@@ -104,6 +211,4 @@ of the stack.
 - '¿': Takes an arguments and pushes a FunctionSkip object to the stack if it's true.
 
 ## Others
-
-- ':': Pops the top argument of the stack. If the top argument is a function, calls that function instead. If the stack
-        is empty, pushes ':' to the stack.
+- ':': Pops the top argument of the stack and prints it to stdout. If the top argument is a function, calls that function instead. If the stack is empty, pushes ':' to the stack.
