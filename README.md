@@ -5,6 +5,8 @@ an ability that other golfing languages do not have.
 The Nylon interpreter can be used by downloading and running the jar via your OS' terminal.
 Use java -jar [jarpath] -r [filename] to run a file with the Nylon interpreter.
 
+Note that the interpreter is not yet finished, and any functionality described may not yet be implemented.
+
 # Definitions
 
 ## Arguments
@@ -105,5 +107,3 @@ of the stack.
 
 - ':': Pops the top argument of the stack. If the top argument is a function, calls that function instead. If the stack
         is empty, pushes ':' to the stack.
-
-# Note: The interpreter is not finished. Some functionality may not be present.
