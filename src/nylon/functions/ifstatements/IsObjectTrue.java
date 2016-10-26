@@ -2,7 +2,7 @@ package nylon.functions.ifstatements;
 
 import nylon.exceptions.NylonRuntimeException;
 import nylon.functions.NylonFunction;
-import nylon.objects.FunctionSkip;
+import nylon.objects.FunctionSkipObject;
 import nylon.objects.NylonObject;
 
 import java.util.LinkedList;
@@ -22,7 +22,7 @@ public class IsObjectTrue extends NylonFunction {
             throws NylonRuntimeException {
         if (args.size() == 1){
             if (!args.getFirst().toBoolean())
-                returnStack.add(new FunctionSkip());
+                returnStack.add(new FunctionSkipObject());
         }
     }
 

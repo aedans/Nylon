@@ -52,4 +52,9 @@ public class NylonString implements NylonObject {
         return new NylonString(this.value + nylonObject.toString());
     }
 
+    @Override
+    public NylonObject clone() {
+        return new NylonString(value);
+    }
+
 }

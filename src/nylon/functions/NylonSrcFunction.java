@@ -2,11 +2,9 @@ package nylon.functions;
 
 import nylon.NylonRuntime;
 import nylon.exceptions.NylonRuntimeException;
-import nylon.objects.FunctionSkip;
 import nylon.objects.NylonObject;
 import nylon.parser.FunctionParser;
 
-import javax.lang.model.type.NullType;
 import java.util.LinkedList;
 
 /**

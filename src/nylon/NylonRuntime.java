@@ -1,6 +1,7 @@
 package nylon;
 
 import nylon.exceptions.NylonRuntimeException;
+import nylon.functions.FunctionDictionary;
 import nylon.functions.NylonSrcFunction;
 import nylon.objects.NylonObject;
 import nylon.objects.NylonString;
@@ -18,6 +19,8 @@ public class NylonRuntime implements Runnable {
     private LinkedList<NylonObject>[] stacks = new LinkedList[52];
 
     private ArrayList<NylonSrcFunction> nylonFunctions = new ArrayList<>();
+
+    private FunctionDictionary functionDictionary = new FunctionDictionary();
 
     public NylonRuntime(String src) throws NylonRuntimeException {
         for (String s : src.split("\n")){
@@ -50,6 +53,10 @@ public class NylonRuntime implements Runnable {
             System.out.println("Unrecognized Exception: " + e.getMessage());
             e.printStackTrace(System.out);
         }
+    }
+
+    public FunctionDictionary getFunctionDictionary() {
+        return functionDictionary;
     }
 
     public NylonSrcFunction getFunction(int function) throws NylonRuntimeException {

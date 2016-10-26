@@ -1,7 +1,7 @@
 package nylon.functions;
 
 import nylon.exceptions.NylonRuntimeException;
-import nylon.objects.FunctionSkip;
+import nylon.objects.FunctionSkipObject;
 import nylon.objects.NylonObject;
 
 import java.util.LinkedList;
@@ -10,7 +10,7 @@ import java.util.LinkedList;
  * Created by Aedan Smith.
  */
 
-public abstract class NylonFunction {
+public abstract class NylonFunction implements NylonObject {
 
     private int args;
 
@@ -20,7 +20,7 @@ public abstract class NylonFunction {
 
     @SuppressWarnings("unchecked")
     public LinkedList<NylonObject> apply(LinkedList<NylonObject> superStack) throws NylonRuntimeException {
-        if (superStack.size() != 0 && superStack.getLast().getClass() == FunctionSkip.class) {
+        if (superStack.size() != 0 && superStack.getLast().getClass() == FunctionSkipObject.class) {
             superStack.removeLast();
             return new LinkedList<>();
         }
@@ -65,6 +65,42 @@ public abstract class NylonFunction {
     @Override
     public String toString() {
         return this.getClass().getSimpleName();
+    }
+
+    @Override
+    public long toLong() throws NylonRuntimeException {
+        throw new NylonRuntimeException("Cannot convert a NylonFunction to a long.");
+    }
+
+    @Override
+    public boolean toBoolean() throws NylonRuntimeException {
+        throw new NylonRuntimeException("Cannot convert a NylonFunction to a boolean.");
+    }
+
+    @Override
+    public NylonObject increment() throws NylonRuntimeException {
+        throw new NylonRuntimeException("Cannot increment a NylonFunction.");
+    }
+
+    @Override
+    public NylonObject decrement() throws NylonRuntimeException {
+        throw new NylonRuntimeException("Cannot not decrement a NylonFunction");
+    }
+
+    @Override
+    public NylonObject concatenate(NylonObject nylonObject) throws NylonRuntimeException {
+        throw new NylonRuntimeException("Cannot concatenate a NylonFunctions.");
+    }
+
+    @Override
+    public NylonObject clone() {
+        return new NylonFunction(args) {
+            @Override
+            protected void applyImpl(LinkedList<NylonObject> args, LinkedList<NylonObject> returnStack)
+                    throws NylonRuntimeException {
+                NylonFunction.this.applyImpl(args, returnStack);
+            }
+        };
     }
 
 }

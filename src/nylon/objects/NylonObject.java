@@ -6,7 +6,7 @@ import nylon.exceptions.NylonRuntimeException;
  * Created by Aedan Smith.
  */
 
-public interface NylonObject {
+public interface NylonObject extends Cloneable<NylonObject> {
 
     @Override
     String toString();

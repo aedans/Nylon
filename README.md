@@ -27,6 +27,8 @@ stack.
 
 Functions will implicitly return all non-argument values on the stack.
 
+A function can be pushed to stack to be accessed by other functions using '@'.
+
 - ';': Pushes the function stack to the return stack.
 - ':': Pushes the top element of the function stack to the return stack.
 - '!': Terminates the function.

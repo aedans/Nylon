@@ -46,4 +46,9 @@ public class NylonLong implements NylonObject {
         return new NylonLong(this.value + nylonObject.toLong());
     }
 
+    @Override
+    public NylonObject clone() {
+        return new NylonLong(value);
+    }
+
 }

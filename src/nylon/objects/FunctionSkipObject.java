@@ -6,7 +6,7 @@ import nylon.exceptions.NylonRuntimeException;
  * Created by Aedan Smith.
  */
 
-public class FunctionSkip implements NylonObject {
+public class FunctionSkipObject implements NylonObject {
 
     @Override
     public String toString() {
@@ -25,17 +25,22 @@ public class FunctionSkip implements NylonObject {
 
     @Override
     public NylonObject increment() throws NylonRuntimeException {
-        throw new NylonRuntimeException("Could not increment FunctionSkip object.");
+        throw new NylonRuntimeException("Could not increment FunctionSkipObject object.");
     }
 
     @Override
     public NylonObject decrement() throws NylonRuntimeException {
-        throw new NylonRuntimeException("Could not decrement FunctionSkip object.");
+        throw new NylonRuntimeException("Could not decrement FunctionSkipObject object.");
     }
 
     @Override
     public NylonObject concatenate(NylonObject nylonObject) throws NylonRuntimeException {
-        throw new NylonRuntimeException("Could not concatenate FunctionSkip object.");
+        throw new NylonRuntimeException("Could not concatenate FunctionSkipObject object.");
+    }
+
+    @Override
+    public NylonObject clone() {
+        return new FunctionSkipObject();
     }
 
 }

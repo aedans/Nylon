@@ -1,7 +1,6 @@
 package nylon.functions;
 
 import nylon.exceptions.NylonRuntimeException;
-import nylon.objects.NylonCharacter;
 import nylon.objects.NylonObject;
 
 import java.util.LinkedList;
@@ -10,19 +9,19 @@ import java.util.LinkedList;
  * Created by Aedan Smith.
  */
 
-public class PushCharacterFunction extends NylonFunction {
+public class PushNylonObjectFunction<T extends NylonObject> extends NylonFunction {
 
-    private char c;
+    private T t;
 
-    public PushCharacterFunction(char c) {
+    public PushNylonObjectFunction(T t) {
         super(0);
-        this.c = c;
+        this.t = t;
     }
 
     @Override
     protected void applyImpl(LinkedList<NylonObject> args, LinkedList<NylonObject> returnStack)
             throws NylonRuntimeException {
-        returnStack.add(new NylonCharacter(c));
+        returnStack.add(t.clone());
     }
 
 }

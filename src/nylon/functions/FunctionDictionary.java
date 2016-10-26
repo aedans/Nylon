@@ -14,11 +14,11 @@ import java.util.LinkedList;
  * Created by Aedan Smith.
  */
 
-public final class FunctionDictionary {
+public class FunctionDictionary {
 
-    private static HashMap<Character, NylonFunction> functionHashMap = new HashMap<>();
+    private HashMap<Character, NylonFunction> functionHashMap = new HashMap<>();
 
-    static {
+    {
         functionHashMap.put('+', new Add());
         functionHashMap.put('-', new Subtract());
         functionHashMap.put('*', new Multiply());
@@ -36,7 +36,7 @@ public final class FunctionDictionary {
         });
     }
 
-    public static NylonFunction get(NylonRuntime runtime, char key) throws NylonRuntimeException {
+    public NylonFunction get(NylonRuntime runtime, char key) throws NylonRuntimeException {
         switch (key){
             case 'ƒ':
                 return new CallFunction(runtime);

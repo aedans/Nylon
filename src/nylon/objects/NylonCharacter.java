@@ -49,4 +49,10 @@ public class NylonCharacter implements NylonObject {
     public NylonObject concatenate(NylonObject nylonObject) throws NylonRuntimeException {
         return new NylonLong(nylonObject.toLong() + this.value);
     }
+
+    @Override
+    public NylonObject clone() {
+        return new NylonCharacter(value);
+    }
+
 }
