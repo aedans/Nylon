@@ -2,47 +2,45 @@ package nylon.objects;
 
 import nylon.exceptions.NylonRuntimeException;
 
-import java.util.LinkedList;
-
 /**
  * Created by Aedan Smith.
  */
 
 public abstract class NylonFunction implements NylonObject {
 
-    private int args;
+    protected int args;
 
     public NylonFunction(int args){
         this.args = args;
     }
 
     @SuppressWarnings("unchecked")
-    public LinkedList<NylonObject> apply(LinkedList<NylonObject> superStack) throws NylonRuntimeException {
+    public NylonStack apply(NylonStack superStack) throws NylonRuntimeException {
         if (superStack.size() != 0 && superStack.getLast().getClass() == FunctionSkipObject.class) {
             superStack.removeLast();
-            return new LinkedList<>();
+            return new NylonStack();
         }
 
-        LinkedList<NylonObject> functionStack = new LinkedList<>();
+        NylonStack functionStack = new NylonStack();
         if (args >= 0) {
             if (superStack.size() >= args) {
-                LinkedList<NylonObject> args = new LinkedList<>();
+                NylonStack args = new NylonStack();
                 for (int i = 0; i < this.args; i++) {
                     args.add(superStack.removeLast());
                 }
                 this.applyImpl(args, functionStack);
             } else {
-                this.applyImpl((LinkedList<NylonObject>) superStack.clone(), functionStack);
+                this.applyImpl(superStack.clone(), functionStack);
                 superStack.clear();
             }
         } else if (args == -1) {
-            this.applyImpl((LinkedList<NylonObject>) superStack.clone(), functionStack);
+            this.applyImpl(superStack.clone(), functionStack);
             superStack.clear();
         } else {
-            this.applyImpl(superStack, functionStack);
+            this.applyImpl(superStack.clone(), functionStack);
         }
 
-        LinkedList<NylonObject> returnStack = new LinkedList<>();
+        NylonStack returnStack = new NylonStack();
         if (functionStack.size() != 0) {
             Class clazz = functionStack.getLast().getClass();
             NylonObject object;
@@ -57,8 +55,7 @@ public abstract class NylonFunction implements NylonObject {
         return returnStack;
     }
 
-    protected abstract void applyImpl(LinkedList<NylonObject> args, LinkedList<NylonObject> returnStack)
-            throws NylonRuntimeException;
+    protected abstract void applyImpl(NylonStack args, NylonStack returnStack) throws NylonRuntimeException;
 
     @Override
     public String toString() {
@@ -95,7 +92,7 @@ public abstract class NylonFunction implements NylonObject {
         if (nylonObject instanceof NylonFunction){
             return new NylonFunction(args) {
                 @Override
-                protected void applyImpl(LinkedList<NylonObject> args, LinkedList<NylonObject> returnStack)
+                protected void applyImpl(NylonStack args, NylonStack returnStack)
                         throws NylonRuntimeException {
                     NylonFunction.this.applyImpl(args, returnStack);
                     returnStack.addAll(((NylonFunction) nylonObject).apply(returnStack));
@@ -112,18 +109,13 @@ public abstract class NylonFunction implements NylonObject {
 
     @Override
     public NylonFunction clone() {
-        return new NylonFunction(args) {
-            @Override
-            protected void applyImpl(LinkedList<NylonObject> args, LinkedList<NylonObject> returnStack)
-                    throws NylonRuntimeException {
-                NylonFunction.this.applyImpl(args, returnStack);
-            }
-
-            @Override
-            public String toString() {
-                return NylonFunction.this.toString();
-            }
-        };
+        try {
+            return (NylonFunction) super.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+            System.exit(-1);
+            return null;
+        }
     }
 
 }

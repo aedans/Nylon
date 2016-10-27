@@ -3,7 +3,7 @@ package nylon.functions;
 import nylon.NylonRuntime;
 import nylon.exceptions.NylonRuntimeException;
 import nylon.objects.NylonFunction;
-import nylon.objects.NylonObject;
+import nylon.objects.NylonStack;
 import nylon.parser.FunctionParser;
 
 import java.util.LinkedList;
@@ -22,7 +22,7 @@ public class NylonSrcFunction extends NylonFunction {
     }
 
     @Override
-    protected void applyImpl(LinkedList<NylonObject> args, LinkedList<NylonObject> returnStack)
+    protected void applyImpl(NylonStack args, NylonStack returnStack)
             throws NylonRuntimeException {
         returnStack.addAll(args);
         for (NylonFunction function : functions) {

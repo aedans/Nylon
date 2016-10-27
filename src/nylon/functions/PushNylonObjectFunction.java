@@ -1,16 +1,15 @@
 package nylon.functions;
 
 import nylon.exceptions.NylonRuntimeException;
-import nylon.objects.NylonFunction;
+import nylon.functions.ifstatements.Conditional;
 import nylon.objects.NylonObject;
-
-import java.util.LinkedList;
+import nylon.objects.NylonStack;
 
 /**
  * Created by Aedan Smith.
  */
 
-public class PushNylonObjectFunction<T extends NylonObject> extends NylonFunction {
+public class PushNylonObjectFunction<T extends NylonObject> extends Conditional {
 
     private T t;
 
@@ -20,7 +19,7 @@ public class PushNylonObjectFunction<T extends NylonObject> extends NylonFunctio
     }
 
     @Override
-    protected void applyImpl(LinkedList<NylonObject> args, LinkedList<NylonObject> returnStack)
+    protected void applyImpl(NylonStack args, NylonStack returnStack)
             throws NylonRuntimeException {
         returnStack.add(t.clone());
     }
@@ -30,4 +29,8 @@ public class PushNylonObjectFunction<T extends NylonObject> extends NylonFunctio
         return super.toString() + "[" + t.toString() + "]";
     }
 
+    @Override
+    public boolean toBoolean(NylonStack args) throws NylonRuntimeException {
+        return t.toBoolean();
+    }
 }

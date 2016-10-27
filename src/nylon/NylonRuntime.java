@@ -4,6 +4,7 @@ import nylon.exceptions.NylonRuntimeException;
 import nylon.functions.FunctionDictionary;
 import nylon.functions.NylonSrcFunction;
 import nylon.objects.NylonObject;
+import nylon.objects.NylonStack;
 import nylon.objects.NylonString;
 
 import java.util.ArrayList;
@@ -15,8 +16,7 @@ import java.util.LinkedList;
 
 public class NylonRuntime implements Runnable {
 
-    @SuppressWarnings("unchecked")
-    private LinkedList<NylonObject>[] stacks = new LinkedList[52];
+    private NylonStack nylonStack = new NylonStack();
 
     private ArrayList<NylonSrcFunction> nylonFunctions = new ArrayList<>();
 
@@ -34,19 +34,16 @@ public class NylonRuntime implements Runnable {
         for (String s : src.split("\n")){
             this.nylonFunctions.add(new NylonSrcFunction(this, s, 0));
         }
-        for (int i = 0; i < 52; i++) {
-            this.stacks[i] = new LinkedList<>();
-        }
     }
 
     public void addInput(String arg) {
-        stacks[0].add(new NylonString(arg));
+        nylonStack.add(new NylonString(arg));
     }
 
     @Override
     public void run() {
         try {
-            this.getFunction(0).apply(new LinkedList<>()).forEach(System.out::println);
+            this.getFunction(0).apply(nylonStack).forEach(System.out::println);
         } catch (NylonRuntimeException e){
             e.printStackTrace(System.out);
         } catch (Exception e){
@@ -63,12 +60,6 @@ public class NylonRuntime implements Runnable {
         if (function >= nylonFunctions.size())
             throw new NylonRuntimeException("Could not access function " + function);
         return nylonFunctions.get(function);
-    }
-
-    public LinkedList<NylonObject> getStack(int stack) throws NylonRuntimeException {
-        if (stack >= 52)
-            throw new NylonRuntimeException("Could not access stack " + stack);
-        return stacks[stack];
     }
 
 }

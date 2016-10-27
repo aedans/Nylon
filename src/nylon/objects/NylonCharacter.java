@@ -39,19 +39,19 @@ public class NylonCharacter implements NylonObject {
     }
 
     @Override
-    public NylonObject increment() {
+    public NylonCharacter increment() {
         this.value++;
         return this;
     }
 
     @Override
-    public NylonObject decrement() {
+    public NylonCharacter decrement() {
         this.value--;
         return this;
     }
 
     @Override
-    public NylonObject concatenate(NylonObject nylonObject) throws NylonRuntimeException {
+    public NylonCharacter concatenate(NylonObject nylonObject) throws NylonRuntimeException {
         return new NylonCharacter((char) (nylonObject.toInteger() + this.value));
     }
 

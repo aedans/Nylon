@@ -57,7 +57,7 @@ public class NylonString implements NylonObject {
     }
 
     @Override
-    public NylonObject concatenate(NylonObject nylonObject) {
+    public NylonString concatenate(NylonObject nylonObject) {
         return new NylonString(this.value + nylonObject.toString());
     }
 

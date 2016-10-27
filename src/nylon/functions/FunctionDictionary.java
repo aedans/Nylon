@@ -7,6 +7,7 @@ import nylon.functions.ifstatements.IsObjectTrue;
 import nylon.functions.math.*;
 import nylon.objects.NylonFunction;
 import nylon.objects.NylonObject;
+import nylon.objects.NylonStack;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -31,6 +32,12 @@ public class FunctionDictionary {
         functionHashMap.put('¿', new IsObjectFalse());
 
         functionHashMap.put(':', new PopTop());
+        functionHashMap.put('µ', new NylonFunction(0) {
+            @Override
+            protected void applyImpl(NylonStack args, NylonStack returnStack) throws NylonRuntimeException {
+                System.exit(0);
+            }
+        });
     }
 
     public NylonFunction get(NylonRuntime runtime, char key) throws NylonRuntimeException {

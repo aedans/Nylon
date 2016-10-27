@@ -44,7 +44,7 @@ public class FunctionSkipObject implements NylonObject {
     }
 
     @Override
-    public NylonObject clone() {
+    public FunctionSkipObject clone() {
         return new FunctionSkipObject();
     }
 

@@ -92,20 +92,17 @@ If Statements are functions that push a FunctionSkip object to the stack. If a F
 
 Example 1:
 <pre>
-true?abc
+?abc
 
-Output: "abc"
-
-false?abc
-
-Output: ""
+Input: "true", Output: "abc"
+Input: "false", Output: ""
 </pre>
 
 Example 2:
 <pre>
-¡abc
+¡abc d
 
-Output: ""
+Output: "d"
 </pre>
 
 Example 3:
@@ -128,17 +125,21 @@ Example:
 <pre>
 §5 4 3 2 1]a
 
-Input: "1", Output: "5a"
-Input: "3", Output: "3a"
-Input: "5", Output: "1a"
-Input: "6", Output: "a"
+Input: "0", Output: "5a"
+Input: "2", Output: "3a"
+Input: "4", Output: "1a"
+Input: "5", Output: "a"
 </pre>
 
 ## Loops
 Loops iterate over a function. The return stacks of the function will not returned until the loop is finished executing, and will be concatenated before being returned. If the loop has a closing brace, the functions between the braces are implicitly converted into an lambda function to be called by the loop.
 
-- 'f(': Iterates for as long as a conditional is true. Conditional defaults to '?'. If the preceding token is not a conditional, and the last item on the stack is numeric, iterates n times instead, pushing and popping n from the stack each loop.
+- '?(': Iterates for as long as a conditional is true. If the preceding token is not a conditional, and the last item on the stack is numeric, iterates n times instead, pushing and popping n from the stack each loop.
 - 's{': Iterates for each item in a stack or list. Defaults to the current stack.
+
+Loops can also be passed arguments via characters. The arguments must be passed before the loop function.
+
+- 'P': Start the loop from 1 instead of 0.
 
 ## Function Flags
 The start of a function may contain any number of Function Flags. Rather than push a string to the stack, these flags change how certain things work. To push a string at the beginning of a function, precede the string with a space.
@@ -200,3 +201,4 @@ Output: "abc"
 
 ## Others
 - ':': Pops the top argument of the stack and prints it to stdout. If the top argument is a function, calls that function instead. If the stack is empty, pushes ':' to the stack.
+- 'µ': Ends the program.

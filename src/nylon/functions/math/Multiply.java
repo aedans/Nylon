@@ -3,9 +3,7 @@ package nylon.functions.math;
 import nylon.exceptions.NylonRuntimeException;
 import nylon.objects.NylonDouble;
 import nylon.objects.NylonFunction;
-import nylon.objects.NylonObject;
-
-import java.util.LinkedList;
+import nylon.objects.NylonStack;
 
 /**
  * Created by Aedan Smith.
@@ -18,7 +16,7 @@ public class Multiply extends NylonFunction {
     }
 
     @Override
-    protected void applyImpl(LinkedList<NylonObject> args, LinkedList<NylonObject> returnStack) throws NylonRuntimeException {
+    protected void applyImpl(NylonStack args, NylonStack returnStack) throws NylonRuntimeException {
         if (args.size() == 0)
             throw new NylonRuntimeException("Cannot multiply null arguments.");
         else if (args.size() == 1)

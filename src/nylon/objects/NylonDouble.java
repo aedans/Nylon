@@ -30,19 +30,19 @@ public class NylonDouble implements NylonObject {
     }
 
     @Override
-    public NylonObject increment() throws NylonRuntimeException {
+    public NylonDouble increment() throws NylonRuntimeException {
         this.value++;
         return this;
     }
 
     @Override
-    public NylonObject decrement() throws NylonRuntimeException {
+    public NylonDouble decrement() throws NylonRuntimeException {
         this.value--;
         return this;
     }
 
     @Override
-    public NylonObject concatenate(NylonObject nylonObject) throws NylonRuntimeException {
+    public NylonDouble concatenate(NylonObject nylonObject) throws NylonRuntimeException {
         return new NylonDouble(this.value + nylonObject.toInteger());
     }
 
@@ -52,7 +52,7 @@ public class NylonDouble implements NylonObject {
     }
 
     @Override
-    public NylonObject clone() {
+    public NylonDouble clone() {
         return new NylonDouble(value);
     }
     

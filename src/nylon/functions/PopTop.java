@@ -3,9 +3,7 @@ package nylon.functions;
 import nylon.exceptions.NylonRuntimeException;
 import nylon.objects.NylonCharacter;
 import nylon.objects.NylonFunction;
-import nylon.objects.NylonObject;
-
-import java.util.LinkedList;
+import nylon.objects.NylonStack;
 
 /**
  * Created by Aedan Smith.
@@ -18,7 +16,7 @@ public class PopTop extends NylonFunction {
     }
 
     @Override
-    protected void applyImpl(LinkedList<NylonObject> args, LinkedList<NylonObject> returnStack)
+    protected void applyImpl(NylonStack args, NylonStack returnStack)
             throws NylonRuntimeException {
         if (args.size() != 0) {
             if (args.getLast() instanceof NylonFunction) {
