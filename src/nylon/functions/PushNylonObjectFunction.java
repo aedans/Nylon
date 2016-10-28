@@ -33,4 +33,5 @@ public class PushNylonObjectFunction<T extends NylonObject> extends Conditional 
     public boolean toBoolean(NylonStack args) throws NylonRuntimeException {
         return t.toBoolean();
     }
+
 }

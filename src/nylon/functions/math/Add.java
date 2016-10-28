@@ -20,9 +20,9 @@ public class Add extends NylonFunction {
         if (args.size() == 0)
             throw new NylonRuntimeException("Cannot add null arguments.");
         else if (args.size() == 1)
-            returnStack.add(args.getFirst().increment());
+            returnStack.add(args.get(0).increment());
         else if (args.size() == 2)
-            returnStack.add(args.getLast().concatenate(args.getFirst()));
+            returnStack.add(args.lastElement().concatenate(args.get(0)));
         else
             // Should never hit
             throw new NylonRuntimeException("Internal error: Too many arguments given.");

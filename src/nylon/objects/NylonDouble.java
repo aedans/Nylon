@@ -15,35 +15,35 @@ public class NylonDouble implements NylonObject {
     }
 
     @Override
-    public int toInteger() throws NylonRuntimeException {
+    public int toInteger() {
         return (int) this.value;
     }
 
     @Override
-    public double toDouble() throws NylonRuntimeException {
+    public double toDouble() {
         return this.value;
     }
 
     @Override
-    public boolean toBoolean() throws NylonRuntimeException {
+    public boolean toBoolean() {
         return this.value != 0;
     }
 
     @Override
-    public NylonDouble increment() throws NylonRuntimeException {
+    public NylonDouble increment() {
         this.value++;
         return this;
     }
 
     @Override
-    public NylonDouble decrement() throws NylonRuntimeException {
+    public NylonDouble decrement() {
         this.value--;
         return this;
     }
 
     @Override
     public NylonDouble concatenate(NylonObject nylonObject) throws NylonRuntimeException {
-        return new NylonDouble(this.value + nylonObject.toInteger());
+        return new NylonDouble(this.value + nylonObject.toDouble());
     }
 
     @Override

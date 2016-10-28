@@ -25,7 +25,7 @@ public class IsObjectFalse extends Conditional {
 
     @Override
     public boolean toBoolean(NylonStack args) throws NylonRuntimeException {
-        return args.size() != 1 || args.getFirst().toBoolean();
+        return args.size() != 1 || args.get(0).toBoolean();
     }
 
 }

@@ -8,7 +8,7 @@ import nylon.exceptions.NylonRuntimeException;
 
 public abstract class NylonFunction implements NylonObject {
 
-    protected int args;
+    protected final int args;
 
     public NylonFunction(int args){
         this.args = args;
@@ -16,8 +16,8 @@ public abstract class NylonFunction implements NylonObject {
 
     @SuppressWarnings("unchecked")
     public NylonStack apply(NylonStack superStack) throws NylonRuntimeException {
-        if (superStack.size() != 0 && superStack.getLast().getClass() == FunctionSkipObject.class) {
-            superStack.removeLast();
+        if (superStack.size() != 0 && superStack.lastElement().getClass() == FunctionSkipObject.class) {
+            superStack.pop();
             return new NylonStack();
         }
 
@@ -26,7 +26,7 @@ public abstract class NylonFunction implements NylonObject {
             if (superStack.size() >= args) {
                 NylonStack args = new NylonStack();
                 for (int i = 0; i < this.args; i++) {
-                    args.add(superStack.removeLast());
+                    args.add(superStack.pop());
                 }
                 this.applyImpl(args, functionStack);
             } else {
@@ -37,17 +37,17 @@ public abstract class NylonFunction implements NylonObject {
             this.applyImpl(superStack.clone(), functionStack);
             superStack.clear();
         } else {
-            this.applyImpl(superStack.clone(), functionStack);
+            this.applyImpl(superStack, functionStack);
         }
 
         NylonStack returnStack = new NylonStack();
         if (functionStack.size() != 0) {
-            Class clazz = functionStack.getLast().getClass();
+            Class clazz = functionStack.lastElement().getClass();
             NylonObject object;
             while (functionStack.size() != 0) {
-                object = functionStack.removeLast();
+                object = functionStack.pop();
                 if (object.getClass() == clazz)
-                    returnStack.addFirst(object);
+                    returnStack.add(object);
                 else
                     break;
             }

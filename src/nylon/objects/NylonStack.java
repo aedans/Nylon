@@ -2,13 +2,13 @@ package nylon.objects;
 
 import nylon.exceptions.NylonRuntimeException;
 
-import java.util.LinkedList;
+import java.util.Stack;
 
 /**
  * Created by Aedan Smith.
  */
 
-public class NylonStack extends LinkedList<NylonObject> implements NylonObject {
+public class NylonStack extends Stack<NylonObject> implements NylonObject {
 
     @Override
     public int toInteger() throws NylonRuntimeException {

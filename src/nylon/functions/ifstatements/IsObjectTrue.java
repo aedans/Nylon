@@ -19,14 +19,14 @@ public class IsObjectTrue extends Conditional {
     protected void applyImpl(NylonStack args, NylonStack returnStack)
             throws NylonRuntimeException {
         if (args.size() == 1){
-            if (!args.getFirst().toBoolean())
+            if (!args.get(0).toBoolean())
                 returnStack.add(new FunctionSkipObject());
         }
     }
 
     @Override
     public boolean toBoolean(NylonStack args) throws NylonRuntimeException {
-        return args.size() != 1 || !args.getFirst().toBoolean();
+        return args.size() != 1 || !args.get(0).toBoolean();
     }
 
 }

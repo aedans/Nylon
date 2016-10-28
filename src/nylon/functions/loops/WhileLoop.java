@@ -23,17 +23,17 @@ public class WhileLoop extends NylonFunction {
             throws NylonRuntimeException {
         if (args.size() == 0)
             return;
-        if (args.getLast() instanceof Conditional){
-            Conditional conditional = (Conditional) args.removeLast();
+        if (args.lastElement() instanceof Conditional){
+            Conditional conditional = (Conditional) args.pop();
             while (conditional.toBoolean(args)) {
                 returnStack.addAll(function.apply(args));
             }
         } else {
-            double d = args.removeLast().toDouble();
+            double d = args.pop().toDouble();
             for (int i = 0; i < d; i++) {
                 args.add(new NylonDouble(i));
                 returnStack.addAll(function.apply(args.clone()));
-                args.removeLast();
+                args.pop();
             }
         }
     }

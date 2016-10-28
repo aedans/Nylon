@@ -21,12 +21,12 @@ public class NylonCharacter implements NylonObject {
 
     @Override
     public int toInteger() {
-        return value;
+        return this.value;
     }
 
     @Override
     public double toDouble() throws NylonRuntimeException {
-        return value;
+        return this.value;
     }
 
     @Override

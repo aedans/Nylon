@@ -22,7 +22,7 @@ public class PowerOf extends NylonFunction {
         else if (args.size() == 1)
             throw new NylonRuntimeException("Cannot exponentiate one argument.");
         else if (args.size() == 2)
-            returnStack.add(new NylonDouble((int) Math.pow(args.getLast().toDouble(), args.getFirst().toDouble())));
+            returnStack.add(new NylonDouble((int) Math.pow(args.lastElement().toDouble(), args.get(0).toDouble())));
         else
             // Should never hit
             throw new NylonRuntimeException("Internal error: Too many arguments given.");
