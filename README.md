@@ -80,8 +80,8 @@ Example 2:
 <pre>
 1ƒƒƒ
 2
-3abc
-
+3
+abc
 
 Output: "abc"
 </pre>
