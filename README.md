@@ -79,8 +79,9 @@ Output: "abcabc"
 Example 2:
 <pre>
 1ƒƒƒ
-2;
-3;abc;;;
+2
+3abc
+
 
 Output: "abc"
 </pre>
@@ -141,6 +142,27 @@ Loops can also be passed arguments via characters. The arguments must be passed 
 
 - 'P': Start the loop from 1 instead of 0.
 
+Example 1:
+<pre>
+@t(a:)
+
+Output: "aaaaaaaaa..."
+</pre>
+
+Example 2:
+<pre>
+100(:)
+
+Output: "012345679...99"
+</pre>
+
+Example 3:
+<pre>
+a b c{.}
+
+Output: "abcabc"
+</pre>
+
 ## Function Flags
 The start of a function may contain any number of Function Flags. Rather than push a string to the stack, these flags change how certain things work. To push a string at the beginning of a function, precede the string with a space.
 
@@ -175,6 +197,14 @@ Output: "123123123"
 ## Implicit Input
 By default, when the program is called, all arguments are pushed onto the stack in order.
 
+Example:
+<pre>
+.
+
+Input: "3", Output: "33"
+Input: "abc", Output: "abcabc"
+</pre>
+
 ## Implicit Output
 By default, when the function terminates, the function returns all consecutive matching objects starting from the top of the stack.
 
@@ -188,7 +218,7 @@ Output: "abc"
 # Builtin Functions
 
 ## Math Functions
-- '+': Takes two arguments and returns the sum. If only one argument is present, increments it.
+- '+': Takes two arguments and concatenates them. If only one argument is present, increments it.
 - '-': Takes two arguments and returns the difference. If only one argument is present, decrements it.
 - '*': Takes two arguments and returns the product.
 - '/': Takes two arguments and returns the quotient.
@@ -201,4 +231,5 @@ Output: "abc"
 
 ## Others
 - ':': Pops the top argument of the stack and prints it to stdout. If the top argument is a function, calls that function instead. If the stack is empty, pushes ':' to the stack.
+- '.': Pushes the top argument of the stack.
 - 'µ': Ends the program.
