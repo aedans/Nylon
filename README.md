@@ -1,4 +1,4 @@
-Nylon is stack based, interpreted, functional programming language designed to compete with Jelly, 05AB1E, MATL, and others in golfing challenges. It is designed to have small programs while still being able to do complex tasks easily, an ability that other golfing languages do not have.
+Nylon is stack based, interpreted, functional programming language designed to compete with Jelly, 05AB1E, MATL, and others in golfing challenges.
 
 The Nylon interpreter can be used by downloading and running the jar via your OS' terminal. Use java -jar [jarpath] [filename] [library-path] to run a file with the Nylon interpreter.
 
