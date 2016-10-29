@@ -2,7 +2,7 @@ Nylon is stack based functional programming language designed to compete with Je
 
 The Nylon interpreter can be used by downloading and running the jar via your OS' terminal. Use java -jar [jarpath] [filename] [library-path] to run a file with the Nylon interpreter.
 
-If you are running windows, an installer can be found in the WinInstall directory. Running the installer as administrator will create a directory at C:\Nylon containing the nylon.bat command and add it to the CMD PATH.
+If you are running Windows, an installer can be found in the WinInstall directory. Running the installer as administrator will create a directory at C:\Nylon containing the nylon.bat command and add it to the CMD PATH.
 
 Note that the interpreter is not yet finished, and any functionality described may not yet be implemented.
 
