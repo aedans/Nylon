@@ -14,6 +14,11 @@ public class FunctionSkipObject implements NylonObject {
     }
 
     @Override
+    public char toChar() throws NylonRuntimeException {
+        return '!';
+    }
+
+    @Override
     public int toInteger() {
         return 0;
     }

@@ -5,12 +5,11 @@ import nylon.exceptions.NylonRuntimeException;
 import nylon.functions.ifstatements.IsObjectFalse;
 import nylon.functions.ifstatements.IsObjectTrue;
 import nylon.functions.math.*;
+import nylon.functions.misc.*;
 import nylon.objects.NylonFunction;
-import nylon.objects.NylonObject;
 import nylon.objects.NylonStack;
 
 import java.util.HashMap;
-import java.util.LinkedList;
 
 /**
  * Created by Aedan Smith.
@@ -18,9 +17,12 @@ import java.util.LinkedList;
 
 public class FunctionDictionary {
 
-    private HashMap<Character, NylonFunction> functionHashMap = new HashMap<>();
+    public final HashMap<Character, NylonFunction> functionHashMap = new HashMap<>();
 
-    {
+    public FunctionDictionary(NylonRuntime runtime){
+        functionHashMap.put('ƒ', new CallFunction(runtime));
+        functionHashMap.put('#', new CallLibraryFunction(runtime));
+
         functionHashMap.put('+', new Add());
         functionHashMap.put('-', new Subtract());
         functionHashMap.put('*', new Multiply());
@@ -31,6 +33,8 @@ public class FunctionDictionary {
         functionHashMap.put('?', new IsObjectTrue());
         functionHashMap.put('¿', new IsObjectFalse());
 
+        functionHashMap.put('|', new Split());
+        functionHashMap.put('Ç', new Cast());
         functionHashMap.put(':', new PopTop());
         functionHashMap.put('µ', new NylonFunction(0) {
             @Override
@@ -38,21 +42,9 @@ public class FunctionDictionary {
                 System.exit(0);
             }
         });
-    }
 
-    public NylonFunction get(NylonRuntime runtime, char key) throws NylonRuntimeException {
-        switch (key){
-            case 'ƒ':
-                return new CallFunction(runtime);
-            case ' ':
-                return null;
-            default:
-                NylonFunction nylonFunction = functionHashMap.get(key);
-                if (nylonFunction != null)
-                    return functionHashMap.get(key);
-                else
-                    throw new NylonRuntimeException("Could not find function with key '" + key + "'");
-        }
+        functionHashMap.put(' ', null);
+        functionHashMap.put('\n', null);
     }
 
 }

@@ -1,4 +1,4 @@
-package nylon.functions;
+package nylon.functions.misc;
 
 import nylon.exceptions.NylonRuntimeException;
 import nylon.objects.NylonCharacter;

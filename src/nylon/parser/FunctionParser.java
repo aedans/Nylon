@@ -5,6 +5,7 @@ import nylon.NylonRuntime;
 import nylon.exceptions.NylonRuntimeException;
 import nylon.functions.*;
 import nylon.functions.loops.WhileLoop;
+import nylon.functions.misc.PushNylonObjectFunction;
 import nylon.objects.NylonCharacter;
 import nylon.objects.NylonDouble;
 import nylon.objects.NylonFunction;
@@ -19,6 +20,7 @@ import java.util.LinkedList;
 public final class FunctionParser {
 
     public static LinkedList<NylonFunction> parse(NylonRuntime runtime, String src) throws NylonRuntimeException {
+        src = src.replaceAll("(?s)/\\*.*?\\*/","");
         LinkedList<NylonFunction> functions = new LinkedList<>();
         for (int i = 0; i < src.length(); i++) {
             Pair<Integer, NylonFunction> pair = parseFunction(runtime, src, i);
@@ -31,10 +33,10 @@ public final class FunctionParser {
 
     private static Pair<Integer, NylonFunction> parseFunction(NylonRuntime runtime, String src, int i)
             throws NylonRuntimeException {
-        if (Character.isDigit(src.charAt(i))) {
+        if (src.charAt(i) >= 48 && src.charAt(i) < 58) {
             int j = i;
             for (; i < src.length(); i++) {
-                if (!Character.isDigit(src.charAt(i)))
+                if (!(src.charAt(i) >= 48 && src.charAt(i) < 58) && src.charAt(i) != '.')
                     break;
             }
             return new Pair<>(
@@ -45,7 +47,7 @@ public final class FunctionParser {
         if ((src.charAt(i) >= 97 && src.charAt(i) <= 122) || (src.charAt(i) >= 65 && src.charAt(i) <= 90)) {
             int j = i;
             for (; i < src.length(); i++) {
-                if (!Character.isAlphabetic(src.charAt(i)))
+                if (!(src.charAt(i) >= 97 && src.charAt(i) <= 122) || (src.charAt(i) >= 65 && src.charAt(i) <= 90))
                     break;
             }
             if (i == j + 1) {
@@ -100,13 +102,13 @@ public final class FunctionParser {
             );
         }
         return new Pair<>(
-                i, runtime.getFunctionDictionary().get(runtime, src.charAt(i))
+                i, runtime.getFunctionDictionary().functionHashMap.get(src.charAt(i))
         );
     }
 
     public static int getArgs(char c) {
-        if (c >= 30 && c < 40)
-            return c-30;
+        if (c >= 48 && c < 58)
+            return c-48;
         if (c == '.')
             return -1;
         if (c == ',')

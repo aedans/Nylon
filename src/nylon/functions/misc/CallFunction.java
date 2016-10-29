@@ -1,4 +1,4 @@
-package nylon.functions;
+package nylon.functions.misc;
 
 import nylon.NylonRuntime;
 import nylon.exceptions.NylonRuntimeException;
@@ -9,11 +9,11 @@ import nylon.objects.NylonStack;
  * Created by Aedan Smith.
  */
 
-class CallFunction extends NylonFunction {
+public class CallFunction extends NylonFunction {
 
     private NylonRuntime nylonRuntime;
 
-    CallFunction(NylonRuntime nylonRuntime){
+    public CallFunction(NylonRuntime nylonRuntime){
         super(-2);
         this.nylonRuntime = nylonRuntime;
     }

@@ -1,6 +1,7 @@
 package nylon.objects;
 
 import nylon.exceptions.NylonRuntimeException;
+import nylon.exceptions.UnconvertableTypeException;
 
 /**
  * Created by Aedan Smith.
@@ -38,7 +39,7 @@ public abstract class NylonFunction implements NylonObject {
             superStack.clear();
         } else {
             this.applyImpl(superStack, functionStack);
-            superStack.clear();
+            superStack.clear(); // TODO
             return functionStack;
         }
 
@@ -65,18 +66,23 @@ public abstract class NylonFunction implements NylonObject {
     }
 
     @Override
+    public char toChar() throws NylonRuntimeException {
+        throw new UnconvertableTypeException(this, Character.class);
+    }
+
+    @Override
     public int toInteger() throws NylonRuntimeException {
-        throw new NylonRuntimeException("Cannot convert a NylonFunction to an integer.");
+        throw new UnconvertableTypeException(this, Integer.class);
     }
 
     @Override
     public double toDouble() throws NylonRuntimeException {
-        throw new NylonRuntimeException("Cannot convert a NylonFunction to a double.");
+        throw new UnconvertableTypeException(this, Double.class);
     }
 
     @Override
     public boolean toBoolean() throws NylonRuntimeException {
-        throw new NylonRuntimeException("Cannot convert a NylonFunction to a boolean.");
+        throw new UnconvertableTypeException(this, Boolean.class);
     }
 
     @Override

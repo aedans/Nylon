@@ -1,6 +1,7 @@
 package nylon.objects;
 
 import nylon.exceptions.NylonRuntimeException;
+import nylon.exceptions.UnconvertableTypeException;
 
 /**
  * Created by Aedan Smith.
@@ -20,6 +21,11 @@ public class NylonCharacter implements NylonObject {
     }
 
     @Override
+    public char toChar() throws NylonRuntimeException {
+        return value;
+    }
+
+    @Override
     public int toInteger() {
         return this.value;
     }
@@ -35,7 +41,7 @@ public class NylonCharacter implements NylonObject {
             return true;
         if (value == 'f')
             return false;
-        throw new NylonRuntimeException("Could not convert character to boolean (character '" + value + "'");
+        throw new UnconvertableTypeException(this, Boolean.class);
     }
 
     @Override

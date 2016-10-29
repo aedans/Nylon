@@ -1,6 +1,7 @@
 package nylon.objects;
 
 import nylon.exceptions.NylonRuntimeException;
+import nylon.exceptions.UnconvertableTypeException;
 
 /**
  * Created by Aedan Smith.
@@ -20,11 +21,20 @@ public class NylonString implements NylonObject {
     }
 
     @Override
+    public char toChar() throws NylonRuntimeException {
+        if (value.length() == 1){
+            return value.charAt(0);
+        } else {
+            throw new UnconvertableTypeException(this, Character.class);
+        }
+    }
+
+    @Override
     public int toInteger() throws NylonRuntimeException {
         try {
             return Integer.parseInt(value);
         } catch (Exception e){
-            throw new NylonRuntimeException("Could not convert string object to integer (string \"" + value + "\"");
+            throw new UnconvertableTypeException(this, Integer.class);
         }
     }
 
@@ -33,7 +43,7 @@ public class NylonString implements NylonObject {
         try {
             return Double.parseDouble(value);
         } catch (Exception e){
-            throw new NylonRuntimeException("Could not convert string object to a double (string \"" + value + "\"");
+            throw new UnconvertableTypeException(this, Double.class);
         }
     }
 
@@ -43,7 +53,7 @@ public class NylonString implements NylonObject {
             return true;
         if (value.equals("f") || value.equals("false"))
             return false;
-        throw new NylonRuntimeException("Could not convert string object to boolean (string \"" + value + "\"");
+        throw new UnconvertableTypeException(this, Boolean.class);
     }
 
     @Override

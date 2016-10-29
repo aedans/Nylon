@@ -15,6 +15,11 @@ public class NylonDouble implements NylonObject {
     }
 
     @Override
+    public char toChar() {
+        return (char) value;
+    }
+
+    @Override
     public int toInteger() {
         return (int) this.value;
     }

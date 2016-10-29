@@ -1,6 +1,7 @@
 package nylon.objects;
 
 import nylon.exceptions.NylonRuntimeException;
+import nylon.exceptions.UnconvertableTypeException;
 
 import java.util.Stack;
 
@@ -11,18 +12,23 @@ import java.util.Stack;
 public class NylonStack extends Stack<NylonObject> implements NylonObject {
 
     @Override
+    public char toChar() throws NylonRuntimeException {
+        throw new UnconvertableTypeException(this, Character.class);
+    }
+
+    @Override
     public int toInteger() throws NylonRuntimeException {
-        throw new NylonRuntimeException("Could not convert NylonStack to integer.");
+        throw new UnconvertableTypeException(this, Integer.class);
     }
 
     @Override
     public double toDouble() throws NylonRuntimeException {
-        throw new NylonRuntimeException("Could not convert NylonStack to double.");
+        throw new UnconvertableTypeException(this, Double.class);
     }
 
     @Override
     public boolean toBoolean() throws NylonRuntimeException {
-        throw new NylonRuntimeException("Could not convert NylonStack to boolean.");
+        throw new UnconvertableTypeException(this, Boolean.class);
     }
 
     @Override
