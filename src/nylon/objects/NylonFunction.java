@@ -1,5 +1,6 @@
 package nylon.objects;
 
+import nylon.exceptions.InvalidActionException;
 import nylon.exceptions.NylonRuntimeException;
 import nylon.exceptions.UnconvertableTypeException;
 
@@ -49,13 +50,13 @@ public abstract class NylonFunction implements NylonObject {
     }
 
     @Override
-    public NylonObject increment() throws NylonRuntimeException {
-        throw new NylonRuntimeException("Cannot increment a NylonFunction.");
+    public NylonString increment() throws NylonRuntimeException {
+        throw new InvalidActionException("increment", this);
     }
 
     @Override
-    public NylonObject decrement() throws NylonRuntimeException {
-        throw new NylonRuntimeException("Cannot not decrement a NylonFunction");
+    public NylonString decrement() throws NylonRuntimeException {
+        throw new InvalidActionException("decrement", this);
     }
 
     @Override
@@ -75,7 +76,7 @@ public abstract class NylonFunction implements NylonObject {
                 }
             };
         }
-        throw new NylonRuntimeException("Cannot concatenate a NylonFunctions.");
+        throw new InvalidActionException("concatenate", this);
     }
 
     @Override

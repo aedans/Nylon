@@ -69,4 +69,5 @@ public class NylonCharacter implements NylonObject {
     public char getValue() {
         return value;
     }
+
 }

@@ -1,5 +1,6 @@
 package nylon.objects;
 
+import nylon.exceptions.InvalidActionException;
 import nylon.exceptions.NylonRuntimeException;
 import nylon.exceptions.UnconvertableTypeException;
 
@@ -58,12 +59,12 @@ public class NylonString implements NylonObject {
 
     @Override
     public NylonString increment() throws NylonRuntimeException {
-        throw new NylonRuntimeException("Cannot increment a string object.");
+        throw new InvalidActionException("increment", this);
     }
 
     @Override
     public NylonString decrement() throws NylonRuntimeException {
-        throw new NylonRuntimeException("Cannot decrement a string object.");
+        throw new InvalidActionException("decrement", this);
     }
 
     @Override
@@ -74,6 +75,10 @@ public class NylonString implements NylonObject {
     @Override
     public NylonString clone() {
         return new NylonString(value);
+    }
+
+    public String getValue() {
+        return value;
     }
 
 }

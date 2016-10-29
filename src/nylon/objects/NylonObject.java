@@ -38,7 +38,7 @@ public interface NylonObject extends Cloneable<NylonObject>, java.lang.Cloneable
             case 's':
                 return new NylonString(this.toString());
             default:
-                throw new NylonRuntimeException("Could not cast: No class found with identifier " + c + ".");
+                throw new NylonRuntimeException("Could not cast: No class found with identifier '" + c + "'");
         }
     }
 

@@ -1,7 +1,7 @@
 package nylon.functions.math;
 
 import nylon.exceptions.NylonRuntimeException;
-import nylon.objects.NylonDouble;
+import nylon.objects.NylonCharacter;
 import nylon.objects.NylonFunction;
 import nylon.objects.NylonObject;
 import nylon.objects.NylonStack;
@@ -16,7 +16,7 @@ public class Add extends NylonFunction {
     protected void applyImpl(NylonStack args, NylonStack returnStack)
             throws NylonRuntimeException {
         if (args.size() == 0)
-            throw new NylonRuntimeException("Cannot add null arguments.");
+            returnStack.add(new NylonCharacter('+'));
         else if (args.size() == 1)
             returnStack.add(args.pop().increment());
         else {

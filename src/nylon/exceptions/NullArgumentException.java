@@ -9,7 +9,7 @@ import nylon.objects.NylonFunction;
 public class NullArgumentException extends NylonRuntimeException {
 
     public NullArgumentException(NylonFunction nylonFunction) {
-        super("(" + nylonFunction + ") Could not parse null arguments.");
+        super("(" + nylonFunction + ") Could not parse null arguments");
     }
 
 }

@@ -9,7 +9,7 @@ import nylon.objects.NylonObject;
 public class UnconvertableTypeException extends NylonRuntimeException {
 
     public UnconvertableTypeException(NylonObject object, Class type) {
-        super("Cannot convert " + object.getClass().getSimpleName() + " \"" + object + "\" to " + type.getSimpleName() + ".");
+        super("Cannot convert " + object.getClass().getSimpleName() + " \"" + object + "\" to " + type.getSimpleName());
     }
 
 }

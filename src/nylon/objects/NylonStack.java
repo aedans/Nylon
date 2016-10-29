@@ -1,6 +1,6 @@
 package nylon.objects;
 
-import javafx.util.Pair;
+import nylon.exceptions.InvalidActionException;
 import nylon.exceptions.NylonRuntimeException;
 import nylon.exceptions.UnconvertableTypeException;
 
@@ -33,13 +33,13 @@ public class NylonStack extends Stack<NylonObject> implements NylonObject {
     }
 
     @Override
-    public NylonObject increment() throws NylonRuntimeException {
-        throw new NylonRuntimeException("Could not increment NylonStack.");
+    public NylonString increment() throws NylonRuntimeException {
+        throw new InvalidActionException("increment", this);
     }
 
     @Override
-    public NylonObject decrement() throws NylonRuntimeException {
-        throw new NylonRuntimeException("Could not decrement NylonStack.");
+    public NylonString decrement() throws NylonRuntimeException {
+        throw new InvalidActionException("decrement", this);
     }
 
     @Override

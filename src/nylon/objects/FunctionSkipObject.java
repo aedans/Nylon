@@ -1,5 +1,6 @@
 package nylon.objects;
 
+import nylon.exceptions.InvalidActionException;
 import nylon.exceptions.NylonRuntimeException;
 
 /**
@@ -34,18 +35,18 @@ public class FunctionSkipObject implements NylonObject {
     }
 
     @Override
-    public NylonObject increment() throws NylonRuntimeException {
-        throw new NylonRuntimeException("Could not increment FunctionSkipObject object.");
+    public NylonString increment() throws NylonRuntimeException {
+        throw new InvalidActionException("increment", this);
     }
 
     @Override
-    public NylonObject decrement() throws NylonRuntimeException {
-        throw new NylonRuntimeException("Could not decrement FunctionSkipObject object.");
+    public NylonString decrement() throws NylonRuntimeException {
+        throw new InvalidActionException("decrement", this);
     }
 
     @Override
     public NylonObject concatenate(NylonObject nylonObject) throws NylonRuntimeException {
-        throw new NylonRuntimeException("Could not concatenate FunctionSkipObject object.");
+        throw new InvalidActionException("concatenate", this);
     }
 
     @Override

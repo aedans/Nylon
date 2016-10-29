@@ -60,5 +60,9 @@ public class NylonDouble implements NylonObject {
     public NylonDouble clone() {
         return new NylonDouble(value);
     }
-    
+
+    public double getValue() {
+        return value;
+    }
+
 }

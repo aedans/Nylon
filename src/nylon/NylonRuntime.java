@@ -3,7 +3,6 @@ package nylon;
 import nylon.exceptions.NylonRuntimeException;
 import nylon.functions.FunctionDictionary;
 import nylon.functions.NylonSrcFunction;
-import nylon.objects.NylonObject;
 import nylon.objects.NylonStack;
 import nylon.objects.NylonString;
 
@@ -11,7 +10,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.Objects;
 
 /**
@@ -54,7 +52,8 @@ public class NylonRuntime implements Runnable {
         try {
             this.getFunction(0).apply(nylonStack).forEach(System.out::println);
         } catch (NylonRuntimeException e){
-            e.printStackTrace(System.out);
+            //noinspection ThrowablePrintedToSystemOut
+            System.out.println(e);
         } catch (Exception e){
             System.out.println("Unrecognized Exception: " + e.getMessage());
             e.printStackTrace(System.out);

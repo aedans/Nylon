@@ -1,11 +1,7 @@
 package nylon.functions.math;
 
-import javafx.util.Pair;
 import nylon.exceptions.NylonRuntimeException;
-import nylon.objects.NylonFunction;
-import nylon.objects.NylonDouble;
-import nylon.objects.NylonObject;
-import nylon.objects.NylonStack;
+import nylon.objects.*;
 
 /**
  * Created by Aedan Smith.
@@ -17,7 +13,7 @@ public class Subtract extends NylonFunction {
     protected void applyImpl(NylonStack args, NylonStack returnStack)
             throws NylonRuntimeException {
         if (args.size() == 0)
-            throw new NylonRuntimeException("Cannot subtract null arguments.");
+            returnStack.add(new NylonCharacter('-'));
         else if (args.size() == 1)
             returnStack.add(args.pop().decrement());
         else {
