@@ -6,6 +6,9 @@ import nylon.functions.ifstatements.IsObjectFalse;
 import nylon.functions.ifstatements.IsObjectTrue;
 import nylon.functions.math.*;
 import nylon.functions.misc.*;
+import nylon.functions.variables.AddVariable;
+import nylon.functions.variables.CallFunction;
+import nylon.functions.variables.GetVariable;
 import nylon.objects.NylonFunction;
 import nylon.objects.NylonStack;
 
@@ -20,8 +23,10 @@ public class FunctionDictionary {
     public final HashMap<Character, NylonFunction> functionHashMap = new HashMap<>();
 
     public FunctionDictionary(NylonRuntime runtime){
+        functionHashMap.put('#', new GetLibraryFunction(runtime));
+        functionHashMap.put('$', new AddVariable(runtime));
+        functionHashMap.put('&', new GetVariable(runtime));
         functionHashMap.put('ƒ', new CallFunction(runtime));
-        functionHashMap.put('#', new CallLibraryFunction(runtime));
 
         functionHashMap.put('+', new Add());
         functionHashMap.put('-', new Subtract());

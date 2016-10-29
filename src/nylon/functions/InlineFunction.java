@@ -12,11 +12,11 @@ import java.util.LinkedList;
  * Created by Aedan Smith.
  */
 
-public class NylonSrcFunction extends NylonFunction {
+public class InlineFunction extends NylonFunction {
 
     private LinkedList<NylonFunction> functions = new LinkedList<>();
 
-    public NylonSrcFunction(NylonRuntime nylonRuntime, String src) throws NylonRuntimeException {
+    public InlineFunction(NylonRuntime nylonRuntime, String src) throws NylonRuntimeException {
         this.functions = FunctionParser.parse(nylonRuntime, src);
     }
 

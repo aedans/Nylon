@@ -2,14 +2,15 @@ package nylon;
 
 import nylon.exceptions.NylonRuntimeException;
 import nylon.functions.FunctionDictionary;
-import nylon.functions.NylonSrcFunction;
+import nylon.functions.InlineFunction;
+import nylon.objects.NylonObject;
 import nylon.objects.NylonStack;
 import nylon.objects.NylonString;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Objects;
 
 /**
@@ -18,13 +19,15 @@ import java.util.Objects;
 
 public class NylonRuntime implements Runnable {
 
-    private NylonStack nylonStack = new NylonStack();
+    private NylonStack args = new NylonStack();
 
-    private ArrayList<NylonSrcFunction> nylonFunctions = new ArrayList<>();
+    private InlineFunction main;
 
     private FunctionDictionary functionDictionary = new FunctionDictionary(this);
 
     private File library;
+
+    private HashMap<String, NylonObject> variables = new HashMap<>();
 
     public NylonRuntime(String src, File library) throws NylonRuntimeException {
         this.library = library;
@@ -36,21 +39,17 @@ public class NylonRuntime implements Runnable {
                 src = src.replace(s, "");
             }
         }
-        String[] functions = src.split("\n");
-        this.nylonFunctions.add(new NylonSrcFunction(this, functions[0]));
-        for (int i = 1; i < functions.length; i++) {
-            this.nylonFunctions.add(new NylonSrcFunction(this, functions[i]));
-        }
+        this.main = new InlineFunction(this, src);
     }
 
     public void addInput(String arg) {
-        nylonStack.add(new NylonString(arg));
+        args.add(new NylonString(arg));
     }
 
     @Override
     public void run() {
         try {
-            this.getFunction(0).apply(nylonStack).forEach(System.out::println);
+            this.main.apply(args).forEach(System.out::println);
         } catch (NylonRuntimeException e){
             //noinspection ThrowablePrintedToSystemOut
             System.out.println(e);
@@ -60,29 +59,40 @@ public class NylonRuntime implements Runnable {
         }
     }
 
-    public FunctionDictionary getFunctionDictionary() {
-        return functionDictionary;
+    public void addVariable(String name, NylonObject object) {
+        this.variables.put(name, object);
     }
 
-    public NylonSrcFunction getFunction(int function) throws NylonRuntimeException {
-        if (function >= nylonFunctions.size())
-            throw new NylonRuntimeException("Could not access function " + function);
-        return nylonFunctions.get(function);
+    public NylonObject getVariable(String s) throws NylonRuntimeException {
+        NylonObject object = variables.get(s);
+        if (object != null) {
+            return variables.get(s);
+        } else {
+            try {
+                return getLibraryFunction(s);
+            } catch (NylonRuntimeException e) {
+                throw new NylonRuntimeException("Could not find variable with name \"" + s + "\"");
+            }
+        }
     }
 
-    public NylonSrcFunction getFunction(String function) throws NylonRuntimeException {
+    public InlineFunction getLibraryFunction(String function) throws NylonRuntimeException {
         try {
             for (File f : library.listFiles()) {
                 if (Objects.equals(f.getName(), function)) {
                     final String[] content = {""};
                     new BufferedReader(new FileReader(f)).lines().forEach(s -> content[0] += s + '\n');
-                    return new NylonSrcFunction(this, content[0]);
+                    return new InlineFunction(this, content[0]);
                 }
             }
             throw new NylonRuntimeException("Could not find function with name \"" + function + "\"");
         } catch (Exception e){
             throw new NylonRuntimeException(e.getMessage());
         }
+    }
+
+    public FunctionDictionary getFunctionDictionary() {
+        return functionDictionary;
     }
 
 }

@@ -10,18 +10,18 @@ import nylon.objects.NylonStack;
  * Created by Aedan Smith.
  */
 
-public class CallLibraryFunction extends NylonFunction {
+public class GetLibraryFunction extends NylonFunction {
 
     private NylonRuntime nylonRuntime;
 
-    public CallLibraryFunction(NylonRuntime nylonRuntime) {
+    public GetLibraryFunction(NylonRuntime nylonRuntime) {
         this.nylonRuntime = nylonRuntime;
     }
 
     @Override
     protected void applyImpl(NylonStack args, NylonStack returnStack) throws NylonRuntimeException {
         if (args.size() > 0)
-            returnStack.add(nylonRuntime.getFunction(args.pop().toString()));
+            returnStack.add(nylonRuntime.getLibraryFunction(args.pop().toString()));
         else
             throw new NullArgumentException(this);
     }

@@ -9,11 +9,9 @@ Note that the interpreter is not yet finished, and any functionality described m
 # Definitions
 
 ## Stacks
-
 The Nylon language operates exclusively on stacks, with one stack allocated per function. Stacks in Nylon are represented as linked lists; pushing an object appends it to the linked list, and popping an object removes it.
 
 ## Constants
-
 Nylon supports four constant types: doubles, characters, strings, and functions (Note that booleans can be stored using characters and strings, t/f & true/false respectively). Each constant can be pushed to the stack via a native function. When Nylon compiles, all constants in the source code are replaced with functions that take no arguments and push the constant to the stack. Constants can be created as follows:
 
 Doubles:
@@ -43,47 +41,57 @@ Functions:
 @[+-*/]
 </pre>
 
+## Variables
+The Nylon Runtime contains variables that can be accessed and modified using the '&' and '$' functions.
+
+- "[string]&": Returns the variable with the given name.
+- "[object][string]$": Creates/overwrites a variable with the given name and value.
+
+Example 1:
+<pre>
+10i$ i&
+
+Output: "10"
+</pre>
+
+Example 2:
+<pre>
+@[abcd]f$ f&
+
+Output: "abcd"
+</pre>
+
 ## Arguments
 Arguments are variables that are passed to functions via the stack. Before the function is called, all arguments must be pushed to the stack that the function will read from.
 
 Numeric arguments take both numbers and characters.
 
 ## Functions
-Functions are declared by creating a new line in the Nylon code. Functions can be called using the 'ƒ' function, which
-takes in an integer n and calls the function on line n.
+Functions are declared using "[...]". A function can be called by storing it in a variable and using the 'ƒ' function.
 
-Functions operate on a new stack that contains only the arguments passed to it. Functions contain a return stack which
-is returned when the function terminates. If no function uses the return stack, the return stack is appended to the
-stack of the function that called the function.
-
-To require a number of arguments to call the function, precede the function definition with 0-9. Precede the function
-with '.' to take all arguments from the stack.
+Functions operate on a new stack that contains only the arguments passed to it. Functions contain a return stack which is returned when the function terminates. If no function uses the return stack, the return stack is appended to the stack of the function that called the function.
 
 Functions will implicitly return all non-argument values on the stack.
 
 A function can be pushed to stack to be accessed by other functions using '@'.
 
+- '[string]ƒ': Calls the function with the given name.
 - ';': Pushes the top element of the function stack to the return stack.
 - '!': Terminates the function.
-- '[...]': Creates a function lambda.
+- "[...]": Creates a function.
 
 Example 1:
 <pre>
-1ƒabc
-2ƒ
-abc
+@[abc]l$lƒlƒ
 
 Output: "abcabc"
 </pre>
 
 Example 2:
 <pre>
-1ƒƒƒ
-2
-3
-abc
+@[+]add$2 3addƒ4addƒ
 
-Output: "abc"
+Output: "9"
 </pre>
 
 ## If Statements
@@ -135,7 +143,7 @@ Input: "5", Output: "a"
 ## Loops
 Loops iterate over a function. The return stacks of the function will not returned until the loop is finished executing, and will be concatenated before being returned. If the loop has a closing brace, the functions between the braces are implicitly converted into an lambda function to be called by the loop.
 
-- '?(': Iterates for as long as a conditional is true. If the preceding token is not a conditional, and the last item on the stack is numeric, iterates n times instead, pushing n to the stack each loop.
+- '[conditional](': Iterates for as long as a conditional is true. If the preceding token is not a conditional, and the last item on the stack is numeric, iterates n times instead, pushing n to the stack each loop.
 - '{': Iterates for each item in the current stack.
 
 Loops can also be passed arguments via characters. The arguments must be passed before the loop function.

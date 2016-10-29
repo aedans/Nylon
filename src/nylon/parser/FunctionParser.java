@@ -3,7 +3,7 @@ package nylon.parser;
 import javafx.util.Pair;
 import nylon.NylonRuntime;
 import nylon.exceptions.NylonRuntimeException;
-import nylon.functions.*;
+import nylon.functions.InlineFunction;
 import nylon.functions.loops.WhileLoop;
 import nylon.functions.misc.PushNylonObjectFunction;
 import nylon.objects.NylonCharacter;
@@ -71,7 +71,7 @@ public final class FunctionParser {
                     break;
             }
             return new Pair<>(
-                    i, new NylonSrcFunction(runtime, src.substring(j, i))
+                    i, new InlineFunction(runtime, src.substring(j, i))
             );
         }
         if (src.charAt(i) == '(') {
@@ -86,7 +86,7 @@ public final class FunctionParser {
             }
             if (depth == 0){
                 return new Pair<>(
-                        i, new WhileLoop(new NylonSrcFunction(runtime, src.substring(j, i)))
+                        i, new WhileLoop(new InlineFunction(runtime, src.substring(j, i)))
                 );
             } else {
                 Pair<Integer, NylonFunction> pair = parseFunction(runtime, src, j);
