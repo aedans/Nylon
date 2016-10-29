@@ -104,4 +104,14 @@ public final class FunctionParser {
         );
     }
 
+    public static int getArgs(char c) {
+        if (c >= 30 && c < 40)
+            return c-30;
+        if (c == '.')
+            return -1;
+        if (c == ',')
+            return -2;
+        return 0;
+    }
+
 }

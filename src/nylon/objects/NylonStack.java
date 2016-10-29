@@ -36,10 +36,12 @@ public class NylonStack extends Stack<NylonObject> implements NylonObject {
     }
 
     @Override
-    public NylonObject concatenate(NylonObject nylonObject) throws NylonRuntimeException {
-        if (nylonObject.getClass() == this.getClass()){
+    public NylonStack concatenate(NylonObject nylonObject) {
+        if (nylonObject instanceof NylonStack){
             ((NylonStack) nylonObject).addAll(this);
             ((NylonStack) nylonObject).clear();
+        } else {
+            this.add(nylonObject);
         }
         return this;
     }

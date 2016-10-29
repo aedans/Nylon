@@ -22,7 +22,7 @@ public class Add extends NylonFunction {
         else if (args.size() == 1)
             returnStack.add(args.get(0).increment());
         else if (args.size() == 2)
-            returnStack.add(args.lastElement().concatenate(args.get(0)));
+            returnStack.add(args.lastElement().concatenate(args.firstElement()));
         else
             // Should never hit
             throw new NylonRuntimeException("Internal error: Too many arguments given.");

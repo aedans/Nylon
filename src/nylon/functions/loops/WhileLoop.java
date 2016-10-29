@@ -1,7 +1,6 @@
 package nylon.functions.loops;
 
 import nylon.exceptions.NylonRuntimeException;
-import nylon.functions.PushNylonObjectFunction;
 import nylon.functions.ifstatements.Conditional;
 import nylon.objects.*;
 
@@ -32,8 +31,7 @@ public class WhileLoop extends NylonFunction {
             double d = args.pop().toDouble();
             for (int i = 0; i < d; i++) {
                 args.add(new NylonDouble(i));
-                returnStack.addAll(function.apply(args.clone()));
-                args.pop();
+                returnStack.addAll(function.apply(args));
             }
         }
     }

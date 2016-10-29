@@ -38,6 +38,8 @@ public abstract class NylonFunction implements NylonObject {
             superStack.clear();
         } else {
             this.applyImpl(superStack, functionStack);
+            superStack.clear();
+            return functionStack;
         }
 
         NylonStack returnStack = new NylonStack();
@@ -47,7 +49,7 @@ public abstract class NylonFunction implements NylonObject {
             while (functionStack.size() != 0) {
                 object = functionStack.pop();
                 if (object.getClass() == clazz)
-                    returnStack.add(object);
+                    returnStack.insertElementAt(object, 0);
                 else
                     break;
             }
@@ -64,12 +66,12 @@ public abstract class NylonFunction implements NylonObject {
 
     @Override
     public int toInteger() throws NylonRuntimeException {
-        throw new NylonRuntimeException("Cannot convert a NylonFunction to a long.");
+        throw new NylonRuntimeException("Cannot convert a NylonFunction to an integer.");
     }
 
     @Override
     public double toDouble() throws NylonRuntimeException {
-        throw new NylonRuntimeException("Cannot convert a NylonFunction to a long.");
+        throw new NylonRuntimeException("Cannot convert a NylonFunction to a double.");
     }
 
     @Override

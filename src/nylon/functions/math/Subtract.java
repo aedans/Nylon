@@ -23,7 +23,7 @@ public class Subtract extends NylonFunction {
         else if (args.size() == 1)
             returnStack.add(args.get(0).decrement());
         else if (args.size() == 2)
-            returnStack.add(new NylonDouble(args.get(0).toDouble() - args.lastElement().toDouble()));
+            returnStack.add(new NylonDouble(args.firstElement().toDouble() - args.lastElement().toDouble()));
         else
             // Should never hit
             throw new NylonRuntimeException("Internal error: Too many arguments given.");

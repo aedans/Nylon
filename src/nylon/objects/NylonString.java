@@ -33,7 +33,7 @@ public class NylonString implements NylonObject {
         try {
             return Double.parseDouble(value);
         } catch (Exception e){
-            throw new NylonRuntimeException("Could not convert string object to integer (string \"" + value + "\"");
+            throw new NylonRuntimeException("Could not convert string object to a double (string \"" + value + "\"");
         }
     }
 
@@ -53,7 +53,7 @@ public class NylonString implements NylonObject {
 
     @Override
     public NylonString decrement() throws NylonRuntimeException {
-        throw new NylonRuntimeException("Cannot increment a string object.");
+        throw new NylonRuntimeException("Cannot decrement a string object.");
     }
 
     @Override

@@ -62,16 +62,15 @@ Functions will implicitly return all non-argument values on the stack.
 
 A function can be pushed to stack to be accessed by other functions using '@'.
 
-- ';': Pushes the function stack to the return stack.
-- ':': Pushes the top element of the function stack to the return stack.
+- ';': Pushes the top element of the function stack to the return stack.
 - '!': Terminates the function.
 - '[...]': Creates a function lambda.
 
 Example 1:
 <pre>
 1ƒabc
-2ƒ;
-abc;
+2ƒ
+abc
 
 Output: "abcabc"
 </pre>
@@ -109,9 +108,9 @@ Output: "d"
 Example 3:
 <pre>
 1ƒa b c
-¡¡
+¡
 
-Output: "c"
+Output: "bc"
 </pre>
 
 ## Switches
@@ -135,7 +134,7 @@ Input: "5", Output: "a"
 ## Loops
 Loops iterate over a function. The return stacks of the function will not returned until the loop is finished executing, and will be concatenated before being returned. If the loop has a closing brace, the functions between the braces are implicitly converted into an lambda function to be called by the loop.
 
-- '?(': Iterates for as long as a conditional is true. If the preceding token is not a conditional, and the last item on the stack is numeric, iterates n times instead, pushing and popping n from the stack each loop.
+- '?(': Iterates for as long as a conditional is true. If the preceding token is not a conditional, and the last item on the stack is numeric, iterates n times instead, pushing n to the stack each loop.
 - 's{': Iterates for each item in a stack or list. Defaults to the current stack.
 
 Loops can also be passed arguments via characters. The arguments must be passed before the loop function.
@@ -151,7 +150,7 @@ Output: "aaaaaaaaa..."
 
 Example 2:
 <pre>
-100(:)
+100()
 
 Output: "012345679...99"
 </pre>

@@ -32,7 +32,7 @@ public class NylonRuntime implements Runnable {
             }
         }
         for (String s : src.split("\n")){
-            this.nylonFunctions.add(new NylonSrcFunction(this, s, 0));
+            this.nylonFunctions.add(new NylonSrcFunction(this, s));
         }
     }
 
