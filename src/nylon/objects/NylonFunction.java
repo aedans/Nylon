@@ -11,7 +11,7 @@ public abstract class NylonFunction implements NylonObject {
 
     @SuppressWarnings("unchecked")
     public NylonStack apply(NylonStack superStack) throws NylonRuntimeException {
-        if (superStack.size() != 0 && superStack.lastElement().getClass() == FunctionSkipObject.class) {
+        if (superStack.size() != 0 && superStack.peek().getClass() == FunctionSkipObject.class) {
             superStack.pop();
             return new NylonStack();
         }

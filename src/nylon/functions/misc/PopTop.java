@@ -15,7 +15,7 @@ public class PopTop extends NylonFunction {
     protected void applyImpl(NylonStack args, NylonStack returnStack)
             throws NylonRuntimeException {
         if (args.size() != 0) {
-            if (args.lastElement() instanceof NylonFunction) {
+            if (args.peek() instanceof NylonFunction) {
                 returnStack.addAll(((NylonFunction) args.pop()).apply(args));
             } else {
                 System.out.println(args.pop());

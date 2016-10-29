@@ -1,7 +1,6 @@
 package nylon.objects;
 
 import nylon.exceptions.NylonRuntimeException;
-import nylon.exceptions.UnconvertableTypeException;
 
 /**
  * Created by Aedan Smith.

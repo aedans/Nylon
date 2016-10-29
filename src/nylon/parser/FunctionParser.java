@@ -47,7 +47,7 @@ public final class FunctionParser {
         if ((src.charAt(i) >= 97 && src.charAt(i) <= 122) || (src.charAt(i) >= 65 && src.charAt(i) <= 90)) {
             int j = i;
             for (; i < src.length(); i++) {
-                if (!(src.charAt(i) >= 97 && src.charAt(i) <= 122) || (src.charAt(i) >= 65 && src.charAt(i) <= 90))
+                if (!(src.charAt(i) >= 97 && src.charAt(i) <= 122 || src.charAt(i) >= 65 && src.charAt(i) <= 90))
                     break;
             }
             if (i == j + 1) {

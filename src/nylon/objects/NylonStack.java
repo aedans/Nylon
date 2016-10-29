@@ -44,7 +44,7 @@ public class NylonStack extends Stack<NylonObject> implements NylonObject {
 
     @Override
     public NylonStack concatenate(NylonObject nylonObject) {
-        if (nylonObject instanceof NylonStack){
+        if (nylonObject instanceof NylonStack) {
             ((NylonStack) nylonObject).addAll(this);
             ((NylonStack) nylonObject).clear();
         } else {
