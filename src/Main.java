@@ -17,7 +17,6 @@ public class Main {
                     "Usage:\n" +
                             "    nylon [library-path] [filename]\n" +
                             "    nylon -c\n" +
-                            "    nylon -l\n" +
                             "    nylond [filename]\n" +
                             "\n" +
                             "See more at github.com/aedans/Nylon"
