@@ -35,6 +35,7 @@ public class FunctionDictionary {
 
         functionHashMap.put('|', new Split());
         functionHashMap.put('Ç', new Cast());
+        functionHashMap.put('š', new RequestInput());
         functionHashMap.put(':', new PopTop());
         functionHashMap.put('µ', new NylonFunction() {
             @Override
