@@ -167,8 +167,8 @@ The start of a function may contain any number of Function Flags. Rather than pu
 
 - 'i': Turns off implicit input.
 - 'I': Turns on implicit input. (default)
-- 'o': Turns off implicit output (Also affects returning).
-- 'O': Turns on implicit output (Also affects returning). (default)
+- 'o': Turns off implicit output.
+- 'O': Turns on implicit output. (default)
 - 'r': Removes function arguments from the stack. (default)
 - 'R': Keeps function arguments on the stack, rather than removing them.
 - 'Z': The function flags for this function will affect sub functions (must be first flag).
