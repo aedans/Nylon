@@ -14,7 +14,6 @@ public class PushNylonObjectFunction<T extends NylonObject> extends Conditional 
     private T t;
 
     public PushNylonObjectFunction(T t) {
-        super(0);
         this.t = t;
     }
 

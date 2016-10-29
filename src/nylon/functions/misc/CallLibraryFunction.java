@@ -15,14 +15,13 @@ public class CallLibraryFunction extends NylonFunction {
     private NylonRuntime nylonRuntime;
 
     public CallLibraryFunction(NylonRuntime nylonRuntime) {
-        super(1);
         this.nylonRuntime = nylonRuntime;
     }
 
     @Override
     protected void applyImpl(NylonStack args, NylonStack returnStack) throws NylonRuntimeException {
         if (args.size() > 0)
-            returnStack.add(nylonRuntime.getFunction(args.lastElement().toString()));
+            returnStack.add(nylonRuntime.getFunction(args.pop().toString()));
         else
             throw new NullArgumentException(this);
     }

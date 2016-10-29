@@ -13,7 +13,6 @@ public class WhileLoop extends NylonFunction {
     private NylonFunction function;
 
     public WhileLoop(NylonFunction function) {
-        super(-2);
         this.function = function;
     }
 

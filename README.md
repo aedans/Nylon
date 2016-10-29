@@ -55,8 +55,7 @@ is returned when the function terminates. If no function uses the return stack, 
 stack of the function that called the function.
 
 To require a number of arguments to call the function, precede the function definition with 0-9. Precede the function
-with '.' to take all arguments from the stack. Precede the function with ',' to keep the function from creating a new
-stack.
+with '.' to take all arguments from the stack.
 
 Functions will implicitly return all non-argument values on the stack.
 
@@ -135,7 +134,7 @@ Input: "5", Output: "a"
 Loops iterate over a function. The return stacks of the function will not returned until the loop is finished executing, and will be concatenated before being returned. If the loop has a closing brace, the functions between the braces are implicitly converted into an lambda function to be called by the loop.
 
 - '?(': Iterates for as long as a conditional is true. If the preceding token is not a conditional, and the last item on the stack is numeric, iterates n times instead, pushing n to the stack each loop.
-- 's{': Iterates for each item in a stack or list. Defaults to the current stack.
+- '{': Iterates for each item in the current stack.
 
 Loops can also be passed arguments via characters. The arguments must be passed before the loop function.
 
@@ -231,7 +230,6 @@ Output: "abc"
 
 ## Others
 - ':': Pops the top argument of the stack and prints it to stdout. If the top argument is a function, calls that function instead. If the stack is empty, pushes ':' to the stack.
-- '.': Pushes the top argument of the stack.
 - '|': Splits a String
 - 'Ç': Casts a NylonObject to another NylonObject.
 - 'µ': Ends the program.

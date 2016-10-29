@@ -1,8 +1,8 @@
 package nylon.functions.misc;
 
-import nylon.exceptions.InvalidArgumentException;
 import nylon.exceptions.NylonRuntimeException;
 import nylon.objects.NylonFunction;
+import nylon.objects.NylonObject;
 import nylon.objects.NylonStack;
 
 /**
@@ -11,17 +11,10 @@ import nylon.objects.NylonStack;
 
 public class Cast extends NylonFunction {
 
-    public Cast() {
-        super(2);
-    }
-
     @Override
     protected void applyImpl(NylonStack args, NylonStack returnStack) throws NylonRuntimeException {
-        if (args.size() == 2) {
-            returnStack.add(args.lastElement().cast(args.firstElement().toChar()));
-        } else {
-            throw new InvalidArgumentException(this);
-        }
+        NylonObject[] vars = args.pop(2);
+        returnStack.add(vars[0].cast(vars[1].toChar()));
     }
 
 }

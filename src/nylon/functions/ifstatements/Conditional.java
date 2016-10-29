@@ -10,10 +10,6 @@ import nylon.objects.NylonStack;
 
 public abstract class Conditional extends NylonFunction {
 
-    public Conditional(int args) {
-        super(args);
-    }
-
     public abstract boolean toBoolean(NylonStack args) throws NylonRuntimeException;
 
     @Override

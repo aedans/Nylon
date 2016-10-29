@@ -11,10 +11,6 @@ import nylon.objects.NylonStack;
 
 public class IsObjectFalse extends Conditional {
 
-    public IsObjectFalse() {
-        super(1);
-    }
-
     @Override
     protected void applyImpl(NylonStack args, NylonStack returnStack)
             throws NylonRuntimeException {
@@ -25,7 +21,7 @@ public class IsObjectFalse extends Conditional {
 
     @Override
     public boolean toBoolean(NylonStack args) throws NylonRuntimeException {
-        return args.size() != 1 || args.get(0).toBoolean();
+        return args.pop().toBoolean();
     }
 
 }

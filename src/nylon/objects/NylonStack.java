@@ -1,5 +1,6 @@
 package nylon.objects;
 
+import javafx.util.Pair;
 import nylon.exceptions.NylonRuntimeException;
 import nylon.exceptions.UnconvertableTypeException;
 
@@ -60,6 +61,14 @@ public class NylonStack extends Stack<NylonObject> implements NylonObject {
             nylonStack.add(object.clone());
         }
         return nylonStack;
+    }
+
+    public NylonObject[] pop(int i) {
+        NylonObject[] objects = new NylonObject[i];
+        for (i--; i >= 0; i--) {
+            objects[i] = pop();
+        }
+        return objects;
     }
 
 }

@@ -1,7 +1,0 @@
-Factorial: ".(:«" (4 bytes):
-        Implicit input
-.       Copy the input
-(       For each number less than copied input
-:       Push the number to the stack
-«       Collapse the stack
-        Implicit output

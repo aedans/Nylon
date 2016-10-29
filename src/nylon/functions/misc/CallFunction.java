@@ -14,7 +14,6 @@ public class CallFunction extends NylonFunction {
     private NylonRuntime nylonRuntime;
 
     public CallFunction(NylonRuntime nylonRuntime){
-        super(-2);
         this.nylonRuntime = nylonRuntime;
     }
 

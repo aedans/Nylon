@@ -12,14 +12,10 @@ import nylon.objects.NylonStack;
 
 public class Split extends NylonFunction {
 
-    public Split() {
-        super(1);
-    }
-
     @Override
     protected void applyImpl(NylonStack args, NylonStack returnStack) throws NylonRuntimeException {
         if (args.size() > 0)
-            for (char c : args.lastElement().toString().toCharArray()){
+            for (char c : args.pop().toString().toCharArray()){
                 returnStack.add(new NylonCharacter(c));
             }
         else

@@ -1,7 +1,9 @@
 package nylon.functions.math;
 
 import nylon.exceptions.NylonRuntimeException;
+import nylon.objects.NylonDouble;
 import nylon.objects.NylonFunction;
+import nylon.objects.NylonObject;
 import nylon.objects.NylonStack;
 
 /**
@@ -10,22 +12,17 @@ import nylon.objects.NylonStack;
 
 public class Add extends NylonFunction {
 
-    public Add() {
-        super(2);
-    }
-
     @Override
     protected void applyImpl(NylonStack args, NylonStack returnStack)
             throws NylonRuntimeException {
         if (args.size() == 0)
             throw new NylonRuntimeException("Cannot add null arguments.");
         else if (args.size() == 1)
-            returnStack.add(args.get(0).increment());
-        else if (args.size() == 2)
-            returnStack.add(args.lastElement().concatenate(args.firstElement()));
-        else
-            // Should never hit
-            throw new NylonRuntimeException("Internal error: Too many arguments given.");
+            returnStack.add(args.pop().increment());
+        else {
+            NylonObject[] vars = args.pop(2);
+            returnStack.add(vars[0].concatenate(vars[1]));
+        }
     }
 
 }

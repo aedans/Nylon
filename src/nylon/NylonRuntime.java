@@ -39,7 +39,7 @@ public class NylonRuntime implements Runnable {
             }
         }
         String[] functions = src.split("\n");
-        this.nylonFunctions.add(new NylonSrcFunction(this, functions[0], 0));
+        this.nylonFunctions.add(new NylonSrcFunction(this, functions[0]));
         for (int i = 1; i < functions.length; i++) {
             this.nylonFunctions.add(new NylonSrcFunction(this, functions[i]));
         }
@@ -52,7 +52,7 @@ public class NylonRuntime implements Runnable {
     @Override
     public void run() {
         try {
-            this.getFunction(0).apply(nylonStack).forEach(System.out::print);
+            this.getFunction(0).apply(nylonStack).forEach(System.out::println);
         } catch (NylonRuntimeException e){
             e.printStackTrace(System.out);
         } catch (Exception e){

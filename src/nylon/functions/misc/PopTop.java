@@ -11,10 +11,6 @@ import nylon.objects.NylonStack;
 
 public class PopTop extends NylonFunction {
 
-    public PopTop() {
-        super(-2);
-    }
-
     @Override
     protected void applyImpl(NylonStack args, NylonStack returnStack)
             throws NylonRuntimeException {

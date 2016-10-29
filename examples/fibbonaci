@@ -1,6 +1,0 @@
-Fibbonaci: "R1 1T(+" (7 bytes):
-R       Keeps function arguments on the stack, rather than removing them
-1 1     Pushes two 1s to the stack
-T(      While true
-+       Adds the two last items on the stack and pushes the output
-        Implicit output
