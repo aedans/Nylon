@@ -32,10 +32,15 @@ public class WhileLoop extends NylonFunction {
             double d = args.pop().toDouble();
             ArrayList<Character> mods = new ArrayList<>();
             while (args.size() != 0 && args.peek() instanceof NylonCharacter){
-                mods.add(((NylonCharacter) args.pop()).getValue());
+                char c = ((NylonCharacter) args.peek()).getValue();
+                if (c == 'I' || c == 'P') {
+                    mods.add(c);
+                    args.pop();
+                }
+                else break;
             }
             if (!mods.contains('I')) {
-                for (int i = mods.contains('P') ? 0 : 1; i < d; i++) {
+                for (int i = mods.contains('P') ? 1 : 0; i < d; i++) {
                     args.add(new NylonDouble(i));
                     returnStack.addAll(function.apply(args));
                 }
