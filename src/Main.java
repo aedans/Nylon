@@ -21,7 +21,7 @@ public class Main {
                             "\n" +
                             "See more at github.com/aedans/Nylon"
             );
-            System.exit(0);
+            return;
         }
 
         if (Objects.equals(args[0], "-c")){
