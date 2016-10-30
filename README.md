@@ -44,7 +44,7 @@ Functions:
 ## Variables
 The Nylon Runtime contains variables that can be accessed and modified using the '&' and '$' functions.
 
-- "[string]&": Returns the variable with the given name.
+- "[string]&": Pushes the variable with the given name to the stack.
 - "[object] [string]$": Creates/overwrites a variable with the given name and value.
 
 Example 1:
