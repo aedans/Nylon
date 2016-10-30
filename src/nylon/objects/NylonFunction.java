@@ -19,7 +19,20 @@ public abstract class NylonFunction implements NylonObject {
 
         NylonStack functionStack = new NylonStack();
         this.applyImpl(superStack, functionStack);
-        return functionStack;
+
+        NylonStack returnStack = new NylonStack();
+        if (functionStack.size() != 0) {
+            Class clazz = functionStack.peek().getClass();
+            NylonObject object;
+            while (functionStack.size() != 0) {
+                object = functionStack.pop();
+                if (object.getClass() == clazz)
+                    returnStack.insertElementAt(object, 0);
+                else
+                    break;
+            }
+        }
+        return returnStack;
     }
 
     protected abstract void applyImpl(NylonStack args, NylonStack returnStack) throws NylonRuntimeException;

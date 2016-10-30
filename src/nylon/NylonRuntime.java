@@ -49,7 +49,7 @@ public class NylonRuntime implements Runnable {
     @Override
     public void run() {
         try {
-            this.main.apply(args).forEach(System.out::println);
+            this.main.apply(args).forEach(System.out::print);
         } catch (NylonRuntimeException e){
             //noinspection ThrowablePrintedToSystemOut
             System.out.println(e);
@@ -78,6 +78,7 @@ public class NylonRuntime implements Runnable {
 
     public InlineFunction getLibraryFunction(String function) throws NylonRuntimeException {
         try {
+            //noinspection ConstantConditions
             for (File f : library.listFiles()) {
                 if (Objects.equals(f.getName(), function)) {
                     final String[] content = {""};
