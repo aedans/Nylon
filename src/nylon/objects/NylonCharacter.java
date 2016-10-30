@@ -58,7 +58,7 @@ public class NylonCharacter implements NylonObject {
 
     @Override
     public NylonCharacter concatenate(NylonObject nylonObject) throws NylonRuntimeException {
-        return new NylonCharacter((char) (nylonObject.toInteger() + this.value));
+        return new NylonCharacter((char) (nylonObject.toChar() + this.value));
     }
 
     @Override

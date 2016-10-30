@@ -2,10 +2,7 @@ package nylon.functions.loops;
 
 import nylon.exceptions.NylonRuntimeException;
 import nylon.functions.ifstatements.Conditional;
-import nylon.objects.NylonCharacter;
-import nylon.objects.NylonDouble;
-import nylon.objects.NylonFunction;
-import nylon.objects.NylonStack;
+import nylon.objects.*;
 
 import java.util.ArrayList;
 
@@ -30,6 +27,11 @@ public class WhileLoop extends NylonFunction {
             Conditional conditional = (Conditional) args.pop();
             while (conditional.toBoolean(args)) {
                 returnStack.addAll(function.apply(args));
+            }
+        } else if (args.peek() instanceof NylonStack) {
+            NylonStack stack = ((NylonStack) args.pop());
+            for (NylonObject object : stack) {
+                returnStack.addAll(function.apply(new NylonStack(object)));
             }
         } else {
             double d = args.pop().toDouble();

@@ -12,6 +12,14 @@ import java.util.Stack;
 
 public class NylonStack extends Stack<NylonObject> implements NylonObject {
 
+    public NylonStack() {
+
+    }
+
+    public NylonStack(NylonObject object) {
+        this.push(object);
+    }
+
     @Override
     public char toChar() throws NylonRuntimeException {
         throw new UnconvertableTypeException(this, Character.class);

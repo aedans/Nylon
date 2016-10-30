@@ -4,6 +4,8 @@ import nylon.NylonRuntime;
 import nylon.exceptions.NylonRuntimeException;
 import nylon.functions.ifstatements.IsObjectFalse;
 import nylon.functions.ifstatements.IsObjectTrue;
+import nylon.functions.lists.CreateList;
+import nylon.functions.lists.ListFromStack;
 import nylon.functions.math.*;
 import nylon.functions.misc.*;
 import nylon.functions.variables.AddVariable;
@@ -37,6 +39,9 @@ public class FunctionDictionary {
 
         functionHashMap.put('?', new IsObjectTrue());
         functionHashMap.put('¿', new IsObjectFalse());
+
+        functionHashMap.put('†', new CreateList());
+        functionHashMap.put('‡', new ListFromStack());
 
         functionHashMap.put('|', new Split());
         functionHashMap.put('Ç', new Cast());

@@ -143,8 +143,9 @@ Input: "5", Output: "a"
 ## Loops
 Loops iterate over a function. The return stacks of the function will not returned until the loop is finished executing, and will be concatenated before being returned. If the loop has a closing brace, the functions between the braces are implicitly converted into an lambda function to be called by the loop.
 
-- '[conditional](': Iterates for as long as a conditional is true. If the preceding token is not a conditional, and the last item on the stack is numeric, iterates n times instead, pushing n to the stack each loop.
-- '{': Iterates for each item in the current stack.
+- "[conditional](": Iterates for as long as a conditional is true.
+- "[double](": Iterates n times, pushing n to the stack each loop.
+- "[list](": Iterates once for each item in the list.
 
 Loops can also be passed arguments via characters. The arguments must be passed before the loop function.
 
@@ -227,20 +228,31 @@ Output: "abc"
 # Builtin Functions
 
 ## Math Functions
-- '+': Takes two arguments and concatenates them. If only one argument is present, increments it.
-- '-': Takes two arguments and returns the difference. If only one argument is present, decrements it.
-- '*': Takes two arguments and returns the product.
-- '/': Takes two arguments and returns the quotient.
-- '%': Takes two arguments and returns the remainder.
-- '^': Takes two arguments and returns the power.
+- "[double]+": Increments a double.
+- "[object] [object]+": Concatenates two objects.
+- "[double]-": Decrements a double.
+- "[double] [double]-": Returns the difference of two doubles.
+- "[double] [double]*": Returns the product of two doubles.
+- "[double] [double]/": Returns the quotient of two doubles.
+- "[double] [double]%": Returns the remainder of two doubles.
+- "[double] [double]^": Returns the power of two doubles.
 
 ## If Statements
-- '?': Takes an arguments and pushes a FunctionSkip object to the stack if it's false.
-- '¿': Takes an arguments and pushes a FunctionSkip object to the stack if it's true.
+- "[object]?": Pushes a FunctionSkip object to the stack if an object is false.
+- "[object]¿": Pushes a FunctionSkip object to the stack if an object is true.
+
+## Lists
+- '†': Creates a new list.
+- "[function]†": Creates a new list from the return stack of the function.
+- '‡': Creates a list from the current stack.
+
+## IO
+- "[object]:": Prints an object to stdout.
+- 'š': Returns a line of input from stdin.
 
 ## Others
-- ':': Pops the top argument of the stack and prints it to stdout. If the top argument is a function, calls that function instead. If the stack is empty, pushes ':' to the stack.
-- '|': Splits a String
-- 'Ç': Casts a NylonObject to another NylonObject.
-- 'š': Requests a line of input from stdin.
+- ':': Returns the ':' character.
+- "[function]:": Calls a function.
+- "[string]|": Splits a String
+- "[object] [character]Ç": Casts a NylonObject to another NylonObject.
 - 'µ': Ends the program.

@@ -15,16 +15,22 @@ import java.util.LinkedList;
 public class InlineFunction extends NylonFunction {
 
     private LinkedList<NylonFunction> functions = new LinkedList<>();
+    private byte args = 0;
 
     public InlineFunction(NylonRuntime nylonRuntime, String src) throws NylonRuntimeException {
+        if (src.length() != 0 && src.charAt(0) >= 48 && src.charAt(0) < 58) {
+            this.args = (byte) (src.charAt(0) - 48);
+            src = src.substring(1);
+        }
         this.functions = FunctionParser.parse(nylonRuntime, src);
     }
 
     @Override
     protected void applyImpl(NylonStack args, NylonStack returnStack)
             throws NylonRuntimeException {
-        returnStack.addAll(args);
-        args.clear();
+        for (int i = 0; i < this.args && args.size() != 0; i++) {
+            returnStack.add(args.pop());
+        }
         for (NylonFunction function : functions) {
             returnStack.addAll(function.apply(returnStack));
         }

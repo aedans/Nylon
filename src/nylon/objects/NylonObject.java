@@ -19,6 +19,10 @@ public interface NylonObject extends Cloneable<NylonObject>, java.lang.Cloneable
 
     boolean toBoolean() throws NylonRuntimeException;
 
+    default NylonStack toStack() {
+        return new NylonStack(this);
+    }
+
     NylonObject increment() throws NylonRuntimeException;
 
     NylonObject decrement() throws NylonRuntimeException;
@@ -37,6 +41,8 @@ public interface NylonObject extends Cloneable<NylonObject>, java.lang.Cloneable
                 return new NylonCharacter(this.toBoolean() ? 't' : 'f');
             case 's':
                 return new NylonString(this.toString());
+            case 'l':
+                return this.toStack();
             default:
                 throw new NylonRuntimeException("Could not cast: No class found with identifier '" + c + "'");
         }
