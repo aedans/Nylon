@@ -55,7 +55,10 @@ public class NylonDouble implements NylonObject {
 
     @Override
     public String toString() {
-        return String.valueOf(this.value);
+        if (this.value % 1 == 0)
+            return String.valueOf((long) this.value);
+        else
+            return String.valueOf(this.value);
     }
 
     @Override

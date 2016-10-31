@@ -104,6 +104,17 @@ public final class FunctionParser {
                     pair.getKey(), new PushNylonObjectFunction<>(pair.getValue())
             );
         }
+        if (src.charAt(i) == '#') {
+            int j = ++i;
+            for (; i < src.length(); i++) {
+                if (!(src.charAt(i) >= 97 && src.charAt(i) <= 122 || src.charAt(i) >= 65 && src.charAt(i) <= 90))
+                    break;
+            }
+            return new Pair<>(
+                    i - 1,
+                    runtime.getLibraryFunction(src.substring(j, i))
+            );
+        }
         if (src.charAt(i) == '\\') {
             return new Pair<>(
                     i + 1, new PushNylonObjectFunction<>(new NylonCharacter(src.charAt(i + 1)))
