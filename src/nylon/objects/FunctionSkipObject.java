@@ -2,6 +2,9 @@ package nylon.objects;
 
 import nylon.exceptions.InvalidActionException;
 import nylon.exceptions.NylonRuntimeException;
+import nylon.exceptions.UnconvertableTypeException;
+
+import java.util.Iterator;
 
 /**
  * Created by Aedan Smith.
@@ -54,4 +57,13 @@ public class FunctionSkipObject implements NylonObject {
         return new FunctionSkipObject();
     }
 
+    @Override
+    public Iterator<NylonObject> iterator(NylonStack nylonStack) throws NylonRuntimeException {
+        throw new UnconvertableTypeException(this, Iterator.class);
+    }
+
+    @Override
+    public Iterator<NylonObject> reverseIterator(NylonStack nylonStack) throws NylonRuntimeException {
+        throw new UnconvertableTypeException(this, Iterator.class);
+    }
 }

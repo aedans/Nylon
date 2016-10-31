@@ -3,6 +3,8 @@ package nylon.objects;
 import nylon.exceptions.NylonRuntimeException;
 import nylon.exceptions.UnconvertableTypeException;
 
+import java.util.Iterator;
+
 /**
  * Created by Aedan Smith.
  */
@@ -70,4 +72,37 @@ public class NylonCharacter implements NylonObject {
         return value;
     }
 
+    @Override
+    public Iterator<NylonObject> iterator(NylonStack nylonStack) throws NylonRuntimeException {
+        return new Iterator<NylonObject>() {
+            char i = 0;
+
+            @Override
+            public boolean hasNext() {
+                return i < value;
+            }
+
+            @Override
+            public NylonDouble next() {
+                return new NylonDouble(i++);
+            }
+        };
+    }
+
+    @Override
+    public Iterator<NylonObject> reverseIterator(NylonStack nylonStack) throws NylonRuntimeException {
+        return new Iterator<NylonObject>() {
+            char i = value;
+
+            @Override
+            public boolean hasNext() {
+                return i > 0;
+            }
+
+            @Override
+            public NylonDouble next() {
+                return new NylonDouble(--i);
+            }
+        };
+    }
 }

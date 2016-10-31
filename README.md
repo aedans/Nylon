@@ -146,6 +146,8 @@ Loops iterate over a function. The return stacks of the function will not return
 - "[conditional](": Iterates for as long as a conditional is true.
 - "[double](": Iterates n times, pushing n to the stack each loop.
 - "[list](": Iterates once for each item in the list.
+- "[string](": Iterates once for each character in the string.
+- "[function](": Iterates once for each item in the return stack of the function.
 
 Loops can also be passed arguments via characters. The arguments must be passed before the loop function.
 

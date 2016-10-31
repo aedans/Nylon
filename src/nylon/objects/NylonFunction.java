@@ -4,6 +4,8 @@ import nylon.exceptions.InvalidActionException;
 import nylon.exceptions.NylonRuntimeException;
 import nylon.exceptions.UnconvertableTypeException;
 
+import java.util.Iterator;
+
 /**
  * Created by Aedan Smith.
  */
@@ -103,4 +105,13 @@ public abstract class NylonFunction implements NylonObject {
         }
     }
 
+    @Override
+    public Iterator<NylonObject> iterator(NylonStack nylonStack) throws NylonRuntimeException {
+        return apply(nylonStack).iterator();
+    }
+
+    @Override
+    public Iterator<NylonObject> reverseIterator(NylonStack nylonStack) throws NylonRuntimeException {
+        return apply(nylonStack).reverseIterator(nylonStack);
+    }
 }

@@ -2,6 +2,8 @@ package nylon.objects;
 
 import nylon.exceptions.NylonRuntimeException;
 
+import java.util.Iterator;
+
 /**
  * Created by Aedan Smith.
  */
@@ -65,4 +67,37 @@ public class NylonDouble implements NylonObject {
         return value;
     }
 
+    @Override
+    public Iterator<NylonObject> iterator(NylonStack nylonStack) throws NylonRuntimeException {
+        return new Iterator<NylonObject>() {
+            double i = 0;
+
+            @Override
+            public boolean hasNext() {
+                return i < value;
+            }
+
+            @Override
+            public NylonDouble next() {
+                return new NylonDouble(i++);
+            }
+        };
+    }
+
+    @Override
+    public Iterator<NylonObject> reverseIterator(NylonStack nylonStack) throws NylonRuntimeException {
+        return new Iterator<NylonObject>() {
+            double i = value;
+
+            @Override
+            public boolean hasNext() {
+                return i > 0;
+            }
+
+            @Override
+            public NylonDouble next() {
+                return new NylonDouble(--i);
+            }
+        };
+    }
 }

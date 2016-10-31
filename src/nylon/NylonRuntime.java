@@ -39,7 +39,7 @@ public class NylonRuntime implements Runnable {
                 src = src.replace(s, "");
             }
         }
-        this.main = new InlineFunction(this, src);
+        this.main = new InlineFunction(this, src, (byte) 0);
     }
 
     public void addInput(String arg) {

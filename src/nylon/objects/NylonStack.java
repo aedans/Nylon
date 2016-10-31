@@ -4,6 +4,7 @@ import nylon.exceptions.InvalidActionException;
 import nylon.exceptions.NylonRuntimeException;
 import nylon.exceptions.UnconvertableTypeException;
 
+import java.util.Iterator;
 import java.util.Stack;
 
 /**
@@ -17,7 +18,7 @@ public class NylonStack extends Stack<NylonObject> implements NylonObject {
     }
 
     public NylonStack(NylonObject object) {
-        this.push(object);
+        this.add(object);
     }
 
     @Override
@@ -79,4 +80,25 @@ public class NylonStack extends Stack<NylonObject> implements NylonObject {
         return objects;
     }
 
+    @Override
+    public Iterator<NylonObject> iterator(NylonStack nylonStack) throws NylonRuntimeException {
+        return iterator();
+    }
+
+    @Override
+    public Iterator<NylonObject> reverseIterator(NylonStack nylonStack) throws NylonRuntimeException {
+        return new Iterator<NylonObject>() {
+            int i = size();
+
+            @Override
+            public boolean hasNext() {
+                return i > 0;
+            }
+
+            @Override
+            public NylonObject next() {
+                return get(--i);
+            }
+        };
+    }
 }

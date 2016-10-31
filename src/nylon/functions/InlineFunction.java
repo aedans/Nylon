@@ -25,6 +25,11 @@ public class InlineFunction extends NylonFunction {
         this.functions = FunctionParser.parse(nylonRuntime, src);
     }
 
+    public InlineFunction(NylonRuntime nylonRuntime, String src, byte args) throws NylonRuntimeException {
+        this.args = args;
+        this.functions = FunctionParser.parse(nylonRuntime, src);
+    }
+
     @Override
     protected void applyImpl(NylonStack args, NylonStack returnStack)
             throws NylonRuntimeException {

@@ -1,10 +1,12 @@
 package nylon.functions.loops;
 
 import nylon.exceptions.NylonRuntimeException;
-import nylon.functions.ifstatements.Conditional;
-import nylon.objects.*;
+import nylon.objects.NylonCharacter;
+import nylon.objects.NylonFunction;
+import nylon.objects.NylonObject;
+import nylon.objects.NylonStack;
 
-import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Created by Aedan Smith.
@@ -23,39 +25,23 @@ public class WhileLoop extends NylonFunction {
             throws NylonRuntimeException {
         if (args.size() == 0)
             return;
-        if (args.peek() instanceof Conditional){
-            Conditional conditional = (Conditional) args.pop();
-            while (conditional.toBoolean(args)) {
-                returnStack.addAll(function.apply(args));
-            }
-        } else if (args.peek() instanceof NylonStack) {
-            NylonStack stack = ((NylonStack) args.pop());
-            for (NylonObject object : stack) {
-                returnStack.addAll(function.apply(new NylonStack(object)));
-            }
-        } else {
-            double d = args.pop().toDouble();
-            ArrayList<Character> mods = new ArrayList<>();
-            while (args.size() != 0 && args.peek() instanceof NylonCharacter){
-                char c = ((NylonCharacter) args.peek()).getValue();
-                if (c == 'I' || c == 'P') {
-                    mods.add(c);
-                    args.pop();
-                }
-                else break;
-            }
-            args = args.clone();
-            if (!mods.contains('I')) {
-                for (int i = mods.contains('P') ? 1 : 0; i < d; i++) {
-                    args.add(new NylonDouble(i));
-                    returnStack.addAll(function.apply(args));
-                }
-            } else {
-                for (int i = (int) d; i >= 0; i--) {
-                    args.add(new NylonDouble(i));
-                    returnStack.addAll(function.apply(args));
-                }
-            }
+
+        boolean reversed = false, skip = false;
+        while (args.size() != 0 && args.peek() instanceof NylonCharacter) {
+            if (args.peek().toChar() == 'I') {
+                reversed = true;
+                args.pop();
+            } else if (args.peek().toChar() == 'P') {
+                skip = true;
+                args.pop();
+            } else
+                break;
+        }
+
+        Iterator<NylonObject> iterator = reversed ? args.pop().reverseIterator(args) : args.pop().iterator(args);
+        if (skip) iterator.next();
+        while (iterator.hasNext()) {
+            returnStack.addAll(function.apply(new NylonStack(iterator.next())));
         }
     }
 
