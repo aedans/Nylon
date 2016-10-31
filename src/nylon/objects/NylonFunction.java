@@ -114,4 +114,9 @@ public abstract class NylonFunction implements NylonObject {
     public Iterator<NylonObject> reverseIterator(NylonStack nylonStack) throws NylonRuntimeException {
         return apply(nylonStack).reverseIterator(nylonStack);
     }
+
+    @Override
+    public int compareTo(NylonObject object, NylonStack nylonStack) throws NylonRuntimeException {
+        throw new InvalidActionException("compare", this);
+    }
 }

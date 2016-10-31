@@ -55,7 +55,7 @@ public class NylonDouble implements NylonObject {
 
     @Override
     public String toString() {
-        if (this.value % 1 == 0)
+        if (this.value <= Long.MAX_VALUE && this.value % 1 == 0)
             return String.valueOf((long) this.value);
         else
             return String.valueOf(this.value);
@@ -102,5 +102,10 @@ public class NylonDouble implements NylonObject {
                 return new NylonDouble(--i);
             }
         };
+    }
+
+    @Override
+    public int compareTo(NylonObject object, NylonStack nylonStack) throws NylonRuntimeException {
+        return Double.compare(value, object.toDouble());
     }
 }

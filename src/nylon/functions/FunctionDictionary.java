@@ -2,8 +2,10 @@ package nylon.functions;
 
 import nylon.NylonRuntime;
 import nylon.exceptions.NylonRuntimeException;
+import nylon.functions.ifstatements.GreaterThan;
 import nylon.functions.ifstatements.IsObjectFalse;
 import nylon.functions.ifstatements.IsObjectTrue;
+import nylon.functions.ifstatements.LessThan;
 import nylon.functions.lists.CreateList;
 import nylon.functions.lists.ListFromStack;
 import nylon.functions.math.*;
@@ -40,6 +42,8 @@ public class FunctionDictionary {
 
         functionHashMap.put('?', new IsObjectTrue());
         functionHashMap.put('¿', new IsObjectFalse());
+        functionHashMap.put('>', new GreaterThan());
+        functionHashMap.put('<', new LessThan());
 
         functionHashMap.put('†', new CreateList());
         functionHashMap.put('‡', new ListFromStack());

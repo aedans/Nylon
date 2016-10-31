@@ -11,7 +11,7 @@ public class Divide extends NylonFunction {
 
     @Override
     protected void applyImpl(NylonStack args, NylonStack returnStack) throws NylonRuntimeException {
-        if (args.size() == 0 || args.size() == 0)
+        if (args.size() == 0 || args.size() == 1)
             returnStack.add(new NylonCharacter('/'));
         else {
             NylonObject[] vars = args.pop(2);

@@ -66,4 +66,9 @@ public class FunctionSkipObject implements NylonObject {
     public Iterator<NylonObject> reverseIterator(NylonStack nylonStack) throws NylonRuntimeException {
         throw new UnconvertableTypeException(this, Iterator.class);
     }
+
+    @Override
+    public int compareTo(NylonObject object, NylonStack nylonStack) throws NylonRuntimeException {
+        throw new InvalidActionException("compare", this);
+    }
 }

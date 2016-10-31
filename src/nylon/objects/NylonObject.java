@@ -6,7 +6,8 @@ import nylon.exceptions.NylonRuntimeException;
  * Created by Aedan Smith.
  */
 
-public interface NylonObject extends Cloneable<NylonObject>, java.lang.Cloneable, Iterable<NylonStack, NylonObject> {
+public interface NylonObject extends Cloneable<NylonObject>, java.lang.Cloneable, Iterable<NylonStack, NylonObject>,
+        Comparable<NylonStack, NylonObject> {
 
     @Override
     String toString();

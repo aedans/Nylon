@@ -116,4 +116,9 @@ public class NylonString implements NylonObject {
             }
         };
     }
+
+    @Override
+    public int compareTo(NylonObject object, NylonStack nylonStack) throws NylonRuntimeException {
+        return value.compareTo(object.toString());
+    }
 }

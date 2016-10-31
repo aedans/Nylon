@@ -71,7 +71,7 @@ public final class FunctionParser {
                     break;
             }
             return new Pair<>(
-                    i, new InlineFunction(runtime, src.substring(j, i))
+                    i, new PushNylonObjectFunction<>(new InlineFunction(runtime, src.substring(j, i)))
             );
         }
         if (src.charAt(i) == '(') {
@@ -97,12 +97,6 @@ public final class FunctionParser {
                         pair.getKey(), new WhileLoop(pair.getValue())
                 );
             }
-        }
-        if (src.charAt(i) == '@') {
-            Pair<Integer, NylonFunction> pair = parseFunction(runtime, src, i + 1);
-            return new Pair<>(
-                    pair.getKey(), new PushNylonObjectFunction<>(pair.getValue())
-            );
         }
         if (src.charAt(i) == '#') {
             int j = ++i;

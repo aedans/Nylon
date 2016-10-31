@@ -36,9 +36,9 @@ asdf
 
 Functions:
 <pre>
-@abcd
-@+
-@[+-*/]
+[abcd]
+[2+]
+[+-*/]
 </pre>
 
 ## Variables
@@ -73,8 +73,6 @@ Functions operate on a new stack that contains only the arguments passed to it. 
 
 Functions will implicitly return all non-argument values on the stack.
 
-A function can be pushed to stack to be accessed by other functions using '@'.
-
 - '[string]ƒ': Calls the function with the given name.
 - ';': Pushes the top element of the function stack to the return stack.
 - '!': Terminates the function.
@@ -82,14 +80,14 @@ A function can be pushed to stack to be accessed by other functions using '@'.
 
 Example 1:
 <pre>
-@[abc]l$lƒlƒ
+[abc]l$lƒlƒ
 
 Output: "abcabc"
 </pre>
 
 Example 2:
 <pre>
-@[+]add$2 3addƒ4addƒ
+[+]add$2 3addƒ4addƒ
 
 Output: "9"
 </pre>

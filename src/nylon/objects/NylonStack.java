@@ -101,4 +101,9 @@ public class NylonStack extends Stack<NylonObject> implements NylonObject {
             }
         };
     }
+
+    @Override
+    public int compareTo(NylonObject object, NylonStack nylonStack) throws NylonRuntimeException {
+        throw new InvalidActionException("compare", this);
+    }
 }
