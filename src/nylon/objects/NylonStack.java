@@ -18,7 +18,7 @@ public class NylonStack extends Stack<NylonObject> implements NylonObject {
     }
 
     public NylonStack(NylonObject object) {
-        this.add(object);
+        this.push(object);
     }
 
     @Override

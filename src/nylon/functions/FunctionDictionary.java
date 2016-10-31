@@ -11,6 +11,7 @@ import nylon.functions.misc.*;
 import nylon.functions.variables.AddVariable;
 import nylon.functions.variables.CallFunction;
 import nylon.functions.variables.GetVariable;
+import nylon.objects.NylonDouble;
 import nylon.objects.NylonFunction;
 import nylon.objects.NylonStack;
 
@@ -47,12 +48,15 @@ public class FunctionDictionary {
         functionHashMap.put('Ç', new Cast());
         functionHashMap.put('š', new RequestInput());
         functionHashMap.put(':', new PopTop());
+        functionHashMap.put(';', new Clone());
         functionHashMap.put('µ', new NylonFunction() {
             @Override
             protected void applyImpl(NylonStack args, NylonStack returnStack) throws NylonRuntimeException {
                 System.exit(0);
             }
         });
+        functionHashMap.put('ð', new PushNylonObjectFunction<>(new NylonDouble(10)));
+        functionHashMap.put('Ð', new PushNylonObjectFunction<>(new NylonDouble(1000)));
 
         functionHashMap.put(' ', null);
         functionHashMap.put('\n', null);

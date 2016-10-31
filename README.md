@@ -254,7 +254,11 @@ Output: "abc"
 
 ## Others
 - ':': Returns the ':' character.
+- ';': Returns the ';' character.
+- '[object];': Returns the object.
 - "[function]:": Calls a function.
 - "[string]|": Splits a String
 - "[object] [character]Ç": Casts a NylonObject to another NylonObject.
 - 'µ': Ends the program.
+- 'ð': Pushes 10 to the stack.
+- 'Ð': Pushes 1000 to the stack.

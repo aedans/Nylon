@@ -85,8 +85,11 @@ public final class FunctionParser {
                     break;
             }
             if (depth == 0){
+                InlineFunction function = new InlineFunction(runtime, src.substring(j, i));
+                if (function.args == 0)
+                    function.args = 1;
                 return new Pair<>(
-                        i, new WhileLoop(new InlineFunction(runtime, src.substring(j, i)))
+                        i, new WhileLoop(function)
                 );
             } else {
                 Pair<Integer, NylonFunction> pair = parseFunction(runtime, src, j);
@@ -99,6 +102,11 @@ public final class FunctionParser {
             Pair<Integer, NylonFunction> pair = parseFunction(runtime, src, i + 1);
             return new Pair<>(
                     pair.getKey(), new PushNylonObjectFunction<>(pair.getValue())
+            );
+        }
+        if (src.charAt(i) == '\\') {
+            return new Pair<>(
+                    i + 1, new PushNylonObjectFunction<>(new NylonCharacter(src.charAt(i + 1)))
             );
         }
         return new Pair<>(

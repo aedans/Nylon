@@ -14,8 +14,8 @@ import java.util.LinkedList;
 
 public class InlineFunction extends NylonFunction {
 
+    public byte args = 0;
     private LinkedList<NylonFunction> functions = new LinkedList<>();
-    private byte args = 0;
 
     public InlineFunction(NylonRuntime nylonRuntime, String src) throws NylonRuntimeException {
         if (src.length() != 0 && src.charAt(0) >= 48 && src.charAt(0) < 58) {
@@ -31,9 +31,8 @@ public class InlineFunction extends NylonFunction {
     }
 
     @Override
-    protected void applyImpl(NylonStack args, NylonStack returnStack)
-            throws NylonRuntimeException {
-        for (int i = 0; i < this.args && args.size() != 0; i++) {
+    protected void applyImpl(NylonStack args, NylonStack returnStack) throws NylonRuntimeException {
+        for (int i = 0; i < this.args && args.size() > 0; i++) {
             returnStack.add(args.pop());
         }
         for (NylonFunction function : functions) {
@@ -43,7 +42,7 @@ public class InlineFunction extends NylonFunction {
 
     @Override
     public String toString() {
-        return super.toString() + functions.toString();
+        return super.toString() + "(" + args + ")" + functions.toString();
     }
 
 }
