@@ -84,7 +84,7 @@ public final class FunctionParser {
                 if (depth == 0)
                     break;
             }
-            if (depth == 0){
+            if (depth == 0) {
                 InlineFunction function = new InlineFunction(runtime, src.substring(j, i));
                 if (function.args == 0)
                     function.args = 1;

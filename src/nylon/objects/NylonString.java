@@ -79,6 +79,7 @@ public class NylonString implements NylonObject {
         return new NylonString(value);
     }
 
+
     public String getValue() {
         return value;
     }

@@ -7,7 +7,7 @@ import nylon.exceptions.NylonRuntimeException;
  */
 
 public interface NylonObject extends Cloneable<NylonObject>, java.lang.Cloneable, Iterable<NylonStack, NylonObject>,
-        Comparable<NylonStack, NylonObject> {
+        Comparable<NylonStack, NylonObject>, java.lang.Comparable<NylonObject> {
 
     @Override
     String toString();
@@ -46,6 +46,17 @@ public interface NylonObject extends Cloneable<NylonObject>, java.lang.Cloneable
                 return this.toStack();
             default:
                 throw new NylonRuntimeException("Could not cast: No class found with identifier '" + c + "'");
+        }
+    }
+
+    @Override
+    default int compareTo(NylonObject o) {
+        try {
+            return this.compareTo(o, null);
+        } catch (NylonRuntimeException e) {
+            e.printStackTrace(System.out);
+            System.exit(1);
+            return -1;
         }
     }
 

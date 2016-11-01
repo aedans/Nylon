@@ -8,6 +8,7 @@ import nylon.functions.ifstatements.IsObjectTrue;
 import nylon.functions.ifstatements.LessThan;
 import nylon.functions.lists.CreateList;
 import nylon.functions.lists.ListFromStack;
+import nylon.functions.lists.Merge;
 import nylon.functions.math.*;
 import nylon.functions.misc.*;
 import nylon.functions.variables.AddVariable;
@@ -47,8 +48,8 @@ public class FunctionDictionary {
 
         functionHashMap.put('†', new CreateList());
         functionHashMap.put('‡', new ListFromStack());
+        functionHashMap.put('«', new Merge());
 
-        functionHashMap.put('|', new Split());
         functionHashMap.put('Ç', new Cast());
         functionHashMap.put('š', new RequestInput());
         functionHashMap.put(':', new PopTop());
@@ -61,6 +62,9 @@ public class FunctionDictionary {
         });
         functionHashMap.put('ð', new PushNylonObjectFunction<>(new NylonDouble(10)));
         functionHashMap.put('Ð', new PushNylonObjectFunction<>(new NylonDouble(1000)));
+        for (char c = 'à'; c <= 'æ'; c++) {
+            functionHashMap.put(c, new AddToRegister(c - 'à'));
+        }
 
         functionHashMap.put(' ', null);
         functionHashMap.put('\n', null);

@@ -59,14 +59,15 @@ public class NylonCharacter implements NylonObject {
     }
 
     @Override
-    public NylonCharacter concatenate(NylonObject nylonObject) throws NylonRuntimeException {
-        return new NylonCharacter((char) (nylonObject.toChar() + this.value));
+    public NylonString concatenate(NylonObject nylonObject) throws NylonRuntimeException {
+        return new NylonString(value + nylonObject.toString());
     }
 
     @Override
     public NylonCharacter clone() {
         return new NylonCharacter(value);
     }
+
 
     public char getValue() {
         return value;

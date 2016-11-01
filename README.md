@@ -245,6 +245,7 @@ Output: "abc"
 - '†': Creates a new list.
 - "[function]†": Creates a new list from the return stack of the function.
 - '‡': Creates a list from the current stack.
+- '«': Collapses the stack.
 
 ## IO
 - "[object]:": Prints an object to stdout.
@@ -255,8 +256,8 @@ Output: "abc"
 - ';': Returns the ';' character.
 - '[object];': Returns the object.
 - "[function]:": Calls a function.
-- "[string]|": Splits a String
 - "[object] [character]Ç": Casts a NylonObject to another NylonObject.
 - 'µ': Ends the program.
 - 'ð': Pushes 10 to the stack.
 - 'Ð': Pushes 1000 to the stack.
+- '[object]àáâãäæ': Adds an element in register 1-6. If there is already an element in register 6, returns that element instead.
