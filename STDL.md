@@ -1,9 +1,10 @@
 ## Libraries
 
-- Constants:
+#### - Constants:
 - Ce: Literal 2.7182818284590452354.
 - Cp: Literal 3.14159265358979323846.
-- Utilities:
+
+#### - Utilities:
 - Uo: Rotates a stack.
 - Ur: Reverses a stack.
 - Us: Sorts a stack.
