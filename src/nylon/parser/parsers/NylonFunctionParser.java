@@ -13,10 +13,10 @@ import parser.StringIterator;
 public class NylonFunctionParser implements Parser<StringIterator, InlineFunction> {
     @Override
     public boolean parse(InlineFunction inlineFunction, StringIterator in) throws ParseException {
+        if (!in.hasNext() || (in.peek() != '[' && in.peek() != ']'))
+            return false;
         if (in.peek() == ']')
             return true;
-        if (!in.hasNext() || in.peek() != '[')
-            return false;
         in.skip();
 
         InlineFunction function = new InlineFunction();

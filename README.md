@@ -60,7 +60,7 @@ Rs
 
 ## If Statements
 
-If statements are function modifiers that cause a function to be applied if the if statement is true. There are four if statements in Nylon, '?', '¿', '>', '<', '=', and '!'. If the statement is true, the following function is executed, otherwise it is skipped. For successive if statements, any of the statements must be true for the following function to execute.
+If statements are function modifiers that cause a function to be applied if the if statement is true. There are six if statements in Nylon, '?', '¿', '>', '<', '=', and '!'. If the statement is true, the following function is executed, otherwise it is skipped. For successive if statements, any of the statements must be true for the following function to execute.
 
 - '?': If the top of the stack is true.
 - '¿': If the top of the stack is false.

@@ -8,8 +8,6 @@ import parser.ParseException;
 import parser.Parser;
 import parser.StringIterator;
 
-import java.util.Arrays;
-
 /**
  * Created by Aedan Smith.
  */
@@ -46,7 +44,7 @@ public class StringParser implements Parser<StringIterator, InlineFunction> {
 
             @Override
             public String toString() {
-                return "PushNylonString(" + Arrays.toString(finalS) + ")";
+                return "PushNylonString(" + new String(finalS) + ")";
             }
         });
 
