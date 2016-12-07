@@ -1,0 +1,30 @@
+package nylon.parser.parsers;
+
+import nylon.InlineFunction;
+import nylon.parser.NylonParser;
+import parser.ParseException;
+import parser.Parser;
+import parser.StringIterator;
+
+/**
+ * Created by Aedan Smith.
+ */
+
+public class NylonFunctionParser implements Parser<StringIterator, InlineFunction> {
+    @Override
+    public boolean parse(InlineFunction inlineFunction, StringIterator in) throws ParseException {
+        if (in.peek() == ']')
+            return true;
+        if (!in.hasNext() || in.peek() != '[')
+            return false;
+        in.skip();
+
+        InlineFunction function = new InlineFunction();
+        NylonParser.nylonParser.parseUntil(in, function, sin -> sin.hasNext() && sin.peek() != ']');
+        inlineFunction.functions.add(function);
+
+        in.skip();
+
+        return true;
+    }
+}
