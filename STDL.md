@@ -16,5 +16,3 @@
 - d: Decrements the top item of the stack by 1.
 - i: Increments the top item of the stack by 1.
 - n: Adds all iterations of an object to the stack.
-- az: Literal a-z.
-- za: Literal z-a.

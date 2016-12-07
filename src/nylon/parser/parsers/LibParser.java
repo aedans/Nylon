@@ -19,6 +19,16 @@ import java.util.HashMap;
 public class LibParser implements Parser<StringIterator, InlineFunction> {
     public static HashMap<String, File> files = new HashMap<>();
 
+    public static void build(File file, String s) {
+        for (File f : file.listFiles()) {
+            if (f.isDirectory()) {
+                build(f, s + f.getName());
+            } else {
+                LibParser.files.put(s + f.getName(), f);
+            }
+        }
+    }
+
     @Override
     public boolean parse(InlineFunction inlineFunction, StringIterator in) throws ParseException {
         try {
@@ -26,8 +36,15 @@ public class LibParser implements Parser<StringIterator, InlineFunction> {
                 return false;
 
             String name = "";
-            while (in.hasNext() && (in.isInRange('a', 'z') || in.isInRange('A', 'Z'))) {
-                name += in.next();
+            while (in.hasNext()) {
+                if (in.isInRange('a', 'z')) {
+                    name += in.next();
+                    break;
+                } else if (in.isInRange('A', 'Z')) {
+                    name += in.next();
+                } else {
+                    break;
+                }
             }
             File f = files.get(name);
 
