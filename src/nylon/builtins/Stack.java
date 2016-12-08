@@ -1,5 +1,6 @@
 package nylon.builtins;
 
+import nylon.NylonObject;
 import nylon.nylonobjects.NylonDouble;
 import nylon.nylonobjects.NylonStack;
 import nylon.parser.parsers.BuiltinParser;
@@ -16,7 +17,7 @@ public class Stack {
     public static void build() {
         BuiltinParser.builtins.put('(', new BuiltinFunction('(') {
             @Override
-            public NylonStack apply(NylonStack stack) {
+            public NylonObject apply(NylonStack stack) {
                 Stack.stacks.push((NylonStack) stack.clone());
                 stack.clear();
                 return stack;
@@ -24,7 +25,7 @@ public class Stack {
         });
         BuiltinParser.builtins.put(')', new BuiltinFunction(')') {
             @Override
-            public NylonStack apply(NylonStack stack) {
+            public NylonObject apply(NylonStack stack) {
                 stack.clear();
                 stack.addAll(Stack.stacks.pop());
                 return stack;
@@ -32,7 +33,7 @@ public class Stack {
         });
         BuiltinParser.builtins.put('_', new BuiltinFunction('_') {
             @Override
-            public NylonStack apply(NylonStack stack) {
+            public NylonObject apply(NylonStack stack) {
                 NylonStack nylonStack = (NylonStack) stack.clone();
                 stack.add(nylonStack);
                 return nylonStack;
@@ -40,73 +41,73 @@ public class Stack {
         });
         BuiltinParser.builtins.put('`', new BuiltinFunction('`') {
             @Override
-            public NylonStack apply(NylonStack stack) {
-                return stack.pop().toStack(stack);
+            public NylonObject apply(NylonStack stack) {
+                return stack.pop();
             }
         });
         BuiltinParser.builtins.put('$', new BuiltinFunction('$') {
             @Override
-            public NylonStack apply(NylonStack stack) {
+            public NylonObject apply(NylonStack stack) {
                 NylonStack nylonStack = (NylonStack) stack.clone();
+                NylonObject nylonObject = nylonStack.pop();
                 stack.clear();
-                stack.add(nylonStack.pop());
-                return nylonStack;
+                stack.add(nylonObject);
+                return nylonObject;
             }
         });
         BuiltinParser.builtins.put(':', new BuiltinFunction(':') {
             @Override
-            public NylonStack apply(NylonStack stack) {
-                stack.add(stack.peek());
-                return stack.peek().toStack(stack);
+            public NylonObject apply(NylonStack stack) {
+                NylonObject nylonObject = stack.peek();
+                stack.add(nylonObject);
+                return nylonObject;
             }
         });
         BuiltinParser.builtins.put(';', new BuiltinFunction(';') {
             @Override
-            public NylonStack apply(NylonStack stack) {
+            public NylonObject apply(NylonStack stack) {
                 stack.addAll((NylonStack) stack.clone());
                 return stack;
             }
         });
         BuiltinParser.builtins.put('À', new BuiltinFunction('À') {
             @Override
-            public NylonStack apply(NylonStack stack) {
-                stack.push(Stack.stacks.peek().pop());
-                return stack.peek().toStack(stack);
+            public NylonObject apply(NylonStack stack) {
+                NylonObject nylonObject = Stack.stacks.peek().pop();
+                stack.push(nylonObject);
+                return nylonObject;
             }
         });
         BuiltinParser.builtins.put('Á', new BuiltinFunction('Á') {
             @Override
-            public NylonStack apply(NylonStack stack) {
-                Stack.stacks.peek().push(stack.pop());
-                return Stack.stacks.peek().toStack(stack);
+            public NylonObject apply(NylonStack stack) {
+                NylonObject nylonObject = stack.pop();
+                Stack.stacks.peek().push(nylonObject);
+                return nylonObject;
             }
         });
         BuiltinParser.builtins.put('ì', new BuiltinFunction('ì') {
             @Override
-            public NylonStack apply(NylonStack stack) {
-                stack.insertElementAt(stack.pop(), 0);
-                return stack.get(0).toStack(stack);
+            public NylonObject apply(NylonStack stack) {
+                NylonObject nylonObject = stack.pop();
+                stack.insertElementAt(nylonObject, 0);
+                return nylonObject;
             }
         });
         BuiltinParser.builtins.put('í', new BuiltinFunction('í') {
             @Override
-            public NylonStack apply(NylonStack stack) {
-                stack.push(stack.remove(0));
-                return stack.peek().toStack(stack);
+            public NylonObject apply(NylonStack stack) {
+                NylonObject nylonObject = stack.remove(0);
+                stack.push(nylonObject);
+                return nylonObject;
             }
         });
         BuiltinParser.builtins.put('î', new BuiltinFunction('î') {
             @Override
-            public NylonStack apply(NylonStack stack) {
-                stack.push(new NylonDouble(stack.size()));
-                return stack.peek().toStack(stack);
-            }
-        });
-        BuiltinParser.builtins.put('×', new BuiltinFunction('×') {
-            @Override
-            public NylonStack apply(NylonStack stack) {
-                stack.add(stack.get((int) stack.pop().toDouble(stack)));
-                return stack.peek().toStack(stack);
+            public NylonObject apply(NylonStack stack) {
+                NylonDouble nylonDouble = new NylonDouble(stack.size());
+                stack.push(nylonDouble);
+                return nylonDouble;
             }
         });
     }

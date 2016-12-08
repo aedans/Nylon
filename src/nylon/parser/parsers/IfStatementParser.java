@@ -1,6 +1,7 @@
 package nylon.parser.parsers;
 
 import nylon.InlineFunction;
+import nylon.NylonObject;
 import nylon.nylonobjects.NylonDouble;
 import nylon.nylonobjects.NylonFunction;
 import nylon.nylonobjects.NylonStack;
@@ -43,7 +44,7 @@ public class IfStatementParser implements Parser<StringIterator, InlineFunction>
 
         inlineFunction.functions.add(new NylonFunction() {
             @Override
-            public NylonStack apply(NylonStack stack) {
+            public NylonObject apply(NylonStack stack) {
                 boolean b = false;
                 for (char c : ifs) {
                     switch (c) {
@@ -68,10 +69,10 @@ public class IfStatementParser implements Parser<StringIterator, InlineFunction>
                 }
                 if (b) {
                     ifTrue.apply(stack);
-                    return new NylonStack(new NylonDouble(1));
+                    return new NylonDouble(1);
                 } else {
                     ifFalse.apply(stack);
-                    return new NylonStack(new NylonDouble(0));
+                    return new NylonDouble(0);
                 }
             }
 

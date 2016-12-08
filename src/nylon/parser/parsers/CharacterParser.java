@@ -1,6 +1,7 @@
 package nylon.parser.parsers;
 
 import nylon.InlineFunction;
+import nylon.NylonObject;
 import nylon.nylonobjects.NylonCharacter;
 import nylon.nylonobjects.NylonFunction;
 import nylon.nylonobjects.NylonStack;
@@ -23,9 +24,10 @@ public class CharacterParser implements Parser<StringIterator, InlineFunction> {
 
         inlineFunction.functions.add(new NylonFunction() {
             @Override
-            public NylonStack apply(NylonStack stack) {
-                stack.push(new NylonCharacter(c));
-                return stack.peek().toStack(stack);
+            public NylonObject apply(NylonStack stack) {
+                NylonCharacter nc = new NylonCharacter(c);
+                stack.push(nc);
+                return nc;
             }
 
             @Override

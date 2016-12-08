@@ -13,7 +13,7 @@ public class InlineFunction implements NylonFunction {
     public ArrayList<NylonFunction> functions = new ArrayList<>();
 
     @Override
-    public NylonStack apply(NylonStack stack) {
+    public NylonObject apply(NylonStack stack) {
         NylonStack returnStack = new NylonStack();
         for (NylonFunction function : functions) {
             returnStack.add(function.apply(stack));

@@ -1,6 +1,7 @@
 package nylon.parser.parsers;
 
 import nylon.InlineFunction;
+import nylon.NylonObject;
 import nylon.nylonobjects.NylonDouble;
 import nylon.nylonobjects.NylonFunction;
 import nylon.nylonobjects.NylonStack;
@@ -24,9 +25,10 @@ public class DoubleParser implements Parser<StringIterator, InlineFunction> {
 
         inlineFunction.functions.add(new NylonFunction() {
             @Override
-            public NylonStack apply(NylonStack stack) {
-                stack.push(new NylonDouble(d));
-                return stack.peek().toStack(stack);
+            public NylonObject apply(NylonStack stack) {
+                NylonDouble nd = new NylonDouble(d);
+                stack.push(nd);
+                return nd;
             }
 
             @Override

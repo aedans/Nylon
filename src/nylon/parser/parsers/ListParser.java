@@ -1,6 +1,7 @@
 package nylon.parser.parsers;
 
 import nylon.InlineFunction;
+import nylon.NylonObject;
 import nylon.nylonobjects.NylonFunction;
 import nylon.nylonobjects.NylonStack;
 import nylon.parser.NylonParser;
@@ -23,13 +24,13 @@ public class ListParser implements Parser<StringIterator, InlineFunction> {
         while (in.hasNext() && in.peek() != '}') {
             InlineFunction inlineFunction1 = new InlineFunction();
             NylonParser.nylonParser.parse(inlineFunction1, in);
-            s.addAll(inlineFunction1.apply(new NylonStack()));
+            s.add(inlineFunction1.apply(new NylonStack()));
         }
         in.skip();
 
         inlineFunction.functions.add(new NylonFunction() {
             @Override
-            public NylonStack apply(NylonStack stack) {
+            public NylonObject apply(NylonStack stack) {
                 stack.add((NylonStack) s.clone());
                 return stack.peek().toStack(stack);
             }

@@ -1,6 +1,7 @@
 package nylon.parser.parsers;
 
 import nylon.InlineFunction;
+import nylon.NylonObject;
 import nylon.nylonobjects.NylonFunction;
 import nylon.nylonobjects.NylonStack;
 import nylon.parser.NylonParser;
@@ -24,10 +25,10 @@ public class WhileLoopParser implements Parser<StringIterator, InlineFunction> {
 
         inlineFunction.functions.add(new NylonFunction() {
             @Override
-            public NylonStack apply(NylonStack stack) {
+            public NylonObject apply(NylonStack stack) {
                 while (wrapped.apply(stack).toBoolean(stack)) {
                 }
-                return null;
+                return wrapped;
             }
 
             @Override

@@ -27,12 +27,12 @@ public class ForLoopParser implements Parser<StringIterator, InlineFunction> {
 
         inlineFunction.functions.add(new NylonFunction() {
             @Override
-            public NylonStack apply(NylonStack stack) {
+            public NylonObject apply(NylonStack stack) {
                 Iterator<NylonObject> iterator = stack.pop().toIterator(stack);
                 NylonStack returnStack = new NylonStack();
                 while (iterator.hasNext()) {
                     stack.push(iterator.next());
-                    returnStack.addAll(wrapped.apply(stack));
+                    returnStack.addAll(wrapped.apply(stack).toStack(stack));
                 }
                 return returnStack;
             }

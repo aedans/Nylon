@@ -9,7 +9,7 @@ import java.util.Iterator;
  */
 
 public interface NylonFunction extends NylonObject {
-    NylonStack apply(NylonStack stack);
+    NylonObject apply(NylonStack stack);
 
     default boolean toBoolean(NylonStack stack) {
         return apply(stack).toDouble(stack) != 0;
@@ -21,7 +21,7 @@ public interface NylonFunction extends NylonObject {
 
     @Override
     default NylonStack toStack(NylonStack stack) {
-        return apply(stack);
+        return apply(stack).toStack(stack);
     }
 
     @Override

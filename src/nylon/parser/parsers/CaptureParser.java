@@ -1,7 +1,6 @@
 package nylon.parser.parsers;
 
 import nylon.InlineFunction;
-import nylon.nylonobjects.NylonStack;
 import nylon.parser.NylonParser;
 import parser.ParseException;
 import parser.Parser;
@@ -22,7 +21,7 @@ public class CaptureParser implements Parser<StringIterator, InlineFunction> {
         NylonParser.nylonParser.parse(inlineFunction1, in);
         inlineFunction.functions.add(stack -> {
             stack.addAll(inlineFunction1.functions);
-            return new NylonStack(inlineFunction1);
+            return inlineFunction1;
         });
         return true;
     }

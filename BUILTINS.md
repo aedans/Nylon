@@ -17,4 +17,3 @@
 - 'ì': Moves the top of the stack to the bottom.
 - 'í': Moves the bottom of the stack to the top.
 - 'î': Pushes the length of the stack to the stack.
-- '×': Pushes the nth element of the stack.
