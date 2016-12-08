@@ -1,8 +1,8 @@
 package nylon.parser.parsers;
 
-import nylon.FunctionWrapper;
 import nylon.InlineFunction;
 import nylon.nylonobjects.NylonDouble;
+import nylon.nylonobjects.NylonFunction;
 import nylon.nylonobjects.NylonStack;
 import nylon.parser.NylonParser;
 import parser.ParseException;
@@ -23,8 +23,7 @@ public class IfStatementParser implements Parser<StringIterator, InlineFunction>
                         || in.peek() == '¿'
                         || in.peek() == '>'
                         || in.peek() == '<'
-                        || in.peek() == '='
-                        || in.peek() == '!'))
+                        || in.peek() == '='))
             return false;
 
         char[] ifs = in.until(stringIterator -> in.hasNext() &&
@@ -32,17 +31,21 @@ public class IfStatementParser implements Parser<StringIterator, InlineFunction>
                         || in.peek() == '¿'
                         || in.peek() == '>'
                         || in.peek() == '<'
-                        || in.peek() == '='
-                        || in.peek() == '!')).toCharArray();
+                        || in.peek() == '=')).toCharArray();
 
-        InlineFunction wrapped = new InlineFunction();
-        NylonParser.nylonParser.parse(wrapped, in);
+        InlineFunction ifTrue = new InlineFunction();
+        NylonParser.nylonParser.parse(ifTrue, in);
 
-        inlineFunction.functions.add(new FunctionWrapper(wrapped) {
+        in.skipWhitespace();
+        InlineFunction ifFalse = new InlineFunction();
+        if (in.hasNext() && in.peek() == '!')
+            NylonParser.nylonParser.parse(ifFalse, in);
+
+        inlineFunction.functions.add(new NylonFunction() {
             @Override
             public NylonStack apply(NylonStack stack) {
+                boolean b = false;
                 for (char c : ifs) {
-                    boolean b = false;
                     switch (c) {
                         case '?':
                             b = stack.peek().toBoolean(stack);
@@ -59,21 +62,22 @@ public class IfStatementParser implements Parser<StringIterator, InlineFunction>
                         case '=':
                             b = Objects.equals(stack.get(stack.size() - 1), stack.get(stack.size() - 2));
                             break;
-                        case '!':
-                            b = !Objects.equals(stack.get(stack.size() - 1), stack.get(stack.size() - 2));
-                            break;
                     }
-                    if (b) {
-                        this.wrappedFunction.apply(stack);
-                        return new NylonDouble(1).toStack(stack);
-                    }
+                    if (b)
+                        break;
                 }
-                return new NylonDouble(0).toStack(stack);
+                if (b) {
+                    ifTrue.apply(stack);
+                    return new NylonStack(new NylonDouble(1));
+                } else {
+                    ifFalse.apply(stack);
+                    return new NylonStack(new NylonDouble(0));
+                }
             }
 
             @Override
             public String toString() {
-                return "If[" + new String(ifs) + "](" + wrappedFunction + ")";
+                return "If[" + new String(ifs) + "](" + ifTrue + ")Else(" + ifFalse + ")";
             }
         });
 

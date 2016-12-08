@@ -81,4 +81,9 @@ public class StringIterator implements Iterator<Character> {
     public int getIndex() {
         return i;
     }
+
+    public void skipWhitespace() {
+        while (peek() <= 32)
+            skip();
+    }
 }

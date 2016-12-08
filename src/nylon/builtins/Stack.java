@@ -42,8 +42,7 @@ public class Stack {
         BuiltinParser.builtins.put('`', new BuiltinFunction('`') {
             @Override
             public NylonStack apply(NylonStack stack) {
-                stack.pop().toStack(stack);
-                return stack.peek().toStack(stack);
+                return stack.pop().toStack(stack);
             }
         });
         BuiltinParser.builtins.put(':', new BuiltinFunction(':') {
@@ -51,6 +50,13 @@ public class Stack {
             public NylonStack apply(NylonStack stack) {
                 stack.add(stack.peek());
                 return stack.peek().toStack(stack);
+            }
+        });
+        BuiltinParser.builtins.put(';', new BuiltinFunction(';') {
+            @Override
+            public NylonStack apply(NylonStack stack) {
+                stack.addAll((NylonStack) stack.clone());
+                return stack;
             }
         });
         BuiltinParser.builtins.put('À', new BuiltinFunction('À') {

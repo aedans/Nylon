@@ -60,14 +60,13 @@ Rs
 
 ## If Statements
 
-If statements are function modifiers that cause a function to be applied if the if statement is true. There are six if statements in Nylon, '?', '¿', '>', '<', '=', and '!'. If the statement is true, the following function is executed, otherwise it is skipped. For successive if statements, any of the statements must be true for the following function to execute.
+If statements are function modifiers that cause a function to be applied if the if statement is true. There are five if statements in Nylon, '?', '¿', '>', '<', and '='. If the statement is true, the following function is executed, otherwise it is skipped. For successive if statements, any of the statements must be true for the following function to execute. '!' is used as an effective else for if statements.
 
 - '?': If the top of the stack is true.
 - '¿': If the top of the stack is false.
 - '>': If the second from the top of the stack is greater than the top.
 - '<': If the second from the top of the stack is less than the top.
 - '=': If the top of the stack is equal to the second from the top.
-- '!': If the top of the stack is not equal to the second from the top.
 
 Example 1
 <pre>
@@ -89,7 +88,7 @@ While loops are function modifiers that cause a function to be called as long as
 
 ## For Loops
 
-For loops are function modifiers that cause a function to be called multiple times, each time enumerating different arguments. For loops are created using '%'. When a for loop is called, it consumes the top object of the stack and behaves differently depending on the type of object consumed.
+For loops are function modifiers that cause a function to be called multiple times, each time enumerating different arguments. For loops are created using '~'. When a for loop is called, it consumes the top object of the stack and behaves differently depending on the type of object consumed.
 
 - [double|character]: Treated as a for loop from 0 to the number.
 - [function]: Iterates once for each object returned by the function.
