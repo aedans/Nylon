@@ -16,6 +16,7 @@ class DefaultParser implements Parser<StringIterator, InlineFunction> {
             return false;
 
         in.skip();
+        in.skipWhitespace();
         return NylonParser.nylonParser.parse(inlineFunction, in);
     }
 }

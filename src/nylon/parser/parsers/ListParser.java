@@ -12,7 +12,7 @@ import parser.StringIterator;
  * Created by Aedan Smith.
  */
 
-public class StackParser implements Parser<StringIterator, InlineFunction> {
+public class ListParser implements Parser<StringIterator, InlineFunction> {
     @Override
     public boolean parse(InlineFunction inlineFunction, StringIterator in) throws ParseException {
         if (!in.hasNext() || in.peek() != '{')

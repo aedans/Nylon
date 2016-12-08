@@ -16,7 +16,7 @@ The Nylon language operates exclusively on stacks, with one stack allocated per 
 
 ## Constants
 
-Constants in Nylon are functions that take no arguments and push a constant to the stack. There are four constant types: Doubles, characters, stacks, and functions. Booleans are be represented using 0/1. Constants are declared as follows:
+Constants in Nylon are functions that take no arguments and push a constant to the stack. There are four constant types: Doubles, characters, lists, and functions. Booleans are be represented using 0/1. Constants are declared as follows:
 
 Doubles:
 <pre>
@@ -31,7 +31,7 @@ Characters:
 '?
 </pre>
 
-Stacks:
+Lists:
 <pre>
 {1.2 2344 134}
 {'a'b'c'd'e'f'g}
@@ -92,7 +92,7 @@ For loops are function modifiers that cause a function to be called multiple tim
 
 - [double|character]: Treated as a for loop from 0 to the number.
 - [function]: Iterates once for each object returned by the function.
-- [stack]: Iterates once for each object in the stack.
+- [list]: Iterates once for each object in the list.
 
 ## Standard Library
 

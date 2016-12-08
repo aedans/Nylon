@@ -7,10 +7,10 @@
 - Ct: Literal tau = 6.283185307179586.
 
 #### - Utilities:
-- Uo: Rotates a stack.
-- Up: Permutations of a stack.
-- Ur: Reverses a stack.
-- Us: Sorts a stack.
+- Uo: Rotates a list.
+- Up: Permutations of a list. // TODO
+- Ur: Reverses a list.
+- Us: Sorts a list.
 
 ## Misc. Functions
 - a: Cycles the top two items of the stack.
@@ -18,4 +18,4 @@
 - d: Decrements the top item of the stack by 1.
 - i: Increments the top item of the stack by 1.
 - n: Adds all iterations of an object to the stack.
-- z: Creates a stack from the top n object of the stack.
+- z: Creates a list from the top n object of the stack.

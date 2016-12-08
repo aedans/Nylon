@@ -7,8 +7,9 @@
 ## Stack Manipulation
 - '(': Shadows the current stack with a new stack.
 - ')': Removes the current stack and replaces it with the shadowed one.
-- '_': Adds the stack to the current stack.
+- '_': Creates a list and from the stack adds it to the stack.
 - '`': Consumes the top item of the stack.
+- '$': Consumes all but the top item of the stack.
 - ':': Duplicates the top item of the stack.
 - ';': Duplicates all items of the stack.
 - 'À': Pulls the top argument of the shadowed stack to the current one.

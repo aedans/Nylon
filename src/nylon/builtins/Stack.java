@@ -34,7 +34,6 @@ public class Stack {
             @Override
             public NylonStack apply(NylonStack stack) {
                 NylonStack nylonStack = (NylonStack) stack.clone();
-                stack.clear();
                 stack.add(nylonStack);
                 return nylonStack;
             }
@@ -43,6 +42,15 @@ public class Stack {
             @Override
             public NylonStack apply(NylonStack stack) {
                 return stack.pop().toStack(stack);
+            }
+        });
+        BuiltinParser.builtins.put('$', new BuiltinFunction('$') {
+            @Override
+            public NylonStack apply(NylonStack stack) {
+                NylonStack nylonStack = (NylonStack) stack.clone();
+                stack.clear();
+                stack.add(nylonStack.pop());
+                return nylonStack;
             }
         });
         BuiltinParser.builtins.put(':', new BuiltinFunction(':') {
