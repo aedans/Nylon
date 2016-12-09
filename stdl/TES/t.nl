@@ -12,6 +12,6 @@
 // C library
 
 // U library
-"edbca"Ur           '
+"edcba"Ur           '
 "bcdea"Uo           '
 "caedb"Us           '

@@ -14,7 +14,7 @@ import java.util.Objects;
 public class CommentParser implements Parser<StringIterator, InlineFunction> {
     @Override
     public boolean parse(InlineFunction inlineFunction, StringIterator in) throws ParseException {
-        if (!in.hasNext() || !Objects.equals(in.peekString(2), "//"))
+        if (!in.hasNext(2) || !Objects.equals(in.peekString(2), "//"))
             return false;
 
         in.until('\n');

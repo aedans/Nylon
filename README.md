@@ -88,11 +88,18 @@ While loops are function modifiers that cause a function to be called as long as
 
 ## For Loops
 
-For loops are function modifiers that cause a function to be called multiple times, each time enumerating different arguments. For loops are created using '~'. When a for loop is called, it consumes the top object of the stack and behaves differently depending on the type of object consumed.
+For loops are function modifiers that cause a function to be called multiple times, each time enumerating different arguments. When a for loop is called, it reads the top object of the stack and behaves differently depending on the type of object consumed.
 
 - [double|character]: Treated as a for loop from 0 to the number.
 - [function]: Iterates once for each object returned by the function.
 - [list]: Iterates once for each object in the list.
+
+There are four types of for loops, one for each permutation of consuming the top of the stack and pushing the current loop value.
+
+- 'î': Creates a consuming, pushing for loop.
+- 'ì': Creates a non-consuming, pushing for loop.
+- 'í': Creates a consuming, non-pushing for loop.
+- 'ï': Creates a non-consuming, non-pushing for loop.
 
 ## Standard Library
 

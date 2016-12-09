@@ -80,7 +80,7 @@ public class Stack {
                 return nylonObject;
             }
         });
-        BuiltinParser.builtins.put('ì', new BuiltinFunction('ì') {
+        BuiltinParser.builtins.put('ù', new BuiltinFunction('ù') {
             @Override
             public NylonObject apply(java.util.Stack<NylonObject> stack) {
                 NylonObject nylonObject = stack.pop();
@@ -88,7 +88,7 @@ public class Stack {
                 return nylonObject;
             }
         });
-        BuiltinParser.builtins.put('í', new BuiltinFunction('í') {
+        BuiltinParser.builtins.put('ú', new BuiltinFunction('ú') {
             @Override
             public NylonObject apply(java.util.Stack<NylonObject> stack) {
                 NylonObject nylonObject = stack.remove(0);
@@ -96,7 +96,7 @@ public class Stack {
                 return nylonObject;
             }
         });
-        BuiltinParser.builtins.put('î', new BuiltinFunction('î') {
+        BuiltinParser.builtins.put('Ï', new BuiltinFunction('Ï') {
             @Override
             public NylonObject apply(java.util.Stack<NylonObject> stack) {
                 NylonDouble nylonDouble = new NylonDouble(stack.size());

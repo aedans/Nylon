@@ -1,5 +1,7 @@
 package parser;
 
+import nylon.NylonException;
+
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.function.Predicate;
@@ -51,22 +53,32 @@ public class StringIterator implements Iterator<Character> {
 
     @Override
     public Character next() {
+        if (i > string.length)
+            throw new NylonException("Unexpected end of string.");
         return string[i++];
     }
 
     public Character peek() {
+        if (i > string.length)
+            throw new NylonException("Unexpected end of string.");
         return string[i];
     }
 
     public Character peek(int n) {
+        if (i + n > string.length)
+            throw new NylonException("Unexpected end of string.");
         return string[i + n];
     }
 
     public String peekString(int n) {
+        if (i + n > string.length)
+            throw new NylonException("Unexpected end of string.");
         return new String(Arrays.copyOfRange(string, i, i + n));
     }
 
     public boolean isInRange(char low, char high) {
+        if (i > string.length)
+            throw new NylonException("Unexpected end of string.");
         return string[i] >= low && string[i] <= high;
     }
 

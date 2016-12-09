@@ -19,8 +19,10 @@ import java.util.Stack;
 public class ForLoopParser implements Parser<StringIterator, InlineFunction> {
     @Override
     public boolean parse(InlineFunction inlineFunction, StringIterator in) throws ParseException {
-        if (!in.hasNext() || in.peek() != '~')
+        if (!in.hasNext() || !(in.peek() >= 'ì' && in.peek() <= 'ï'))
             return false;
+        boolean push = in.peek() == 'î' || in.peek() == 'ì';
+        boolean consume = in.peek() == 'î' || in.peek() == 'í';
         in.skip();
 
         InlineFunction wrapped = new InlineFunction();
@@ -29,10 +31,13 @@ public class ForLoopParser implements Parser<StringIterator, InlineFunction> {
         inlineFunction.functions.add(new NylonFunction() {
             @Override
             public NylonObject apply(Stack<NylonObject> stack) {
-                Iterator<NylonObject> iterator = stack.pop().toIterator(stack);
+                Iterator<NylonObject> iterator = consume ? stack.pop().toIterator(stack) : stack.peek().toIterator(stack);
                 NylonList returnList = new NylonList();
                 while (iterator.hasNext()) {
-                    stack.push(iterator.next());
+                    if (push)
+                        stack.push(iterator.next());
+                    else
+                        iterator.next();
                     returnList.addAll(wrapped.apply(stack).toList(stack));
                 }
                 return returnList;
