@@ -1,31 +1,44 @@
 package nylon.nylonobjects;
 
+import nylon.NylonException;
 import nylon.NylonObject;
 
 import java.util.Iterator;
+import java.util.Stack;
 
 /**
  * Created by Aedan Smith.
  */
 
-public interface NylonFunction extends NylonObject {
-    NylonObject apply(NylonStack stack);
+public abstract class NylonFunction extends NylonObject {
+    public abstract NylonObject apply(Stack<NylonObject> stack);
 
-    default boolean toBoolean(NylonStack stack) {
+    public boolean toBoolean(Stack<NylonObject> stack) {
         return apply(stack).toDouble(stack) != 0;
     }
 
-    default double toDouble(NylonStack stack) {
+    public double toDouble(Stack<NylonObject> stack) {
         return apply(stack).toDouble(stack);
     }
 
     @Override
-    default NylonStack toStack(NylonStack stack) {
-        return apply(stack).toStack(stack);
+    public NylonList toList(Stack<NylonObject> stack) {
+        return apply(stack).toList(stack);
     }
 
     @Override
-    default Iterator<NylonObject> toIterator(NylonStack stack) {
+    public Iterator<NylonObject> toIterator(Stack<NylonObject> stack) {
         return apply(stack).toIterator(stack);
+    }
+
+    @Override
+    public NylonObject concatenate(NylonObject object, Stack<NylonObject> stack) {
+        // TODO
+        throw new NylonException("Concatenation of functions is not yet supported", this);
+    }
+
+    @Override
+    public NylonObject subtract(NylonObject object, Stack<NylonObject> stack) {
+        throw new NylonException("Cannot subtract functions");
     }
 }

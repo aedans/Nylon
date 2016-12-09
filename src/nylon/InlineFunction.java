@@ -1,24 +1,25 @@
 package nylon;
 
 import nylon.nylonobjects.NylonFunction;
-import nylon.nylonobjects.NylonStack;
+import nylon.nylonobjects.NylonList;
 
 import java.util.ArrayList;
+import java.util.Stack;
 
 /**
  * Created by Aedan Smith.
  */
 
-public class InlineFunction implements NylonFunction {
+public class InlineFunction extends NylonFunction {
     public ArrayList<NylonFunction> functions = new ArrayList<>();
 
     @Override
-    public NylonObject apply(NylonStack stack) {
-        NylonStack returnStack = new NylonStack();
+    public NylonObject apply(Stack<NylonObject> stack) {
+        NylonList list = new NylonList();
         for (NylonFunction function : functions) {
-            returnStack.add(function.apply(stack));
+            list.add(function.apply(stack));
         }
-        return returnStack;
+        return list;
     }
 
     @Override

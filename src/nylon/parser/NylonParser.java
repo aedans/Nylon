@@ -14,6 +14,7 @@ public class NylonParser extends LinkedParser<StringIterator, InlineFunction> {
 
     public NylonParser() {
         super(new DefaultParser(),
+                new CommentParser(),
                 new DoubleParser(),
                 new CharacterParser(),
                 new StringParser(),
@@ -24,7 +25,7 @@ public class NylonParser extends LinkedParser<StringIterator, InlineFunction> {
                 new CaptureParser(),
                 new IfStatementParser(),
                 new BuiltinParser(),
-                new LibParser()
+                new LibraryParser()
         );
     }
 

@@ -11,7 +11,6 @@
 - '`': Consumes the top item of the stack.
 - '$': Consumes all but the top item of the stack.
 - ':': Duplicates the top item of the stack.
-- ';': Duplicates all items of the stack.
 - 'À': Pulls the top argument of the shadowed stack to the current one.
 - 'Á': Pushes the top argument of the current stack to the shadowed one.
 - 'ì': Moves the top of the stack to the bottom.

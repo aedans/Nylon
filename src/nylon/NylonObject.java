@@ -1,20 +1,28 @@
 package nylon;
 
-import nylon.nylonobjects.NylonStack;
+import nylon.nylonobjects.NylonList;
 
 import java.util.Iterator;
+import java.util.Stack;
 
 /**
  * Created by Aedan Smith.
  */
 
-public interface NylonObject {
-    boolean toBoolean(NylonStack stack);
+public abstract class NylonObject {
+    public abstract boolean toBoolean(Stack<NylonObject> stack);
 
-    double toDouble(NylonStack stack);
+    public abstract double toDouble(Stack<NylonObject> stack);
 
-    Iterator<NylonObject> toIterator(NylonStack stack);
+    public char toCharacter(Stack<NylonObject> stack) {
+        return (char) toDouble(stack);
+    }
 
-    NylonStack toStack(NylonStack stack);
+    public abstract Iterator<NylonObject> toIterator(Stack<NylonObject> stack);
+
+    public abstract NylonList toList(Stack<NylonObject> stack);
+
+    public abstract NylonObject concatenate(NylonObject object, Stack<NylonObject> stack);
+
+    public abstract NylonObject subtract(NylonObject object, Stack<NylonObject> stack);
 }
-

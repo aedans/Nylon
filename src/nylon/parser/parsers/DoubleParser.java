@@ -4,10 +4,11 @@ import nylon.InlineFunction;
 import nylon.NylonObject;
 import nylon.nylonobjects.NylonDouble;
 import nylon.nylonobjects.NylonFunction;
-import nylon.nylonobjects.NylonStack;
 import parser.ParseException;
 import parser.Parser;
 import parser.StringIterator;
+
+import java.util.Stack;
 
 /**
  * Created by Aedan Smith.
@@ -25,7 +26,7 @@ public class DoubleParser implements Parser<StringIterator, InlineFunction> {
 
         inlineFunction.functions.add(new NylonFunction() {
             @Override
-            public NylonObject apply(NylonStack stack) {
+            public NylonObject apply(Stack<NylonObject> stack) {
                 NylonDouble nd = new NylonDouble(d);
                 stack.push(nd);
                 return nd;

@@ -3,12 +3,13 @@ package nylon.nylonobjects;
 import nylon.NylonObject;
 
 import java.util.Iterator;
+import java.util.Stack;
 
 /**
  * Created by Aedan Smith.
  */
 
-public class NylonCharacter implements NylonObject {
+public class NylonCharacter extends NylonObject {
     private char c;
 
     public NylonCharacter(char c) {
@@ -16,17 +17,17 @@ public class NylonCharacter implements NylonObject {
     }
 
     @Override
-    public boolean toBoolean(NylonStack stack) {
+    public boolean toBoolean(Stack<NylonObject> stack) {
         return c == 't';
     }
 
     @Override
-    public double toDouble(NylonStack stack) {
+    public double toDouble(Stack<NylonObject> stack) {
         return c;
     }
 
     @Override
-    public Iterator<NylonObject> toIterator(NylonStack stack) {
+    public Iterator<NylonObject> toIterator(Stack<NylonObject> stack) {
         return new Iterator<NylonObject>() {
             int i = 0;
 
@@ -43,8 +44,20 @@ public class NylonCharacter implements NylonObject {
     }
 
     @Override
-    public NylonStack toStack(NylonStack stack) {
-        return new NylonStack(this);
+    public NylonList toList(Stack<NylonObject> stack) {
+        return new NylonList(this);
+    }
+
+    @Override
+    public NylonObject concatenate(NylonObject object, Stack<NylonObject> stack) {
+        c += object.toCharacter(stack);
+        return this;
+    }
+
+    @Override
+    public NylonObject subtract(NylonObject object, Stack<NylonObject> stack) {
+        c -= object.toCharacter(stack);
+        return this;
     }
 
     @Override

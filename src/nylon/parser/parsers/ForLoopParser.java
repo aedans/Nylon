@@ -3,13 +3,14 @@ package nylon.parser.parsers;
 import nylon.InlineFunction;
 import nylon.NylonObject;
 import nylon.nylonobjects.NylonFunction;
-import nylon.nylonobjects.NylonStack;
+import nylon.nylonobjects.NylonList;
 import nylon.parser.NylonParser;
 import parser.ParseException;
 import parser.Parser;
 import parser.StringIterator;
 
 import java.util.Iterator;
+import java.util.Stack;
 
 /**
  * Created by Aedan Smith.
@@ -27,14 +28,14 @@ public class ForLoopParser implements Parser<StringIterator, InlineFunction> {
 
         inlineFunction.functions.add(new NylonFunction() {
             @Override
-            public NylonObject apply(NylonStack stack) {
+            public NylonObject apply(Stack<NylonObject> stack) {
                 Iterator<NylonObject> iterator = stack.pop().toIterator(stack);
-                NylonStack returnStack = new NylonStack();
+                NylonList returnList = new NylonList();
                 while (iterator.hasNext()) {
                     stack.push(iterator.next());
-                    returnStack.addAll(wrapped.apply(stack).toStack(stack));
+                    returnList.addAll(wrapped.apply(stack).toList(stack));
                 }
-                return returnStack;
+                return returnList;
             }
 
             @Override

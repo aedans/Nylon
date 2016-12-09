@@ -1,10 +1,11 @@
 package nylon;
 
 import nylon.nylonobjects.NylonCharacter;
-import nylon.nylonobjects.NylonStack;
+import nylon.nylonobjects.NylonList;
 import nylon.parser.NylonParser;
 
 import java.util.List;
+import java.util.Stack;
 
 /**
  * Created by Aedan Smith.
@@ -12,12 +13,12 @@ import java.util.List;
 
 public class NylonRuntime implements Runnable {
     private InlineFunction main;
-    private NylonStack nylonStack = new NylonStack();
+    private Stack<NylonObject> nylonStack = new Stack<>();
 
     public NylonRuntime(String src, List<String> strings) {
         this.main = NylonParser.parse(src);
         for (String arg : strings) {
-            NylonStack string = new NylonStack();
+            NylonList string = new NylonList();
             for (char c : arg.toCharArray()) {
                 string.add(new NylonCharacter(c));
             }
@@ -28,8 +29,8 @@ public class NylonRuntime implements Runnable {
     @Override
     public void run() {
         this.main.apply(nylonStack);
-        if (nylonStack.size() != 0) {
-            System.out.println(nylonStack.peek());
+        for (NylonObject nylonObject : nylonStack) {
+            System.out.print(nylonObject);
         }
     }
 }

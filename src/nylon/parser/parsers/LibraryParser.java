@@ -1,6 +1,7 @@
 package nylon.parser.parsers;
 
 import nylon.InlineFunction;
+import nylon.NylonException;
 import nylon.parser.NylonParser;
 import parser.ParseException;
 import parser.Parser;
@@ -16,7 +17,7 @@ import java.util.HashMap;
  * Created by Aedan Smith.
  */
 
-public class LibParser implements Parser<StringIterator, InlineFunction> {
+public class LibraryParser implements Parser<StringIterator, InlineFunction> {
     public static HashMap<String, File> files = new HashMap<>();
 
     public static void build(File file, String s) {
@@ -24,7 +25,7 @@ public class LibParser implements Parser<StringIterator, InlineFunction> {
             if (f.isDirectory()) {
                 build(f, s + f.getName());
             } else {
-                LibParser.files.put(s + f.getName(), f);
+                LibraryParser.files.put(s + f.getName(), f);
             }
         }
     }
@@ -46,10 +47,12 @@ public class LibParser implements Parser<StringIterator, InlineFunction> {
                     break;
                 }
             }
-            File f = files.get(name);
+            File f = files.get(name + ".nl");
+            if (f == null)
+                throw new NylonException("Could not find STD Function \"" + name + "\"", this, in.getIndex());
 
             final String[] content = {""};
-            new BufferedReader(new FileReader(f)).lines().forEach(s -> content[0] += s);
+            new BufferedReader(new FileReader(f)).lines().forEach(s -> content[0] += s + "\n");
 
             inlineFunction.functions.add(NylonParser.parse(content[0]));
             return true;

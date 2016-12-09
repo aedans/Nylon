@@ -3,12 +3,13 @@ package nylon.nylonobjects;
 import nylon.NylonObject;
 
 import java.util.Iterator;
+import java.util.Stack;
 
 /**
  * Created by Aedan Smith.
  */
 
-public class NylonDouble implements NylonObject {
+public class NylonDouble extends NylonObject {
     private double d;
 
     public NylonDouble(double d) {
@@ -16,17 +17,17 @@ public class NylonDouble implements NylonObject {
     }
 
     @Override
-    public boolean toBoolean(NylonStack stack) {
+    public boolean toBoolean(Stack<NylonObject> stack) {
         return d != 0;
     }
 
     @Override
-    public double toDouble(NylonStack stack) {
+    public double toDouble(Stack<NylonObject> stack) {
         return d;
     }
 
     @Override
-    public Iterator<NylonObject> toIterator(NylonStack stack) {
+    public Iterator<NylonObject> toIterator(Stack<NylonObject> stack) {
         return new Iterator<NylonObject>() {
             double i = 0;
 
@@ -43,8 +44,8 @@ public class NylonDouble implements NylonObject {
     }
 
     @Override
-    public NylonStack toStack(NylonStack stack) {
-        return new NylonStack(this);
+    public NylonList toList(Stack<NylonObject> stack) {
+        return new NylonList(this);
     }
 
     @Override
@@ -55,5 +56,17 @@ public class NylonDouble implements NylonObject {
     @Override
     public String toString() {
         return String.valueOf(d);
+    }
+
+    @Override
+    public NylonObject concatenate(NylonObject object, Stack<NylonObject> stack) {
+        d += object.toDouble(stack);
+        return this;
+    }
+
+    @Override
+    public NylonObject subtract(NylonObject object, Stack<NylonObject> stack) {
+        d -= object.toDouble(stack);
+        return this;
     }
 }

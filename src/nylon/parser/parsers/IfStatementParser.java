@@ -4,13 +4,13 @@ import nylon.InlineFunction;
 import nylon.NylonObject;
 import nylon.nylonobjects.NylonDouble;
 import nylon.nylonobjects.NylonFunction;
-import nylon.nylonobjects.NylonStack;
 import nylon.parser.NylonParser;
 import parser.ParseException;
 import parser.Parser;
 import parser.StringIterator;
 
 import java.util.Objects;
+import java.util.Stack;
 
 /**
  * Created by Aedan Smith.
@@ -44,7 +44,7 @@ public class IfStatementParser implements Parser<StringIterator, InlineFunction>
 
         inlineFunction.functions.add(new NylonFunction() {
             @Override
-            public NylonObject apply(NylonStack stack) {
+            public NylonObject apply(Stack<NylonObject> stack) {
                 boolean b = false;
                 for (char c : ifs) {
                     switch (c) {
@@ -54,15 +54,21 @@ public class IfStatementParser implements Parser<StringIterator, InlineFunction>
                         case '¿':
                             b = !stack.peek().toBoolean(stack);
                             break;
-                        case '>':
-                            b = stack.get(stack.size() - 2).toDouble(stack) > stack.get(stack.size() - 1).toDouble(stack);
+                        case '>': {
+                            NylonObject o1 = stack.peek(), o2 = stack.get(stack.size() - 2);
+                            b = o2.toDouble(stack) > o1.toDouble(stack);
                             break;
-                        case '<':
-                            b = stack.get(stack.size() - 2).toDouble(stack) < stack.get(stack.size() - 1).toDouble(stack);
+                        }
+                        case '<': {
+                            NylonObject o1 = stack.peek(), o2 = stack.get(stack.size() - 2);
+                            b = o2.toDouble(stack) < o1.toDouble(stack);
                             break;
-                        case '=':
-                            b = Objects.equals(stack.get(stack.size() - 1), stack.get(stack.size() - 2));
+                        }
+                        case '=': {
+                            NylonObject o1 = stack.peek(), o2 = stack.get(stack.size() - 2);
+                            b = Objects.equals(o1, o2);
                             break;
+                        }
                     }
                     if (b)
                         break;

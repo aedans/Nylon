@@ -4,10 +4,12 @@ import nylon.InlineFunction;
 import nylon.NylonObject;
 import nylon.nylonobjects.NylonCharacter;
 import nylon.nylonobjects.NylonFunction;
-import nylon.nylonobjects.NylonStack;
+import nylon.nylonobjects.NylonList;
 import parser.ParseException;
 import parser.Parser;
 import parser.StringIterator;
+
+import java.util.Stack;
 
 /**
  * Created by Aedan Smith.
@@ -34,8 +36,8 @@ public class StringParser implements Parser<StringIterator, InlineFunction> {
         char[] finalS = s.toCharArray();
         inlineFunction.functions.add(new NylonFunction() {
             @Override
-            public NylonObject apply(NylonStack stack) {
-                NylonStack string = new NylonStack();
+            public NylonObject apply(Stack<NylonObject> stack) {
+                NylonList string = new NylonList();
                 for (char c : finalS) {
                     string.add(new NylonCharacter(c));
                 }

@@ -83,7 +83,7 @@ public class StringIterator implements Iterator<Character> {
     }
 
     public void skipWhitespace() {
-        while (peek() <= 32)
+        while (hasNext() && peek() <= 32)
             skip();
     }
 }

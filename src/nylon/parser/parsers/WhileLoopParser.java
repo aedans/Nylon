@@ -3,11 +3,12 @@ package nylon.parser.parsers;
 import nylon.InlineFunction;
 import nylon.NylonObject;
 import nylon.nylonobjects.NylonFunction;
-import nylon.nylonobjects.NylonStack;
 import nylon.parser.NylonParser;
 import parser.ParseException;
 import parser.Parser;
 import parser.StringIterator;
+
+import java.util.Stack;
 
 /**
  * Created by Aedan Smith.
@@ -25,7 +26,7 @@ public class WhileLoopParser implements Parser<StringIterator, InlineFunction> {
 
         inlineFunction.functions.add(new NylonFunction() {
             @Override
-            public NylonObject apply(NylonStack stack) {
+            public NylonObject apply(Stack<NylonObject> stack) {
                 while (wrapped.apply(stack).toBoolean(stack)) {
                 }
                 return wrapped;
