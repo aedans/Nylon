@@ -27,6 +27,22 @@ public class NylonDouble extends NylonObject {
     }
 
     @Override
+    public NylonObject toFunction(Stack<NylonObject> stack) {
+        return new NylonFunction() {
+            @Override
+            public NylonObject apply(Stack<NylonObject> stack) {
+                stack.add(new NylonDouble(d));
+                return stack.peek();
+            }
+
+            @Override
+            public String toString() {
+                return "PushNylonDouble(" + d + ")";
+            }
+        };
+    }
+
+    @Override
     public Iterator<NylonObject> toIterator(Stack<NylonObject> stack) {
         return new Iterator<NylonObject>() {
             double i = 0;

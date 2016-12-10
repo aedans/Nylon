@@ -1,2 +1,2 @@
-// Swaps the top two elements of the stack.
-(ÀÀúÁÁ)
+// Casts the top item of the stack to a character.
+~c

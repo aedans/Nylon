@@ -14,21 +14,26 @@ public abstract class NylonFunction extends NylonObject {
     public abstract NylonObject apply(Stack<NylonObject> stack);
 
     public boolean toBoolean(Stack<NylonObject> stack) {
-        return apply(stack).toDouble(stack) != 0;
+        return apply((Stack<NylonObject>) stack.clone()).toDouble(stack) != 0;
     }
 
     public double toDouble(Stack<NylonObject> stack) {
-        return apply(stack).toDouble(stack);
+        return apply((Stack<NylonObject>) stack.clone()).toDouble(stack);
     }
 
     @Override
     public NylonList toList(Stack<NylonObject> stack) {
-        return apply(stack).toList(stack);
+        return apply((Stack<NylonObject>) stack.clone()).toList(stack);
+    }
+
+    @Override
+    public NylonObject toFunction(Stack<NylonObject> stack) {
+        return this;
     }
 
     @Override
     public Iterator<NylonObject> toIterator(Stack<NylonObject> stack) {
-        return apply(stack).toIterator(stack);
+        return apply((Stack<NylonObject>) stack.clone()).toIterator(stack);
     }
 
     @Override

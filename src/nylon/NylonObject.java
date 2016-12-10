@@ -18,6 +18,8 @@ public abstract class NylonObject {
         return (char) toDouble(stack);
     }
 
+    public abstract NylonObject toFunction(Stack<NylonObject> stack);
+
     public abstract Iterator<NylonObject> toIterator(Stack<NylonObject> stack);
 
     public abstract NylonList toList(Stack<NylonObject> stack);

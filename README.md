@@ -102,6 +102,18 @@ loop value.
 - 'í': Creates a consuming, non-pushing for loop.
 - 'ï': Creates a non-consuming, non-pushing for loop.
 
+## Casting
+Casting is done via the character '~', followed by 'd' (double), 'c', (character), 'l' (list), or 'f' (function). Casting
+casts the top object of the stack to the given type, and each type has unique methods of casting.
+
+- d->c: The UTF-16 character with value d.
+- d->l: A list containing d.
+- d->f: A function that pushes d to the stack.
+- c->(anything): Creates a double with value c, then casts that to the target.
+- l->d|c: A double or character equal to the size of the list.
+- l->f: Attempts to create a string from the list, then compiles the string.
+- f->(anything): Calls the function, then get the return value and casts that to the target.
+
 ## Standard Library
 
 The Nylon Standard Library contains many useful functions for golfing. Functions can be accessed using any sequence of

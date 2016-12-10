@@ -1,6 +1,7 @@
 package nylon.nylonobjects;
 
 import nylon.NylonObject;
+import nylon.parser.NylonParser;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -98,6 +99,11 @@ public class NylonList extends NylonObject implements Collection<NylonObject> {
     @Override
     public double toDouble(Stack<NylonObject> stack) {
         return size();
+    }
+
+    @Override
+    public NylonObject toFunction(Stack<NylonObject> stack) {
+        return NylonParser.parse(this.toString());
     }
 
     @Override
