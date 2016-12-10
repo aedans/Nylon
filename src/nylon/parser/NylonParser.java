@@ -18,7 +18,6 @@ public class NylonParser extends LinkedParser<StringIterator, InlineFunction> {
                 new DoubleParser(),
                 new CharacterParser(),
                 new StringParser(),
-                new ListParser(),
                 new NylonFunctionParser(),
                 new WhileLoopParser(),
                 new ForLoopParser(),

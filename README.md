@@ -18,7 +18,7 @@ management difficult, as objects can be lost in the stack if the program is not 
 ## Constants
 
 Constants in Nylon are functions that take no arguments and push a constant to the stack. There are four constant types:
-Doubles, characters, lists, and functions. Booleans are be represented using 0/1. Constants are declared as follows:
+Doubles, characters, strings, and functions. Booleans are be represented using 0/1. Constants are declared as follows:
 
 Doubles:
 <pre>
@@ -33,15 +33,7 @@ Characters:
 '?
 </pre>
 
-Lists:
-<pre>
-{1.2 2344 134}
-{'a'b'c'd'e'f'g}
-{[abcd][2+][+-*/]}
-{{"abc"}{123}{[{}]}
-</pre>
-
-Strings (lists of characters):
+Strings:
 <pre>
 "abcdefg"
 "123\""
