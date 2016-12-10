@@ -69,4 +69,9 @@ public class NylonDouble extends NylonObject {
         d -= object.toDouble(stack);
         return this;
     }
+
+    @Override
+    public NylonObject clone() {
+        return new NylonDouble(d);
+    }
 }

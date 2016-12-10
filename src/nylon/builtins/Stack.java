@@ -59,8 +59,8 @@ public class Stack {
             @Override
             public NylonObject apply(java.util.Stack<NylonObject> stack) {
                 NylonObject nylonObject = stack.pop();
-                stack.add(nylonObject);
-                stack.add(nylonObject);
+                stack.add(nylonObject.clone());
+                stack.add(nylonObject.clone());
                 return nylonObject;
             }
         });

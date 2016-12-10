@@ -1,7 +1,5 @@
 package nylon;
 
-import nylon.nylonobjects.NylonCharacter;
-import nylon.nylonobjects.NylonList;
 import nylon.parser.NylonParser;
 
 import java.util.List;
@@ -16,14 +14,11 @@ public class NylonRuntime implements Runnable {
     private Stack<NylonObject> nylonStack = new Stack<>();
 
     public NylonRuntime(String src, List<String> strings) {
-        this.main = NylonParser.parse(src);
-        for (String arg : strings) {
-            NylonList string = new NylonList();
-            for (char c : arg.toCharArray()) {
-                string.add(new NylonCharacter(c));
-            }
-            nylonStack.add(string);
+        String n = "";
+        for (String string : strings) {
+            n += string + " ";
         }
+        this.main = NylonParser.parse(n + src);
     }
 
     @Override

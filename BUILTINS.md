@@ -1,3 +1,5 @@
+A list of builtins that are not discussed in README.md.
+
 ## Math
 - '+': Adds the top two objects of the stack.
 - '-': Subtracts the top two objects of the stack.

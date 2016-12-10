@@ -25,4 +25,13 @@ public abstract class NylonObject {
     public abstract NylonObject concatenate(NylonObject object, Stack<NylonObject> stack);
 
     public abstract NylonObject subtract(NylonObject object, Stack<NylonObject> stack);
+
+    @Override
+    public NylonObject clone() {
+        try {
+            return (NylonObject) super.clone();
+        } catch (Exception e) {
+            throw new NylonException("Internal Error: Could not clone object.", this);
+        }
+    }
 }

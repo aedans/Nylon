@@ -1,3 +1,5 @@
+A list of libraries and functions contained in the Nylon Standard Library.
+
 ## Libraries
 
 #### - C: Constants:
@@ -18,3 +20,6 @@
 - e: Adds all iterations of an object to the stack.
 - i: Increments the top item of the stack by 1.
 - z: Creates a list from the top n object of the stack.
+- TESt: Runs unit tests for the Nylon interpreter. If a line does not output the string "abcde", then the interpreter is
+likely broken. All updates to the Nylon repo must pass this test, or, if they change syntax, update the test to work with
+the new syntax.

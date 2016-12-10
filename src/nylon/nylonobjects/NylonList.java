@@ -1,6 +1,5 @@
 package nylon.nylonobjects;
 
-import nylon.NylonException;
 import nylon.NylonObject;
 
 import java.util.Collection;
@@ -13,7 +12,7 @@ import java.util.Vector;
  */
 
 public class NylonList extends NylonObject implements Collection<NylonObject> {
-    private Vector<NylonObject> vector = new Vector<>();
+    protected Vector<NylonObject> vector = new Vector<>();
 
     public NylonList() {
     }
@@ -136,11 +135,7 @@ public class NylonList extends NylonObject implements Collection<NylonObject> {
     }
 
     @Override
-    public Object clone() {
-        try {
-            return super.clone();
-        } catch (CloneNotSupportedException e) {
-            throw new NylonException("Internal Error: Could not clone List.", this);
-        }
+    public NylonObject clone() {
+        return super.clone();
     }
 }

@@ -69,4 +69,9 @@ public class NylonCharacter extends NylonObject {
     public String toString() {
         return String.valueOf(c);
     }
+
+    @Override
+    public NylonObject clone() {
+        return new NylonCharacter(c);
+    }
 }
