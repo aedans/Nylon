@@ -22,7 +22,7 @@ public class NylonList extends NylonObject implements Collection<NylonObject> {
         vector.add(object);
     }
 
-    public NylonList(Stack<NylonObject> stack) {
+    public NylonList(Collection<NylonObject> stack) {
         vector.addAll(stack);
     }
 
@@ -142,6 +142,6 @@ public class NylonList extends NylonObject implements Collection<NylonObject> {
 
     @Override
     public NylonObject clone() {
-        return super.clone();
+        return new NylonList((Collection<NylonObject>) vector.clone());
     }
 }
