@@ -34,7 +34,7 @@ public class DoubleParser implements Parser<StringIterator, InlineFunction> {
 
             @Override
             public String toString() {
-                return "PushNylonDouble(" + d + ")";
+                return "PushNylonDouble(\"" + d + "\")";
             }
         });
 

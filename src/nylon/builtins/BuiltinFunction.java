@@ -15,6 +15,6 @@ public abstract class BuiltinFunction extends NylonFunction {
 
     @Override
     public String toString() {
-        return "BuiltinFunction(" + c + ")";
+        return "BuiltinFunction('" + c + "')";
     }
 }

@@ -57,6 +57,6 @@ tt*3-ctt*2-ctt*1-ctt*ctt*1+c                '
 // C library: No tests.
 
 // U library
-"edcba"Ur                               '
-"bcdea"Uo                               '
-"caedb"Us                               '
+"edcba"Ur                                   '
+"bcdea"Uo                                   '
+"caedb"Us                                   '

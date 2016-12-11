@@ -29,6 +29,11 @@ public class CaptureParser implements Parser<StringIterator, InlineFunction> {
                 stack.addAll(inlineFunction1.functions);
                 return inlineFunction1;
             }
+
+            @Override
+            public String toString() {
+                return "Capture(" + inlineFunction1.functions + ")";
+            }
         });
         return true;
     }

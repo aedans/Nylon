@@ -14,14 +14,14 @@ public class NylonParser extends LinkedParser<StringIterator, InlineFunction> {
 
     public NylonParser() {
         super(new DefaultParser(),
-                new CommentParser(),
-                new DoubleParser(),
                 new CharacterParser(),
                 new StringParser(),
                 new NylonFunctionParser(),
                 new WhileLoopParser(),
                 new CastParser(),
                 new CaptureParser(),
+                new CommentParser(),
+                new DoubleParser(),
                 new ForLoopParser(),
                 new IfStatementParser(),
                 new BuiltinParser(),

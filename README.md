@@ -65,20 +65,6 @@ execute. '!' is used as an effective else for if statements.
 - '<': If the second from the top of the stack is less than the top.
 - '=': If the top of the stack is equal to the second from the top.
 
-Example 1
-<pre>
-="true"!"false"
-
-Yields true if the inputs are equal, false otherwise.
-</pre>
-
-Example 2
-<pre>
->="more"!"less"
-
-Yields true if the second input is greater than or equal to the first input, false otherwise.
-</pre>
-
 ## While Loops
 
 While loops are function modifiers that cause a function to be called as long as a condition is true. While loops are

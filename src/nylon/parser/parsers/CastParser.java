@@ -43,6 +43,11 @@ public class CastParser implements Parser<StringIterator, InlineFunction> {
                 }
                 return stack.peek();
             }
+
+            @Override
+            public String toString() {
+                return "CastToObject('" + c + "')";
+            }
         });
         return true;
     }
