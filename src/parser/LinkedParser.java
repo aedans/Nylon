@@ -44,8 +44,9 @@ public class LinkedParser<I extends Iterator, T> implements Parser<I, T> {
     @Override
     public boolean parse(T t, I in) throws ParseException {
         for (int i = 0, parsersSize = parsers.size(); i < parsersSize; i++) {
-            if (parsers.get(i).parse(t, in))
+            if (parsers.get(i).parse(t, in)) {
                 return true;
+            }
         }
         return defaultParser.parse(t, in);
     }

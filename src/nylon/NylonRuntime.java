@@ -20,7 +20,7 @@ public class NylonRuntime implements Runnable {
         }
         long t = System.nanoTime();
         this.main = NylonParser.parse(n + src);
-        System.out.printf("Compiled in: %f milliseconds\n", (double) (System.nanoTime() - t) / 1000000d);
+        System.out.printf("Program compiled in %f milliseconds\n", (double) (System.nanoTime() - t) / 1000000d);
     }
 
     @Override

@@ -4,7 +4,7 @@ challenges.
 The Nylon interpreter can be used by downloading and running the jar via your OS' terminal. Use
 java -jar [jarpath] [library-path] [filename] to run a file with the Nylon interpreter.
 
-Also tkaden4/Cylon for a C implementation of Nylon.
+Also see tkaden4/Cylon for a C implementation of Nylon.
 
 # Definitions
 

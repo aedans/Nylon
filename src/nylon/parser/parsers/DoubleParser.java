@@ -20,9 +20,11 @@ public class DoubleParser implements Parser<StringIterator, InlineFunction> {
         if (!in.hasNext() || !(in.peek() >= '0' && in.peek() <= '9'))
             return false;
 
-        double d = Double.parseDouble(in.until(
-                sin -> sin.hasNext() && ((sin.peek() >= '0' && sin.peek() <= '9') || sin.peek() == '.' || sin.peek() == 'E')
-        ));
+        String s = "";
+        while (in.hasNext() && ((in.peek() >= '0' && in.peek() <= '9') || in.peek() == '.' || in.peek() == 'E')) {
+            s += in.next();
+        }
+        double d = Double.parseDouble(s);
 
         inlineFunction.functions.add(new NylonFunction() {
             @Override

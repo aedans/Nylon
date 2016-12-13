@@ -5,8 +5,6 @@ import parser.ParseException;
 import parser.Parser;
 import parser.StringIterator;
 
-import java.util.Objects;
-
 /**
  * Created by Aedan Smith.
  */
@@ -14,7 +12,7 @@ import java.util.Objects;
 public class CommentParser implements Parser<StringIterator, InlineFunction> {
     @Override
     public boolean parse(InlineFunction inlineFunction, StringIterator in) throws ParseException {
-        if (!in.hasNext(2) || !Objects.equals(in.peekString(2), "//"))
+        if (!in.hasNext(2) || !(in.peek() == '/' && in.peek(1) == '/'))
             return false;
 
         in.until('\n');
