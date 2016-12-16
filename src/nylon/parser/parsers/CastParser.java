@@ -40,6 +40,9 @@ public class CastParser implements Parser<StringIterator, InlineFunction> {
                     case 'l':
                         stack.add(stack.pop().toList(stack));
                         break;
+                    case 's':
+                        stack.add(stack.pop().toNylonString(stack));
+                        break;
                 }
                 return stack.peek();
             }

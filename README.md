@@ -89,8 +89,8 @@ loop value.
 - 'ï': Creates a non-consuming, non-pushing for loop.
 
 ## Casting
-Casting is done via the character '~', followed by 'd' (double), 'c', (character), 'l' (list), or 'f' (function). Casting
-casts the top object of the stack to the given type, and each type has unique methods of casting.
+Casting is done via the character '~', followed by 'd' (double), 'c', (character), 'l' (list), 's' (string), or
+'f' (function). Casting casts the top object of the stack to the given type, and each type has unique methods of casting.
 
 - d->c: The UTF-16 character with value d.
 - d->l: A list containing d.
@@ -106,6 +106,9 @@ The Nylon Standard Library contains many useful functions for golfing. Functions
 alphabetic letters. Capital letters declare the library, while lowercase letters declare the function. Function names
 must be one single lowercase letter, but library names may be any number of capital letters. This capitalization allows
 the interpreter to parse statements like "UsUreUoc" without needing separators.
+
+Many standard library functions, such as "Fn" (File New) are implemented in the interpreter. These functions start
+with the line "// #Interpreter Function"; the rest of the function — usually an error message — should be ignored.
 
 Explanations of methods in the Nylon Standard Library are described in STDL.md.
 

@@ -11,7 +11,7 @@ import java.util.LinkedList;
  * Created by Aedan Smith.
  */
 
-public class Stack {
+public final class Stack {
     private static LinkedList<java.util.Stack<NylonObject>> stacks = new LinkedList<>();
 
     public static void build() {

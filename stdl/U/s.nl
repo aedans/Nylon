@@ -1,5 +1,5 @@
 // Sorts a list.
-// @Req: c, d, e
+// #Req: d, e, s
 (À(Àe
     Ïd
     í[

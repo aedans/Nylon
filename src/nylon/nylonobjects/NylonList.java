@@ -117,6 +117,15 @@ public class NylonList extends NylonObject implements Collection<NylonObject> {
     }
 
     @Override
+    public NylonObject toNylonString(Stack<NylonObject> stack) {
+        String s = "";
+        for (NylonObject nylonObject : this) {
+            s += nylonObject.toString();
+        }
+        return new NylonString(s.toCharArray());
+    }
+
+    @Override
     public NylonObject concatenate(NylonObject object, Stack<NylonObject> stack) {
         this.addAll(object.toList(stack));
         return this;
@@ -132,10 +141,7 @@ public class NylonList extends NylonObject implements Collection<NylonObject> {
     public String toString() {
         String s = "";
         for (NylonObject nylonObject : this) {
-            if (nylonObject.getClass() == NylonCharacter.class)
-                s += nylonObject;
-            else
-                s += nylonObject + "\n";
+            s += nylonObject + "\n";
         }
         return s;
     }

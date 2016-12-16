@@ -1,4 +1,5 @@
 // Unit tests for the Nylon interpreter. If a line does not output the string "abcde", then the interpreter is likely broken.
+// All updates to the Nylon repo must pass these tests, or, if they change syntax, update this test to work with the new syntax.
 
 // Constant tests
 'a'b'c'd'e                                  '
@@ -23,10 +24,10 @@
 
 // Stack
 "abc"(À"de"+Á)                              '
-('a'b'c'd'e_$Á)                             '
+('a'b'c'd'e_$Á)~s                           '
 "abcde":`                                   '
-('b'c'd'e'aù_$Á)                            '
-('e'a'b'c'dú_$Á)                            '
+('b'c'd'e'aù_$Á)~s                          '
+('e'a'b'c'dú_$Á)~s                          '
 // TODO: Length of stack builtin
 
 // If statement tests
@@ -52,11 +53,13 @@
 '`i'ai'bi'ci'di                             '
 'a'b'c'e'ds                                 '
 tt*3-ctt*2-ctt*1-ctt*ctt*1+c                '
-'a'b'c'd'e5z                                '
+'a'b'c'd'e5z~s                              '
 
 // C library: No tests.
 
+// F Library: No tests.
+
 // U library
-"edcba"Ur                                   '
-"bcdea"Uo                                   '
-"caedb"Us                                   '
+"edcba"Ur~s                                 '
+"bcdea"Uo~s                                 '
+"caedb"Us~s                                 '

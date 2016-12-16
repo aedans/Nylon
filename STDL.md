@@ -10,6 +10,11 @@ A list of libraries and functions contained in the Nylon Standard Library.
 - Cp: Literal pi = 3.141592653589793.
 - Ct: Literal 1000.
 
+#### - F: Files:
+- Fc: Creates a file with path equal to the top of the stack.
+- Fd: Creates a directory with path equal to the top of the stack.
+- Fn: Creates a new file object from the top of the stack.
+
 #### - U: Utilities:
 - Uo: Rotates a list.
 - Up: Permutations of a list. // TODO

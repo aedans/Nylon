@@ -2,6 +2,7 @@ package nylon.parser.parsers;
 
 import nylon.InlineFunction;
 import nylon.NylonException;
+import nylon.nylonobjects.NylonFunction;
 import nylon.parser.NylonParser;
 import parser.ParseException;
 import parser.Parser;
@@ -19,33 +20,34 @@ import java.util.function.Supplier;
  */
 
 public class LibraryParser implements Parser<StringIterator, InlineFunction> {
-    public static HashMap<String, Supplier<InlineFunction>> files = new HashMap<>();
+    public static HashMap<String, Supplier<NylonFunction>> files = new HashMap<>();
 
     public static void build(File file, String s) {
         for (File f : file.listFiles()) {
             if (f.isDirectory()) {
                 build(f, s + f.getName());
             } else {
-                LibraryParser.files.put(s + f.getName(), new Supplier<InlineFunction>() {
-                    private InlineFunction function = null;
+                if (!LibraryParser.files.containsKey(s + f.getName()))
+                    LibraryParser.files.put(s + f.getName(), new Supplier<NylonFunction>() {
+                        private InlineFunction function = null;
 
-                    @Override
-                    public InlineFunction get() {
-                        if (function == null) {
-                            try {
-                                final StringBuilder content = new StringBuilder();
-                                new BufferedReader(new FileReader(f)).lines().forEach(s -> {
-                                    content.append(s);
-                                    content.append('\n');
-                                });
-                                return function = NylonParser.parse(content.toString());
-                            } catch (IOException e) {
-                                throw new NylonException(e.getMessage());
-                            }
-                        } else
-                            return function;
-                    }
-                });
+                        @Override
+                        public InlineFunction get() {
+                            if (function == null) {
+                                try {
+                                    final StringBuilder content = new StringBuilder();
+                                    new BufferedReader(new FileReader(f)).lines().forEach(s -> {
+                                        content.append(s);
+                                        content.append('\n');
+                                    });
+                                    return function = NylonParser.parse(content.toString());
+                                } catch (IOException e) {
+                                    throw new NylonException(e.getMessage());
+                                }
+                            } else
+                                return function;
+                        }
+                    });
             }
         }
     }
@@ -67,7 +69,7 @@ public class LibraryParser implements Parser<StringIterator, InlineFunction> {
             }
         }
 
-        Supplier<InlineFunction> function = files.get(name + ".nl");
+        Supplier<NylonFunction> function = files.get(name + ".nl");
         if (function == null)
             throw new NylonException("Could not find STDL Function with name \"" + name + "\"", this, in.getIndex());
 

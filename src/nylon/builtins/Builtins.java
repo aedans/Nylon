@@ -8,5 +8,6 @@ public final class Builtins {
     public static void build() {
         Math.build();
         Stack.build();
+        FileLibrary.build();
     }
 }
