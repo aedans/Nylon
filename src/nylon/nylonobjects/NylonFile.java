@@ -46,7 +46,12 @@ public class NylonFile extends NylonObject {
 
                     @Override
                     public NylonObject next() {
-                        return new NylonFile(files[i++]);
+                        return new NylonFile(files[i++]) {
+                            @Override
+                            public String toString() {
+                                return super.toString();
+                            }
+                        };
                     }
                 };
             } else {
