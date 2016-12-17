@@ -11,9 +11,11 @@ A list of libraries and functions contained in the Nylon Standard Library.
 - Ct: Literal 1000.
 
 #### - F: Files:
+- Fa: Appends the top of the stack to a file.
 - Fc: Creates a file with path equal to the top of the stack.
 - Fd: Creates a directory with path equal to the top of the stack.
 - Fn: Creates a new file object from the top of the stack.
+- Fw: Writes the top of the stack to a file.
 
 #### - U: Utilities:
 - Uo: Rotates a list.
@@ -31,4 +33,4 @@ A list of libraries and functions contained in the Nylon Standard Library.
 - z: Creates a list from the top n object of the stack.
 - TESt: Runs unit tests for the Nylon interpreter. If a line does not output the string "abcde", then the interpreter is
 likely broken. All updates to the Nylon repo must pass this test, or, if they change syntax, update the test to work with
-the new syntax.
+the new syntax. All new standard library functions must add a line to the unit test to verify it working.

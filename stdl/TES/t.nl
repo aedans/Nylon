@@ -1,5 +1,6 @@
 // Unit tests for the Nylon interpreter. If a line does not output the string "abcde", then the interpreter is likely broken.
 // All updates to the Nylon repo must pass these tests, or, if they change syntax, update this test to work with the new syntax.
+// All new standard library functions must add a line to these tests to verify it working.
 
 // Constant tests
 'a'b'c'd'e                                  '
@@ -7,7 +8,7 @@
 ["abcde"]                                   '
 
 // Casting tests
-// TODO: d&c->l, l->d&c
+// TODO: d&c->l, l->d&c, l->s
 97~c98~c99~c100~c101~c                      '
 97~f~c98~f~c99~f~c100~f~c101~f~c            '
 "\"abcde"~f~l                               // No ' here because the list should print a trailing newline.
@@ -18,7 +19,7 @@
 "abc""de"+                                  '
 101 4-~c101 3-~c101 2-~c101 1-~c101~c       '
 "abcdefg""fg"-                              '
-// TODO: Multiply strings.
+// TODO: Multiply strings
 9 11*2-~c9 11*1-~c9 11*~c10 10*~c9 11*2+~c  '
 970 10/~c980 10/~c990 10/~c500 5/~c202 2/~c '
 
@@ -57,7 +58,7 @@ tt*3-ctt*2-ctt*1-ctt*ctt*1+c                '
 
 // C library: No tests.
 
-// F Library: No tests.
+// F Library: No tests, due to non-deterministic output.
 
 // U library
 "edcba"Ur~s                                 '

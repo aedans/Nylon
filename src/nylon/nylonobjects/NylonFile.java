@@ -3,10 +3,9 @@ package nylon.nylonobjects;
 import nylon.NylonException;
 import nylon.NylonObject;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Iterator;
 import java.util.Stack;
 
@@ -56,7 +55,7 @@ public class NylonFile extends NylonObject {
                 };
             } else {
                 return new Iterator<NylonObject>() {
-                    Iterator<String> lines = new BufferedReader(new FileReader(file)).lines().iterator();
+                    Iterator<String> lines = Files.lines(file.toPath()).iterator();
 
                     @Override
                     public boolean hasNext() {
@@ -65,7 +64,7 @@ public class NylonFile extends NylonObject {
 
                     @Override
                     public NylonObject next() {
-                        return new NylonString((lines.next() + '\n').toCharArray());
+                        return new NylonString((lines.next()).toCharArray());
                     }
                 };
             }

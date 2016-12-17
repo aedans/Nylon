@@ -25,9 +25,11 @@ public class NylonRuntime implements Runnable {
 
     @Override
     public void run() {
+        long t = System.nanoTime();
         this.main.apply(nylonStack);
         for (NylonObject nylonObject : nylonStack) {
             System.out.print(nylonObject);
         }
+        System.out.printf("\nProgram ran in %f milliseconds\n", (double) (System.nanoTime() - t) / 1000000d);
     }
 }
