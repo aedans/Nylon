@@ -25,8 +25,7 @@ public class ForLoopParser implements Parser<StringIterator, InlineFunction> {
         boolean consume = in.peek() == 'î' || in.peek() == 'í';
         in.skip();
 
-        InlineFunction wrapped = new InlineFunction();
-        NylonParser.nylonParser.parse(wrapped, in);
+        NylonFunction wrapped = NylonParser.parse(in);
 
         inlineFunction.functions.add(new NylonFunction() {
             @Override
@@ -45,7 +44,7 @@ public class ForLoopParser implements Parser<StringIterator, InlineFunction> {
 
             @Override
             public String toString() {
-                return "ForLoop(" + wrapped + ")";
+                return "ForLoop[" + wrapped + "]";
             }
         });
 

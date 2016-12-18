@@ -15,15 +15,46 @@ public class InlineFunction extends NylonFunction {
 
     @Override
     public NylonObject apply(Stack<NylonObject> stack) {
-        NylonList list = new NylonList();
+        NylonList ret = new NylonList();
         for (NylonFunction function : functions) {
-            list.add(function.apply(stack));
+            ret.add(function.apply(stack));
         }
-        return list;
+        return ret;
     }
 
     @Override
     public String toString() {
-        return "InlineFunction(" + functions.toString() + ")";
+        if (functions.size() == 0)
+            return "EmptyFunction";
+
+        String s = "InlineFunction" + functions.toString(), v = "";
+        int tDepth = 0;
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == '[') {
+                v += s.charAt(i);
+                tDepth++;
+                v += '\n';
+                for (int k = 0; k < tDepth; k++) {
+                    v += '\t';
+                }
+            } else if (s.charAt(i) == ']') {
+                tDepth--;
+                v += '\n';
+                for (int k = 0; k < tDepth; k++) {
+                    v += '\t';
+                }
+                v += s.charAt(i);
+            } else if (s.charAt(i) == ',') {
+                v += s.charAt(i);
+                v += '\n';
+                for (int k = 0; k < tDepth; k++) {
+                    v += '\t';
+                }
+                i++;
+            } else if (s.charAt(i) != '\n' && s.charAt(i) != '\t') {
+                v += s.charAt(i);
+            }
+        }
+        return v;
     }
 }

@@ -21,18 +21,17 @@ public class CaptureParser implements Parser<StringIterator, InlineFunction> {
             return false;
         in.skip();
 
-        InlineFunction inlineFunction1 = new InlineFunction();
-        NylonParser.nylonParser.parse(inlineFunction1, in);
+        NylonFunction capture = NylonParser.parse(in);
         inlineFunction.functions.add(new NylonFunction() {
             @Override
             public NylonObject apply(Stack<NylonObject> stack) {
-                stack.addAll(inlineFunction1.functions);
-                return inlineFunction1;
+                stack.add(capture);
+                return capture;
             }
 
             @Override
             public String toString() {
-                return "Capture(" + inlineFunction1.functions + ")";
+                return "Capture[" + capture + "]";
             }
         });
         return true;

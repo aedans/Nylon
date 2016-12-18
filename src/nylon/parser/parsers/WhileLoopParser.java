@@ -3,6 +3,7 @@ package nylon.parser.parsers;
 import nylon.InlineFunction;
 import nylon.NylonObject;
 import nylon.nylonobjects.NylonFunction;
+import nylon.nylonobjects.NylonList;
 import nylon.parser.NylonParser;
 import parser.ParseException;
 import parser.Parser;
@@ -21,20 +22,22 @@ public class WhileLoopParser implements Parser<StringIterator, InlineFunction> {
             return false;
         in.skip();
 
-        InlineFunction wrapped = new InlineFunction();
-        NylonParser.nylonParser.parse(wrapped, in);
+        NylonFunction test = NylonParser.parse(in);
+        NylonFunction wrapped = NylonParser.parse(in);
 
         inlineFunction.functions.add(new NylonFunction() {
             @Override
             public NylonObject apply(Stack<NylonObject> stack) {
-                while (wrapped.apply(stack).toBoolean(stack)) {
+                NylonList ret = new NylonList();
+                while (test.apply(stack).toBoolean(stack)) {
+                    ret.add(wrapped.apply(stack));
                 }
-                return wrapped;
+                return ret;
             }
 
             @Override
             public String toString() {
-                return "WhileLoop(" + wrapped + ")";
+                return "While[" + test + "]Do[" + wrapped + "]";
             }
         });
 

@@ -22,6 +22,8 @@
 // TODO: Multiply strings
 9 11*2-~c9 11*1-~c9 11*~c10 10*~c9 11*2+~c  '
 970 10/~c980 10/~c990 10/~c500 5/~c202 2/~c '
+10 2^3-~c10 2^2-~c10 2^1-~c10 2^~c10 2^1+~c '
+// TODO: Modulo test
 
 // Stack
 "abc"(À"de"+Á)                              '
@@ -64,6 +66,7 @@ tt*3-ctt*2-ctt*1-ctt*ctt*1+c                '
 // F Library: No tests, due to non-deterministic output.
 
 // U library
+// TODO: Ub test.
 "edcba"Ur~s                                 '
 "bcdea"Uo~s                                 '
 "caedb"Us~s                                 '

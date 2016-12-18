@@ -34,6 +34,9 @@ public class CastParser implements Parser<StringIterator, InlineFunction> {
                     case 'd':
                         stack.add(new NylonDouble(stack.pop().toDouble(stack)));
                         break;
+                    case 'i':
+                        stack.add(new NylonDouble((int) stack.pop().toDouble(stack)));
+                        break;
                     case 'f':
                         stack.add(stack.pop().toFunction(stack));
                         break;

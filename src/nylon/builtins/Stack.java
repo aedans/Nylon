@@ -20,7 +20,7 @@ public final class Stack {
             public NylonObject apply(java.util.Stack<NylonObject> stack) {
                 Stack.stacks.push((java.util.Stack<NylonObject>) stack.clone());
                 stack.clear();
-                return Stack.stacks.peek().peek();
+                return Stack.stacks.peek().isEmpty() ? null : Stack.stacks.peek().peek();
             }
         });
         BuiltinParser.builtins.put(')', new BuiltinFunction(')') {
@@ -28,7 +28,7 @@ public final class Stack {
             public NylonObject apply(java.util.Stack<NylonObject> stack) {
                 stack.clear();
                 stack.addAll(Stack.stacks.pop());
-                return stack.peek();
+                return stack.isEmpty() ? null : stack.peek();
             }
         });
         BuiltinParser.builtins.put('_', new BuiltinFunction('_') {

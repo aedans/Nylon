@@ -48,5 +48,23 @@ public final class Math {
                 return nylonDouble;
             }
         });
+        BuiltinParser.builtins.put('^', new BuiltinFunction('^') {
+            @Override
+            public NylonObject apply(Stack<NylonObject> stack) {
+                NylonObject n2 = stack.pop(), n1 = stack.pop();
+                NylonDouble nylonDouble = new NylonDouble(java.lang.Math.pow(n1.toDouble(stack), n2.toDouble(stack)));
+                stack.add(nylonDouble);
+                return nylonDouble;
+            }
+        });
+        BuiltinParser.builtins.put('%', new BuiltinFunction('%') {
+            @Override
+            public NylonObject apply(Stack<NylonObject> stack) {
+                NylonObject n2 = stack.pop(), n1 = stack.pop();
+                NylonDouble nylonDouble = new NylonDouble(n1.toDouble(stack) % n2.toDouble(stack));
+                stack.add(nylonDouble);
+                return nylonDouble;
+            }
+        });
     }
 }

@@ -20,7 +20,7 @@ import java.util.Stack;
 
 public final class FileLibrary {
     public static void build() {
-        LibraryParser.files.put("Fa.nl", () -> new LibraryFunction("Fa") {
+        LibraryParser.files.put("Fa.nl", () -> new LibraryFunction("Fa.nl") {
             @Override
             public NylonObject apply(Stack<NylonObject> stack) {
                 try {
@@ -32,7 +32,7 @@ public final class FileLibrary {
                 }
             }
         });
-        LibraryParser.files.put("Fc.nl", () -> new LibraryFunction("Fc") {
+        LibraryParser.files.put("Fc.nl", () -> new LibraryFunction("Fc.nl") {
             @Override
             public NylonObject apply(Stack<NylonObject> stack) {
                 try {
@@ -44,7 +44,7 @@ public final class FileLibrary {
                 }
             }
         });
-        LibraryParser.files.put("Fd.nl", () -> new LibraryFunction("Fd") {
+        LibraryParser.files.put("Fd.nl", () -> new LibraryFunction("Fd.nl") {
             @Override
             public NylonObject apply(Stack<NylonObject> stack) {
                 File file = new File(stack.peek().toString());
@@ -52,14 +52,14 @@ public final class FileLibrary {
                 return new NylonFile(file);
             }
         });
-        LibraryParser.files.put("Fn.nl", () -> new LibraryFunction("Fn") {
+        LibraryParser.files.put("Fn.nl", () -> new LibraryFunction("Fn.nl") {
             @Override
             public NylonObject apply(Stack<NylonObject> stack) {
                 stack.add(new NylonFile(new File(stack.pop().toString())));
                 return stack.peek();
             }
         });
-        LibraryParser.files.put("Fw.nl", () -> new LibraryFunction("Fw") {
+        LibraryParser.files.put("Fw.nl", () -> new LibraryFunction("Fw.nl") {
             @Override
             public NylonObject apply(Stack<NylonObject> stack) {
                 try {

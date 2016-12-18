@@ -18,6 +18,7 @@ A list of libraries and functions contained in the Nylon Standard Library.
 - Fw: Writes the top of the stack to a file.
 
 #### - U: Utilities:
+- Ub: Returns the binary representation of a number as a list.
 - Uo: Rotates a list.
 - Up: Permutations of a list. // TODO
 - Ur: Reverses a list.
@@ -30,6 +31,7 @@ A list of libraries and functions contained in the Nylon Standard Library.
 - i: Increments the top item of the stack by 1.
 - s: Swaps the top two items of the stack.
 - t: Literal 10.
+- v: Literal empty function.
 - z: Creates a list from the top n object of the stack.
 - TESt: Runs unit tests for the Nylon interpreter. If a line does not output the string "abcde", then the interpreter is
 likely broken. All updates to the Nylon repo must pass this test, or, if they change syntax, update the test to work with

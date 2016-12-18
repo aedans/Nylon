@@ -42,7 +42,7 @@ public class StringParser implements Parser<StringIterator, InlineFunction> {
 
             @Override
             public String toString() {
-                return "PushNylonString(\"" + new String(finalS) + "\")";
+                return "PushNylonString(\"" + new String(finalS).replaceAll("\n", "\\n") + "\")";
             }
         });
 

@@ -2,6 +2,8 @@ package nylon.parser.parsers;
 
 import nylon.InlineFunction;
 import nylon.NylonException;
+import nylon.NylonObject;
+import nylon.builtins.LibraryFunction;
 import nylon.nylonobjects.NylonFunction;
 import nylon.parser.NylonParser;
 import parser.ParseException;
@@ -13,6 +15,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Stack;
 import java.util.function.Supplier;
 
 /**
@@ -29,10 +32,10 @@ public class LibraryParser implements Parser<StringIterator, InlineFunction> {
             } else {
                 if (!LibraryParser.files.containsKey(s + f.getName()))
                     LibraryParser.files.put(s + f.getName(), new Supplier<NylonFunction>() {
-                        private InlineFunction function = null;
+                        private LibraryFunction function = null;
 
                         @Override
-                        public InlineFunction get() {
+                        public LibraryFunction get() {
                             if (function == null) {
                                 try {
                                     final StringBuilder content = new StringBuilder();
@@ -40,12 +43,24 @@ public class LibraryParser implements Parser<StringIterator, InlineFunction> {
                                         content.append(s);
                                         content.append('\n');
                                     });
-                                    return function = NylonParser.parse(content.toString());
+                                    InlineFunction inlineFunction = NylonParser.parse(content.toString());
+                                    return function = new LibraryFunction(s + f.getName()) {
+                                        @Override
+                                        public NylonObject apply(Stack<NylonObject> stack) {
+                                            return inlineFunction.apply(stack);
+                                        }
+
+                                        @Override
+                                        public String toString() {
+                                            return super.toString() + inlineFunction.toString().substring(14);
+                                        }
+                                    };
                                 } catch (IOException e) {
                                     throw new NylonException(e.getMessage());
                                 }
-                            } else
+                            } else {
                                 return function;
+                            }
                         }
                     });
             }

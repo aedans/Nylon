@@ -1,6 +1,7 @@
 package nylon.parser;
 
 import nylon.InlineFunction;
+import nylon.nylonobjects.NylonFunction;
 import nylon.parser.parsers.*;
 import parser.LinkedParser;
 import parser.StringIterator;
@@ -33,5 +34,15 @@ public class NylonParser extends LinkedParser<StringIterator, InlineFunction> {
         InlineFunction inlineFunction = new InlineFunction();
         nylonParser.parse(new StringIterator(s), inlineFunction);
         return inlineFunction;
+    }
+
+    public static NylonFunction parse(StringIterator s) {
+        InlineFunction inlineFunction = new InlineFunction();
+        nylonParser.parse(inlineFunction, s);
+        if (inlineFunction.functions.size() != 0) {
+            return inlineFunction.functions.get(0);
+        } else {
+            return new InlineFunction();
+        }
     }
 }

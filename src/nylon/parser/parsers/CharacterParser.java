@@ -33,7 +33,7 @@ public class CharacterParser implements Parser<StringIterator, InlineFunction> {
 
             @Override
             public String toString() {
-                return "PushNylonCharacter('" + c + "')";
+                return "PushNylonCharacter('" + (c == '\n' ? "\\n" : c) + "')";
             }
         });
 

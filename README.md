@@ -89,8 +89,9 @@ loop value.
 - 'ï': Creates a non-consuming, non-pushing for loop.
 
 ## Casting
-Casting is done via the character '~', followed by 'd' (double), 'c', (character), 'l' (list), 's' (string), or
-'f' (function). Casting casts the top object of the stack to the given type, and each type has unique methods of casting.
+Casting is done via the character '~', followed by 'd' (double), 'i' (int), 'c', (character), 'l' (list), 's' (string),
+or 'f' (function). Casting casts the top object of the stack to the given type, and each type has unique methods of
+casting.
 
 - d->c: The UTF-16 character with value d.
 - d->l: A list containing d.

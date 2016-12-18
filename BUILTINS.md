@@ -4,7 +4,9 @@ A list of builtins that are not discussed in README.md.
 - '+': Adds the top two objects of the stack.
 - '-': Subtracts the top two objects of the stack.
 - '*': Multiplies the top two objects of the stack.
-- '/': Divides the top two object of the stack.
+- '/': Divides the top two objects of the stack.
+- '^': Exponentiates the top two objects of the stack.
+- '%': Adds the remainder of the top two objects of the stack to the stack.
 
 ## Stack Manipulation
 - '(': Shadows the current stack with a new stack.

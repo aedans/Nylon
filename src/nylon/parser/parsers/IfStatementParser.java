@@ -34,14 +34,14 @@ public class IfStatementParser implements Parser<StringIterator, InlineFunction>
                         || in.peek() == '<'
                         || in.peek() == '=')).toCharArray();
 
-        InlineFunction ifTrue = new InlineFunction();
-        NylonParser.nylonParser.parse(ifTrue, in);
+        NylonFunction ifTrue = NylonParser.parse(in);
 
         in.skipWhitespace();
-        InlineFunction ifFalse = new InlineFunction();
+        NylonFunction ifFalse = new InlineFunction();
         if (in.hasNext() && in.peek() == '!')
-            NylonParser.nylonParser.parse(ifFalse, in);
+            ifFalse = NylonParser.parse(in);
 
+        NylonFunction finalIfFalse = ifFalse;
         inlineFunction.functions.add(new NylonFunction() {
             @Override
             public NylonObject apply(Stack<NylonObject> stack) {
@@ -77,14 +77,14 @@ public class IfStatementParser implements Parser<StringIterator, InlineFunction>
                     ifTrue.apply(stack);
                     return new NylonDouble(1);
                 } else {
-                    ifFalse.apply(stack);
+                    finalIfFalse.apply(stack);
                     return new NylonDouble(0);
                 }
             }
 
             @Override
             public String toString() {
-                return "If[" + new String(ifs) + "](" + ifTrue + ")Else(" + ifFalse + ")";
+                return "If[" + new String(ifs) + "]Then[" + ifTrue + "]Else[" + finalIfFalse + "]";
             }
         });
 
