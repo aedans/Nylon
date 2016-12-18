@@ -23,8 +23,8 @@ A list of builtins that are not discussed in README.md.
 (3rd on the stack, 2nd on the stack). "Painting" creates two grids from both of the strings, translates the string
 to paint by (x, y), then overrides all characters on the string being painted over with the characters at the same
 points as the paint.
-Example:
 <pre>
+Example:
 "|----|
 |    |
 |    |
