@@ -9,5 +9,6 @@ public final class Builtins {
         Math.build();
         Stack.build();
         FileLibrary.build();
+        AsciiCanvas.build();
     }
 }

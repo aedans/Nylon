@@ -25,11 +25,14 @@
 
 // Stack
 "abc"(À"de"+Á)                              '
-('a'b'c'd'e_$Á)~s                           '
+('a'b'c'd'e_Á)~s                            '
 "abcde":`                                   '
-('b'c'd'e'aù_$Á)~s                          '
-('e'a'b'c'dú_$Á)~s                          '
+('b'c'd'e'aù_Á)~s                           '
+('e'a'b'c'dú_Á)~s                           '
 // TODO: Length of stack builtin
+
+// Ascii Canvas
+"ab de"2 0'c$                               '
 
 // If statement tests
 1?[`"abcde"]![`"ERROR"]                     '

@@ -1,5 +1,6 @@
 package nylon;
 
+import nylon.nylonobjects.NylonString;
 import nylon.parser.NylonParser;
 
 import java.util.List;
@@ -14,12 +15,11 @@ public class NylonRuntime implements Runnable {
     private Stack<NylonObject> nylonStack = new Stack<>();
 
     public NylonRuntime(String src, List<String> strings) {
-        String n = "";
-        for (String string : strings) {
-            n += string + " ";
+        for (String s : strings) {
+            nylonStack.add(new NylonString(s.toCharArray()));
         }
         long t = System.nanoTime();
-        this.main = NylonParser.parse(n + src);
+        this.main = NylonParser.parse(src);
         System.out.printf("Program compiled in %f milliseconds\n", (double) (System.nanoTime() - t) / 1000000d);
     }
 

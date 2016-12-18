@@ -17,3 +17,28 @@ A list of builtins that are not discussed in README.md.
 - 'ù': Moves the top of the stack to the bottom.
 - 'ú': Moves the bottom of the stack to the top.
 - 'Ï': Pushes the length of the stack to the stack.
+
+## Ascii Canvas
+- '$': "Paints" the top string of the stack on 4th string of the stack at coordinate points
+(3rd on the stack, 2nd on the stack). "Painting" creates two grids from both of the strings, translates the string
+to paint by (x, y), then overrides all characters on the string being painted over with the characters at the same
+points as the paint.
+Example:
+<pre>
+"
+|----|
+|    |
+|    |
+|----|"
+1 2
+"1234
+5678"$
+
+Output:
+
+|----|
+|1234|
+|5678|
+|----|
+</pre>
+
