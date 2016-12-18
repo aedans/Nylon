@@ -25,17 +25,14 @@ to paint by (x, y), then overrides all characters on the string being painted ov
 points as the paint.
 Example:
 <pre>
-"
-|----|
+"|----|
 |    |
 |    |
 |----|"
-1 2
+1 1
 "1234
 5678"$
-
 Output:
-
 |----|
 |1234|
 |5678|
