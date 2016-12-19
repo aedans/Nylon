@@ -2,8 +2,8 @@ package nylon.parser.parsers;
 
 import nylon.InlineFunction;
 import nylon.NylonObject;
+import nylon.nylonobjects.NylonArray;
 import nylon.nylonobjects.NylonFunction;
-import nylon.nylonobjects.NylonList;
 import nylon.parser.NylonParser;
 import parser.ParseException;
 import parser.Parser;
@@ -28,7 +28,7 @@ public class WhileLoopParser implements Parser<StringIterator, InlineFunction> {
         inlineFunction.functions.add(new NylonFunction() {
             @Override
             public NylonObject apply(Stack<NylonObject> stack) {
-                NylonList ret = new NylonList();
+                NylonArray ret = new NylonArray();
                 while (test.apply(stack).toBoolean(stack)) {
                     ret.add(wrapped.apply(stack));
                 }

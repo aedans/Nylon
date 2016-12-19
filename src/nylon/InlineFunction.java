@@ -1,7 +1,7 @@
 package nylon;
 
+import nylon.nylonobjects.NylonArray;
 import nylon.nylonobjects.NylonFunction;
-import nylon.nylonobjects.NylonList;
 
 import java.util.ArrayList;
 import java.util.Stack;
@@ -15,7 +15,7 @@ public class InlineFunction extends NylonFunction {
 
     @Override
     public NylonObject apply(Stack<NylonObject> stack) {
-        NylonList ret = new NylonList();
+        NylonArray ret = new NylonArray();
         for (NylonFunction function : functions) {
             ret.add(function.apply(stack));
         }
@@ -24,9 +24,6 @@ public class InlineFunction extends NylonFunction {
 
     @Override
     public String toString() {
-        if (functions.size() == 0)
-            return "EmptyFunction";
-
         String s = "InlineFunction" + functions.toString(), v = "";
         int tDepth = 0;
         for (int i = 0; i < s.length(); i++) {

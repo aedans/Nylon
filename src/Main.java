@@ -1,6 +1,6 @@
+import nylon.Builtins;
 import nylon.NylonException;
 import nylon.NylonRuntime;
-import nylon.builtins.Builtins;
 import nylon.parser.parsers.LibraryParser;
 
 import java.io.BufferedReader;

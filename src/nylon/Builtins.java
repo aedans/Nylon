@@ -1,4 +1,7 @@
-package nylon.builtins;
+package nylon;
+
+import nylon.builtins.*;
+import nylon.builtins.Math;
 
 /**
  * Created by Aedan Smith.
@@ -9,6 +12,7 @@ public final class Builtins {
         Math.build();
         Stack.build();
         FileLibrary.build();
+        Functions.build();
         AsciiCanvas.build();
     }
 }

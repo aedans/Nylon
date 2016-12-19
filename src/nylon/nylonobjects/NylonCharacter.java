@@ -2,76 +2,44 @@ package nylon.nylonobjects;
 
 import nylon.NylonObject;
 
-import java.util.Iterator;
 import java.util.Stack;
 
 /**
  * Created by Aedan Smith.
  */
 
-public class NylonCharacter extends NylonObject {
-    private char c;
-
+public class NylonCharacter extends NylonObject<Character> {
     public NylonCharacter(char c) {
-        this.c = c;
-    }
-
-    @Override
-    public boolean toBoolean(Stack<NylonObject> stack) {
-        return c == 't';
+        super(c);
     }
 
     @Override
     public double toDouble(Stack<NylonObject> stack) {
-        return c;
+        return this.value;
     }
 
     @Override
-    public Iterator<NylonObject> toIterator(Stack<NylonObject> stack) {
-        return new Iterator<NylonObject>() {
-            int i = 0;
-
-            @Override
-            public boolean hasNext() {
-                return i < c;
-            }
-
-            @Override
-            public NylonObject next() {
-                return new NylonCharacter((char) i++);
-            }
-        };
+    public long toLong(Stack<NylonObject> stack) {
+        return this.value;
     }
 
     @Override
-    public NylonList toList(Stack<NylonObject> stack) {
-        return new NylonList(this);
+    public char toCharacter(Stack<NylonObject> stack) {
+        return this.value;
     }
 
     @Override
-    public NylonObject concatenate(NylonObject object, Stack<NylonObject> stack) {
-        c += object.toCharacter(stack);
-        return this;
+    public NylonCharacter concatenate(NylonObject object, Stack<NylonObject> stack) {
+        return new NylonCharacter((char) (this.value + object.toCharacter(stack)));
     }
 
     @Override
-    public NylonObject subtract(NylonObject object, Stack<NylonObject> stack) {
-        c -= object.toCharacter(stack);
-        return this;
+    public NylonCharacter subtract(NylonObject object, Stack<NylonObject> stack) {
+        return new NylonCharacter((char) (this.value - object.toCharacter(stack)));
     }
 
     @Override
-    public boolean equals(Object obj) {
-        return obj instanceof NylonCharacter && ((NylonCharacter) obj).c == c;
-    }
-
-    @Override
-    public String toString() {
-        return String.valueOf(c);
-    }
-
-    @Override
-    public NylonObject clone() {
-        return new NylonCharacter(c);
+    public NylonCharacter clone() {
+        return new NylonCharacter(this.value);
     }
 }

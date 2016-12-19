@@ -17,14 +17,23 @@ management difficult, as objects can be lost in the stack if the program is not 
 
 ## Constants
 
-Constants in Nylon are functions that take no arguments and push a constant to the stack. There are four constant types:
-Doubles, characters, strings, and functions. Booleans are be represented using 0/1. Constants are declared as follows:
+Constants in Nylon are functions that take no arguments and push a constant to the stack. There are five constant types:
+Doubles, longs, characters, strings, and functions. Booleans are be represented using 0/1. Constants are declared as
+follows:
+
+Longs:
+<pre>
+42
+25234
+25E8
+</pre>
 
 Doubles:
 <pre>
-1
+1.0
 225.4234
 3E199
+144.
 </pre>
 
 Characters:
@@ -68,7 +77,14 @@ execute. '!' is used as an effective else for if statements.
 ## While Loops
 
 While loops are function modifiers that cause a function to be called as long as a condition is true. While loops are
-created using '&', followed by a comparator.
+created using '&', followed by a comparator and a function.
+
+Example:
+<pre>
+3 & ?v [1-]
+
+Output: 0
+</pre>
 
 ## For Loops
 
@@ -76,9 +92,9 @@ For loops are function modifiers that cause a function to be called multiple tim
 arguments. When a for loop is called, it reads the top object of the stack and behaves differently depending on the type
 of object consumed.
 
-- [double|character]: Treated as a for loop from 0 to the number.
+- [number]: Treated as a for loop from 0 to the number.
 - [function]: Iterates once for each object returned by the function.
-- [list]: Iterates once for each object in the list.
+- [array]: Iterates once for each object in the array.
 
 There are four types of for loops, one for each permutation of consuming the top of the stack and pushing the current
 loop value.
@@ -89,17 +105,23 @@ loop value.
 - 'ï': Creates a non-consuming, non-pushing for loop.
 
 ## Casting
-Casting is done via the character '~', followed by 'd' (double), 'i' (int), 'c', (character), 'l' (list), 's' (string),
-or 'f' (function). Casting casts the top object of the stack to the given type, and each type has unique methods of
-casting.
+Casting is done via the character '~', followed by 'a' (array), 'd' (double), 'l' (long), 'c', (character), 'b' (boolean),
+'s' (string), or 'f' (function). Casting casts the top object of the stack to the given type, and each type has unique
+methods of casting.
 
-- d->c: The UTF-16 character with value d.
-- d->l: A list containing d.
-- d->f: A function that pushes d to the stack.
-- c->(anything): Creates a double with value c, then casts that to the target.
-- l->d|c: A double or character equal to the size of the list.
-- l->f: Attempts to create a string from the list, then compiles the string.
-- f->(anything): Calls the function, then get the return value and casts that to the target.
+Defaults:
+- (anything) -> a: Creates a 1-element array containing the object.
+- (anything) -> l: Casts the object to a double, then casts that to a long.
+- (anything) -> c: Casts the object to a double, then casts that to a char.
+- (anything) -> b: Casts the object to a double, then casts that to a boolean.
+- (anything) -> f: Creates a function that pushes clones of the object to the stack.
+
+Special:
+- a -> d: Creates a double with size equal to the length of the array.
+- a -> b: False if the last element of the array is false, or if the array is empty.
+- b -> d: 1 if true, 0 if false.
+- s -> d: Attempts to parse the string to a double.
+- s -> f: Compiles the string to function as though it were the source.
 
 ## Standard Library
 
@@ -117,3 +139,21 @@ Explanations of methods in the Nylon Standard Library are described in STDL.md.
 
 Nylon has many builtins that are not described here, allowing for functions that may not otherwise be possible. A list
 of builtins and their descriptions can be found in BUILTINS.md.
+
+## Captures
+The capture builtin '@' captures the next function in the source code and pushes it to the stack. This can be used to
+pass functions to other functions, call the function multiple times, and many other usages.
+
+Captures can also be used to debug Nylon programs. When a function capture is cast to a string, it creates a readable
+representation of the function.
+
+Example:
+<pre>
+@d
+
+Output:
+LibraryFunction("d.nl")[
+	PushNylonDouble("1.0"),
+	BuiltinFunction('-')
+]
+<\pre>

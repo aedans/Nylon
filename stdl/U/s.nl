@@ -1,6 +1,6 @@
-// Sorts a list.
+// Sorts an array.
 // #Req: d, e, s
-(À(Àe
+~a(À(Àe
     Ïd
     í[
         Ï

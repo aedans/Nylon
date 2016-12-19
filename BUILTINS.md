@@ -14,11 +14,13 @@ A list of builtins that are not discussed in README.md.
 - 'À': Pulls the top argument of the shadowed stack to the current one.
 - 'Á': Pushes the top argument of the current stack to the shadowed one.
 - '_': Replaces the stack with a list containing the stack.
-- '`': Consumes the top item of the stack.
-- ':': Duplicates the top item of the stack.
+- ';': Consumes the top item of the stack.
 - 'ù': Moves the top of the stack to the bottom.
 - 'ú': Moves the bottom of the stack to the top.
 - 'Ï': Pushes the length of the stack to the stack.
+
+## Functions
+- ':': Casts the top of the stack to a function, then calls it.
 
 ## Ascii Canvas
 - '$': "Paints" the top string of the stack on 4th string of the stack at coordinate points
@@ -40,4 +42,3 @@ Output:
 |5678|
 |----|
 </pre>
-

@@ -8,10 +8,9 @@
 ["abcde"]                                   '
 
 // Casting tests
-// TODO: d&c->l, l->d&c, l->s
 97~c98~c99~c100~c101~c                      '
 97~f~c98~f~c99~f~c100~f~c101~f~c            '
-"\"abcde"~f~l                               // No ' here because the list should print a trailing newline.
+"\"abcde"~f~a                               // No ' here because the list should print a trailing newline.
 
 // Builtin tests
 // Math
@@ -28,23 +27,25 @@
 // Stack
 "abc"(À"de"+Á)                              '
 ('a'b'c'd'e_Á)~s                            '
-"abcde":`                                   '
 ('b'c'd'e'aù_Á)~s                           '
 ('e'a'b'c'dú_Á)~s                           '
 // TODO: Length of stack builtin
+
+// Functions
+";\"abcde":                                '
 
 // Ascii Canvas
 "ab de"2 0'c$                               '
 
 // If statement tests
-1?[`"abcde"]![`"ERROR"]                     '
-0¿[`"abcde"]![`"ERROR"]                     '
-5 4>[``"abcde"]![``"ERROR"]                 '
-4 5<[``"abcde"]![``"ERROR"]                 '
-3 3=[``"abcde"]![``"ERROR"]                 '
-3 3<=[``"abcde"]![``"ERROR"]                '
-3 3=¿[``"abcde"]![``"ERROR"]                '
-3 0?>[``"abcde"]![``"ERROR"]                '
+1?[;"abcde"]![;"ERROR"]                     '
+0¿[;"abcde"]![;"ERROR"]                     '
+5 4>[;;"abcde"]![;;"ERROR"]                 '
+4 5<[;;"abcde"]![;;"ERROR"]                 '
+3 3=[;;"abcde"]![;;"ERROR"]                 '
+3 3<=[;;"abcde"]![;;"ERROR"]                '
+3 3=¿[;;"abcde"]![;;"ERROR"]                '
+3 0?>[;;"abcde"]![;;"ERROR"]                '
 
 // For loop tests
 5î['a+c]                                    '
@@ -66,7 +67,6 @@ tt*3-ctt*2-ctt*1-ctt*ctt*1+c                '
 // F Library: No tests, due to non-deterministic output.
 
 // U library
-// TODO: Ub test.
 "edcba"Ur~s                                 '
 "bcdea"Uo~s                                 '
 "caedb"Us~s                                 '

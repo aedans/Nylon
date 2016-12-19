@@ -22,7 +22,7 @@ public class NylonParser extends LinkedParser<StringIterator, InlineFunction> {
                 new CastParser(),
                 new CaptureParser(),
                 new CommentParser(),
-                new DoubleParser(),
+                new NumberParser(),
                 new ForLoopParser(),
                 new IfStatementParser(),
                 new BuiltinParser(),

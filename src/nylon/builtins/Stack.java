@@ -1,8 +1,8 @@
 package nylon.builtins;
 
 import nylon.NylonObject;
+import nylon.nylonobjects.NylonArray;
 import nylon.nylonobjects.NylonDouble;
-import nylon.nylonobjects.NylonList;
 import nylon.parser.parsers.BuiltinParser;
 
 import java.util.LinkedList;
@@ -34,13 +34,13 @@ public final class Stack {
         BuiltinParser.builtins.put('_', new BuiltinFunction('_') {
             @Override
             public NylonObject apply(java.util.Stack<NylonObject> stack) {
-                NylonList nylonStack = new NylonList((java.util.Stack<NylonObject>) stack.clone());
+                NylonArray nylonStack = new NylonArray((java.util.Stack<NylonObject>) stack.clone());
                 stack.clear();
                 stack.add(nylonStack);
                 return nylonStack;
             }
         });
-        BuiltinParser.builtins.put('`', new BuiltinFunction('`') {
+        BuiltinParser.builtins.put(';', new BuiltinFunction(';') {
             @Override
             public NylonObject apply(java.util.Stack<NylonObject> stack) {
                 return stack.pop();

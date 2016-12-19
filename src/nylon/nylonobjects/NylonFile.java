@@ -13,29 +13,27 @@ import java.util.Stack;
  * Created by Aedan Smith.
  */
 
-public class NylonFile extends NylonObject {
-    public File file;
-
+public class NylonFile extends NylonObject<File> {
     public NylonFile(File file) {
-        this.file = file;
+        super(file);
     }
 
     @Override
     public boolean toBoolean(Stack<NylonObject> stack) {
-        return file.exists();
+        return this.value.exists();
     }
 
     @Override
     public double toDouble(Stack<NylonObject> stack) {
-        return file.getTotalSpace();
+        return this.value.getTotalSpace();
     }
 
     @Override
     public Iterator<NylonObject> toIterator(Stack<NylonObject> stack) {
         try {
-            if (file.isDirectory()) {
+            if (this.value.isDirectory()) {
                 return new Iterator<NylonObject>() {
-                    File[] files = file.listFiles();
+                    File[] files = NylonFile.this.value.listFiles();
                     int i = 0;
 
                     @Override
@@ -55,7 +53,7 @@ public class NylonFile extends NylonObject {
                 };
             } else {
                 return new Iterator<NylonObject>() {
-                    Iterator<String> lines = Files.lines(file.toPath()).iterator();
+                    Iterator<String> lines = Files.lines(NylonFile.this.value.toPath()).iterator();
 
                     @Override
                     public boolean hasNext() {
@@ -74,19 +72,14 @@ public class NylonFile extends NylonObject {
     }
 
     @Override
-    public NylonList toList(Stack<NylonObject> stack) {
-        NylonList nylonList = new NylonList();
-        this.toIterator(stack).forEachRemaining(nylonList::add);
-        return nylonList;
-    }
-
-    @Override
-    public String toString() {
-        return file.toString();
+    public NylonArray toArray(Stack<NylonObject> stack) {
+        NylonArray nylonArray = new NylonArray();
+        this.toIterator(stack).forEachRemaining(nylonArray::add);
+        return nylonArray;
     }
 
     @Override
     public NylonObject clone() {
-        return new NylonFile(file);
+        return new NylonFile(this.value);
     }
 }

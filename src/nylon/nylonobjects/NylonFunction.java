@@ -5,35 +5,53 @@ import nylon.NylonObject;
 
 import java.util.Iterator;
 import java.util.Stack;
+import java.util.function.Function;
 
 /**
  * Created by Aedan Smith.
  */
 
-public abstract class NylonFunction extends NylonObject {
-    public abstract NylonObject apply(Stack<NylonObject> stack);
+@SuppressWarnings("unchecked")
+public abstract class NylonFunction extends NylonObject<Function<Stack<NylonObject>, NylonObject>>
+        implements Function<Stack<NylonObject>, NylonObject> {
+    public NylonFunction() {
+        super(null);
+        this.value = this;
+    }
 
+    @Override
     public boolean toBoolean(Stack<NylonObject> stack) {
-        return apply((Stack<NylonObject>) stack.clone()).toDouble(stack) != 0;
+        return this.value.apply((Stack<NylonObject>) stack.clone()).toBoolean(stack);
     }
 
+    @Override
     public double toDouble(Stack<NylonObject> stack) {
-        return apply((Stack<NylonObject>) stack.clone()).toDouble(stack);
+        return this.value.apply((Stack<NylonObject>) stack.clone()).toDouble(stack);
     }
 
     @Override
-    public NylonList toList(Stack<NylonObject> stack) {
-        return apply((Stack<NylonObject>) stack.clone()).toList(stack);
+    public long toLong(Stack<NylonObject> stack) {
+        return this.value.apply((Stack<NylonObject>) stack.clone()).toLong(stack);
     }
 
     @Override
-    public NylonObject toFunction(Stack<NylonObject> stack) {
-        return this;
+    public char toCharacter(Stack<NylonObject> stack) {
+        return this.value.apply((Stack<NylonObject>) stack.clone()).toCharacter(stack);
+    }
+
+    @Override
+    public NylonArray toArray(Stack<NylonObject> stack) {
+        return this.value.apply((Stack<NylonObject>) stack.clone()).toArray(stack);
     }
 
     @Override
     public Iterator<NylonObject> toIterator(Stack<NylonObject> stack) {
-        return apply((Stack<NylonObject>) stack.clone()).toIterator(stack);
+        return this.value.apply((Stack<NylonObject>) stack.clone()).toIterator(stack);
+    }
+
+    @Override
+    public NylonFunction toFunction(Stack<NylonObject> stack) {
+        return this;
     }
 
     @Override

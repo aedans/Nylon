@@ -1,16 +1,35 @@
 package nylon.nylonobjects;
 
 import nylon.NylonObject;
+import nylon.parser.NylonParser;
+
+import java.util.Stack;
 
 /**
  * Created by Aedan Smith.
  */
 
-public class NylonString extends NylonList {
+// TODO: Type safety.
+public class NylonString extends NylonArray {
     public NylonString(char[] s) {
         for (char c : s) {
             this.add(new NylonCharacter(c));
         }
+    }
+
+    @Override
+    public double toDouble(Stack<NylonObject> stack) {
+        return Double.parseDouble(this.toString());
+    }
+
+    @Override
+    public long toLong(Stack<NylonObject> stack) {
+        return Long.parseLong(this.toString());
+    }
+
+    @Override
+    public NylonFunction toFunction(Stack<NylonObject> stack) {
+        return NylonParser.parse(this.toString());
     }
 
     @Override

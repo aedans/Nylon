@@ -2,9 +2,7 @@ package nylon.parser.parsers;
 
 import nylon.InlineFunction;
 import nylon.NylonObject;
-import nylon.nylonobjects.NylonCharacter;
-import nylon.nylonobjects.NylonDouble;
-import nylon.nylonobjects.NylonFunction;
+import nylon.nylonobjects.*;
 import parser.ParseException;
 import parser.Parser;
 import parser.StringIterator;
@@ -28,20 +26,23 @@ public class CastParser implements Parser<StringIterator, InlineFunction> {
             @Override
             public NylonObject apply(Stack<NylonObject> stack) {
                 switch (c) {
+                    case 'a':
+                        stack.add(stack.pop().toArray(stack));
+                        break;
+                    case 'b':
+                        stack.add(new NylonBoolean(stack.pop().toBoolean(stack)));
+                        break;
                     case 'c':
                         stack.add(new NylonCharacter(stack.pop().toCharacter(stack)));
                         break;
                     case 'd':
                         stack.add(new NylonDouble(stack.pop().toDouble(stack)));
                         break;
-                    case 'i':
-                        stack.add(new NylonDouble((int) stack.pop().toDouble(stack)));
-                        break;
                     case 'f':
                         stack.add(stack.pop().toFunction(stack));
                         break;
                     case 'l':
-                        stack.add(stack.pop().toList(stack));
+                        stack.add(new NylonLong(stack.pop().toLong(stack)));
                         break;
                     case 's':
                         stack.add(stack.pop().toNylonString(stack));

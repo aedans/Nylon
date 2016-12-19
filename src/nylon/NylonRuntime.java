@@ -1,5 +1,7 @@
 package nylon;
 
+import nylon.nylonobjects.NylonDouble;
+import nylon.nylonobjects.NylonLong;
 import nylon.nylonobjects.NylonString;
 import nylon.parser.NylonParser;
 
@@ -28,7 +30,11 @@ public class NylonRuntime implements Runnable {
         long t = System.nanoTime();
         this.main.apply(nylonStack);
         for (NylonObject nylonObject : nylonStack) {
-            System.out.print(nylonObject);
+            if (nylonObject instanceof NylonDouble || nylonObject instanceof NylonLong) {
+                System.out.println(nylonObject);
+            } else {
+                System.out.print(nylonObject);
+            }
         }
         System.out.printf("\nProgram ran in %f milliseconds\n", (double) (System.nanoTime() - t) / 1000000d);
     }
