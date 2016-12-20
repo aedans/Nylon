@@ -10,7 +10,7 @@ import java.util.Stack;
 
 public class NylonCharacter extends NylonObject<Character> {
     public NylonCharacter(char c) {
-        super(c);
+        super(c, Type.CHAR);
     }
 
     @Override

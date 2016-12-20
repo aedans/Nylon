@@ -32,10 +32,10 @@
 // TODO: Length of stack builtin
 
 // Functions
-";\"abcde":                                '
+";\"abcde":                                 '
 
 // Ascii Canvas
-"ab de"2 0'c$                               '
+"ab de"0 2'c$                               '
 
 // If statement tests
 1?[;"abcde"]![;"ERROR"]                     '

@@ -15,6 +15,7 @@ public class NylonString extends NylonArray {
         for (char c : s) {
             this.add(new NylonCharacter(c));
         }
+        this.type = Type.STRING;
     }
 
     @Override

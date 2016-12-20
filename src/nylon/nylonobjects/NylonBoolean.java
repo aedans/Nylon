@@ -10,7 +10,7 @@ import java.util.Stack;
 
 public class NylonBoolean extends NylonObject<Boolean> {
     public NylonBoolean(boolean b) {
-        super(b);
+        super(b, Type.BOOL);
     }
 
     @Override

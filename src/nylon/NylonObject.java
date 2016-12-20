@@ -1,10 +1,8 @@
 package nylon;
 
-import nylon.nylonobjects.NylonArray;
-import nylon.nylonobjects.NylonFunction;
-import nylon.nylonobjects.NylonLong;
-import nylon.nylonobjects.NylonString;
+import nylon.nylonobjects.*;
 
+import java.io.File;
 import java.util.Iterator;
 import java.util.Stack;
 
@@ -16,9 +14,11 @@ import java.util.Stack;
 
 public abstract class NylonObject<T> {
     public T value;
+    protected Type type;
 
-    public NylonObject(T value) {
+    public NylonObject(T value, Type type) {
         this.value = value;
+        this.type = type;
     }
 
     public abstract double toDouble(Stack<NylonObject> stack);
@@ -75,16 +75,55 @@ public abstract class NylonObject<T> {
     }
 
     public NylonObject concatenate(NylonObject object, Stack<NylonObject> stack) {
-        throw new NylonException("Could not concatenate objects");
+        return new NylonDouble(this.toDouble(stack) + object.toDouble(stack));
     }
 
     public NylonObject subtract(NylonObject object, Stack<NylonObject> stack) {
-        throw new NylonException("Could not subtract objects");
+        return new NylonDouble(this.toDouble(stack) - object.toDouble(stack));
+    }
+
+    public NylonObject multiply(NylonObject object, Stack<NylonObject> stack) {
+        return new NylonDouble(this.toDouble(stack) * object.toDouble(stack));
+    }
+
+    public NylonObject divide(NylonObject object, Stack<NylonObject> stack) {
+        return new NylonDouble(this.toDouble(stack) / object.toDouble(stack));
+    }
+
+    public NylonObject to(Type type, Stack<NylonObject> stack) {
+        switch (type) {
+            case BOOL:
+                return new NylonBoolean(this.toBoolean(stack));
+            case CHAR:
+                return new NylonCharacter(this.toCharacter(stack));
+            case LONG:
+                return new NylonLong(this.toLong(stack));
+            case DOUBLE:
+                return new NylonDouble(this.toDouble(stack));
+            case ARRAY:
+                return this.toArray(stack);
+            case STRING:
+                return this.toNylonString(stack);
+            case FUNCTION:
+                return this.toFunction(stack);
+            case FILE:
+                return new NylonFile(new File(this.toString()));
+            default:
+                throw new NylonException("Could not cast object to type " + type);
+        }
+    }
+
+    public NylonObject promote(NylonObject object, Stack<NylonObject> stack) {
+        if (this.type.promotionLevel < object.type.promotionLevel) {
+            return this.to(object.type, stack);
+        } else {
+            return this;
+        }
     }
 
     @Override
     public String toString() {
-        return this.value.toString();
+        return String.valueOf(this.value);
     }
 
     @Override
@@ -98,6 +137,27 @@ public abstract class NylonObject<T> {
             return (NylonObject) super.clone();
         } catch (Exception e) {
             throw new NylonException("Internal Error: Could not clone object.", this);
+        }
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    protected enum Type {
+        FILE((byte) -1),
+        BOOL((byte) 0),
+        LONG((byte) 1),
+        CHAR((byte) 2),
+        DOUBLE((byte) 3),
+        STRING((byte) 4),
+        ARRAY((byte) 5),
+        FUNCTION((byte) 6);
+
+        protected byte promotionLevel;
+
+        Type(byte promotionLevel) {
+            this.promotionLevel = promotionLevel;
         }
     }
 }

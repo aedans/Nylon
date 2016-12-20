@@ -10,7 +10,7 @@ import java.util.Stack;
 
 public class NylonDouble extends NylonObject<Double> {
     public NylonDouble(double d) {
-        super(d);
+        super(d, Type.DOUBLE);
     }
 
     @Override

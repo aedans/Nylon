@@ -15,7 +15,7 @@ import java.util.Stack;
 
 public class NylonFile extends NylonObject<File> {
     public NylonFile(File file) {
-        super(file);
+        super(file, Type.FILE);
     }
 
     @Override

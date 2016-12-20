@@ -10,7 +10,7 @@ import java.util.Stack;
 
 public class NylonLong extends NylonObject<Long> {
     public NylonLong(long l) {
-        super(l);
+        super(l, Type.LONG);
     }
 
     @Override

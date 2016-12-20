@@ -19,7 +19,7 @@ public final class AsciiCanvas {
                 // The lines of the string to add
                 String[] add = stack.pop().toString().split("\n");
                 // The x and y position to add the string
-                int y = ((int) stack.pop().toDouble(stack)), x = ((int) stack.pop().toDouble(stack));
+                int x = ((int) stack.pop().toDouble(stack)), y = ((int) stack.pop().toDouble(stack));
                 // The canvas to add the string to
                 String canvasString = stack.pop().toString();
                 ArrayList<ArrayList<Character>> canvas = new ArrayList<>();

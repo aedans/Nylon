@@ -26,6 +26,17 @@ public class StringParser implements Parser<StringIterator, InlineFunction> {
             if (in.peek() == '\\') {
                 in.skip();
                 s += in.next();
+            } else if (in.peek() == '*') {
+                in.skip();
+                String num = "";
+                while (in.hasNext() && ((in.peek() >= '0' && in.peek() <= '9'))) {
+                    num += in.next();
+                }
+                long l = Long.parseLong(num);
+                char c = in.next();
+                for (long i = 0; i < l; i++) {
+                    s += c;
+                }
             } else {
                 s += in.next();
             }
@@ -42,7 +53,7 @@ public class StringParser implements Parser<StringIterator, InlineFunction> {
 
             @Override
             public String toString() {
-                return "PushNylonString(\"" + new String(finalS).replaceAll("\n", "\\n") + "\")";
+                return "PushNylonString(\"" + new String(finalS).replaceAll("\\n", "\\\\n") + "\")";
             }
         });
 

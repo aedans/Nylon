@@ -24,7 +24,7 @@ A list of builtins that are not discussed in README.md.
 
 ## Ascii Canvas
 - '$': "Paints" the top string of the stack on 4th string of the stack at coordinate points
-(3rd on the stack, 2nd on the stack). "Painting" creates two grids from both of the strings, translates the string
+(2rd on the stack, 3nd on the stack). "Painting" creates two grids from both of the strings, translates the string
 to paint by (x, y), then overrides all characters on the string being painted over with the characters at the same
 points as the paint.
 <pre>

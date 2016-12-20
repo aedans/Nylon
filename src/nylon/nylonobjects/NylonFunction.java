@@ -15,7 +15,7 @@ import java.util.function.Function;
 public abstract class NylonFunction extends NylonObject<Function<Stack<NylonObject>, NylonObject>>
         implements Function<Stack<NylonObject>, NylonObject> {
     public NylonFunction() {
-        super(null);
+        super(null, Type.FUNCTION);
         this.value = this;
     }
 

@@ -13,16 +13,16 @@ import java.util.Vector;
 
 public class NylonArray extends NylonObject<Vector<NylonObject>> implements Collection<NylonObject> {
     public NylonArray() {
-        super(new Vector<>());
+        super(new Vector<>(), Type.ARRAY);
     }
 
     public NylonArray(NylonObject object) {
-        super(new Vector<>());
+        super(new Vector<>(), Type.ARRAY);
         this.value.add(object);
     }
 
     public NylonArray(Collection<NylonObject> stack) {
-        super(new Vector<>());
+        super(new Vector<>(), Type.ARRAY);
         this.value.addAll(stack);
     }
 
@@ -129,6 +129,15 @@ public class NylonArray extends NylonObject<Vector<NylonObject>> implements Coll
     @Override
     public NylonObject subtract(NylonObject object, Stack<NylonObject> stack) {
         this.removeAll(object.toArray(stack));
+        return this;
+    }
+
+    @Override
+    public NylonObject multiply(NylonObject object, Stack<NylonObject> stack) {
+        Vector<NylonObject> v = (Vector<NylonObject>) this.value.clone();
+        for (long i = 0; i < object.toLong(stack); i++) {
+            this.addAll(v);
+        }
         return this;
     }
 
