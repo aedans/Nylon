@@ -1,7 +1,5 @@
 package nylon;
 
-import nylon.nylonobjects.NylonDouble;
-import nylon.nylonobjects.NylonLong;
 import nylon.nylonobjects.NylonString;
 import nylon.parser.NylonParser;
 
@@ -30,7 +28,7 @@ public class NylonRuntime implements Runnable {
         long t = System.nanoTime();
         this.main.apply(nylonStack);
         for (NylonObject nylonObject : nylonStack) {
-            if (nylonObject instanceof NylonDouble || nylonObject instanceof NylonLong) {
+            if (nylonObject.shouldOutputNewline) {
                 System.out.println(nylonObject);
             } else {
                 System.out.print(nylonObject);

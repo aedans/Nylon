@@ -19,6 +19,38 @@ public abstract class NylonFunction extends NylonObject<Function<Stack<NylonObje
         this.value = this;
     }
 
+    public static String format(String s) {
+        String v = "";
+        int tDepth = 0;
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == '[') {
+                v += s.charAt(i);
+                tDepth++;
+                v += '\n';
+                for (int k = 0; k < tDepth; k++) {
+                    v += '\t';
+                }
+            } else if (s.charAt(i) == ']') {
+                tDepth--;
+                v += '\n';
+                for (int k = 0; k < tDepth; k++) {
+                    v += '\t';
+                }
+                v += s.charAt(i);
+            } else if (s.charAt(i) == ',') {
+                v += s.charAt(i);
+                v += '\n';
+                for (int k = 0; k < tDepth; k++) {
+                    v += '\t';
+                }
+                i++;
+            } else if (s.charAt(i) != '\n' && s.charAt(i) != '\t') {
+                v += s.charAt(i);
+            }
+        }
+        return v;
+    }
+
     @Override
     public boolean toBoolean(Stack<NylonObject> stack) {
         return this.value.apply((Stack<NylonObject>) stack.clone()).toBoolean(stack);

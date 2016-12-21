@@ -14,6 +14,7 @@ import java.util.Stack;
 
 public abstract class NylonObject<T> {
     public T value;
+    public boolean shouldOutputNewline = true;
     protected Type type;
 
     public NylonObject(T value, Type type) {

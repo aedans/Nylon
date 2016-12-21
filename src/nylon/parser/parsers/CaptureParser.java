@@ -31,7 +31,7 @@ public class CaptureParser implements Parser<StringIterator, InlineFunction> {
 
             @Override
             public String toString() {
-                return "Capture[" + capture + "]";
+                return format("Capture[" + capture + "]");
             }
         });
         return true;
