@@ -14,6 +14,7 @@ import java.util.Vector;
 public class NylonArray extends NylonObject<Vector<NylonObject>> implements Collection<NylonObject> {
     public NylonArray() {
         super(new Vector<>(), Type.ARRAY);
+        this.shouldOutputNewline = false;
     }
 
     public NylonArray(NylonObject object) {
