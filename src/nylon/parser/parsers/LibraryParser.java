@@ -46,8 +46,8 @@ public class LibraryParser implements Parser<StringIterator, InlineFunction> {
                                     InlineFunction inlineFunction = NylonParser.parse(content.toString());
                                     return function = new LibraryFunction(s + f.getName()) {
                                         @Override
-                                        public NylonObject apply(Stack<NylonObject> stack) {
-                                            return inlineFunction.apply(stack);
+                                        public void apply(Stack<NylonObject> stack) {
+                                            inlineFunction.apply(stack);
                                         }
 
                                         @Override

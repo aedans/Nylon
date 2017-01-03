@@ -13,8 +13,8 @@ public final class Functions {
     public static void build() {
         BuiltinParser.builtins.put(',', new BuiltinFunction(',') {
             @Override
-            public NylonObject apply(Stack<NylonObject> stack) {
-                return stack.pop().toFunction(stack).apply(stack);
+            public void apply(Stack<NylonObject> stack) {
+                stack.pop().toFunction(stack).apply(stack);
             }
         });
     }

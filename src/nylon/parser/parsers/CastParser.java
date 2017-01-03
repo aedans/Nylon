@@ -24,7 +24,7 @@ public class CastParser implements Parser<StringIterator, InlineFunction> {
 
         inlineFunction.functions.add(new NylonFunction() {
             @Override
-            public NylonObject apply(Stack<NylonObject> stack) {
+            public void apply(Stack<NylonObject> stack) {
                 switch (c) {
                     case 'a':
                         stack.add(stack.pop().toArray(stack));
@@ -48,7 +48,6 @@ public class CastParser implements Parser<StringIterator, InlineFunction> {
                         stack.add(stack.pop().toNylonString(stack));
                         break;
                 }
-                return stack.peek();
             }
 
             @Override

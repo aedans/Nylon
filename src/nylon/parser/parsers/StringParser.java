@@ -46,9 +46,8 @@ public class StringParser implements Parser<StringIterator, InlineFunction> {
         char[] finalS = s.toCharArray();
         inlineFunction.functions.add(new NylonFunction() {
             @Override
-            public NylonObject apply(Stack<NylonObject> stack) {
+            public void apply(Stack<NylonObject> stack) {
                 stack.add(new NylonString(finalS));
-                return stack.peek();
             }
 
             @Override

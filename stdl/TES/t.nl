@@ -9,8 +9,6 @@
 
 // Casting tests
 97~c98~c99~c100~c101~c                      '
-97~f~c98~f~c99~f~c100~f~c101~f~c            '
-"\"abcde"~f~a                               // No ' here because the list should print a trailing newline.
 
 // Builtin tests
 // Math

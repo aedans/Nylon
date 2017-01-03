@@ -1,6 +1,5 @@
 package nylon;
 
-import nylon.nylonobjects.NylonArray;
 import nylon.nylonobjects.NylonFunction;
 
 import java.util.ArrayList;
@@ -22,12 +21,10 @@ public class InlineFunction extends NylonFunction {
     }
 
     @Override
-    public NylonObject apply(Stack<NylonObject> stack) {
-        NylonArray ret = new NylonArray();
+    public void apply(Stack<NylonObject> stack) {
         for (NylonFunction function : functions) {
-            ret.add(function.apply(stack));
+            function.apply(stack);
         }
-        return ret;
     }
 
     @Override

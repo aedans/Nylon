@@ -43,9 +43,8 @@ public abstract class NylonObject<T> {
     public NylonFunction toFunction(Stack<NylonObject> stack) {
         return new NylonFunction() {
             @Override
-            public NylonObject apply(Stack<NylonObject> stack) {
+            public void apply(Stack<NylonObject> stack) {
                 stack.add(NylonObject.this.clone());
-                return stack.peek();
             }
 
             @Override

@@ -74,18 +74,6 @@ execute. '!' is used as an effective else for if statements.
 - '<': If the second from the top of the stack is less than the top.
 - '=': If the top of the stack is equal to the second from the top.
 
-## While Loops
-
-While loops are function modifiers that cause a function to be called as long as a condition is true. While loops are
-created using '&', followed by a comparator and a function.
-
-Example:
-<pre>
-3 & ?v [1-]
-
-Output: 0
-</pre>
-
 ## For Loops
 
 For loops are function modifiers that cause a function to be called multiple times, each time enumerating different

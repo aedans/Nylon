@@ -2,7 +2,6 @@ package nylon.parser.parsers;
 
 import nylon.InlineFunction;
 import nylon.NylonObject;
-import nylon.nylonobjects.NylonDouble;
 import nylon.nylonobjects.NylonFunction;
 import nylon.parser.NylonParser;
 import parser.ParseException;
@@ -44,7 +43,7 @@ public class IfStatementParser implements Parser<StringIterator, InlineFunction>
         NylonFunction finalIfFalse = ifFalse;
         inlineFunction.functions.add(new NylonFunction() {
             @Override
-            public NylonObject apply(Stack<NylonObject> stack) {
+            public void apply(Stack<NylonObject> stack) {
                 boolean b = false;
                 for (char c : ifs) {
                     switch (c) {
@@ -75,10 +74,8 @@ public class IfStatementParser implements Parser<StringIterator, InlineFunction>
                 }
                 if (b) {
                     ifTrue.apply(stack);
-                    return new NylonDouble(1);
                 } else {
                     finalIfFalse.apply(stack);
-                    return new NylonDouble(0);
                 }
             }
 

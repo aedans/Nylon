@@ -25,10 +25,9 @@ public class CharacterParser implements Parser<StringIterator, InlineFunction> {
 
         inlineFunction.functions.add(new NylonFunction() {
             @Override
-            public NylonObject apply(Stack<NylonObject> stack) {
+            public void apply(Stack<NylonObject> stack) {
                 NylonCharacter nc = new NylonCharacter(c);
                 stack.push(nc);
-                return nc;
             }
 
             @Override

@@ -15,7 +15,7 @@ public final class AsciiCanvas {
     public static void build() {
         BuiltinParser.builtins.put('$', new BuiltinFunction('$') {
             @Override
-            public NylonObject apply(Stack<NylonObject> stack) {
+            public void apply(Stack<NylonObject> stack) {
                 // The lines of the string to add
                 String[] add = stack.pop().toString().split("\n");
                 // The x and y position to add the string
@@ -66,7 +66,6 @@ public final class AsciiCanvas {
                 }
                 s = s.substring(0, s.length() - 1);
                 stack.add(new NylonString(s.toCharArray()));
-                return stack.peek();
             }
         });
     }

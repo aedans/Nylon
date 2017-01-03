@@ -24,9 +24,8 @@ public class CaptureParser implements Parser<StringIterator, InlineFunction> {
         NylonFunction capture = NylonParser.parse(in);
         inlineFunction.functions.add(new NylonFunction() {
             @Override
-            public NylonObject apply(Stack<NylonObject> stack) {
+            public void apply(Stack<NylonObject> stack) {
                 stack.add(capture);
-                return capture;
             }
 
             @Override
