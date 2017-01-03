@@ -1,5 +1,6 @@
 package nylon.nylonobjects;
 
+import nylon.InlineFunction;
 import nylon.NylonException;
 import nylon.NylonObject;
 
@@ -87,9 +88,8 @@ public abstract class NylonFunction extends NylonObject<Function<Stack<NylonObje
     }
 
     @Override
-    public NylonObject concatenate(NylonObject object, Stack<NylonObject> stack) {
-        // TODO
-        throw new NylonException("Concatenation of functions is not yet supported", this);
+    public NylonFunction concatenate(NylonObject object, Stack<NylonObject> stack) {
+        return new InlineFunction(this, object.toFunction(stack));
     }
 
     @Override

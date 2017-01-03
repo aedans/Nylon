@@ -31,12 +31,27 @@ public class NylonCharacter extends NylonObject<Character> {
 
     @Override
     public NylonCharacter concatenate(NylonObject object, Stack<NylonObject> stack) {
-        return new NylonCharacter((char) (this.value + object.toCharacter(stack)));
+        this.value = (char) (this.value + object.toCharacter(stack));
+        return this;
     }
 
     @Override
     public NylonCharacter subtract(NylonObject object, Stack<NylonObject> stack) {
-        return new NylonCharacter((char) (this.value - object.toCharacter(stack)));
+        this.value = (char) (this.value - object.toCharacter(stack));
+        return this;
+    }
+
+
+    @Override
+    public NylonCharacter multiply(NylonObject object, Stack<NylonObject> stack) {
+        this.value = (char) (this.value * object.toCharacter(stack));
+        return this;
+    }
+
+    @Override
+    public NylonObject divide(NylonObject object, Stack<NylonObject> stack) {
+        this.value = (char) (this.value / object.toCharacter(stack));
+        return this;
     }
 
     @Override

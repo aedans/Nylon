@@ -31,6 +31,18 @@ public class NylonDouble extends NylonObject<Double> {
     }
 
     @Override
+    public NylonDouble multiply(NylonObject object, Stack<NylonObject> stack) {
+        this.value *= object.toDouble(stack);
+        return this;
+    }
+
+    @Override
+    public NylonDouble divide(NylonObject object, Stack<NylonObject> stack) {
+        this.value /= object.toDouble(stack);
+        return this;
+    }
+
+    @Override
     public NylonDouble clone() {
         return new NylonDouble(this.value);
     }

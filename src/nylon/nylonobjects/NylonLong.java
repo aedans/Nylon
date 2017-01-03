@@ -36,6 +36,18 @@ public class NylonLong extends NylonObject<Long> {
     }
 
     @Override
+    public NylonLong multiply(NylonObject object, Stack<NylonObject> stack) {
+        this.value *= object.toLong(stack);
+        return this;
+    }
+
+    @Override
+    public NylonLong divide(NylonObject object, Stack<NylonObject> stack) {
+        this.value /= object.toLong(stack);
+        return this;
+    }
+
+    @Override
     public NylonLong clone() {
         return new NylonLong(this.value);
     }

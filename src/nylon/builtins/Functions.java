@@ -11,10 +11,10 @@ import java.util.Stack;
 
 public final class Functions {
     public static void build() {
-        BuiltinParser.builtins.put(':', new BuiltinFunction(':') {
+        BuiltinParser.builtins.put(',', new BuiltinFunction(',') {
             @Override
             public NylonObject apply(Stack<NylonObject> stack) {
-                return stack.peek().toFunction(stack).apply(stack);
+                return stack.pop().toFunction(stack).apply(stack);
             }
         });
     }

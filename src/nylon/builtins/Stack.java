@@ -49,10 +49,9 @@ public final class Stack {
         BuiltinParser.builtins.put(':', new BuiltinFunction(':') {
             @Override
             public NylonObject apply(java.util.Stack<NylonObject> stack) {
-                NylonObject nylonObject = stack.pop();
-                stack.add(nylonObject.clone());
-                stack.add(nylonObject.clone());
-                return nylonObject;
+                NylonObject object = stack.pop();
+                stack.add(object.toFunction(stack).apply(stack));
+                return object;
             }
         });
         BuiltinParser.builtins.put('À', new BuiltinFunction('À') {

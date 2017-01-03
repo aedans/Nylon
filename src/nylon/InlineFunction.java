@@ -4,6 +4,7 @@ import nylon.nylonobjects.NylonArray;
 import nylon.nylonobjects.NylonFunction;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Stack;
 
 /**
@@ -12,6 +13,13 @@ import java.util.Stack;
 
 public class InlineFunction extends NylonFunction {
     public ArrayList<NylonFunction> functions = new ArrayList<>();
+
+    public InlineFunction() {
+    }
+
+    public InlineFunction(NylonFunction... functions) {
+        Collections.addAll(this.functions, functions);
+    }
 
     @Override
     public NylonObject apply(Stack<NylonObject> stack) {

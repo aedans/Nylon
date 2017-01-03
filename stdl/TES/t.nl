@@ -32,7 +32,8 @@
 // TODO: Length of stack builtin
 
 // Functions
-";\"abcde":                                 '
+"\"abcde
+",
 
 // Ascii Canvas
 "ab de"0 2'c$                               '
