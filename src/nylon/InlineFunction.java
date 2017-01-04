@@ -13,15 +13,13 @@ import java.util.Stack;
 public class InlineFunction extends NylonFunction {
     public ArrayList<NylonFunction> functions = new ArrayList<>();
 
-    public InlineFunction() {
-    }
-
-    public InlineFunction(NylonFunction... functions) {
+    public InlineFunction(String id, NylonFunction... functions) {
+        this.id = id;
         Collections.addAll(this.functions, functions);
     }
 
     @Override
-    public void apply(Stack<NylonObject> stack) {
+    public void applyImpl(Stack<NylonObject> stack) throws NylonException {
         for (NylonFunction function : functions) {
             function.apply(stack);
         }
@@ -29,6 +27,10 @@ public class InlineFunction extends NylonFunction {
 
     @Override
     public String toString() {
-        return format("InlineFunction" + functions.toString());
+        if (functions != null) {
+            return NylonFunction.format("InlineFunction" + functions.toString());
+        } else {
+            return "InlineFunction(null)";
+        }
     }
 }

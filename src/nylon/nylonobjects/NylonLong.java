@@ -1,5 +1,6 @@
 package nylon.nylonobjects;
 
+import nylon.NylonException;
 import nylon.NylonObject;
 
 import java.util.Stack;
@@ -24,25 +25,25 @@ public class NylonLong extends NylonObject<Long> {
     }
 
     @Override
-    public NylonLong concatenate(NylonObject object, Stack<NylonObject> stack) {
+    public NylonLong concatenate(NylonObject object, Stack<NylonObject> stack) throws NylonException {
         this.value += object.toLong(stack);
         return this;
     }
 
     @Override
-    public NylonLong subtract(NylonObject object, Stack<NylonObject> stack) {
+    public NylonLong subtract(NylonObject object, Stack<NylonObject> stack) throws NylonException {
         this.value -= object.toLong(stack);
         return this;
     }
 
     @Override
-    public NylonLong multiply(NylonObject object, Stack<NylonObject> stack) {
+    public NylonLong multiply(NylonObject object, Stack<NylonObject> stack) throws NylonException {
         this.value *= object.toLong(stack);
         return this;
     }
 
     @Override
-    public NylonLong divide(NylonObject object, Stack<NylonObject> stack) {
+    public NylonLong divide(NylonObject object, Stack<NylonObject> stack) throws NylonException {
         this.value /= object.toLong(stack);
         return this;
     }

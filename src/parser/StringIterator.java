@@ -1,7 +1,5 @@
 package parser;
 
-import nylon.NylonException;
-
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.function.Predicate;
@@ -35,7 +33,7 @@ public class StringIterator implements Iterator<Character> {
         this.i += i;
     }
 
-    public String until(char c) {
+    public String until(char c) throws ParseException {
         String s = "";
         while (hasNext() && peek() != c) {
             s += string[i++];
@@ -52,33 +50,33 @@ public class StringIterator implements Iterator<Character> {
     }
 
     @Override
-    public Character next() {
+    public Character next() throws ParseException {
         if (i > string.length)
-            throw new NylonException("Unexpected end of string.");
+            throw new ParseException("Unexpected end of string", this);
         return string[i++];
     }
 
-    public Character peek() {
+    public Character peek() throws ParseException {
         if (i > string.length)
-            throw new NylonException("Unexpected end of string.");
+            throw new ParseException("Unexpected end of string.", this);
         return string[i];
     }
 
-    public Character peek(int n) {
+    public Character peek(int n) throws ParseException {
         if (i + n > string.length)
-            throw new NylonException("Unexpected end of string.");
+            throw new ParseException("Unexpected end of string", this);
         return string[i + n];
     }
 
-    public String peekString(int n) {
+    public String peekString(int n) throws ParseException {
         if (i + n > string.length)
-            throw new NylonException("Unexpected end of string.");
+            throw new ParseException("Unexpected end of string", this);
         return new String(Arrays.copyOfRange(string, i, i + n));
     }
 
-    public boolean isInRange(char low, char high) {
+    public boolean isInRange(char low, char high) throws ParseException {
         if (i > string.length)
-            throw new NylonException("Unexpected end of string.");
+            throw new ParseException("Unexpected end of string", this);
         return string[i] >= low && string[i] <= high;
     }
 
@@ -94,7 +92,7 @@ public class StringIterator implements Iterator<Character> {
         return i;
     }
 
-    public void skipWhitespace() {
+    public void skipWhitespace() throws ParseException {
         while (hasNext() && peek() <= 32)
             skip();
     }

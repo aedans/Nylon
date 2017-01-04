@@ -1,5 +1,6 @@
 package nylon.builtins;
 
+import nylon.NylonException;
 import nylon.NylonObject;
 import nylon.nylonobjects.NylonString;
 import nylon.parser.parsers.BuiltinParser;
@@ -15,7 +16,7 @@ public final class AsciiCanvas {
     public static void build() {
         BuiltinParser.builtins.put('$', new BuiltinFunction('$') {
             @Override
-            public void apply(Stack<NylonObject> stack) {
+            public void applyImpl(Stack<NylonObject> stack) throws NylonException {
                 // The lines of the string to add
                 String[] add = stack.pop().toString().split("\n");
                 // The x and y position to add the string

@@ -33,7 +33,7 @@ public class NumberParser implements Parser<StringIterator, InlineFunction> {
 
             inlineFunction.functions.add(new NylonFunction() {
                 @Override
-                public void apply(Stack<NylonObject> stack) {
+                public void applyImpl(Stack<NylonObject> stack) {
                     NylonDouble nd = new NylonDouble(d);
                     stack.push(nd);
                 }
@@ -48,7 +48,7 @@ public class NumberParser implements Parser<StringIterator, InlineFunction> {
 
             inlineFunction.functions.add(new NylonFunction() {
                 @Override
-                public void apply(Stack<NylonObject> stack) {
+                public void applyImpl(Stack<NylonObject> stack) {
                     NylonLong nl = new NylonLong(l);
                     stack.push(nl);
                 }

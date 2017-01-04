@@ -29,19 +29,19 @@ public class NylonParser extends LinkedParser<StringIterator, InlineFunction> {
         );
     }
 
-    public static InlineFunction parse(String s) {
-        InlineFunction inlineFunction = new InlineFunction();
+    public static InlineFunction parse(String id, String s) {
+        InlineFunction inlineFunction = new InlineFunction(id);
         nylonParser.parse(new StringIterator(s), inlineFunction);
         return inlineFunction;
     }
 
     public static NylonFunction parse(StringIterator s) {
-        InlineFunction inlineFunction = new InlineFunction();
+        InlineFunction inlineFunction = new InlineFunction("LambdaFunction");
         nylonParser.parse(inlineFunction, s);
         if (inlineFunction.functions.size() != 0) {
             return inlineFunction.functions.get(0);
         } else {
-            return new InlineFunction();
+            return new InlineFunction("LambdaFunction");
         }
     }
 }

@@ -15,36 +15,42 @@ import java.util.Stack;
 public abstract class NylonObject<T> {
     public T value;
     public boolean shouldOutputNewline = true;
+    public String id;
     protected Type type;
 
     public NylonObject(T value, Type type) {
         this.value = value;
         this.type = type;
+        this.id = toString();
     }
 
-    public abstract double toDouble(Stack<NylonObject> stack);
+    public abstract double toDouble(Stack<NylonObject> stack) throws NylonException;
 
-    public boolean toBoolean(Stack<NylonObject> stack) {
+    public boolean toBoolean(Stack<NylonObject> stack) throws NylonException {
         return toDouble(stack) != 0;
     }
 
-    public long toLong(Stack<NylonObject> stack) {
+    public long toLong(Stack<NylonObject> stack) throws NylonException {
         return (long) toDouble(stack);
     }
 
-    public char toCharacter(Stack<NylonObject> stack) {
+    public char toCharacter(Stack<NylonObject> stack) throws NylonException {
         return (char) toDouble(stack);
     }
 
-    public NylonArray toArray(Stack<NylonObject> stack) {
+    public NylonArray toArray(Stack<NylonObject> stack) throws NylonException {
         return new NylonArray(this);
     }
 
     public NylonFunction toFunction(Stack<NylonObject> stack) {
         return new NylonFunction() {
             @Override
-            public void apply(Stack<NylonObject> stack) {
-                stack.add(NylonObject.this.clone());
+            public void applyImpl(Stack<NylonObject> stack) throws NylonException {
+                try {
+                    stack.add(NylonObject.this.clone());
+                } catch (CloneNotSupportedException e) {
+                    throw new NylonException("Could not clone object \"" + this.id + "\"", this);
+                }
             }
 
             @Override
@@ -54,7 +60,7 @@ public abstract class NylonObject<T> {
         };
     }
 
-    public Iterator<NylonObject> toIterator(Stack<NylonObject> stack) {
+    public Iterator<NylonObject> toIterator(Stack<NylonObject> stack) throws NylonException {
         return new Iterator<NylonObject>() {
             long i = 0, number = toLong(stack);
 
@@ -74,23 +80,23 @@ public abstract class NylonObject<T> {
         return new NylonString(this.toString().toCharArray());
     }
 
-    public NylonObject concatenate(NylonObject object, Stack<NylonObject> stack) {
+    public NylonObject concatenate(NylonObject object, Stack<NylonObject> stack) throws NylonException {
         return new NylonDouble(this.toDouble(stack) + object.toDouble(stack));
     }
 
-    public NylonObject subtract(NylonObject object, Stack<NylonObject> stack) {
+    public NylonObject subtract(NylonObject object, Stack<NylonObject> stack) throws NylonException {
         return new NylonDouble(this.toDouble(stack) - object.toDouble(stack));
     }
 
-    public NylonObject multiply(NylonObject object, Stack<NylonObject> stack) {
+    public NylonObject multiply(NylonObject object, Stack<NylonObject> stack) throws NylonException {
         return new NylonDouble(this.toDouble(stack) * object.toDouble(stack));
     }
 
-    public NylonObject divide(NylonObject object, Stack<NylonObject> stack) {
+    public NylonObject divide(NylonObject object, Stack<NylonObject> stack) throws NylonException {
         return new NylonDouble(this.toDouble(stack) / object.toDouble(stack));
     }
 
-    public NylonObject to(Type type, Stack<NylonObject> stack) {
+    public NylonObject to(Type type, Stack<NylonObject> stack) throws NylonException {
         switch (type) {
             case BOOL:
                 return new NylonBoolean(this.toBoolean(stack));
@@ -109,11 +115,11 @@ public abstract class NylonObject<T> {
             case FILE:
                 return new NylonFile(new File(this.toString()));
             default:
-                throw new NylonException("Could not cast object to type " + type);
+                throw new NylonException("Could not cast object to type " + type, this);
         }
     }
 
-    public NylonObject promote(NylonObject object, Stack<NylonObject> stack) {
+    public NylonObject promote(NylonObject object, Stack<NylonObject> stack) throws NylonException {
         if (this.type.promotionLevel < object.type.promotionLevel) {
             return this.to(object.type, stack);
         } else {
@@ -132,12 +138,8 @@ public abstract class NylonObject<T> {
     }
 
     @Override
-    public NylonObject clone() {
-        try {
-            return (NylonObject) super.clone();
-        } catch (Exception e) {
-            throw new NylonException("Internal Error: Could not clone object.", this);
-        }
+    public NylonObject clone() throws CloneNotSupportedException {
+        return (NylonObject) super.clone();
     }
 
     public Type getType() {

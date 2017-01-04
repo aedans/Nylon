@@ -1,7 +1,9 @@
 package nylon.parser.parsers;
 
 import nylon.InlineFunction;
+import nylon.NylonException;
 import nylon.NylonObject;
+import nylon.nylonobjects.EmptyFunction;
 import nylon.nylonobjects.NylonFunction;
 import nylon.parser.NylonParser;
 import parser.ParseException;
@@ -36,14 +38,14 @@ public class IfStatementParser implements Parser<StringIterator, InlineFunction>
         NylonFunction ifTrue = NylonParser.parse(in);
 
         in.skipWhitespace();
-        NylonFunction ifFalse = new InlineFunction();
+        NylonFunction ifFalse = new EmptyFunction();
         if (in.hasNext() && in.peek() == '!')
             ifFalse = NylonParser.parse(in);
 
         NylonFunction finalIfFalse = ifFalse;
         inlineFunction.functions.add(new NylonFunction() {
             @Override
-            public void apply(Stack<NylonObject> stack) {
+            public void applyImpl(Stack<NylonObject> stack) throws NylonException {
                 boolean b = false;
                 for (char c : ifs) {
                     switch (c) {

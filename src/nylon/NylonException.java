@@ -1,23 +1,35 @@
 package nylon;
 
+import java.util.ArrayList;
+
 /**
  * Created by Aedan Smith.
  */
 
-public class NylonException extends RuntimeException {
-    public NylonException(String message) {
-        super(message);
+public class NylonException extends Exception {
+    private ArrayList<NylonObject> causes = new ArrayList<>();
+    private String message;
+
+    public NylonException(String message, NylonObject source) {
+        this.message = message;
+        add(source);
     }
 
-    public NylonException(String message, Object src) {
-        this(message + " (" + src.getClass().getSimpleName() + ")");
+    public void add(NylonObject source) {
+        causes.add(source);
     }
 
-    public NylonException(String message, int character) {
-        this(message + " (char " + character + ")");
+    @Override
+    public String getMessage() {
+        return toString();
     }
 
-    public NylonException(String message, Object src, int character) {
-        this(message + " (" + src.getClass().getSimpleName() + ", char " + character + ")");
+    @Override
+    public String toString() {
+        String s = message;
+        for (NylonObject object : causes) {
+            s += "\n\tat " + object.id;
+        }
+        return s;
     }
 }

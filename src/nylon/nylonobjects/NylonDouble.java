@@ -1,5 +1,6 @@
 package nylon.nylonobjects;
 
+import nylon.NylonException;
 import nylon.NylonObject;
 
 import java.util.Stack;
@@ -19,25 +20,25 @@ public class NylonDouble extends NylonObject<Double> {
     }
 
     @Override
-    public NylonDouble concatenate(NylonObject object, Stack<NylonObject> stack) {
+    public NylonDouble concatenate(NylonObject object, Stack<NylonObject> stack) throws NylonException {
         this.value += object.toDouble(stack);
         return this;
     }
 
     @Override
-    public NylonDouble subtract(NylonObject object, Stack<NylonObject> stack) {
+    public NylonDouble subtract(NylonObject object, Stack<NylonObject> stack) throws NylonException {
         this.value -= object.toDouble(stack);
         return this;
     }
 
     @Override
-    public NylonDouble multiply(NylonObject object, Stack<NylonObject> stack) {
+    public NylonDouble multiply(NylonObject object, Stack<NylonObject> stack) throws NylonException {
         this.value *= object.toDouble(stack);
         return this;
     }
 
     @Override
-    public NylonDouble divide(NylonObject object, Stack<NylonObject> stack) {
+    public NylonDouble divide(NylonObject object, Stack<NylonObject> stack) throws NylonException {
         this.value /= object.toDouble(stack);
         return this;
     }

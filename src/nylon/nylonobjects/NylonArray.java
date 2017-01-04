@@ -1,5 +1,6 @@
 package nylon.nylonobjects;
 
+import nylon.NylonException;
 import nylon.NylonObject;
 
 import java.util.Collection;
@@ -93,7 +94,7 @@ public class NylonArray extends NylonObject<Vector<NylonObject>> implements Coll
     }
 
     @Override
-    public boolean toBoolean(Stack<NylonObject> stack) {
+    public boolean toBoolean(Stack<NylonObject> stack) throws NylonException {
         return !isEmpty() && this.value.lastElement().toBoolean(stack);
     }
 
@@ -122,19 +123,19 @@ public class NylonArray extends NylonObject<Vector<NylonObject>> implements Coll
     }
 
     @Override
-    public NylonObject concatenate(NylonObject object, Stack<NylonObject> stack) {
+    public NylonObject concatenate(NylonObject object, Stack<NylonObject> stack) throws NylonException {
         this.addAll(object.toArray(stack));
         return this;
     }
 
     @Override
-    public NylonObject subtract(NylonObject object, Stack<NylonObject> stack) {
+    public NylonObject subtract(NylonObject object, Stack<NylonObject> stack) throws NylonException {
         this.removeAll(object.toArray(stack));
         return this;
     }
 
     @Override
-    public NylonObject multiply(NylonObject object, Stack<NylonObject> stack) {
+    public NylonObject multiply(NylonObject object, Stack<NylonObject> stack) throws NylonException {
         Vector<NylonObject> v = (Vector<NylonObject>) this.value.clone();
         for (long i = 0; i < object.toLong(stack); i++) {
             this.addAll(v);

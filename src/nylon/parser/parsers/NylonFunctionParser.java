@@ -19,7 +19,7 @@ public class NylonFunctionParser implements Parser<StringIterator, InlineFunctio
             return true;
         in.skip();
 
-        InlineFunction function = new InlineFunction();
+        InlineFunction function = new InlineFunction("LambdaFunction");
         NylonParser.nylonParser.parseUntil(in, function, sin -> sin.hasNext() && sin.peek() != ']');
         inlineFunction.functions.add(function);
 

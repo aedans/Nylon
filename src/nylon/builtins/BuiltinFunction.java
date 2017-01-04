@@ -11,6 +11,7 @@ public abstract class BuiltinFunction extends NylonFunction {
 
     public BuiltinFunction(char c) {
         this.c = c;
+        this.id = toString();
     }
 
     @Override

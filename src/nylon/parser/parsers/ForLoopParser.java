@@ -1,6 +1,7 @@
 package nylon.parser.parsers;
 
 import nylon.InlineFunction;
+import nylon.NylonException;
 import nylon.NylonObject;
 import nylon.nylonobjects.NylonFunction;
 import nylon.parser.NylonParser;
@@ -27,8 +28,12 @@ public class ForLoopParser implements Parser<StringIterator, InlineFunction> {
         NylonFunction wrapped = NylonParser.parse(in);
 
         inlineFunction.functions.add(new NylonFunction() {
+            {
+                id = "ForLoop(" + wrapped.id + ")";
+            }
+
             @Override
-            public void apply(Stack<NylonObject> stack) {
+            public void applyImpl(Stack<NylonObject> stack) throws NylonException {
                 Iterator<NylonObject> iterator = consume ? stack.pop().toIterator(stack) : stack.peek().toIterator(stack);
                 while (iterator.hasNext()) {
                     if (push)

@@ -21,47 +21,47 @@ public final class FileLibrary {
     public static void build() {
         LibraryParser.files.put("Fa.nl", () -> new LibraryFunction("Fa.nl") {
             @Override
-            public void apply(Stack<NylonObject> stack) {
+            public void applyImpl(Stack<NylonObject> stack) throws NylonException {
                 try {
                     String s = stack.pop().toString();
                     new PrintStream(Files.newOutputStream(Paths.get(stack.pop().toString()), StandardOpenOption.APPEND)).print(s);
                 } catch (IOException e) {
-                    throw new NylonException(e.getMessage());
+                    throw new NylonException(e.getMessage(), this);
                 }
             }
         });
         LibraryParser.files.put("Fc.nl", () -> new LibraryFunction("Fc.nl") {
             @Override
-            public void apply(Stack<NylonObject> stack) {
+            public void applyImpl(Stack<NylonObject> stack) throws NylonException {
                 try {
                     File file = new File(stack.peek().toString());
                     file.createNewFile();
                 } catch (IOException e) {
-                    throw new NylonException(e.getMessage());
+                    throw new NylonException(e.getMessage(), this);
                 }
             }
         });
         LibraryParser.files.put("Fd.nl", () -> new LibraryFunction("Fd.nl") {
             @Override
-            public void apply(Stack<NylonObject> stack) {
+            public void applyImpl(Stack<NylonObject> stack) {
                 File file = new File(stack.peek().toString());
                 file.mkdir();
             }
         });
         LibraryParser.files.put("Fn.nl", () -> new LibraryFunction("Fn.nl") {
             @Override
-            public void apply(Stack<NylonObject> stack) {
+            public void applyImpl(Stack<NylonObject> stack) {
                 stack.add(new NylonFile(new File(stack.pop().toString())));
             }
         });
         LibraryParser.files.put("Fw.nl", () -> new LibraryFunction("Fw.nl") {
             @Override
-            public void apply(Stack<NylonObject> stack) {
+            public void applyImpl(Stack<NylonObject> stack) throws NylonException {
                 try {
                     String s = stack.pop().toString();
                     new PrintStream(Files.newOutputStream(Paths.get(stack.pop().toString()))).print(s);
                 } catch (IOException e) {
-                    throw new NylonException(e.getMessage());
+                    throw new NylonException(e.getMessage(), this);
                 }
             }
         });

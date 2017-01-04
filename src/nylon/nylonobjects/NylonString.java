@@ -30,7 +30,7 @@ public class NylonString extends NylonArray {
 
     @Override
     public NylonFunction toFunction(Stack<NylonObject> stack) {
-        return NylonParser.parse(this.toString());
+        return NylonParser.parse("NylonFunction(" + toString() + ")", this.toString());
     }
 
     @Override

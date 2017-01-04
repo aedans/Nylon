@@ -43,10 +43,10 @@ public class LibraryParser implements Parser<StringIterator, InlineFunction> {
                                         content.append(s);
                                         content.append('\n');
                                     });
-                                    InlineFunction inlineFunction = NylonParser.parse(content.toString());
+                                    InlineFunction inlineFunction = NylonParser.parse(s + f.getName(), content.toString());
                                     return function = new LibraryFunction(s + f.getName()) {
                                         @Override
-                                        public void apply(Stack<NylonObject> stack) {
+                                        public void applyImpl(Stack<NylonObject> stack) throws NylonException {
                                             inlineFunction.apply(stack);
                                         }
 
@@ -56,7 +56,7 @@ public class LibraryParser implements Parser<StringIterator, InlineFunction> {
                                         }
                                     };
                                 } catch (IOException e) {
-                                    throw new NylonException(e.getMessage());
+                                    throw new RuntimeException(e.getMessage());
                                 }
                             } else {
                                 return function;
@@ -69,26 +69,30 @@ public class LibraryParser implements Parser<StringIterator, InlineFunction> {
 
     @Override
     public boolean parse(InlineFunction inlineFunction, StringIterator in) throws ParseException {
-        if (!in.hasNext() || !(in.isInRange('a', 'z') || in.isInRange('A', 'Z')))
-            return false;
+        try {
+            if (!in.hasNext() || !(in.isInRange('a', 'z') || in.isInRange('A', 'Z')))
+                return false;
 
-        String name = "";
-        while (in.hasNext()) {
-            if (in.isInRange('a', 'z')) {
-                name += in.next();
-                break;
-            } else if (in.isInRange('A', 'Z')) {
-                name += in.next();
-            } else {
-                break;
+            String name = "";
+            while (in.hasNext()) {
+                if (in.isInRange('a', 'z')) {
+                    name += in.next();
+                    break;
+                } else if (in.isInRange('A', 'Z')) {
+                    name += in.next();
+                } else {
+                    break;
+                }
             }
+
+            Supplier<NylonFunction> function = files.get(name + ".nl");
+            if (function == null)
+                throw new ParseException("Could not find STDL Function with name \"" + name + "\"", this);
+
+            inlineFunction.functions.add(function.get());
+            return true;
+        } catch (ParseException e) {
+            throw new ParseException(e.getMessage(), this);
         }
-
-        Supplier<NylonFunction> function = files.get(name + ".nl");
-        if (function == null)
-            throw new NylonException("Could not find STDL Function with name \"" + name + "\"", this, in.getIndex());
-
-        inlineFunction.functions.add(function.get());
-        return true;
     }
 }

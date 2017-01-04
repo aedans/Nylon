@@ -29,7 +29,7 @@ public class NylonFile extends NylonObject<File> {
     }
 
     @Override
-    public Iterator<NylonObject> toIterator(Stack<NylonObject> stack) {
+    public Iterator<NylonObject> toIterator(Stack<NylonObject> stack) throws NylonException {
         try {
             if (this.value.isDirectory()) {
                 return new Iterator<NylonObject>() {
@@ -67,12 +67,12 @@ public class NylonFile extends NylonObject<File> {
                 };
             }
         } catch (IOException e) {
-            throw new NylonException(e.getMessage());
+            throw new NylonException(e.getMessage(), this);
         }
     }
 
     @Override
-    public NylonArray toArray(Stack<NylonObject> stack) {
+    public NylonArray toArray(Stack<NylonObject> stack) throws NylonException {
         NylonArray nylonArray = new NylonArray();
         this.toIterator(stack).forEachRemaining(nylonArray::add);
         return nylonArray;

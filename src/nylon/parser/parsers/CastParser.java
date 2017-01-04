@@ -1,6 +1,7 @@
 package nylon.parser.parsers;
 
 import nylon.InlineFunction;
+import nylon.NylonException;
 import nylon.NylonObject;
 import nylon.nylonobjects.*;
 import parser.ParseException;
@@ -24,7 +25,7 @@ public class CastParser implements Parser<StringIterator, InlineFunction> {
 
         inlineFunction.functions.add(new NylonFunction() {
             @Override
-            public void apply(Stack<NylonObject> stack) {
+            public void applyImpl(Stack<NylonObject> stack) throws NylonException {
                 switch (c) {
                     case 'a':
                         stack.add(stack.pop().toArray(stack));

@@ -49,11 +49,22 @@ public abstract class NylonFunction extends NylonObject<NylonFunction> {
         return v;
     }
 
-    public abstract void apply(Stack<NylonObject> stack);
+    public void apply(Stack<NylonObject> stack) throws NylonException {
+        try {
+            applyImpl(stack);
+        } catch (NylonException e) {
+            e.add(this);
+            throw e;
+        } catch (Exception e) {
+            throw new NylonException(e.getClass().getCanonicalName() + ": " + e.getMessage(), this);
+        }
+    }
+
+    public abstract void applyImpl(Stack<NylonObject> stack) throws NylonException;
 
     @Override
-    public double toDouble(Stack<NylonObject> stack) {
-        throw new NylonException("Cannot cast function to non-function objects");
+    public double toDouble(Stack<NylonObject> stack) throws NylonException {
+        throw new NylonException("Cannot cast function to non-function objects", this);
     }
 
     @Override
@@ -63,11 +74,31 @@ public abstract class NylonFunction extends NylonObject<NylonFunction> {
 
     @Override
     public NylonFunction concatenate(NylonObject object, Stack<NylonObject> stack) {
-        return new InlineFunction(this, object.toFunction(stack));
+        return new InlineFunction("ConcatenatedFunction(" + this.id + ", " + object.id + ")",
+                this, object.toFunction(stack));
     }
 
     @Override
-    public NylonObject subtract(NylonObject object, Stack<NylonObject> stack) {
-        throw new NylonException("Cannot subtract functions");
+    public NylonObject subtract(NylonObject object, Stack<NylonObject> stack) throws NylonException {
+        throw new NylonException("Cannot subtract functions", this);
+    }
+
+    @Override
+    public NylonFunction clone() throws CloneNotSupportedException {
+        return new NylonFunction() {
+            {
+                id = NylonFunction.this.id;
+            }
+
+            @Override
+            public void applyImpl(Stack<NylonObject> stack) throws NylonException {
+                NylonFunction.this.applyImpl(stack);
+            }
+
+            @Override
+            public String toString() {
+                return NylonFunction.this.toString();
+            }
+        };
     }
 }

@@ -1,5 +1,4 @@
 import nylon.Builtins;
-import nylon.NylonException;
 import nylon.NylonRuntime;
 import nylon.parser.parsers.LibraryParser;
 
@@ -19,16 +18,11 @@ public class Main {
             return;
         }
 
-        try {
-            Builtins.build();
-            LibraryParser.build(new File(args[0]), "");
+        Builtins.build();
+        LibraryParser.build(new File(args[0]), "");
 
-            final StringBuilder content = new StringBuilder();
-            new BufferedReader(new FileReader(args[1])).lines().forEach(s -> content.append(s).append('\n'));
-            new NylonRuntime(content.toString(), Arrays.asList(args).subList(2, args.length)).run();
-        } catch (NylonException e) {
-            e.printStackTrace();
-            System.err.println(e);
-        }
+        final StringBuilder content = new StringBuilder();
+        new BufferedReader(new FileReader(args[1])).lines().forEach(s -> content.append(s).append('\n'));
+        new NylonRuntime(args[1], content.toString(), Arrays.asList(args).subList(2, args.length)).run();
     }
 }
