@@ -51,7 +51,7 @@ public final class Stack {
                 try {
                     stack.add(object.clone());
                 } catch (CloneNotSupportedException e) {
-                    throw new NylonException("Could not clone object \"" + object.id + "\"", this);
+                    throw new NylonException("Could not clone object \"" + object.getId() + "\"", this);
                 }
             }
         });

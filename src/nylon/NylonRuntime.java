@@ -15,12 +15,12 @@ public class NylonRuntime {
     private Stack<NylonObject> nylonStack = new Stack<>();
 
     public NylonRuntime(String name, String src, List<String> strings) {
-        for (String s : strings) {
-            nylonStack.add(new NylonString(s.toCharArray()));
-        }
         long t = System.nanoTime();
         this.main = NylonParser.parse(name, src);
         System.out.printf("Program compiled in %f milliseconds\n", (double) (System.nanoTime() - t) / 1000000d);
+        for (String s : strings) {
+            nylonStack.add(new NylonString(s.toCharArray()));
+        }
     }
 
     public void run() throws NylonException {

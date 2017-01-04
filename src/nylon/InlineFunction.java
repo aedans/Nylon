@@ -20,8 +20,9 @@ public class InlineFunction extends NylonFunction {
 
     @Override
     public void applyImpl(Stack<NylonObject> stack) throws NylonException {
-        for (NylonFunction function : functions) {
-            function.apply(stack);
+        //noinspection ForLoopReplaceableByForEach
+        for (int i = 0, functionsSize = functions.size(); i < functionsSize; i++) {
+            functions.get(i).apply(stack);
         }
     }
 

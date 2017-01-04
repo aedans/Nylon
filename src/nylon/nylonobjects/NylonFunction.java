@@ -74,7 +74,7 @@ public abstract class NylonFunction extends NylonObject<NylonFunction> {
 
     @Override
     public NylonFunction concatenate(NylonObject object, Stack<NylonObject> stack) {
-        return new InlineFunction("ConcatenatedFunction(" + this.id + ", " + object.id + ")",
+        return new InlineFunction("ConcatenatedFunction(" + this.id + ", " + object.getId() + ")",
                 this, object.toFunction(stack));
     }
 

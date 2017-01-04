@@ -28,7 +28,7 @@ public class NylonException extends Exception {
     public String toString() {
         String s = message;
         for (NylonObject object : causes) {
-            s += "\n\tat " + object.id;
+            s += "\n\tat " + object.getId();
         }
         return s;
     }

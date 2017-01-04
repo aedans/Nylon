@@ -15,7 +15,7 @@ import java.util.Stack;
 public abstract class NylonObject<T> {
     public T value;
     public boolean shouldOutputNewline = true;
-    public String id;
+    protected String id;
     protected Type type;
 
     public NylonObject(T value, Type type) {
@@ -140,6 +140,10 @@ public abstract class NylonObject<T> {
     @Override
     public NylonObject clone() throws CloneNotSupportedException {
         return (NylonObject) super.clone();
+    }
+
+    public String getId() {
+        return id;
     }
 
     public Type getType() {

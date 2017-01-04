@@ -4,14 +4,17 @@ import nylon.InlineFunction;
 import nylon.nylonobjects.NylonFunction;
 import nylon.parser.parsers.*;
 import parser.LinkedParser;
+import parser.ParseException;
 import parser.StringIterator;
+
+import java.util.function.Predicate;
 
 /**
  * Created by Aedan Smith.
  */
 
 public class NylonParser extends LinkedParser<StringIterator, InlineFunction> {
-    public static NylonParser nylonParser = new NylonParser();
+    static NylonParser nylonParser = new NylonParser();
 
     public NylonParser() {
         super(new DefaultParser(),
@@ -41,7 +44,19 @@ public class NylonParser extends LinkedParser<StringIterator, InlineFunction> {
         if (inlineFunction.functions.size() != 0) {
             return inlineFunction.functions.get(0);
         } else {
-            return new InlineFunction("LambdaFunction");
+            return inlineFunction;
         }
+    }
+
+    public static InlineFunction parseUntil(StringIterator in, Predicate<StringIterator> test) {
+        InlineFunction inlineFunction = new InlineFunction("LambdaFunction");
+        nylonParser.parseUntil(in, inlineFunction, test);
+        return inlineFunction;
+    }
+
+    @Override
+    public boolean parse(InlineFunction inlineFunction, StringIterator in) throws ParseException {
+        in.skipWhitespace();
+        return super.parse(inlineFunction, in);
     }
 }

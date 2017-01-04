@@ -32,7 +32,7 @@ public interface Parser<I extends Iterator, T> {
      *
      * @param in   The input to parse.
      * @param t    The object to parse to.
-     * @param test The Predicate to test the end of parser.
+     * @param test The Predicate to test.nl the end of parser.
      * @throws ParseException If there was an error parsing the input.
      */
     default void parseUntil(I in, T t, Predicate<I> test) throws ParseException {

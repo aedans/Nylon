@@ -44,6 +44,10 @@ public class IfStatementParser implements Parser<StringIterator, InlineFunction>
 
         NylonFunction finalIfFalse = ifFalse;
         inlineFunction.functions.add(new NylonFunction() {
+            {
+                id = "IfStatement";
+            }
+
             @Override
             public void applyImpl(Stack<NylonObject> stack) throws NylonException {
                 boolean b = false;

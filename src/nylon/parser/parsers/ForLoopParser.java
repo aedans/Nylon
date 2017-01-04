@@ -29,7 +29,7 @@ public class ForLoopParser implements Parser<StringIterator, InlineFunction> {
 
         inlineFunction.functions.add(new NylonFunction() {
             {
-                id = "ForLoop(" + wrapped.id + ")";
+                id = "ForLoop(" + wrapped.getId() + ")";
             }
 
             @Override
