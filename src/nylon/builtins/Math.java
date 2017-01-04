@@ -3,6 +3,7 @@ package nylon.builtins;
 import nylon.NylonException;
 import nylon.NylonObject;
 import nylon.nylonobjects.NylonDouble;
+import nylon.nylonobjects.NylonLong;
 import nylon.parser.parsers.BuiltinParser;
 
 import java.util.Stack;
@@ -57,8 +58,8 @@ public final class Math {
             @Override
             public void applyImpl(Stack<NylonObject> stack) throws NylonException {
                 NylonObject n2 = stack.pop(), n1 = stack.pop();
-                NylonDouble nylonDouble = new NylonDouble(n1.toDouble(stack) % n2.toDouble(stack));
-                stack.add(nylonDouble);
+                NylonLong nylonLong = new NylonLong(n1.toLong(stack) % n2.toLong(stack));
+                stack.add(nylonLong);
             }
         });
     }

@@ -17,6 +17,13 @@ A list of libraries and functions contained in the Nylon Standard Library.
 - Fn: Creates a new file object from the top of the stack.
 - Fw: Writes the top of the stack to a file.
 
+#### - R: Random:
+- Ra: Shuffles an array.
+- Rb: Pushes a random boolean to the stack.
+- Rd: Pushes a random double to the stack.
+- Rl: Pushes a random long to the stack.
+- Ru: Pushes a random unsigned long to the stack.
+
 #### - U: Utilities:
 - Ub: Returns the binary representation of a number as an array. // TODO
 - Uo: Rotates an array.

@@ -65,6 +65,8 @@ tt*3-ctt*2-ctt*1-ctt*ctt*1+c                '
 
 // F Library: No tests, due to non-deterministic output.
 
+// R Library: No tests, due to non-deterministic output.
+
 // U library
 "edcba"Ur~s                                 '
 "bcdea"Uo~s                                 '

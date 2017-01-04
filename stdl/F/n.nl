@@ -12,4 +12,4 @@
 //     If the file is a directory, creates an array of all files in the directory
 //     If the file is a file, creates an array of all lines in the file.
 
-"Interpreter does not support NylonFile type" // If the function is not implemented
+"Interpreter does not support NylonFile type"

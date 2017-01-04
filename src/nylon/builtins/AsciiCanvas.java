@@ -57,7 +57,7 @@ public final class AsciiCanvas {
                     y++;
                 }
 
-                // Turn the canvas back into a string
+                // Turn the canvas back into a.nl string
                 String s = "";
                 for (ArrayList<Character> chars : canvas) {
                     for (Character c : chars) {

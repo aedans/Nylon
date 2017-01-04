@@ -14,5 +14,6 @@ public final class Builtins {
         FileLibrary.build();
         Functions.build();
         AsciiCanvas.build();
+        Random.build();
     }
 }
