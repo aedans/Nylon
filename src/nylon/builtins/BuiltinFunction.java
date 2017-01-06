@@ -10,12 +10,12 @@ public abstract class BuiltinFunction extends NylonFunction {
     private char c;
 
     public BuiltinFunction(char c) {
+        super("BuiltinFunction('" + c + "')");
         this.c = c;
-        this.id = toString();
     }
 
     @Override
     public String toString() {
-        return "BuiltinFunction('" + c + "')";
+        return id;
     }
 }

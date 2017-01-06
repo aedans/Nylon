@@ -10,8 +10,8 @@ import java.util.Stack;
  */
 
 public class EmptyFunction extends NylonFunction {
-    {
-        id = "EmptyFunction";
+    public EmptyFunction() {
+        super("EmptyFunction");
     }
 
     @Override

@@ -44,7 +44,7 @@ public class StringParser implements Parser<StringIterator, InlineFunction> {
         in.skip();
 
         char[] finalS = s.toCharArray();
-        inlineFunction.functions.add(new NylonFunction() {
+        inlineFunction.functions.add(new NylonFunction("PushNylonString(\"" + new String(finalS).replaceAll("\\n", "\\\\n") + "\")") {
             @Override
             public void applyImpl(Stack<NylonObject> stack) {
                 stack.add(new NylonString(finalS));
@@ -52,7 +52,7 @@ public class StringParser implements Parser<StringIterator, InlineFunction> {
 
             @Override
             public String toString() {
-                return "PushNylonString(\"" + new String(finalS).replaceAll("\\n", "\\\\n") + "\")";
+                return getId();
             }
         });
 

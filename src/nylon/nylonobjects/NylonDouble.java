@@ -11,7 +11,7 @@ import java.util.Stack;
 
 public class NylonDouble extends NylonObject<Double> {
     public NylonDouble(double d) {
-        super(d, Type.DOUBLE);
+        super(d, Type.DOUBLE, "Double");
     }
 
     @Override

@@ -14,17 +14,17 @@ import java.util.Vector;
 
 public class NylonArray extends NylonObject<Vector<NylonObject>> implements Collection<NylonObject> {
     public NylonArray() {
-        super(new Vector<>(), Type.ARRAY);
+        super(new Vector<>(), Type.ARRAY, "Array");
         this.shouldOutputNewline = false;
     }
 
     public NylonArray(NylonObject object) {
-        super(new Vector<>(), Type.ARRAY);
+        super(new Vector<>(), Type.ARRAY, "Array");
         this.value.add(object);
     }
 
     public NylonArray(Collection<NylonObject> stack) {
-        super(new Vector<>(), Type.ARRAY);
+        super(new Vector<>(), Type.ARRAY, "Array");
         this.value.addAll(stack);
     }
 

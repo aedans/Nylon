@@ -22,11 +22,7 @@ public class CaptureParser implements Parser<StringIterator, InlineFunction> {
         in.skip();
 
         NylonFunction capture = NylonParser.parse(in);
-        inlineFunction.functions.add(new NylonFunction() {
-            {
-                id = "Capture(" + capture.getId() + ")";
-            }
-
+        inlineFunction.functions.add(new NylonFunction("Capture(" + capture.getId() + ")") {
             @Override
             public void applyImpl(Stack<NylonObject> stack) {
                 stack.add(capture);

@@ -18,10 +18,10 @@ public abstract class NylonObject<T> {
     protected String id;
     protected Type type;
 
-    public NylonObject(T value, Type type) {
+    public NylonObject(T value, Type type, String id) {
         this.value = value;
         this.type = type;
-        this.id = toString();
+        this.id = id;
     }
 
     public abstract double toDouble(Stack<NylonObject> stack) throws NylonException;
@@ -43,7 +43,7 @@ public abstract class NylonObject<T> {
     }
 
     public NylonFunction toFunction(Stack<NylonObject> stack) {
-        return new NylonFunction() {
+        return new NylonFunction("Push" + NylonObject.this.getClass().getSimpleName() + "(" + NylonObject.this + ")") {
             @Override
             public void applyImpl(Stack<NylonObject> stack) throws NylonException {
                 try {
@@ -55,7 +55,7 @@ public abstract class NylonObject<T> {
 
             @Override
             public String toString() {
-                return "Push" + NylonObject.this.getClass().getSimpleName() + "(" + NylonObject.this + ")";
+                return id;
             }
         };
     }
@@ -143,7 +143,7 @@ public abstract class NylonObject<T> {
     }
 
     public String getId() {
-        return id;
+        return id + '(' + value + ')';
     }
 
     public Type getType() {

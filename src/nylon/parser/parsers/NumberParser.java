@@ -31,7 +31,7 @@ public class NumberParser implements Parser<StringIterator, InlineFunction> {
         if (isDouble) {
             double d = Double.parseDouble(s);
 
-            inlineFunction.functions.add(new NylonFunction() {
+            inlineFunction.functions.add(new NylonFunction("PushNylonDouble(\"" + d + "\")") {
                 @Override
                 public void applyImpl(Stack<NylonObject> stack) {
                     NylonDouble nd = new NylonDouble(d);
@@ -40,13 +40,13 @@ public class NumberParser implements Parser<StringIterator, InlineFunction> {
 
                 @Override
                 public String toString() {
-                    return "PushNylonDouble(\"" + d + "\")";
+                    return id;
                 }
             });
         } else {
             long l = Long.parseLong(s);
 
-            inlineFunction.functions.add(new NylonFunction() {
+            inlineFunction.functions.add(new NylonFunction("PushNylonLong(\"" + l + "\")") {
                 @Override
                 public void applyImpl(Stack<NylonObject> stack) {
                     NylonLong nl = new NylonLong(l);
@@ -55,7 +55,7 @@ public class NumberParser implements Parser<StringIterator, InlineFunction> {
 
                 @Override
                 public String toString() {
-                    return "PushNylonDouble(\"" + l + "\")";
+                    return id;
                 }
             });
         }

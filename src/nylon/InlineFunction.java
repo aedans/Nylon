@@ -14,7 +14,7 @@ public class InlineFunction extends NylonFunction {
     public ArrayList<NylonFunction> functions = new ArrayList<>();
 
     public InlineFunction(String id, NylonFunction... functions) {
-        this.id = id;
+        super(id);
         Collections.addAll(this.functions, functions);
     }
 
@@ -31,7 +31,7 @@ public class InlineFunction extends NylonFunction {
         if (functions != null) {
             return NylonFunction.format("InlineFunction" + functions.toString());
         } else {
-            return "InlineFunction(null)";
+            return "InlineFunction()";
         }
     }
 }

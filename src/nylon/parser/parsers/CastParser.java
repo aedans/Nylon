@@ -23,7 +23,7 @@ public class CastParser implements Parser<StringIterator, InlineFunction> {
 
         char c = in.next();
 
-        inlineFunction.functions.add(new NylonFunction() {
+        inlineFunction.functions.add(new NylonFunction("CastToObject('" + c + "')") {
             @Override
             public void applyImpl(Stack<NylonObject> stack) throws NylonException {
                 switch (c) {
@@ -53,7 +53,7 @@ public class CastParser implements Parser<StringIterator, InlineFunction> {
 
             @Override
             public String toString() {
-                return "CastToObject('" + c + "')";
+                return id;
             }
         });
         return true;

@@ -23,7 +23,7 @@ public class CharacterParser implements Parser<StringIterator, InlineFunction> {
 
         char c = in.next();
 
-        inlineFunction.functions.add(new NylonFunction() {
+        inlineFunction.functions.add(new NylonFunction("PushNylonCharacter('" + (c == '\n' ? "\\n" : c) + "')") {
             @Override
             public void applyImpl(Stack<NylonObject> stack) {
                 NylonCharacter nc = new NylonCharacter(c);
@@ -32,7 +32,7 @@ public class CharacterParser implements Parser<StringIterator, InlineFunction> {
 
             @Override
             public String toString() {
-                return "PushNylonCharacter('" + (c == '\n' ? "\\n" : c) + "')";
+                return id;
             }
         });
 

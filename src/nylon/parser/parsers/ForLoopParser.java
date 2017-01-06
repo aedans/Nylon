@@ -27,11 +27,7 @@ public class ForLoopParser implements Parser<StringIterator, InlineFunction> {
 
         NylonFunction wrapped = NylonParser.parse(in);
 
-        inlineFunction.functions.add(new NylonFunction() {
-            {
-                id = "ForLoop(" + wrapped.getId() + ")";
-            }
-
+        inlineFunction.functions.add(new NylonFunction("ForLoop(" + wrapped.getId() + ")") {
             @Override
             public void applyImpl(Stack<NylonObject> stack) throws NylonException {
                 Iterator<NylonObject> iterator = consume ? stack.pop().toIterator(stack) : stack.peek().toIterator(stack);

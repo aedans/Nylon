@@ -12,7 +12,7 @@ import java.util.Stack;
 
 public abstract class LibraryFunction extends NylonFunction {
     public LibraryFunction(String s) {
-        this.id = s;
+        super(s);
     }
 
     @Override

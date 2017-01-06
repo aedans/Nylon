@@ -12,8 +12,8 @@ import java.util.Stack;
 
 @SuppressWarnings("unchecked")
 public abstract class NylonFunction extends NylonObject<NylonFunction> {
-    public NylonFunction() {
-        super(null, Type.FUNCTION);
+    public NylonFunction(String id) {
+        super(null, Type.FUNCTION, id);
         this.value = this;
     }
 
@@ -84,12 +84,13 @@ public abstract class NylonFunction extends NylonObject<NylonFunction> {
     }
 
     @Override
-    public NylonFunction clone() throws CloneNotSupportedException {
-        return new NylonFunction() {
-            {
-                id = NylonFunction.this.id;
-            }
+    public String getId() {
+        return id;
+    }
 
+    @Override
+    public NylonFunction clone() throws CloneNotSupportedException {
+        return new NylonFunction(id) {
             @Override
             public void applyImpl(Stack<NylonObject> stack) throws NylonException {
                 NylonFunction.this.applyImpl(stack);
