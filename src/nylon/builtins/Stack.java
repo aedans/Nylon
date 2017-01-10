@@ -50,6 +50,7 @@ public final class Stack {
                 NylonObject object = stack.pop();
                 try {
                     stack.add(object.clone());
+                    stack.add(object.clone());
                 } catch (CloneNotSupportedException e) {
                     throw new NylonException("Could not clone object \"" + object.getId() + "\"", this);
                 }

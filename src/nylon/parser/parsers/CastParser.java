@@ -48,6 +48,8 @@ public class CastParser implements Parser<StringIterator, InlineFunction> {
                     case 's':
                         stack.add(stack.pop().toNylonString(stack));
                         break;
+                    default:
+                        throw new NylonException("Cannot cast object to '" + c + "'", this);
                 }
             }
 

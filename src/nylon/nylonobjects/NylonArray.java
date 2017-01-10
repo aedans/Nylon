@@ -136,10 +136,11 @@ public class NylonArray extends NylonObject<Vector<NylonObject>> implements Coll
 
     @Override
     public NylonObject multiply(NylonObject object, Stack<NylonObject> stack) throws NylonException {
-        Vector<NylonObject> v = (Vector<NylonObject>) this.value.clone();
+        Vector<NylonObject> v = new Vector<>();
         for (long i = 0; i < object.toLong(stack); i++) {
-            this.addAll(v);
+            v.addAll(this);
         }
+        this.value = v;
         return this;
     }
 
