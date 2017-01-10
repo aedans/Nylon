@@ -57,6 +57,7 @@
 'bd'cd'dd'ed'fd                             '
 "abcde"e                                    '
 '`i'ai'bi'ci'di                             '
+"`abcd"@ime                                 '
 'a'b'c'e'ds                                 '
 tt*3-ctt*2-ctt*1-ctt*ctt*1+c                '
 'a'b'c'd'e5z~s                              '
