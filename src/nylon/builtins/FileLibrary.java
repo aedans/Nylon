@@ -2,6 +2,7 @@ package nylon.builtins;
 
 import nylon.NylonException;
 import nylon.NylonObject;
+import nylon.nylonobjects.NylonBoolean;
 import nylon.nylonobjects.NylonFile;
 import nylon.parser.parsers.LibraryParser;
 
@@ -48,6 +49,14 @@ public final class FileLibrary {
                 file.mkdir();
             }
         });
+        LibraryParser.files.put("Ff.nl", () -> new LibraryFunction("Ff.nl") {
+            @Override
+            public void applyImpl(Stack<NylonObject> stack) {
+                File file = new File(stack.peek().toString());
+                stack.add(new NylonBoolean(file.isFile()));
+            }
+        });
+
         LibraryParser.files.put("Fn.nl", () -> new LibraryFunction("Fn.nl") {
             @Override
             public void applyImpl(Stack<NylonObject> stack) {

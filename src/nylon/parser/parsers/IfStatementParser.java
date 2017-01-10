@@ -33,7 +33,10 @@ public class IfStatementParser implements Parser<StringIterator, InlineFunction>
                         || in.peek() == '¿'
                         || in.peek() == '>'
                         || in.peek() == '<'
-                        || in.peek() == '=')).toCharArray();
+                        || in.peek() == '='
+                        || in.peek() == '!'
+                )
+        ).toCharArray();
 
         NylonFunction ifTrue = NylonParser.parse(in);
 
@@ -42,6 +45,7 @@ public class IfStatementParser implements Parser<StringIterator, InlineFunction>
         if (in.hasNext() && in.peek() == '!')
             ifFalse = NylonParser.parse(in);
 
+        boolean pop = ifs[ifs.length - 1] != '!';
         NylonFunction finalIfFalse = ifFalse;
         inlineFunction.functions.add(new NylonFunction("IfStatement") {
             @Override
@@ -74,6 +78,8 @@ public class IfStatementParser implements Parser<StringIterator, InlineFunction>
                     if (b)
                         break;
                 }
+                if (pop)
+                    stack.pop();
                 if (b) {
                     ifTrue.apply(stack);
                 } else {

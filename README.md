@@ -66,7 +66,8 @@ Rs
 If statements are function modifiers that cause a function to be applied if the if statement is true. There are five if
 statements in Nylon, '?', '¿', '>', '<', and '='. If the statement is true, the following function is executed,
 otherwise it is skipped. For successive if statements, any of the statements must be true for the following function to
-execute. '!' is used as an effective else for if statements.
+execute. '!' is used as an effective else for if statements. If statements will always consume the top object of the
+stack. To preserve the top object of the stack, add a '!' as the last character of the if statement.
 
 - '?': If the top of the stack is true.
 - '¿': If the top of the stack is false.

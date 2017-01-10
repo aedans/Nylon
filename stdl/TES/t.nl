@@ -37,14 +37,14 @@
 "ab de"0 2'c$                               '
 
 // If statement tests
-1?[;"abcde"]![;"ERROR"]                     '
-0¿[;"abcde"]![;"ERROR"]                     '
-5 4>[;;"abcde"]![;;"ERROR"]                 '
-4 5<[;;"abcde"]![;;"ERROR"]                 '
-3 3=[;;"abcde"]![;;"ERROR"]                 '
-3 3<=[;;"abcde"]![;;"ERROR"]                '
-3 3=¿[;;"abcde"]![;;"ERROR"]                '
-3 0?>[;;"abcde"]![;;"ERROR"]                '
+1?"abcde"!"ERROR"                           '
+0¿"abcde"!"ERROR"                           '
+5 4>[;"abcde"]![;"ERROR"]                 '
+4 5<[;"abcde"]![;"ERROR"]                 '
+3 3=[;"abcde"]![;"ERROR"]                 '
+3 3<=[;"abcde"]![;"ERROR"]                '
+3 3=¿[;"abcde"]![;"ERROR"]                '
+3 0?>[;"abcde"]![;"ERROR"]                '
 
 // For loop tests
 5î['a+c]                                    '

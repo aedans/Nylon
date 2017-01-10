@@ -14,6 +14,7 @@ A list of libraries and functions contained in the Nylon Standard Library.
 - Fa: Appends the top of the stack to a file.
 - Fc: Creates a file with path equal to the top of the stack.
 - Fd: Creates a directory with path equal to the top of the stack.
+- Ff: Pushes true to the stack if the top of the stack is an existing, non-directory file.
 - Fn: Creates a new file object from the top of the stack.
 - Fw: Writes the top of the stack to a file.
 
