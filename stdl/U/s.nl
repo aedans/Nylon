@@ -1,5 +1,5 @@
 // Sorts an array.
-// #Req: d, e, s
+// #Req: a, d, e, s
 ~a(À(Àe
     Ïd
     í[
@@ -11,4 +11,4 @@
         Á
     ]
     Á
-)_Á)
+)aÁ)

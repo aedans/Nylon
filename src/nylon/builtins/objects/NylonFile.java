@@ -1,7 +1,9 @@
-package nylon.nylonobjects;
+package nylon.builtins.objects;
 
 import nylon.NylonException;
 import nylon.NylonObject;
+import nylon.nylonobjects.NylonArray;
+import nylon.nylonobjects.NylonString;
 
 import java.io.File;
 import java.io.IOException;

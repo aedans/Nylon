@@ -1,4 +1,4 @@
-package nylon.builtins;
+package nylon.builtins.objects;
 
 import nylon.NylonException;
 import nylon.NylonObject;

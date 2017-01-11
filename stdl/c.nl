@@ -1,2 +1,3 @@
-// Casts the top item of the stack to a character.
-~c
+// Concatenates all items on the stack.
+// #Req: d
+Ïdí+

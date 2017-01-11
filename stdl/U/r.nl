@@ -1,2 +1,3 @@
 // Reverses an array.
-~a(Àîù_Á)
+// #Req: a
+~a(ÀîùaÁ)

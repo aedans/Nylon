@@ -2,6 +2,7 @@ package nylon;
 
 import nylon.builtins.*;
 import nylon.builtins.Math;
+import nylon.builtins.objects.LibraryFunction;
 import nylon.nylonobjects.NylonFunction;
 import nylon.parser.NylonParser;
 
@@ -25,6 +26,7 @@ public final class Builtins {
 
         Random.build(nylonParser.functions);
         FileLibrary.build(nylonParser.functions);
+        Optimizations.build(nylonParser.functions);
     }
 
     private static void buildLibrary(NylonParser nylonParser, File stdl, String path) {

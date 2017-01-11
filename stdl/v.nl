@@ -1,1 +1,0 @@
-// Literal empty function

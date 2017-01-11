@@ -2,6 +2,7 @@ package nylon.builtins;
 
 import nylon.NylonException;
 import nylon.NylonObject;
+import nylon.builtins.objects.BuiltinFunction;
 import nylon.nylonobjects.NylonDouble;
 import nylon.nylonobjects.NylonLong;
 import nylon.parser.parsers.BuiltinParser;

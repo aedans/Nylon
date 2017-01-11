@@ -1,4 +1,5 @@
 // Shuffles an array.
+// #Req: a, d, e, Rl
 ~a
 (À(Àe
     Ïd
@@ -6,4 +7,4 @@
         RlÏd%íù
         Á
     ]
-)_Á)
+)aÁ)

@@ -33,14 +33,15 @@ A list of libraries and functions contained in the Nylon Standard Library.
 - Us: Sorts an array.
 
 ## Misc. Functions
-- c: Casts the top object of the stack to a character.
+- a: Replaces the stack with an array containing the stack.
+- c: Concatenates all items on the stack.
 - d: Decrements the top item of the stack by 1.
 - e: Adds all iterations of an object to the stack.
 - i: Increments the top item of the stack by 1.
 - m: Maps a function to an array.
+- p: Pops the top object of the stack.
 - s: Swaps the top two items of the stack.
 - t: Literal 10.
-- v: Literal empty function.
 - x: Clones the top two objects of the stack.
 - z: Creates an array from the top n object of the stack.
 - TEST: Runs unit tests for the Nylon interpreter. If a line does not output the string "abcde", then the interpreter is

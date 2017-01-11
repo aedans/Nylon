@@ -1,5 +1,6 @@
 package nylon;
 
+import nylon.builtins.objects.NylonFile;
 import nylon.nylonobjects.*;
 
 import java.io.File;

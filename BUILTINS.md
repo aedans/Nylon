@@ -13,9 +13,7 @@ A list of builtins that are not discussed in README.md.
 - ')': Removes the current stack and replaces it with the shadowed one.
 - 'À': Pulls the top argument of the shadowed stack to the current one.
 - 'Á': Pushes the top argument of the current stack to the shadowed one.
-- '_': Replaces the stack with a list containing the stack.
 - ':': Duplicates the top item of the stack.
-- ';': Consumes the top item of the stack.
 - 'ù': Moves the top of the stack to the bottom.
 - 'ú': Moves the bottom of the stack to the top.
 - 'Ï': Pushes the length of the stack to the stack.

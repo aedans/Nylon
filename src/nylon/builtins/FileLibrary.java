@@ -2,8 +2,9 @@ package nylon.builtins;
 
 import nylon.NylonException;
 import nylon.NylonObject;
+import nylon.builtins.objects.LibraryFunction;
+import nylon.builtins.objects.NylonFile;
 import nylon.nylonobjects.NylonBoolean;
-import nylon.nylonobjects.NylonFile;
 import nylon.nylonobjects.NylonFunction;
 
 import java.io.File;

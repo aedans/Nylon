@@ -2,7 +2,7 @@ package nylon.builtins;
 
 import nylon.NylonException;
 import nylon.NylonObject;
-import nylon.nylonobjects.NylonArray;
+import nylon.builtins.objects.BuiltinFunction;
 import nylon.nylonobjects.NylonDouble;
 import nylon.parser.parsers.BuiltinParser;
 
@@ -28,20 +28,6 @@ public final class Stack {
             public void applyImpl(java.util.Stack<NylonObject> stack) {
                 stack.clear();
                 stack.addAll(Stack.stacks.pop());
-            }
-        });
-        BuiltinParser.builtins.put('_', new BuiltinFunction('_') {
-            @Override
-            public void applyImpl(java.util.Stack<NylonObject> stack) {
-                NylonArray nylonStack = new NylonArray((java.util.Stack<NylonObject>) stack.clone());
-                stack.clear();
-                stack.add(nylonStack);
-            }
-        });
-        BuiltinParser.builtins.put(';', new BuiltinFunction(';') {
-            @Override
-            public void applyImpl(java.util.Stack<NylonObject> stack) {
-                stack.pop();
             }
         });
         BuiltinParser.builtins.put(':', new BuiltinFunction(':') {

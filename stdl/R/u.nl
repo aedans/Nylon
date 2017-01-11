@@ -1,2 +1,3 @@
 // Pushes a random unsigned long to the stack.
-Rl0<[;0d*]!;
+// #Req: d, Rl
+Rl0<[;0d*]!p
