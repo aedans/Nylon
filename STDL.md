@@ -43,6 +43,6 @@ A list of libraries and functions contained in the Nylon Standard Library.
 - v: Literal empty function.
 - x: Clones the top two objects of the stack.
 - z: Creates an array from the top n object of the stack.
-- TESt: Runs unit tests for the Nylon interpreter. If a line does not output the string "abcde", then the interpreter is
+- TEST: Runs unit tests for the Nylon interpreter. If a line does not output the string "abcde", then the interpreter is
 likely broken. All updates to the Nylon repo must pass this test, or, if they change syntax, update the test to work with
 the new syntax. All new standard library functions must add a line to the unit test to verify it working.

@@ -1,5 +1,6 @@
 package nylon.parser;
 
+import nylon.Builtins;
 import nylon.InlineFunction;
 import nylon.nylonobjects.NylonFunction;
 import nylon.parser.parsers.*;
@@ -7,41 +8,45 @@ import parser.LinkedParser;
 import parser.ParseException;
 import parser.StringIterator;
 
+import java.io.File;
+import java.util.HashMap;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 /**
  * Created by Aedan Smith.
  */
 
 public class NylonParser extends LinkedParser<StringIterator, InlineFunction> {
-    static NylonParser nylonParser = new NylonParser();
+    public HashMap<String, Supplier<NylonFunction>> functions = new HashMap<>();
 
-    public NylonParser() {
-        super(new DefaultParser(),
-                new CharacterParser(),
-                new StringParser(),
-                new NylonFunctionParser(),
-                new CastParser(),
-                new WhileNotEmptyLoop(),
-                new CaptureParser(),
-                new CommentParser(),
-                new NumberParser(),
-                new ForLoopParser(),
-                new IfStatementParser(),
-                new BuiltinParser(),
-                new LibraryParser()
-        );
+    public NylonParser(File stdl) {
+        super(new DefaultParser());
+        parsers.add(new CharacterParser());
+        parsers.add(new StringParser());
+        parsers.add(new NylonFunctionParser(this));
+        parsers.add(new CastParser());
+        parsers.add(new WhileNotEmptyLoop(this));
+        parsers.add(new CaptureParser(this));
+        parsers.add(new MacroParser(this));
+        parsers.add(new CommentParser());
+        parsers.add(new NumberParser());
+        parsers.add(new ForLoopParser(this));
+        parsers.add(new IfStatementParser(this));
+        parsers.add(new BuiltinParser());
+        parsers.add(new ExternalFunctionParser(this));
+        Builtins.build(this, stdl);
     }
 
-    public static InlineFunction parse(String id, String s) {
+    public InlineFunction parse(String id, String s) {
         InlineFunction inlineFunction = new InlineFunction(id);
-        nylonParser.parse(new StringIterator(s), inlineFunction);
+        parse(new StringIterator(s), inlineFunction);
         return inlineFunction;
     }
 
-    public static NylonFunction parse(StringIterator s) {
+    public NylonFunction parse(StringIterator s) {
         InlineFunction inlineFunction = new InlineFunction("LambdaFunction");
-        nylonParser.parse(inlineFunction, s);
+        parse(inlineFunction, s);
         if (inlineFunction.functions.size() != 0) {
             return inlineFunction.functions.get(0);
         } else {
@@ -49,9 +54,9 @@ public class NylonParser extends LinkedParser<StringIterator, InlineFunction> {
         }
     }
 
-    public static InlineFunction parseUntil(StringIterator in, Predicate<StringIterator> test) {
+    public InlineFunction parseUntil(StringIterator in, Predicate<StringIterator> test) {
         InlineFunction inlineFunction = new InlineFunction("LambdaFunction");
-        nylonParser.parseUntil(in, inlineFunction, test);
+        parseUntil(in, inlineFunction, test);
         return inlineFunction;
     }
 

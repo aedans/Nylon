@@ -146,3 +146,27 @@ LibraryFunction("d.nl")[
 	BuiltinFunction('-')
 ]
 </pre>
+
+## Function Macros
+
+Function macros can be defined using '#', followed by the function name and the function to call. The name may include
+capital and lowercase letters, '-', and '_'. Functions macros can be called by inserting the name at any point in the
+program.
+
+Note that function macros can override standard library functions. To make sure that your names do not override any
+standard library functions, all macros should be defined in all caps.
+
+Example:
+<pre>
+#HELLO "Hello, "
+
+#WORLD [
+    "world!"
+]
+
+HELLO WORLD
+
+Output:
+Hello, world!
+</pre>
+

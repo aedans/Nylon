@@ -15,13 +15,19 @@ import java.util.Stack;
  */
 
 public class CaptureParser implements Parser<StringIterator, InlineFunction> {
+    private NylonParser nylonParser;
+
+    public CaptureParser(NylonParser nylonParser) {
+        this.nylonParser = nylonParser;
+    }
+
     @Override
     public boolean parse(InlineFunction inlineFunction, StringIterator in) throws ParseException {
         if (!in.hasNext() || in.peek() != '@')
             return false;
         in.skip();
 
-        NylonFunction capture = NylonParser.parse(in);
+        NylonFunction capture = nylonParser.parse(in);
         inlineFunction.functions.add(new NylonFunction("Capture(" + capture.getId() + ")") {
             @Override
             public void applyImpl(Stack<NylonObject> stack) {

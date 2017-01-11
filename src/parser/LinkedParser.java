@@ -1,7 +1,6 @@
 package parser;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -18,7 +17,7 @@ public class LinkedParser<I extends Iterator, T> implements Parser<I, T> {
     /**
      * The List of Parsers for the LinkedParser to parse.
      */
-    private List<Parser<I, T>> parsers = new ArrayList<>();
+    protected List<Parser<I, T>> parsers = new ArrayList<>();
 
     /**
      * The default parser.
@@ -29,12 +28,9 @@ public class LinkedParser<I extends Iterator, T> implements Parser<I, T> {
      * Default LinkedParser constructor.
      *
      * @param defaultParser The default Parser for the LinkedParser.
-     * @param parsers       The array of Parsers for the LinkedParser to parse
      */
-    @SafeVarargs
-    public LinkedParser(Parser<I, T> defaultParser, Parser<I, T>... parsers) {
+    public LinkedParser(Parser<I, T> defaultParser) {
         this.defaultParser = defaultParser;
-        Collections.addAll(this.parsers, parsers);
     }
 
     /**

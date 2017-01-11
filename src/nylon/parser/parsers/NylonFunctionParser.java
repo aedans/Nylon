@@ -11,6 +11,12 @@ import parser.StringIterator;
  */
 
 public class NylonFunctionParser implements Parser<StringIterator, InlineFunction> {
+    private NylonParser nylonParser;
+
+    public NylonFunctionParser(NylonParser nylonParser) {
+        this.nylonParser = nylonParser;
+    }
+
     @Override
     public boolean parse(InlineFunction inlineFunction, StringIterator in) throws ParseException {
         if (!in.hasNext() || (in.peek() != '[' && in.peek() != ']'))
@@ -19,7 +25,7 @@ public class NylonFunctionParser implements Parser<StringIterator, InlineFunctio
             return true;
         in.skip();
 
-        InlineFunction function = NylonParser.parseUntil(in, sin -> sin.hasNext() && sin.peek() != ']');
+        InlineFunction function = nylonParser.parseUntil(in, sin -> sin.hasNext() && sin.peek() != ']');
         inlineFunction.functions.add(function);
 
         in.skip();

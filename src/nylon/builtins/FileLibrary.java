@@ -4,7 +4,7 @@ import nylon.NylonException;
 import nylon.NylonObject;
 import nylon.nylonobjects.NylonBoolean;
 import nylon.nylonobjects.NylonFile;
-import nylon.parser.parsers.LibraryParser;
+import nylon.nylonobjects.NylonFunction;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,15 +12,17 @@ import java.io.PrintStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.util.HashMap;
 import java.util.Stack;
+import java.util.function.Supplier;
 
 /**
  * Created by Aedan Smith.
  */
 
 public final class FileLibrary {
-    public static void build() {
-        LibraryParser.files.put("Fa.nl", () -> new LibraryFunction("Fa.nl") {
+    public static void build(HashMap<String, Supplier<NylonFunction>> functions) {
+        functions.put("Fa", () -> new LibraryFunction("Fa.nl") {
             @Override
             public void applyImpl(Stack<NylonObject> stack) throws NylonException {
                 try {
@@ -31,7 +33,7 @@ public final class FileLibrary {
                 }
             }
         });
-        LibraryParser.files.put("Fc.nl", () -> new LibraryFunction("Fc.nl") {
+        functions.put("Fc", () -> new LibraryFunction("Fc.nl") {
             @Override
             public void applyImpl(Stack<NylonObject> stack) throws NylonException {
                 try {
@@ -42,28 +44,27 @@ public final class FileLibrary {
                 }
             }
         });
-        LibraryParser.files.put("Fd.nl", () -> new LibraryFunction("Fd.nl") {
+        functions.put("Fd", () -> new LibraryFunction("Fd.nl") {
             @Override
             public void applyImpl(Stack<NylonObject> stack) {
                 File file = new File(stack.peek().toString());
                 file.mkdir();
             }
         });
-        LibraryParser.files.put("Ff.nl", () -> new LibraryFunction("Ff.nl") {
+        functions.put("Ff", () -> new LibraryFunction("Ff.nl") {
             @Override
             public void applyImpl(Stack<NylonObject> stack) {
                 File file = new File(stack.peek().toString());
                 stack.add(new NylonBoolean(file.isFile()));
             }
         });
-
-        LibraryParser.files.put("Fn.nl", () -> new LibraryFunction("Fn.nl") {
+        functions.put("Fn", () -> new LibraryFunction("Fn.nl") {
             @Override
             public void applyImpl(Stack<NylonObject> stack) {
                 stack.add(new NylonFile(new File(stack.pop().toString())));
             }
         });
-        LibraryParser.files.put("Fw.nl", () -> new LibraryFunction("Fw.nl") {
+        functions.put("Fw", () -> new LibraryFunction("Fw.nl") {
             @Override
             public void applyImpl(Stack<NylonObject> stack) throws NylonException {
                 try {

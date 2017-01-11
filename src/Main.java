@@ -1,6 +1,4 @@
-import nylon.Builtins;
 import nylon.NylonRuntime;
-import nylon.parser.parsers.LibraryParser;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -18,11 +16,13 @@ public class Main {
             return;
         }
 
-        Builtins.build();
-        LibraryParser.build(new File(args[0]), "");
-
         final StringBuilder content = new StringBuilder();
         new BufferedReader(new FileReader(args[1])).lines().forEach(s -> content.append(s).append('\n'));
-        new NylonRuntime(args[1], content.toString(), Arrays.asList(args).subList(2, args.length)).run();
+        new NylonRuntime(
+                args[1],
+                content.toString(),
+                new File(args[0]),
+                Arrays.asList(args).subList(2, args.length)
+        ).run();
     }
 }

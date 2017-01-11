@@ -17,6 +17,12 @@ import java.util.Stack;
  */
 
 public class ForLoopParser implements Parser<StringIterator, InlineFunction> {
+    private NylonParser nylonParser;
+
+    public ForLoopParser(NylonParser nylonParser) {
+        this.nylonParser = nylonParser;
+    }
+
     @Override
     public boolean parse(InlineFunction inlineFunction, StringIterator in) throws ParseException {
         if (!in.hasNext() || !(in.peek() >= 'ì' && in.peek() <= 'ï'))
@@ -25,7 +31,7 @@ public class ForLoopParser implements Parser<StringIterator, InlineFunction> {
         boolean consume = in.peek() == 'î' || in.peek() == 'í';
         in.skip();
 
-        NylonFunction wrapped = NylonParser.parse(in);
+        NylonFunction wrapped = nylonParser.parse(in);
 
         inlineFunction.functions.add(new NylonFunction("ForLoop(" + wrapped.getId() + ")") {
             @Override

@@ -18,6 +18,12 @@ import java.util.Stack;
  */
 
 public class IfStatementParser implements Parser<StringIterator, InlineFunction> {
+    private NylonParser nylonParser;
+
+    public IfStatementParser(NylonParser nylonParser) {
+        this.nylonParser = nylonParser;
+    }
+
     @Override
     public boolean parse(InlineFunction inlineFunction, StringIterator in) throws ParseException {
         if (!in.hasNext() ||
@@ -38,12 +44,14 @@ public class IfStatementParser implements Parser<StringIterator, InlineFunction>
                 )
         ).toCharArray();
 
-        NylonFunction ifTrue = NylonParser.parse(in);
+        NylonFunction ifTrue = nylonParser.parse(in);
 
         in.skipWhitespace();
         NylonFunction ifFalse = new EmptyFunction();
-        if (in.hasNext() && in.peek() == '!')
-            ifFalse = NylonParser.parse(in);
+        if (in.hasNext() && in.peek() == '!') {
+            in.skip();
+            ifFalse = nylonParser.parse(in);
+        }
 
         boolean pop = ifs[ifs.length - 1] != '!';
         NylonFunction finalIfFalse = ifFalse;

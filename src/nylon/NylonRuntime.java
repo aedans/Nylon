@@ -3,6 +3,7 @@ package nylon;
 import nylon.nylonobjects.NylonString;
 import nylon.parser.NylonParser;
 
+import java.io.File;
 import java.util.List;
 import java.util.Stack;
 
@@ -11,12 +12,14 @@ import java.util.Stack;
  */
 
 public class NylonRuntime {
+    private NylonParser nylonParser;
     private InlineFunction main;
     private Stack<NylonObject> nylonStack = new Stack<>();
 
-    public NylonRuntime(String name, String src, List<String> strings) {
+    public NylonRuntime(String name, String src, File stdl, List<String> strings) {
+        nylonParser = new NylonParser(stdl);
         long t = System.nanoTime();
-        this.main = NylonParser.parse(name, src);
+        this.main = nylonParser.parse(name, src);
         System.out.printf("Program compiled in %f milliseconds\n", (double) (System.nanoTime() - t) / 1000000d);
         for (String s : strings) {
             nylonStack.add(new NylonString(s.toCharArray()));

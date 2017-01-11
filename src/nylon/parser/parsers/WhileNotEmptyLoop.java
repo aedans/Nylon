@@ -16,13 +16,19 @@ import java.util.Stack;
  */
 
 public class WhileNotEmptyLoop implements Parser<StringIterator, InlineFunction> {
+    private NylonParser nylonParser;
+
+    public WhileNotEmptyLoop(NylonParser nylonParser) {
+        this.nylonParser = nylonParser;
+    }
+
     @Override
     public boolean parse(InlineFunction inlineFunction, StringIterator in) throws ParseException {
         if (!in.hasNext() || in.peek() != '&')
             return false;
         in.skip();
 
-        NylonFunction wrapped = NylonParser.parse(in);
+        NylonFunction wrapped = nylonParser.parse(in);
 
         inlineFunction.functions.add(new NylonFunction("WhileNotEmpty(" + wrapped.getId() + ")") {
             @Override

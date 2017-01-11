@@ -1,7 +1,6 @@
 package nylon.nylonobjects;
 
 import nylon.NylonObject;
-import nylon.parser.NylonParser;
 
 import java.util.Stack;
 
@@ -33,10 +32,10 @@ public class NylonString extends NylonArray {
         return this;
     }
 
-    @Override
-    public NylonFunction toFunction(Stack<NylonObject> stack) {
-        return NylonParser.parse("NylonFunction(" + toString() + ")", this.toString());
-    }
+//    @Override
+//    public NylonFunction toFunction(Stack<NylonObject> stack) {
+//        return NylonParser.parse("NylonFunction(" + toString() + ")", this.toString());
+//    }
 
     @Override
     public String toString() {
