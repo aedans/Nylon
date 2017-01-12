@@ -1,31 +1,21 @@
 package nylon.parser.parsers;
 
-import nylon.InlineFunction;
+import nylon.builtins.objects.BuiltinFunction;
 import nylon.nylonobjects.NylonFunction;
-import parser.ParseException;
-import parser.Parser;
-import parser.StringIterator;
+import nylon.parser.NylonParser;
+import nylon.parser.StringIterator;
 
-import java.util.HashMap;
+import java.util.function.BiFunction;
 
 /**
  * Created by Aedan Smith.
  */
 
-public class BuiltinParser implements Parser<StringIterator, InlineFunction> {
-    public static HashMap<Character, NylonFunction> builtins = new HashMap<>();
-
-    @Override
-    public boolean parse(InlineFunction inlineFunction, StringIterator in) throws ParseException {
-        if (!in.hasNext())
-            return false;
-
-        NylonFunction n = builtins.get(in.peek());
-        if (n == null)
-            return false;
-
-        in.skip();
-        inlineFunction.functions.add(n);
-        return true;
+public class BuiltinParser {
+    public static BiFunction<StringIterator, NylonParser, NylonFunction> getParser(BuiltinFunction builtinFunction) {
+        return (stringIterator, nylonParser) -> {
+            stringIterator.skip();
+            return builtinFunction;
+        };
     }
 }

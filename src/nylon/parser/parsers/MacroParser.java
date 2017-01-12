@@ -1,27 +1,22 @@
 package nylon.parser.parsers;
 
-import nylon.InlineFunction;
 import nylon.nylonobjects.NylonFunction;
 import nylon.parser.NylonParser;
-import parser.ParseException;
-import parser.Parser;
-import parser.StringIterator;
+import nylon.parser.StringIterator;
+
+import java.util.ArrayList;
+import java.util.function.BiFunction;
 
 /**
  * Created by Aedan Smith.
  */
 
-public class MacroParser implements Parser<StringIterator, InlineFunction> {
-    private NylonParser nylonParser;
-
-    public MacroParser(NylonParser nylonParser) {
-        this.nylonParser = nylonParser;
+public class MacroParser {
+    public static void addTo(ArrayList<BiFunction<StringIterator, NylonParser, NylonFunction>> parsers) {
+        parsers.set('#', MacroParser::parse);
     }
 
-    @Override
-    public boolean parse(InlineFunction inlineFunction, StringIterator in) throws ParseException {
-        if (!in.hasNext() || in.peek() != '#')
-            return false;
+    public static NylonFunction parse(StringIterator in, NylonParser nylonParser) {
         in.skip();
 
         String name = "";
@@ -41,6 +36,6 @@ public class MacroParser implements Parser<StringIterator, InlineFunction> {
 
         nylonParser.functions.put(name, () -> nylonFunction);
 
-        return true;
+        return null;
     }
 }

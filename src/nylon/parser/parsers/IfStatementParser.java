@@ -1,39 +1,31 @@
 package nylon.parser.parsers;
 
-import nylon.InlineFunction;
 import nylon.NylonException;
 import nylon.NylonObject;
 import nylon.nylonobjects.EmptyFunction;
 import nylon.nylonobjects.NylonFunction;
 import nylon.parser.NylonParser;
-import parser.ParseException;
-import parser.Parser;
-import parser.StringIterator;
+import nylon.parser.StringIterator;
 
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Stack;
+import java.util.function.BiFunction;
 
 /**
  * Created by Aedan Smith.
  */
 
-public class IfStatementParser implements Parser<StringIterator, InlineFunction> {
-    private NylonParser nylonParser;
-
-    public IfStatementParser(NylonParser nylonParser) {
-        this.nylonParser = nylonParser;
+public class IfStatementParser {
+    public static void addTo(ArrayList<BiFunction<StringIterator, NylonParser, NylonFunction>> parsers) {
+        parsers.set('?', IfStatementParser::parse);
+        parsers.set('¿', IfStatementParser::parse);
+        parsers.set('>', IfStatementParser::parse);
+        parsers.set('<', IfStatementParser::parse);
+        parsers.set('=', IfStatementParser::parse);
     }
 
-    @Override
-    public boolean parse(InlineFunction inlineFunction, StringIterator in) throws ParseException {
-        if (!in.hasNext() ||
-                !(in.peek() == '?'
-                        || in.peek() == '¿'
-                        || in.peek() == '>'
-                        || in.peek() == '<'
-                        || in.peek() == '='))
-            return false;
-
+    public static NylonFunction parse(StringIterator in, NylonParser nylonParser) {
         char[] ifs = in.until(stringIterator -> in.hasNext() &&
                 (in.peek() == '?'
                         || in.peek() == '¿'
@@ -55,7 +47,7 @@ public class IfStatementParser implements Parser<StringIterator, InlineFunction>
 
         boolean pop = ifs[ifs.length - 1] != '!';
         NylonFunction finalIfFalse = ifFalse;
-        inlineFunction.functions.add(new NylonFunction("IfStatement") {
+        return new NylonFunction("IfStatement") {
             @Override
             public void applyImpl(Stack<NylonObject> stack) throws NylonException {
                 boolean b = false;
@@ -99,8 +91,6 @@ public class IfStatementParser implements Parser<StringIterator, InlineFunction>
             public String toString() {
                 return "If[" + new String(ifs) + "]Then[" + ifTrue + "]Else[" + finalIfFalse + "]";
             }
-        });
-
-        return true;
+        };
     }
 }

@@ -1,44 +1,36 @@
 package nylon.parser.parsers;
 
-import nylon.InlineFunction;
 import nylon.NylonException;
 import nylon.NylonObject;
 import nylon.nylonobjects.NylonFunction;
 import nylon.parser.NylonParser;
-import parser.ParseException;
-import parser.Parser;
-import parser.StringIterator;
+import nylon.parser.StringIterator;
 
+import java.util.ArrayList;
 import java.util.Stack;
+import java.util.function.BiFunction;
 
 /**
  * Created by Aedan Smith.
  */
 
-public class WhileNotEmptyLoop implements Parser<StringIterator, InlineFunction> {
-    private NylonParser nylonParser;
-
-    public WhileNotEmptyLoop(NylonParser nylonParser) {
-        this.nylonParser = nylonParser;
+public class WhileNotEmptyLoop {
+    public static void addTo(ArrayList<BiFunction<StringIterator, NylonParser, NylonFunction>> parsers) {
+        parsers.set('&', WhileNotEmptyLoop::parse);
     }
 
-    @Override
-    public boolean parse(InlineFunction inlineFunction, StringIterator in) throws ParseException {
-        if (!in.hasNext() || in.peek() != '&')
-            return false;
+    public static NylonFunction parse(StringIterator in, NylonParser nylonParser) {
         in.skip();
 
         NylonFunction wrapped = nylonParser.parse(in);
 
-        inlineFunction.functions.add(new NylonFunction("WhileNotEmpty(" + wrapped.getId() + ")") {
+        return new NylonFunction("WhileNotEmpty(" + wrapped.getId() + ")") {
             @Override
             public void applyImpl(Stack<NylonObject> stack) throws NylonException {
                 while (!stack.isEmpty()) {
                     wrapped.apply(stack);
                 }
             }
-        });
-
-        return true;
+        };
     }
 }

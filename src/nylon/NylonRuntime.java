@@ -2,6 +2,7 @@ package nylon;
 
 import nylon.nylonobjects.NylonString;
 import nylon.parser.NylonParser;
+import nylon.parser.StringIterator;
 
 import java.io.File;
 import java.util.List;
@@ -19,7 +20,8 @@ public class NylonRuntime {
     public NylonRuntime(String name, String src, File stdl, List<String> strings) {
         nylonParser = new NylonParser(stdl);
         long t = System.nanoTime();
-        this.main = nylonParser.parse(name, src);
+        this.main = new InlineFunction(name);
+        nylonParser.parse(new StringIterator(src), main);
         System.out.printf("Program compiled in %f milliseconds\n", (double) (System.nanoTime() - t) / 1000000d);
         for (String s : strings) {
             nylonStack.add(new NylonString(s.toCharArray()));

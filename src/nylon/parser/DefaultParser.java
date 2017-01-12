@@ -1,22 +1,23 @@
 package nylon.parser;
 
-import nylon.InlineFunction;
-import parser.ParseException;
-import parser.Parser;
-import parser.StringIterator;
+import nylon.nylonobjects.NylonFunction;
+
+import java.util.ArrayList;
+import java.util.function.BiFunction;
 
 /**
  * Created by Aedan Smith.
  */
 
-class DefaultParser implements Parser<StringIterator, InlineFunction> {
-    @Override
-    public boolean parse(InlineFunction inlineFunction, StringIterator in) throws ParseException {
-        if (!in.hasNext())
-            return false;
+class DefaultParser {
+    public static void addTo(ArrayList<BiFunction<StringIterator, NylonParser, NylonFunction>> parsers) {
+        for (int i = 0; i < 256; i++) {
+            parsers.add(i, DefaultParser::parse);
+        }
+    }
 
+    public static NylonFunction parse(StringIterator in, NylonParser nylonParser) {
         in.skip();
-        in.skipWhitespace();
-        return true;
+        return null;
     }
 }

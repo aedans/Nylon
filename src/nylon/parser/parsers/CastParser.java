@@ -1,29 +1,31 @@
 package nylon.parser.parsers;
 
-import nylon.InlineFunction;
 import nylon.NylonException;
 import nylon.NylonObject;
 import nylon.nylonobjects.*;
-import parser.ParseException;
-import parser.Parser;
-import parser.StringIterator;
+import nylon.parser.NylonParser;
+import nylon.parser.StringIterator;
 
+import java.util.ArrayList;
 import java.util.Stack;
+import java.util.function.BiFunction;
 
 /**
  * Created by Aedan Smith.
  */
 
-public class CastParser implements Parser<StringIterator, InlineFunction> {
-    @Override
-    public boolean parse(InlineFunction inlineFunction, StringIterator in) throws ParseException {
-        if (!in.hasNext() || in.peek() != '~')
-            return false;
+public class CastParser {
+    public static void addTo(ArrayList<BiFunction<StringIterator, NylonParser, NylonFunction>> parsers) {
+        parsers.set('~', CastParser::parse);
+    }
+
+    public static NylonFunction parse(StringIterator in, NylonParser parser) {
         in.skip();
 
         char c = in.next();
 
-        inlineFunction.functions.add(new NylonFunction("CastToObject('" + c + "')") {
+        // TODO Be decent
+        return new NylonFunction("CastToObject('" + c + "')") {
             @Override
             public void applyImpl(Stack<NylonObject> stack) throws NylonException {
                 switch (c) {
@@ -57,7 +59,6 @@ public class CastParser implements Parser<StringIterator, InlineFunction> {
             public String toString() {
                 return id;
             }
-        });
-        return true;
+        };
     }
 }

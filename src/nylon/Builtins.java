@@ -5,6 +5,7 @@ import nylon.builtins.Math;
 import nylon.builtins.objects.LibraryFunction;
 import nylon.nylonobjects.NylonFunction;
 import nylon.parser.NylonParser;
+import nylon.parser.StringIterator;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -19,10 +20,11 @@ import java.util.function.Supplier;
 public final class Builtins {
     public static void build(NylonParser nylonParser, File stdl) {
         buildLibrary(nylonParser, stdl, "");
-        Math.build();
-        Stack.build();
-        Functions.build();
-        AsciiCanvas.build();
+
+        Math.build(nylonParser.parsers);
+        Stack.build(nylonParser.parsers);
+        Functions.build(nylonParser.parsers);
+        AsciiCanvas.build(nylonParser.parsers);
 
         Random.build(nylonParser.functions);
         FileLibrary.build(nylonParser.functions);
@@ -66,20 +68,22 @@ public final class Builtins {
                         content.append(s);
                         content.append('\n');
                     });
-                    InlineFunction inlineFunction = nylonParser.parse(
-                            path + file.getName(), content.toString()
-                    );
-                    return function = new LibraryFunction(path + file.getName()) {
-                        @Override
-                        public void applyImpl(java.util.Stack<NylonObject> stack) throws NylonException {
-                            inlineFunction.apply(stack);
-                        }
+                    InlineFunction inlineFunction = new InlineFunction(path + file.getName());
+                    try {
+                        return function = new LibraryFunction(path + file.getName()) {
+                            @Override
+                            public void applyImpl(java.util.Stack<NylonObject> stack) throws NylonException {
+                                inlineFunction.apply(stack);
+                            }
 
-                        @Override
-                        public String toString() {
-                            return super.toString() + inlineFunction.toString().substring(14);
-                        }
-                    };
+                            @Override
+                            public String toString() {
+                                return super.toString() + inlineFunction.toString().substring(14);
+                            }
+                        };
+                    } finally {
+                        nylonParser.parse(new StringIterator(content.toString()), inlineFunction);
+                    }
                 } catch (IOException e) {
                     throw new RuntimeException(e.getMessage());
                 }

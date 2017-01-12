@@ -1,24 +1,25 @@
 package nylon.parser.parsers;
 
-import nylon.InlineFunction;
 import nylon.NylonObject;
 import nylon.nylonobjects.NylonFunction;
 import nylon.nylonobjects.NylonString;
-import parser.ParseException;
-import parser.Parser;
-import parser.StringIterator;
+import nylon.parser.NylonParser;
+import nylon.parser.StringIterator;
 
+import java.util.ArrayList;
 import java.util.Stack;
+import java.util.function.BiFunction;
 
 /**
  * Created by Aedan Smith.
  */
 
-public class StringParser implements Parser<StringIterator, InlineFunction> {
-    @Override
-    public boolean parse(InlineFunction inlineFunction, StringIterator in) throws ParseException {
-        if (!in.hasNext() || in.peek() != '"')
-            return false;
+public class StringParser {
+    public static void addTo(ArrayList<BiFunction<StringIterator, NylonParser, NylonFunction>> parsers) {
+        parsers.set('"', StringParser::parse);
+    }
+
+    public static NylonFunction parse(StringIterator in, NylonParser nylonParser) {
         in.skip();
 
         String s = "";
@@ -26,17 +27,6 @@ public class StringParser implements Parser<StringIterator, InlineFunction> {
             if (in.peek() == '\\') {
                 in.skip();
                 s += in.next();
-            } else if (in.peek() == '*') {
-                in.skip();
-                String num = "";
-                while (in.hasNext() && ((in.peek() >= '0' && in.peek() <= '9'))) {
-                    num += in.next();
-                }
-                long l = Long.parseLong(num);
-                char c = in.next();
-                for (long i = 0; i < l; i++) {
-                    s += c;
-                }
             } else {
                 s += in.next();
             }
@@ -44,7 +34,7 @@ public class StringParser implements Parser<StringIterator, InlineFunction> {
         in.skip();
 
         char[] finalS = s.toCharArray();
-        inlineFunction.functions.add(new NylonFunction("PushNylonString(\"" + new String(finalS).replaceAll("\\n", "\\\\n") + "\")") {
+        return new NylonFunction("PushNylonString(\"" + new String(finalS).replaceAll("\\n", "\\\\n") + "\")") {
             @Override
             public void applyImpl(Stack<NylonObject> stack) {
                 stack.add(new NylonString(finalS));
@@ -54,8 +44,6 @@ public class StringParser implements Parser<StringIterator, InlineFunction> {
             public String toString() {
                 return getId();
             }
-        });
-
-        return true;
+        };
     }
 }

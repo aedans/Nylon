@@ -1,39 +1,37 @@
 package nylon.parser.parsers;
 
-import nylon.InlineFunction;
 import nylon.NylonException;
 import nylon.NylonObject;
 import nylon.nylonobjects.NylonFunction;
 import nylon.parser.NylonParser;
-import parser.ParseException;
-import parser.Parser;
-import parser.StringIterator;
+import nylon.parser.StringIterator;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Stack;
+import java.util.function.BiFunction;
 
 /**
  * Created by Aedan Smith.
  */
 
-public class ForLoopParser implements Parser<StringIterator, InlineFunction> {
-    private NylonParser nylonParser;
-
-    public ForLoopParser(NylonParser nylonParser) {
-        this.nylonParser = nylonParser;
+public class ForLoopParser {
+    public static void addTo(ArrayList<BiFunction<StringIterator, NylonParser, NylonFunction>> parsers) {
+        // TODO separate methods
+        parsers.set('î', ForLoopParser::parse);
+        parsers.set('ì', ForLoopParser::parse);
+        parsers.set('î', ForLoopParser::parse);
+        parsers.set('í', ForLoopParser::parse);
     }
 
-    @Override
-    public boolean parse(InlineFunction inlineFunction, StringIterator in) throws ParseException {
-        if (!in.hasNext() || !(in.peek() >= 'ì' && in.peek() <= 'ï'))
-            return false;
+    public static NylonFunction parse(StringIterator in, NylonParser nylonParser) {
         boolean push = in.peek() == 'î' || in.peek() == 'ì';
         boolean consume = in.peek() == 'î' || in.peek() == 'í';
         in.skip();
 
         NylonFunction wrapped = nylonParser.parse(in);
 
-        inlineFunction.functions.add(new NylonFunction("ForLoop(" + wrapped.getId() + ")") {
+        return new NylonFunction("ForLoop(" + wrapped.getId() + ")") {
             @Override
             public void applyImpl(Stack<NylonObject> stack) throws NylonException {
                 Iterator<NylonObject> iterator = consume ? stack.pop().toIterator(stack) : stack.peek().toIterator(stack);
@@ -50,8 +48,6 @@ public class ForLoopParser implements Parser<StringIterator, InlineFunction> {
             public String toString() {
                 return "ForLoop[" + wrapped + "]";
             }
-        });
-
-        return true;
+        };
     }
 }

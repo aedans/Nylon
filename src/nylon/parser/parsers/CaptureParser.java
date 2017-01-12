@@ -1,34 +1,28 @@
 package nylon.parser.parsers;
 
-import nylon.InlineFunction;
 import nylon.NylonObject;
 import nylon.nylonobjects.NylonFunction;
 import nylon.parser.NylonParser;
-import parser.ParseException;
-import parser.Parser;
-import parser.StringIterator;
+import nylon.parser.StringIterator;
 
+import java.util.ArrayList;
 import java.util.Stack;
+import java.util.function.BiFunction;
 
 /**
  * Created by Aedan Smith.
  */
 
-public class CaptureParser implements Parser<StringIterator, InlineFunction> {
-    private NylonParser nylonParser;
-
-    public CaptureParser(NylonParser nylonParser) {
-        this.nylonParser = nylonParser;
+public class CaptureParser {
+    public static void addTo(ArrayList<BiFunction<StringIterator, NylonParser, NylonFunction>> parsers) {
+        parsers.set('@', CaptureParser::parse);
     }
 
-    @Override
-    public boolean parse(InlineFunction inlineFunction, StringIterator in) throws ParseException {
-        if (!in.hasNext() || in.peek() != '@')
-            return false;
+    public static NylonFunction parse(StringIterator in, NylonParser nylonParser) {
         in.skip();
 
         NylonFunction capture = nylonParser.parse(in);
-        inlineFunction.functions.add(new NylonFunction("Capture(" + capture.getId() + ")") {
+        return new NylonFunction("Capture(" + capture.getId() + ")") {
             @Override
             public void applyImpl(Stack<NylonObject> stack) {
                 stack.add(capture);
@@ -38,7 +32,6 @@ public class CaptureParser implements Parser<StringIterator, InlineFunction> {
             public String toString() {
                 return format("Capture[" + capture + "]");
             }
-        });
-        return true;
+        };
     }
 }

@@ -1,35 +1,29 @@
 package nylon.parser.parsers;
 
 import nylon.InlineFunction;
+import nylon.nylonobjects.NylonFunction;
 import nylon.parser.NylonParser;
-import parser.ParseException;
-import parser.Parser;
-import parser.StringIterator;
+import nylon.parser.StringIterator;
+
+import java.util.ArrayList;
+import java.util.function.BiFunction;
 
 /**
  * Created by Aedan Smith.
  */
 
-public class NylonFunctionParser implements Parser<StringIterator, InlineFunction> {
-    private NylonParser nylonParser;
-
-    public NylonFunctionParser(NylonParser nylonParser) {
-        this.nylonParser = nylonParser;
+public class NylonFunctionParser {
+    public static void addTo(ArrayList<BiFunction<StringIterator, NylonParser, NylonFunction>> parsers) {
+        parsers.set('[', NylonFunctionParser::parse);
     }
 
-    @Override
-    public boolean parse(InlineFunction inlineFunction, StringIterator in) throws ParseException {
-        if (!in.hasNext() || (in.peek() != '[' && in.peek() != ']'))
-            return false;
-        if (in.peek() == ']')
-            return true;
+    public static NylonFunction parse(StringIterator in, NylonParser nylonParser) {
         in.skip();
 
-        InlineFunction function = nylonParser.parseUntil(in, sin -> sin.hasNext() && sin.peek() != ']');
-        inlineFunction.functions.add(function);
+        InlineFunction function = new InlineFunction("LambdaFunction");
+        nylonParser.parseUntil(function, in, ']');
 
         in.skip();
-
-        return true;
+        return function;
     }
 }

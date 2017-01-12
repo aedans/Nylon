@@ -4,65 +4,81 @@ import nylon.Builtins;
 import nylon.InlineFunction;
 import nylon.nylonobjects.NylonFunction;
 import nylon.parser.parsers.*;
-import parser.LinkedParser;
-import parser.ParseException;
-import parser.StringIterator;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.function.Predicate;
+import java.util.Objects;
+import java.util.function.BiFunction;
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 /**
  * Created by Aedan Smith.
  */
 
-public class NylonParser extends LinkedParser<StringIterator, InlineFunction> {
+public class NylonParser {
+    public ArrayList<BiFunction<StringIterator, NylonParser, NylonFunction>> parsers = new ArrayList<>(256);
+
     public HashMap<String, Supplier<NylonFunction>> functions = new HashMap<>();
 
     public NylonParser(File stdl) {
-        super(new DefaultParser());
-        parsers.add(new CharacterParser());
-        parsers.add(new StringParser());
-        parsers.add(new NylonFunctionParser(this));
-        parsers.add(new CastParser());
-        parsers.add(new WhileNotEmptyLoop(this));
-        parsers.add(new CaptureParser(this));
-        parsers.add(new MacroParser(this));
-        parsers.add(new CommentParser());
-        parsers.add(new NumberParser());
-        parsers.add(new ForLoopParser(this));
-        parsers.add(new IfStatementParser(this));
-        parsers.add(new BuiltinParser());
-        parsers.add(new ExternalFunctionParser(this));
+        this(
+                stdl,
+                DefaultParser::addTo,
+                CaptureParser::addTo,
+                CastParser::addTo,
+                CharacterParser::addTo,
+                ExternalFunctionParser::addTo,
+                ForLoopParser::addTo,
+                IfStatementParser::addTo,
+                MacroParser::addTo,
+                NumberParser::addTo,
+                NylonFunctionParser::addTo,
+                StringParser::addTo,
+                WhileNotEmptyLoop::addTo
+        );
+    }
+
+    @SafeVarargs
+    public NylonParser(File stdl, Consumer<ArrayList<BiFunction<StringIterator, NylonParser, NylonFunction>>>... parsers) {
+        for (Consumer<ArrayList<BiFunction<StringIterator, NylonParser, NylonFunction>>> parser : parsers) {
+            parser.accept(this.parsers);
+        }
         Builtins.build(this, stdl);
     }
 
-    public InlineFunction parse(String id, String s) {
-        InlineFunction inlineFunction = new InlineFunction(id);
-        parse(new StringIterator(s), inlineFunction);
-        return inlineFunction;
-    }
-
-    public NylonFunction parse(StringIterator s) {
-        InlineFunction inlineFunction = new InlineFunction("LambdaFunction");
-        parse(inlineFunction, s);
-        if (inlineFunction.functions.size() != 0) {
-            return inlineFunction.functions.get(0);
-        } else {
-            return inlineFunction;
+    public void parse(StringIterator in, InlineFunction inlineFunction) {
+        while (in.hasNext()) {
+            NylonFunction parse = parse(in);
+            if (parse != null) {
+                inlineFunction.functions.add(parse);
+            }
         }
     }
 
-    public InlineFunction parseUntil(StringIterator in, Predicate<StringIterator> test) {
-        InlineFunction inlineFunction = new InlineFunction("LambdaFunction");
-        parseUntil(in, inlineFunction, test);
-        return inlineFunction;
+    public NylonFunction parse(StringIterator in) {
+        NylonFunction nylonFunction = null;
+        while (in.hasNext() && nylonFunction == null) {
+            if (in.hasNext(2) && Objects.equals(in.peekString(2), "//"))
+                in.until('\n');
+            nylonFunction = parsers.get(in.peek()).apply(in, this);
+        }
+        return nylonFunction;
     }
 
-    @Override
-    public boolean parse(InlineFunction inlineFunction, StringIterator in) throws ParseException {
-        in.skipWhitespace();
-        return super.parse(inlineFunction, in);
+    public void parseUntil(InlineFunction inlineFunction, StringIterator in, char c) {
+        loop:
+        while (in.hasNext()) {
+            NylonFunction nylonFunction = null;
+            while (in.hasNext() && nylonFunction == null) {
+                if (in.hasNext(2) && Objects.equals(in.peekString(2), "//"))
+                    in.until('\n');
+                if (in.peek() == c)
+                    break loop;
+                nylonFunction = parsers.get(in.peek()).apply(in, this);
+            }
+            inlineFunction.functions.add(nylonFunction);
+        }
     }
 }

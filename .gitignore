@@ -2,4 +2,5 @@
 .idea/
 Nylon.iml
 out/
-test.nl
+lib/
+/test.nl

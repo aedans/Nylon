@@ -1,31 +1,28 @@
 package nylon.parser.parsers;
 
-import nylon.InlineFunction;
 import nylon.nylonobjects.NylonFunction;
 import nylon.parser.NylonParser;
-import parser.ParseException;
-import parser.Parser;
-import parser.StringIterator;
+import nylon.parser.StringIterator;
 
+import java.util.ArrayList;
+import java.util.function.BiFunction;
 import java.util.function.Supplier;
 
 /**
  * Created by Aedan Smith.
  */
 
-public class ExternalFunctionParser implements Parser<StringIterator, InlineFunction> {
-    private NylonParser nylonParser;
-
-    public ExternalFunctionParser(NylonParser nylonParser) {
-        this.nylonParser = nylonParser;
+public class ExternalFunctionParser {
+    public static void addTo(ArrayList<BiFunction<StringIterator, NylonParser, NylonFunction>> parsers) {
+        for (int i = 'a'; i <= 'z'; i++) {
+            parsers.set(i, ExternalFunctionParser::parse);
+        }
+        for (int i = 'A'; i <= 'Z'; i++) {
+            parsers.set(i, ExternalFunctionParser::parse);
+        }
     }
 
-    @Override
-    public boolean parse(InlineFunction inlineFunction, StringIterator in) throws ParseException {
-        try {
-            if (!in.hasNext() || !(in.isInRange('a', 'z') || in.isInRange('A', 'Z')))
-                return false;
-
+    public static NylonFunction parse(StringIterator in, NylonParser nylonParser) {
             String name = "";
             while (in.hasNext()) {
                 if (in.isInRange('a', 'z')) {
@@ -40,12 +37,8 @@ public class ExternalFunctionParser implements Parser<StringIterator, InlineFunc
 
             Supplier<NylonFunction> function = nylonParser.functions.get(name);
             if (function == null)
-                throw new ParseException("Could not find function with name \"" + name + "\"", this);
+                throw new RuntimeException("Could not find function with name \"" + name + "\"");
 
-            inlineFunction.functions.add(function.get());
-            return true;
-        } catch (ParseException e) {
-            throw new ParseException(e.getMessage(), this);
-        }
+        return function.get();
     }
 }

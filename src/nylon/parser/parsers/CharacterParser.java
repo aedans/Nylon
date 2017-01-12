@@ -1,29 +1,30 @@
 package nylon.parser.parsers;
 
-import nylon.InlineFunction;
 import nylon.NylonObject;
 import nylon.nylonobjects.NylonCharacter;
 import nylon.nylonobjects.NylonFunction;
-import parser.ParseException;
-import parser.Parser;
-import parser.StringIterator;
+import nylon.parser.NylonParser;
+import nylon.parser.StringIterator;
 
+import java.util.ArrayList;
 import java.util.Stack;
+import java.util.function.BiFunction;
 
 /**
  * Created by Aedan Smith.
  */
 
-public class CharacterParser implements Parser<StringIterator, InlineFunction> {
-    @Override
-    public boolean parse(InlineFunction inlineFunction, StringIterator in) throws ParseException {
-        if (!in.hasNext() || in.peek() != '\'')
-            return false;
+public class CharacterParser {
+    public static void addTo(ArrayList<BiFunction<StringIterator, NylonParser, NylonFunction>> parsers) {
+        parsers.set('\'', CharacterParser::parse);
+    }
+
+    public static NylonFunction parse(StringIterator in, NylonParser parser) {
         in.skip();
 
         char c = in.next();
 
-        inlineFunction.functions.add(new NylonFunction("PushNylonCharacter('" + (c == '\n' ? "\\n" : c) + "')") {
+        return new NylonFunction("PushNylonCharacter('" + (c == '\n' ? "\\n" : c) + "')") {
             @Override
             public void applyImpl(Stack<NylonObject> stack) {
                 NylonCharacter nc = new NylonCharacter(c);
@@ -34,8 +35,6 @@ public class CharacterParser implements Parser<StringIterator, InlineFunction> {
             public String toString() {
                 return id;
             }
-        });
-
-        return true;
+        };
     }
 }

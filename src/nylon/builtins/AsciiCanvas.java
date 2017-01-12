@@ -3,26 +3,30 @@ package nylon.builtins;
 import nylon.NylonException;
 import nylon.NylonObject;
 import nylon.builtins.objects.BuiltinFunction;
+import nylon.nylonobjects.NylonFunction;
 import nylon.nylonobjects.NylonString;
+import nylon.parser.NylonParser;
+import nylon.parser.StringIterator;
 import nylon.parser.parsers.BuiltinParser;
 
 import java.util.ArrayList;
 import java.util.Stack;
+import java.util.function.BiFunction;
 
 /**
  * Created by Aedan Smith.
  */
 
 public final class AsciiCanvas {
-    public static void build() {
-        BuiltinParser.builtins.put('$', new BuiltinFunction('$') {
+    public static void build(ArrayList<BiFunction<StringIterator, NylonParser, NylonFunction>> parsers) {
+        parsers.set('$', BuiltinParser.getParser(new BuiltinFunction('$') {
             @Override
             public void applyImpl(Stack<NylonObject> stack) throws NylonException {
-                // The lines of the string to add
+                // The lines of the string to addTo
                 String[] add = stack.pop().toString().split("\n");
-                // The x and y position to add the string
+                // The x and y position to addTo the string
                 int x = ((int) stack.pop().toDouble(stack)), y = ((int) stack.pop().toDouble(stack));
-                // The canvas to add the string to
+                // The canvas to addTo the string to
                 String canvasString = stack.pop().toString();
                 ArrayList<ArrayList<Character>> canvas = new ArrayList<>();
                 canvas.add(new ArrayList<>());
@@ -41,7 +45,7 @@ public final class AsciiCanvas {
                     canvas.add(new ArrayList<>());
                 }
 
-                // For each line in the string to add
+                // For each line in the string to addTo
                 for (String s : add) {
                     char[] charArray = s.toCharArray();
                     // Extend the line to the required length
@@ -69,6 +73,6 @@ public final class AsciiCanvas {
                 s = s.substring(0, s.length() - 1);
                 stack.add(new NylonString(s.toCharArray()));
             }
-        });
+        }));
     }
 }
