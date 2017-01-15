@@ -8,7 +8,7 @@
 // Constant tests
 'a'b'c'd'e                                  ENDL
 "abcde"                                     ENDL
-["abcde"]                                   ENDL
+{"abcde"}                                   ENDL
 
 // Casting tests
 97~c98~c99~c100~c101~c                      ENDL
@@ -41,18 +41,18 @@
 // If statement tests
 1?"abcde"!"ERROR"                           ENDL
 0¿"abcde"!"ERROR"                           ENDL
-5 4>[p"abcde"]![p"ERROR"]                   ENDL
-4 5<[p"abcde"]![p"ERROR"]                   ENDL
-3 3=[p"abcde"]![p"ERROR"]                   ENDL
-3 3<=[p"abcde"]![p"ERROR"]                  ENDL
-3 3=¿[p"abcde"]![p"ERROR"]                  ENDL
-3 0?>[p"abcde"]![p"ERROR"]                  ENDL
+5 4>{p"abcde"}!{p"ERROR"}                   ENDL
+4 5<{p"abcde"}!{p"ERROR"}                   ENDL
+3 3={p"abcde"}!{p"ERROR"}                   ENDL
+3 3<={p"abcde"}!{p"ERROR"}                  ENDL
+3 3=¿{p"abcde"}!{p"ERROR"}                  ENDL
+3 0?>{p"abcde"}!{p"ERROR"}                  ENDL
 
 // For loop tests
-5î['a+~c]                                   ENDL
+5î{'a+~c}                                   ENDL
 ('aìi~cÁ'bìi~cÁ'cìi~cÁ'dìi~cÁ'eìi~cÁ)       ENDL
 0'aíi~c1'aíi~c2'aíi~c3'aíi~c4'aíi~c         ENDL
-'aï[]'bï[]'cï[]'dï[]'eï[]                   ENDL
+'aï{}'bï{}'cï{}'dï{}'eï{}                   ENDL
 
 // STDL tests
 // a.nl and c.nl are tested in the stack section. p.nl is tested in the if statement section.

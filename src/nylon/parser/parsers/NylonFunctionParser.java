@@ -14,14 +14,14 @@ import java.util.ArrayList;
 
 public class NylonFunctionParser {
     public static void addTo(ArrayList<Parser> parsers) {
-        parsers.set('[', NylonFunctionParser::parse);
+        parsers.set('{', NylonFunctionParser::parse);
     }
 
     public static NylonFunction parse(StringIterator in, NylonParser nylonParser) {
         in.skip();
 
         InlineFunction function = new InlineFunction("LambdaFunction");
-        nylonParser.parseUntil(function, in, ']');
+        nylonParser.parseUntil(function, in, '}');
 
         in.skip();
         return function;

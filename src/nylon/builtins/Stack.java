@@ -4,14 +4,11 @@ import nylon.NylonException;
 import nylon.NylonObject;
 import nylon.builtins.objects.BuiltinFunction;
 import nylon.nylonobjects.NylonDouble;
-import nylon.nylonobjects.NylonFunction;
-import nylon.parser.NylonParser;
-import nylon.parser.StringIterator;
+import nylon.parser.Parser;
 import nylon.parser.parsers.BuiltinParser;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.function.BiFunction;
 
 /**
  * Created by Aedan Smith.
@@ -20,7 +17,7 @@ import java.util.function.BiFunction;
 public final class Stack {
     private static LinkedList<java.util.Stack<NylonObject>> stacks = new LinkedList<>();
 
-    public static void build(ArrayList<BiFunction<StringIterator, NylonParser, NylonFunction>> parsers) {
+    public static void build(ArrayList<Parser> parsers) {
         parsers.set('(', BuiltinParser.getParser(new BuiltinFunction('(') {
             @Override
             public void applyImpl(java.util.Stack<NylonObject> stack) {

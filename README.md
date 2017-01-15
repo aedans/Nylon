@@ -50,9 +50,9 @@ Strings:
 
 Functions:
 <pre>
-[abcd]
-[2+]
-[+-*/]
+{abcd}
+{2+}
+{+-*/}
 </pre>
 
 Standard Library Functions:
@@ -160,9 +160,9 @@ Example:
 <pre>
 #HELLO "Hello, "
 
-#WORLD [
+#WORLD {
     "world!"
-]
+}
 
 HELLO WORLD
 
