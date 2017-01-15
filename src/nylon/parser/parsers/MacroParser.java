@@ -2,6 +2,7 @@ package nylon.parser.parsers;
 
 import nylon.nylonobjects.NylonFunction;
 import nylon.parser.NylonParser;
+import nylon.parser.ParseUtils;
 import nylon.parser.Parser;
 import nylon.parser.StringIterator;
 
@@ -19,18 +20,7 @@ public class MacroParser {
     public static NylonFunction parse(StringIterator in, NylonParser nylonParser) {
         in.skip();
 
-        String name = "";
-        while (in.hasNext()) {
-            if (in.isInRange('a', 'z')
-                    || in.isInRange('A', 'Z')
-                    || in.isInRange('0', '9')
-                    || in.peek() == '_'
-                    || in.peek() == '-') {
-                name += in.next();
-            } else {
-                break;
-            }
-        }
+        String name = ParseUtils.parseNextName(in);
 
         NylonFunction nylonFunction = nylonParser.parse(in);
 

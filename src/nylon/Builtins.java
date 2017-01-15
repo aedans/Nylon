@@ -1,7 +1,6 @@
 package nylon;
 
 import nylon.builtins.*;
-import nylon.builtins.Math;
 import nylon.builtins.objects.LibraryFunction;
 import nylon.nylonobjects.NylonFunction;
 import nylon.parser.NylonParser;
@@ -21,12 +20,12 @@ public final class Builtins {
     public static void build(NylonParser nylonParser, File stdl) {
         buildLibrary(nylonParser, stdl, "");
 
-        Math.build(nylonParser.parsers);
-        Stack.build(nylonParser.parsers);
-        Functions.build(nylonParser.parsers);
+        MathBuiltins.build(nylonParser.parsers);
+        StackBuiltins.build(nylonParser.parsers);
+        FunctionBuiltins.build(nylonParser.parsers);
         AsciiCanvas.build(nylonParser.parsers);
 
-        Random.build(nylonParser.functions);
+        RandomBuiltins.build(nylonParser.functions);
         FileLibrary.build(nylonParser.functions);
         Optimizations.build(nylonParser.functions);
     }

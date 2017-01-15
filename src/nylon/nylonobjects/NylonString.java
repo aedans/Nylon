@@ -15,6 +15,7 @@ public class NylonString extends NylonArray {
             this.add(new NylonCharacter(c));
         }
         this.type = Type.STRING;
+        this.id = "String";
     }
 
     @Override
@@ -31,11 +32,6 @@ public class NylonString extends NylonArray {
     public NylonString toNylonString(Stack<NylonObject> stack) {
         return this;
     }
-
-//    @Override
-//    public NylonFunction toFunction(Stack<NylonObject> stack) {
-//        return NylonParser.parse("NylonFunction(" + toString() + ")", this.toString());
-//    }
 
     @Override
     public String toString() {

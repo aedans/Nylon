@@ -36,7 +36,7 @@
 @"abcde",                                   ENDL
 
 // Ascii Canvas
-"ab de"0 2'c$                               ENDL
+"ab de"0 2'cð                               ENDL
 
 // If statement tests
 1?"abcde"!"ERROR"                           ENDL

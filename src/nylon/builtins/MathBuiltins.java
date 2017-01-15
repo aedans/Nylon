@@ -15,7 +15,7 @@ import java.util.Stack;
  * Created by Aedan Smith.
  */
 
-public final class Math {
+public final class MathBuiltins {
     public static void build(ArrayList<Parser> parsers) {
         parsers.set('+', BuiltinParser.getParser(new BuiltinFunction('+') {
             @Override
@@ -53,7 +53,7 @@ public final class Math {
             @Override
             public void applyImpl(Stack<NylonObject> stack) throws NylonException {
                 NylonObject n2 = stack.pop(), n1 = stack.pop();
-                NylonDouble nylonDouble = new NylonDouble(java.lang.Math.pow(n1.toDouble(stack), n2.toDouble(stack)));
+                NylonDouble nylonDouble = new NylonDouble(Math.pow(n1.toDouble(stack), n2.toDouble(stack)));
                 stack.add(nylonDouble);
             }
         }));

@@ -84,16 +84,6 @@ public abstract class NylonFunction extends NylonObject<NylonFunction> {
     }
 
     @Override
-    public String getId() {
-        return id;
-    }
-
-    @Override
-    public String toString() {
-        return this.getClass().getSimpleName();
-    }
-
-    @Override
     public NylonFunction clone() throws CloneNotSupportedException {
         return new NylonFunction(id) {
             @Override
@@ -106,5 +96,15 @@ public abstract class NylonFunction extends NylonObject<NylonFunction> {
                 return NylonFunction.this.toString();
             }
         };
+    }
+
+    @Override
+    public String getId() {
+        return id;
+    }
+
+    @Override
+    public String toString() {
+        return this.getClass().getSimpleName();
     }
 }

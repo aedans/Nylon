@@ -2,6 +2,7 @@ package nylon.parser.parsers;
 
 import nylon.nylonobjects.NylonFunction;
 import nylon.parser.NylonParser;
+import nylon.parser.ParseUtils;
 import nylon.parser.Parser;
 import nylon.parser.StringIterator;
 
@@ -23,17 +24,7 @@ public class ExternalFunctionParser {
     }
 
     public static NylonFunction parse(StringIterator in, NylonParser nylonParser) {
-            String name = "";
-            while (in.hasNext()) {
-                if (in.isInRange('a', 'z')) {
-                    name += in.next();
-                    break;
-                } else if (in.isInRange('A', 'Z') || in.peek() == '_' || in.peek() == '_') {
-                    name += in.next();
-                } else {
-                    break;
-                }
-            }
+        String name = ParseUtils.parseNextName(in);
 
             Supplier<NylonFunction> function = nylonParser.functions.get(name);
             if (function == null)

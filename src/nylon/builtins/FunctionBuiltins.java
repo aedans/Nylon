@@ -13,7 +13,7 @@ import java.util.Stack;
  * Created by Aedan Smith.
  */
 
-public final class Functions {
+public final class FunctionBuiltins {
     public static void build(ArrayList<Parser> parsers) {
         parsers.set(',', BuiltinParser.getParser(new BuiltinFunction(',') {
             @Override

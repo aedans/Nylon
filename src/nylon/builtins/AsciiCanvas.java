@@ -16,7 +16,7 @@ import java.util.Stack;
 
 public final class AsciiCanvas {
     public static void build(ArrayList<Parser> parsers) {
-        parsers.set('$', BuiltinParser.getParser(new BuiltinFunction('$') {
+        parsers.set('ð', BuiltinParser.getParser(new BuiltinFunction('ð') {
             @Override
             public void applyImpl(Stack<NylonObject> stack) throws NylonException {
                 // The lines of the string to addTo

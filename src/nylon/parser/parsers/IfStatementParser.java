@@ -2,7 +2,6 @@ package nylon.parser.parsers;
 
 import nylon.NylonException;
 import nylon.NylonObject;
-import nylon.nylonobjects.EmptyFunction;
 import nylon.nylonobjects.NylonFunction;
 import nylon.parser.NylonParser;
 import nylon.parser.Parser;
@@ -39,7 +38,17 @@ public class IfStatementParser {
         NylonFunction ifTrue = nylonParser.parse(in);
 
         in.skipWhitespace();
-        NylonFunction ifFalse = new EmptyFunction();
+        NylonFunction ifFalse = new NylonFunction("EmptyFunction") {
+            @Override
+            public void applyImpl(Stack<NylonObject> stack) throws NylonException {
+
+            }
+
+            @Override
+            public String toString() {
+                return "EmptyFunction";
+            }
+        };
         if (in.hasNext() && in.peek() == '!') {
             in.skip();
             ifFalse = nylonParser.parse(in);
