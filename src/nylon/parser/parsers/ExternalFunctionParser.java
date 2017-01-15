@@ -2,10 +2,10 @@ package nylon.parser.parsers;
 
 import nylon.nylonobjects.NylonFunction;
 import nylon.parser.NylonParser;
+import nylon.parser.Parser;
 import nylon.parser.StringIterator;
 
 import java.util.ArrayList;
-import java.util.function.BiFunction;
 import java.util.function.Supplier;
 
 /**
@@ -13,7 +13,7 @@ import java.util.function.Supplier;
  */
 
 public class ExternalFunctionParser {
-    public static void addTo(ArrayList<BiFunction<StringIterator, NylonParser, NylonFunction>> parsers) {
+    public static void addTo(ArrayList<Parser> parsers) {
         for (int i = 'a'; i <= 'z'; i++) {
             parsers.set(i, ExternalFunctionParser::parse);
         }

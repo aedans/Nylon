@@ -9,7 +9,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
-import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
@@ -18,7 +17,7 @@ import java.util.function.Supplier;
  */
 
 public class NylonParser {
-    public ArrayList<BiFunction<StringIterator, NylonParser, NylonFunction>> parsers = new ArrayList<>(256);
+    public ArrayList<Parser> parsers = new ArrayList<>(256);
 
     public HashMap<String, Supplier<NylonFunction>> functions = new HashMap<>();
 
@@ -41,8 +40,8 @@ public class NylonParser {
     }
 
     @SafeVarargs
-    public NylonParser(File stdl, Consumer<ArrayList<BiFunction<StringIterator, NylonParser, NylonFunction>>>... parsers) {
-        for (Consumer<ArrayList<BiFunction<StringIterator, NylonParser, NylonFunction>>> parser : parsers) {
+    public NylonParser(File stdl, Consumer<ArrayList<Parser>>... parsers) {
+        for (Consumer<ArrayList<Parser>> parser : parsers) {
             parser.accept(this.parsers);
         }
         Builtins.build(this, stdl);

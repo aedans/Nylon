@@ -5,19 +5,19 @@ import nylon.NylonObject;
 import nylon.nylonobjects.EmptyFunction;
 import nylon.nylonobjects.NylonFunction;
 import nylon.parser.NylonParser;
+import nylon.parser.Parser;
 import nylon.parser.StringIterator;
 
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Stack;
-import java.util.function.BiFunction;
 
 /**
  * Created by Aedan Smith.
  */
 
 public class IfStatementParser {
-    public static void addTo(ArrayList<BiFunction<StringIterator, NylonParser, NylonFunction>> parsers) {
+    public static void addTo(ArrayList<Parser> parsers) {
         parsers.set('?', IfStatementParser::parse);
         parsers.set('¿', IfStatementParser::parse);
         parsers.set('>', IfStatementParser::parse);

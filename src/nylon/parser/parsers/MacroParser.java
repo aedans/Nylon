@@ -2,17 +2,17 @@ package nylon.parser.parsers;
 
 import nylon.nylonobjects.NylonFunction;
 import nylon.parser.NylonParser;
+import nylon.parser.Parser;
 import nylon.parser.StringIterator;
 
 import java.util.ArrayList;
-import java.util.function.BiFunction;
 
 /**
  * Created by Aedan Smith.
  */
 
 public class MacroParser {
-    public static void addTo(ArrayList<BiFunction<StringIterator, NylonParser, NylonFunction>> parsers) {
+    public static void addTo(ArrayList<Parser> parsers) {
         parsers.set('#', MacroParser::parse);
     }
 

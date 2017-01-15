@@ -1,18 +1,14 @@
 package nylon.parser.parsers;
 
 import nylon.builtins.objects.BuiltinFunction;
-import nylon.nylonobjects.NylonFunction;
-import nylon.parser.NylonParser;
-import nylon.parser.StringIterator;
-
-import java.util.function.BiFunction;
+import nylon.parser.Parser;
 
 /**
  * Created by Aedan Smith.
  */
 
 public class BuiltinParser {
-    public static BiFunction<StringIterator, NylonParser, NylonFunction> getParser(BuiltinFunction builtinFunction) {
+    public static Parser getParser(BuiltinFunction builtinFunction) {
         return (stringIterator, nylonParser) -> {
             stringIterator.skip();
             return builtinFunction;

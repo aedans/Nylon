@@ -5,18 +5,18 @@ import nylon.nylonobjects.NylonDouble;
 import nylon.nylonobjects.NylonFunction;
 import nylon.nylonobjects.NylonLong;
 import nylon.parser.NylonParser;
+import nylon.parser.Parser;
 import nylon.parser.StringIterator;
 
 import java.util.ArrayList;
 import java.util.Stack;
-import java.util.function.BiFunction;
 
 /**
  * Created by Aedan Smith.
  */
 
 public class NumberParser {
-    public static void addTo(ArrayList<BiFunction<StringIterator, NylonParser, NylonFunction>> parsers) {
+    public static void addTo(ArrayList<Parser> parsers) {
         for (int i = '0'; i <= '9'; i++) {
             parsers.set(i, NumberParser::parse);
         }

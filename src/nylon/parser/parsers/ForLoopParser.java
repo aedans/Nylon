@@ -4,19 +4,19 @@ import nylon.NylonException;
 import nylon.NylonObject;
 import nylon.nylonobjects.NylonFunction;
 import nylon.parser.NylonParser;
+import nylon.parser.Parser;
 import nylon.parser.StringIterator;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Stack;
-import java.util.function.BiFunction;
 
 /**
  * Created by Aedan Smith.
  */
 
 public class ForLoopParser {
-    public static void addTo(ArrayList<BiFunction<StringIterator, NylonParser, NylonFunction>> parsers) {
+    public static void addTo(ArrayList<Parser> parsers) {
         // TODO separate methods
         parsers.set('î', ForLoopParser::parse);
         parsers.set('ì', ForLoopParser::parse);

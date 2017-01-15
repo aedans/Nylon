@@ -4,18 +4,18 @@ import nylon.NylonObject;
 import nylon.nylonobjects.NylonCharacter;
 import nylon.nylonobjects.NylonFunction;
 import nylon.parser.NylonParser;
+import nylon.parser.Parser;
 import nylon.parser.StringIterator;
 
 import java.util.ArrayList;
 import java.util.Stack;
-import java.util.function.BiFunction;
 
 /**
  * Created by Aedan Smith.
  */
 
 public class CharacterParser {
-    public static void addTo(ArrayList<BiFunction<StringIterator, NylonParser, NylonFunction>> parsers) {
+    public static void addTo(ArrayList<Parser> parsers) {
         parsers.set('\'', CharacterParser::parse);
     }
 
