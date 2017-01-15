@@ -78,7 +78,9 @@ public class NylonParser {
                     break loop;
                 nylonFunction = parsers.get(in.peek()).apply(in, this);
             }
-            inlineFunction.functions.add(nylonFunction);
+            if (nylonFunction != null) {
+                inlineFunction.functions.add(nylonFunction);
+            }
         }
     }
 }

@@ -22,6 +22,6 @@ public abstract class LibraryFunction extends NylonFunction {
 
     @Override
     public String toString() {
-        return "LibraryFunction(\"" + id + "\")";
+        return "LibraryFunction(\"" + this.id + "\")";
     }
 }

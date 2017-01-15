@@ -12,7 +12,6 @@ import java.util.Stack;
 
 public class InlineFunction extends NylonFunction {
     public ArrayList<NylonFunction> functions = new ArrayList<>();
-
     public InlineFunction(String id, NylonFunction... functions) {
         super(id);
         Collections.addAll(this.functions, functions);

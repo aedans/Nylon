@@ -75,11 +75,6 @@ public final class Builtins {
                             public void applyImpl(java.util.Stack<NylonObject> stack) throws NylonException {
                                 inlineFunction.apply(stack);
                             }
-
-                            @Override
-                            public String toString() {
-                                return super.toString() + inlineFunction.toString().substring(14);
-                            }
                         };
                     } finally {
                         nylonParser.parse(new StringIterator(content.toString()), inlineFunction);
