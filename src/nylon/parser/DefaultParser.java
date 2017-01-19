@@ -15,7 +15,7 @@ class DefaultParser {
         }
     }
 
-    public static NylonFunction parse(StringIterator in, NylonParser nylonParser) {
+    public static NylonFunction parse(CharIterator in, NylonParser nylonParser) {
         in.skip();
         return null;
     }

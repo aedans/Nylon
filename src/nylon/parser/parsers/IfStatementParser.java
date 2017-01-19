@@ -3,9 +3,9 @@ package nylon.parser.parsers;
 import nylon.NylonException;
 import nylon.NylonObject;
 import nylon.nylonobjects.NylonFunction;
+import nylon.parser.CharIterator;
 import nylon.parser.NylonParser;
 import nylon.parser.Parser;
-import nylon.parser.StringIterator;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -16,22 +16,30 @@ import java.util.Stack;
  */
 
 public class IfStatementParser {
+    public static final char
+            TRUE = '?',
+            FALSE = '¿',
+            GREATER = '>',
+            LESS = '<',
+            EQUALS = '=',
+            ELSE = '!';
+
     public static void addTo(ArrayList<Parser> parsers) {
-        parsers.set('?', IfStatementParser::parse);
-        parsers.set('¿', IfStatementParser::parse);
-        parsers.set('>', IfStatementParser::parse);
-        parsers.set('<', IfStatementParser::parse);
-        parsers.set('=', IfStatementParser::parse);
+        parsers.set(TRUE, IfStatementParser::parse);
+        parsers.set(FALSE, IfStatementParser::parse);
+        parsers.set(GREATER, IfStatementParser::parse);
+        parsers.set(LESS, IfStatementParser::parse);
+        parsers.set(EQUALS, IfStatementParser::parse);
     }
 
-    public static NylonFunction parse(StringIterator in, NylonParser nylonParser) {
+    public static NylonFunction parse(CharIterator in, NylonParser nylonParser) {
         char[] ifs = in.until(stringIterator -> in.hasNext() &&
-                (in.peek() == '?'
-                        || in.peek() == '¿'
-                        || in.peek() == '>'
-                        || in.peek() == '<'
-                        || in.peek() == '='
-                        || in.peek() == '!'
+                (in.peek() == TRUE
+                        || in.peek() == FALSE
+                        || in.peek() == LESS
+                        || in.peek() == GREATER
+                        || in.peek() == EQUALS
+                        || in.peek() == ELSE
                 )
         ).toCharArray();
 
@@ -49,38 +57,38 @@ public class IfStatementParser {
                 return "EmptyFunction";
             }
         };
-        if (in.hasNext() && in.peek() == '!') {
+        if (in.hasNext() && in.peek() == ELSE) {
             in.skip();
             ifFalse = nylonParser.parse(in);
         }
 
-        boolean pop = ifs[ifs.length - 1] != '!';
+        boolean pop = ifs[ifs.length - 1] != ELSE;
         NylonFunction finalIfFalse = ifFalse;
-        return new NylonFunction("IfStatement") {
+        return new NylonFunction("IfStatement(" + new String(ifs) + ")") {
             @Override
             public void applyImpl(Stack<NylonObject> stack) throws NylonException {
                 boolean b = false;
                 for (char c : ifs) {
                     switch (c) {
-                        case '?':
-                            b = stack.peek().toBoolean(stack);
+                        case TRUE:
+                            b = stack.peek().toBoolean();
                             break;
-                        case '¿':
-                            b = !stack.peek().toBoolean(stack);
+                        case FALSE:
+                            b = !stack.peek().toBoolean();
                             break;
-                        case '>': {
+                        case GREATER: {
                             NylonObject o1 = stack.peek(), o2 = stack.get(stack.size() - 2);
-                            b = o2.toDouble(stack) > o1.toDouble(stack);
+                            b = o2.toDouble() > o1.toDouble();
                             break;
                         }
-                        case '<': {
+                        case LESS: {
                             NylonObject o1 = stack.peek(), o2 = stack.get(stack.size() - 2);
-                            b = o2.toDouble(stack) < o1.toDouble(stack);
+                            b = o2.toDouble() < o1.toDouble();
                             break;
                         }
-                        case '=': {
+                        case EQUALS: {
                             NylonObject o1 = stack.peek(), o2 = stack.get(stack.size() - 2);
-                            b = Objects.equals(o1, o2);
+                            b = Objects.equals(o1.value, o2.value);
                             break;
                         }
                     }

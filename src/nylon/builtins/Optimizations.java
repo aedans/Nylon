@@ -3,6 +3,7 @@ package nylon.builtins;
 import nylon.NylonException;
 import nylon.NylonObject;
 import nylon.builtins.objects.LibraryFunction;
+import nylon.nylonobjects.NylonArray;
 import nylon.nylonobjects.NylonFunction;
 
 import java.util.HashMap;
@@ -19,6 +20,14 @@ public final class Optimizations {
             @Override
             public void applyImpl(Stack<NylonObject> stack) throws NylonException {
                 stack.pop();
+            }
+        });
+        functions.put("a", () -> new LibraryFunction("a.nl") {
+            @Override
+            protected void applyImpl(Stack<NylonObject> stack) throws NylonException {
+                NylonArray nylonArray = new NylonArray(stack);
+                stack.clear();
+                stack.add(nylonArray);
             }
         });
     }

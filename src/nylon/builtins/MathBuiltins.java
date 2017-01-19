@@ -21,7 +21,7 @@ public final class MathBuiltins {
             @Override
             public void applyImpl(Stack<NylonObject> stack) throws NylonException {
                 NylonObject n2 = stack.pop(), n1 = stack.pop();
-                NylonObject nylonObject = n1.promote(n2, stack).concatenate(n2.promote(n1, stack), stack);
+                NylonObject nylonObject = n1.promote(n2).concatenate(n2.promote(n1));
                 stack.add(nylonObject);
             }
         }));
@@ -29,7 +29,7 @@ public final class MathBuiltins {
             @Override
             public void applyImpl(Stack<NylonObject> stack) throws NylonException {
                 NylonObject n2 = stack.pop(), n1 = stack.pop();
-                NylonObject nylonObject = n1.promote(n2, stack).subtract(n2.promote(n1, stack), stack);
+                NylonObject nylonObject = n1.promote(n2).subtract(n2.promote(n1));
                 stack.add(nylonObject);
             }
         }));
@@ -37,7 +37,7 @@ public final class MathBuiltins {
             @Override
             public void applyImpl(Stack<NylonObject> stack) throws NylonException {
                 NylonObject n2 = stack.pop(), n1 = stack.pop();
-                NylonObject nylonObject = n1.promote(n2, stack).multiply(n2.promote(n1, stack), stack);
+                NylonObject nylonObject = n1.promote(n2).multiply(n2.promote(n1));
                 stack.add(nylonObject);
             }
         }));
@@ -45,7 +45,7 @@ public final class MathBuiltins {
             @Override
             public void applyImpl(Stack<NylonObject> stack) throws NylonException {
                 NylonObject n2 = stack.pop(), n1 = stack.pop();
-                NylonObject nylonObject = n1.promote(n2, stack).divide(n2.promote(n1, stack), stack);
+                NylonObject nylonObject = n1.promote(n2).divide(n2.promote(n1));
                 stack.add(nylonObject);
             }
         }));
@@ -53,7 +53,7 @@ public final class MathBuiltins {
             @Override
             public void applyImpl(Stack<NylonObject> stack) throws NylonException {
                 NylonObject n2 = stack.pop(), n1 = stack.pop();
-                NylonDouble nylonDouble = new NylonDouble(Math.pow(n1.toDouble(stack), n2.toDouble(stack)));
+                NylonDouble nylonDouble = new NylonDouble(Math.pow(n1.toDouble(), n2.toDouble()));
                 stack.add(nylonDouble);
             }
         }));
@@ -61,7 +61,7 @@ public final class MathBuiltins {
             @Override
             public void applyImpl(Stack<NylonObject> stack) throws NylonException {
                 NylonObject n2 = stack.pop(), n1 = stack.pop();
-                NylonLong nylonLong = new NylonLong(n1.toLong(stack) % n2.toLong(stack));
+                NylonLong nylonLong = new NylonLong(n1.toLong() % n2.toLong());
                 stack.add(nylonLong);
             }
         }));

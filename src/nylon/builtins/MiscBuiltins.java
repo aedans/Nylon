@@ -14,15 +14,21 @@ import java.util.Stack;
  * Created by Aedan Smith.
  */
 
-public final class AsciiCanvas {
+public class MiscBuiltins {
     public static void build(ArrayList<Parser> parsers) {
+        parsers.set(',', BuiltinParser.getParser(new BuiltinFunction(',') {
+            @Override
+            public void applyImpl(Stack<NylonObject> stack) throws NylonException {
+                stack.pop().toFunction().apply(stack);
+            }
+        }));
         parsers.set('ð', BuiltinParser.getParser(new BuiltinFunction('ð') {
             @Override
             public void applyImpl(Stack<NylonObject> stack) throws NylonException {
                 // The lines of the string to addTo
                 String[] add = stack.pop().toString().split("\n");
                 // The x and y position to addTo the string
-                int x = ((int) stack.pop().toDouble(stack)), y = ((int) stack.pop().toDouble(stack));
+                int x = ((int) stack.pop().toDouble()), y = ((int) stack.pop().toDouble());
                 // The canvas to addTo the string to
                 String canvasString = stack.pop().toString();
                 ArrayList<ArrayList<Character>> canvas = new ArrayList<>();

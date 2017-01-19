@@ -11,25 +11,25 @@
 {"abcde"}                                   ENDL
 
 // Casting tests
-97~c98~c99~c100~c101~c                      ENDL
+97â98â99â100â101â                           ENDL
 
 // Builtin tests
 // Math
 '2'/+'3'/+'4'/+'5'/+'6'/+                   ENDL
 "abc""de"+                                  ENDL
-101 4-~c101 3-~c101 2-~c101 1-~c101~c       ENDL
+101 4-â101 3-â101 2-â101 1-â101â            ENDL
 "abcdefg""fg"-                              ENDL
 // TODO: Multiply strings
-9 11*2-~c9 11*1-~c9 11*~c10 10*~c9 11*2+~c  ENDL
-970 10/~c980 10/~c990 10/~c500 5/~c202 2/~c ENDL
-10 2^3-~c10 2^2-~c10 2^1-~c10 2^~c10 2^1+~c ENDL
+9 11*2-â9 11*1-â9 11*â10 10*â9 11*2+â       ENDL
+970 10/â980 10/â990 10/â500 5/â202 2/â      ENDL
+10 2^3-â10 2^2-â10 2^1-â10 2^â10 2^1+â      ENDL
 // TODO: Modulo test
 
 // Stack
 "abc"(À"de"+Á)                              ENDL
-('a'b'c'd'eaÁ)~s                            ENDL
-('b'c'd'e'aùaÁ)~s                           ENDL
-('e'a'b'c'dúaÁ)~s                           ENDL
+('a'b'c'd'eaÁ)ã                             ENDL
+('b'c'd'e'aùaÁ)ã                            ENDL
+('e'a'b'c'dúaÁ)ã                            ENDL
 // TODO: Length of stack builtin
 
 // Functions
@@ -49,9 +49,9 @@
 3 0?>{p"abcde"}!{p"ERROR"}                  ENDL
 
 // For loop tests
-5î{'a+~c}                                   ENDL
-('aìi~cÁ'bìi~cÁ'cìi~cÁ'dìi~cÁ'eìi~cÁ)       ENDL
-0'aíi~c1'aíi~c2'aíi~c3'aíi~c4'aíi~c         ENDL
+5î{'a+â}                                    ENDL
+('aìiâÁ'bìiâÁ'cìiâÁ'dìiâÁ'eìiâÁ)            ENDL
+0'aíiâ1'aíiâ2'aíiâ3'aíiâ4'aíiâ              ENDL
 'aï{}'bï{}'cï{}'dï{}'eï{}                   ENDL
 
 // STDL tests
@@ -61,9 +61,9 @@
 '`i'ai'bi'ci'di                             ENDL // i.nl
 "`abcd"@ime                                 ENDL // m.nl
 'a'b'c'e'ds                                 ENDL // s.nl
-tt*3-~ctt*2-~ctt*1-~ctt*~ctt*1+~c           ENDL // t.nl
+tt*3-âtt*2-âtt*1-âtt*âtt*1+â                ENDL // t.nl
 "abc"exis3+                                 ENDL // x.nl
-'a'b'c'd'e5z~s                              ENDL // z.nl
+'a'b'c'd'e5zã                               ENDL // z.nl
 
 // C library: No tests.
 
@@ -72,6 +72,6 @@ tt*3-~ctt*2-~ctt*1-~ctt*~ctt*1+~c           ENDL // t.nl
 // R Library: No tests, due to non-deterministic output.
 
 // U library
-"edcba"Ur~s                                 ENDL
-"bcdea"Uo~s                                 ENDL
-"caedb"Us~s                                 ENDL
+"edcba"Urã                                  ENDL
+"bcdea"Uoã                                  ENDL
+"caedb"Usã                                  ENDL

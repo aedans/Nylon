@@ -1,10 +1,10 @@
 package nylon.parser.parsers;
 
 import nylon.nylonobjects.NylonFunction;
+import nylon.parser.CharIterator;
 import nylon.parser.NylonParser;
 import nylon.parser.ParseUtils;
 import nylon.parser.Parser;
-import nylon.parser.StringIterator;
 
 import java.util.ArrayList;
 
@@ -13,11 +13,13 @@ import java.util.ArrayList;
  */
 
 public class MacroParser {
+    public static final char DEFINE_MACRO = '#';
+
     public static void addTo(ArrayList<Parser> parsers) {
-        parsers.set('#', MacroParser::parse);
+        parsers.set(DEFINE_MACRO, MacroParser::parse);
     }
 
-    public static NylonFunction parse(StringIterator in, NylonParser nylonParser) {
+    public static NylonFunction parse(CharIterator in, NylonParser nylonParser) {
         in.skip();
 
         String name = ParseUtils.parseNextName(in);

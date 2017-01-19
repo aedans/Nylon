@@ -1,2 +1,2 @@
 // Replaces the stack with an array containing the stack.
-~ac
+// #Interpreter Function

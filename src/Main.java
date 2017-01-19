@@ -1,5 +1,6 @@
 import nylon.NylonObject;
 import nylon.NylonRuntime;
+import nylon.parser.CharIterator;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -23,7 +24,7 @@ public class Main {
         long t = System.nanoTime();
         NylonRuntime nylonRuntime = new NylonRuntime(
                 args[1],
-                content.toString(),
+                new CharIterator(content.toString()),
                 new File(args[0]),
                 Arrays.asList(args).subList(2, args.length)
         );

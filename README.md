@@ -94,23 +94,16 @@ loop value.
 - 'ï': Creates a non-consuming, non-pushing for loop.
 
 ## Casting
-Casting is done via the character '~', followed by 'a' (array), 'd' (double), 'l' (long), 'c', (character), 'b' (boolean),
-'s' (string), or 'f' (function). Casting casts the top object of the stack to the given type, and each type has unique
-methods of casting.
+Casting is done via the builtins 'ä' (array), 'à' (double), 'á' (long), 'â', (char), 'ã' (string), or 'å' (function). 
+Casting casts the top object of the stack to the given type, and each type has unique methods of casting.
 
-Defaults:
-- (anything) -> a: Creates a 1-element array containing the object.
-- (anything) -> l: Casts the object to a double, then casts that to a long.
-- (anything) -> c: Casts the object to a double, then casts that to a char.
-- (anything) -> b: Casts the object to a double, then casts that to a boolean.
-- (anything) -> f: Creates a function that pushes clones of the object to the stack.
-
-Special:
-- a -> d: Creates a double with size equal to the length of the array.
-- a -> b: False if the last element of the array is false, or if the array is empty.
-- b -> d: 1 if true, 0 if false.
-- s -> d: Attempts to parse the string to a double.
-- s -> f: Compiles the string to function as though it were the source.
+- array -> double: Creates a double with size equal to the length of the array.
+- string -> double: Attempts to parse the string to a double.
+- function -> anything: Calls the function on an empty stack, then casts the top of the stack to the result.
+- anything -> array: Creates a 1-element array containing the object.
+- anything -> long: Casts the object to a double, then casts that to a long.
+- anything -> char: Casts the object to a double, then casts that to a char.
+- anything -> function: Creates a function that pushes clones of the object to the stack.
 
 ## Standard Library
 

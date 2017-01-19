@@ -11,8 +11,8 @@ A list of builtins that are not discussed in README.md.
 ## Stack Manipulation
 - '(': Shadows the current stack with a new stack.
 - ')': Removes the current stack and replaces it with the shadowed one.
-- 'À': Pulls the top argument of the shadowed stack to the current one.
-- 'Á': Pushes the top argument of the current stack to the shadowed one.
+- 'À': Pulls the top argument from the shadowed stack to the current one.
+- 'Á': Pushes the top argument from the current stack to the shadowed one.
 - ':': Duplicates the top item of the stack.
 - 'ù': Moves the top of the stack to the bottom.
 - 'ú': Moves the bottom of the stack to the top.
@@ -20,6 +20,10 @@ A list of builtins that are not discussed in README.md.
 
 ## Functions
 - ',': Casts the top of the stack to a function, then calls it.
+
+## IO
+- '': Reads a line of input from stdin.
+- 'ß': Writes the top of the stack to stdout.
 
 ## Ascii Canvas
 - 'ð': "Paints" the top string of the stack on 4th string of the stack at coordinate points

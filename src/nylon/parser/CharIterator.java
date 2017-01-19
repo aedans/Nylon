@@ -8,11 +8,11 @@ import java.util.function.Predicate;
  * Created by Aedan Smith.
  */
 
-public class StringIterator implements Iterator<Character> {
+public class CharIterator implements Iterator<Character> {
     protected int i = 0;
     protected char[] string;
 
-    public StringIterator(String string) {
+    public CharIterator(String string) {
         this.string = string.toCharArray();
     }
 
@@ -41,7 +41,7 @@ public class StringIterator implements Iterator<Character> {
         return s;
     }
 
-    public String until(Predicate<StringIterator> test) {
+    public String until(Predicate<CharIterator> test) {
         String s = "";
         while (test.test(this)) {
             s += next();

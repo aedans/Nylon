@@ -3,9 +3,9 @@ package nylon.parser.parsers;
 import nylon.NylonObject;
 import nylon.nylonobjects.NylonCharacter;
 import nylon.nylonobjects.NylonFunction;
+import nylon.parser.CharIterator;
 import nylon.parser.NylonParser;
 import nylon.parser.Parser;
-import nylon.parser.StringIterator;
 
 import java.util.ArrayList;
 import java.util.Stack;
@@ -15,11 +15,13 @@ import java.util.Stack;
  */
 
 public class CharacterParser {
+    public static final char CHAR_ESCAPE = '\'';
+
     public static void addTo(ArrayList<Parser> parsers) {
-        parsers.set('\'', CharacterParser::parse);
+        parsers.set(CHAR_ESCAPE, CharacterParser::parse);
     }
 
-    public static NylonFunction parse(StringIterator in, NylonParser parser) {
+    public static NylonFunction parse(CharIterator in, NylonParser parser) {
         in.skip();
 
         char c = in.next();

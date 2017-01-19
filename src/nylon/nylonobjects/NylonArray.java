@@ -5,14 +5,13 @@ import nylon.NylonObject;
 
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.Stack;
 import java.util.Vector;
 
 /**
  * Created by Aedan Smith.
  */
 
-public class NylonArray extends NylonObject<Vector<NylonObject>> implements Collection<NylonObject> {
+public class NylonArray extends NylonObject<Vector<NylonObject>> {
     public NylonArray() {
         super(new Vector<>(), Type.ARRAY, "Array");
         this.shouldOutputNewline = false;
@@ -29,116 +28,51 @@ public class NylonArray extends NylonObject<Vector<NylonObject>> implements Coll
     }
 
     @Override
-    public int size() {
-        return this.value.size();
+    public boolean toBoolean() throws NylonException {
+        return !value.isEmpty() && this.value.lastElement().toBoolean();
     }
 
     @Override
-    public boolean isEmpty() {
-        return this.value.isEmpty();
+    public double toDouble() {
+        return value.size();
     }
 
     @Override
-    public boolean contains(Object o) {
-        return this.value.contains(o);
+    public Iterator<NylonObject> toIterator() {
+        return value.iterator();
     }
 
     @Override
-    public Iterator<NylonObject> iterator() {
-        return this.value.iterator();
-    }
-
-    @Override
-    public Object[] toArray() {
-        return this.value.toArray();
-    }
-
-    @Override
-    public <T> T[] toArray(T[] a) {
-        return this.value.toArray(a);
-    }
-
-    @Override
-    public boolean add(NylonObject nylonObject) {
-        return this.value.add(nylonObject);
-    }
-
-    @Override
-    public boolean remove(Object o) {
-        return this.value.remove(o);
-    }
-
-    @Override
-    public boolean containsAll(Collection<?> c) {
-        return this.value.containsAll(c);
-    }
-
-    @Override
-    public boolean addAll(Collection<? extends NylonObject> c) {
-        return this.value.addAll(c);
-    }
-
-    @Override
-    public boolean removeAll(Collection<?> c) {
-        return this.value.removeAll(c);
-    }
-
-    @Override
-    public boolean retainAll(Collection<?> c) {
-        return this.value.retainAll(c);
-    }
-
-    @Override
-    public void clear() {
-        this.value.clear();
-    }
-
-    @Override
-    public boolean toBoolean(Stack<NylonObject> stack) throws NylonException {
-        return !isEmpty() && this.value.lastElement().toBoolean(stack);
-    }
-
-    @Override
-    public double toDouble(Stack<NylonObject> stack) {
-        return this.size();
-    }
-
-    @Override
-    public Iterator<NylonObject> toIterator(Stack<NylonObject> stack) {
-        return this.iterator();
-    }
-
-    @Override
-    public NylonArray toArray(Stack<NylonObject> stack) {
+    public NylonArray toArray() {
         return this;
     }
 
     @Override
-    public NylonString toNylonString(Stack<NylonObject> stack) {
+    public NylonString toNylonString() {
         String s = "";
-        for (NylonObject nylonObject : this) {
+        for (NylonObject nylonObject : this.value) {
             s += nylonObject.toString();
         }
         return new NylonString(s.toCharArray());
     }
 
     @Override
-    public NylonObject concatenate(NylonObject object, Stack<NylonObject> stack) throws NylonException {
-        this.addAll(object.toArray(stack));
+    public NylonObject concatenate(NylonObject object) throws NylonException {
+        value.addAll(object.toArray().value);
         return this;
     }
 
     @Override
-    public NylonObject subtract(NylonObject object, Stack<NylonObject> stack) throws NylonException {
-        this.removeAll(object.toArray(stack));
+    public NylonObject subtract(NylonObject object) throws NylonException {
+        value.removeAll(object.toArray().value);
         return this;
     }
 
     @Override
-    public NylonObject multiply(NylonObject object, Stack<NylonObject> stack) throws NylonException {
+    public NylonObject multiply(NylonObject object) throws NylonException {
         Vector<NylonObject> v = new Vector<>();
-        for (long i = 0; i < object.toLong(stack); i++) {
-            v.addAll(this);
+        for (long i = 0; i < object.toLong(); i++) {
+            v.addAll(this.value);
         }
         this.value = v;
         return this;
@@ -147,7 +81,7 @@ public class NylonArray extends NylonObject<Vector<NylonObject>> implements Coll
     @Override
     public String toString() {
         String s = "";
-        for (NylonObject nylonObject : this) {
+        for (NylonObject nylonObject : this.value) {
             s += nylonObject + "\n";
         }
         return s;

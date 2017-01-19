@@ -1,6 +1,5 @@
 // Shuffles an array.
-// #Req: a, d, e, Rl
-~a
+ä
 (À(Àe
     Ïd
     í{

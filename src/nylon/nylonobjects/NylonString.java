@@ -2,8 +2,6 @@ package nylon.nylonobjects;
 
 import nylon.NylonObject;
 
-import java.util.Stack;
-
 /**
  * Created by Aedan Smith.
  */
@@ -12,31 +10,31 @@ import java.util.Stack;
 public class NylonString extends NylonArray {
     public NylonString(char[] s) {
         for (char c : s) {
-            this.add(new NylonCharacter(c));
+            this.value.add(new NylonCharacter(c));
         }
         this.type = Type.STRING;
         this.id = "String";
     }
 
     @Override
-    public double toDouble(Stack<NylonObject> stack) {
+    public double toDouble() {
         return Double.parseDouble(this.toString());
     }
 
     @Override
-    public long toLong(Stack<NylonObject> stack) {
+    public long toLong() {
         return Long.parseLong(this.toString());
     }
 
     @Override
-    public NylonString toNylonString(Stack<NylonObject> stack) {
+    public NylonString toNylonString() {
         return this;
     }
 
     @Override
     public String toString() {
         String s = "";
-        for (NylonObject object : this) {
+        for (NylonObject object : this.value) {
             s += object.toString();
         }
         return s;

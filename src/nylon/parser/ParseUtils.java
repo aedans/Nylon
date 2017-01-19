@@ -5,7 +5,7 @@ package nylon.parser;
  */
 
 public class ParseUtils {
-    public static String parseNextName(StringIterator in) {
+    public static String parseNextName(CharIterator in) {
         String name = "";
         while (in.hasNext()) {
             if (in.isInRange('A', 'Z')

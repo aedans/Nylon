@@ -25,25 +25,25 @@ public abstract class NylonObject<T> {
         this.id = id;
     }
 
-    public abstract double toDouble(Stack<NylonObject> stack) throws NylonException;
+    public abstract double toDouble() throws NylonException;
 
-    public boolean toBoolean(Stack<NylonObject> stack) throws NylonException {
-        return toDouble(stack) != 0;
+    public boolean toBoolean() throws NylonException {
+        return toDouble() != 0;
     }
 
-    public long toLong(Stack<NylonObject> stack) throws NylonException {
-        return (long) toDouble(stack);
+    public long toLong() throws NylonException {
+        return (long) toDouble();
     }
 
-    public char toCharacter(Stack<NylonObject> stack) throws NylonException {
-        return (char) toDouble(stack);
+    public char toCharacter() throws NylonException {
+        return (char) toDouble();
     }
 
-    public NylonArray toArray(Stack<NylonObject> stack) throws NylonException {
+    public NylonArray toArray() throws NylonException {
         return new NylonArray(this);
     }
 
-    public NylonFunction toFunction(Stack<NylonObject> stack) {
+    public NylonFunction toFunction() {
         return new NylonFunction("Push" + NylonObject.this.getClass().getSimpleName() + "(" + NylonObject.this + ")") {
             @Override
             public void applyImpl(Stack<NylonObject> stack) throws NylonException {
@@ -61,58 +61,46 @@ public abstract class NylonObject<T> {
         };
     }
 
-    public Iterator<NylonObject> toIterator(Stack<NylonObject> stack) throws NylonException {
-        return new Iterator<NylonObject>() {
-            long i = 0, number = toLong(stack);
-
-            @Override
-            public boolean hasNext() {
-                return i < number;
-            }
-
-            @Override
-            public NylonObject next() {
-                return new NylonLong(i++);
-            }
-        };
+    public Iterator<NylonObject> toIterator() throws NylonException {
+        return toArray().toIterator();
     }
 
-    public NylonString toNylonString(Stack<NylonObject> stack) {
+    public NylonString toNylonString() throws NylonException {
         return new NylonString(this.toString().toCharArray());
     }
 
-    public NylonObject concatenate(NylonObject object, Stack<NylonObject> stack) throws NylonException {
-        return new NylonDouble(this.toDouble(stack) + object.toDouble(stack));
+    public NylonObject concatenate(NylonObject object) throws NylonException {
+        return new NylonDouble(this.toDouble() + object.toDouble());
     }
 
-    public NylonObject subtract(NylonObject object, Stack<NylonObject> stack) throws NylonException {
-        return new NylonDouble(this.toDouble(stack) - object.toDouble(stack));
+    public NylonObject subtract(NylonObject object) throws NylonException {
+        return new NylonDouble(this.toDouble() - object.toDouble());
     }
 
-    public NylonObject multiply(NylonObject object, Stack<NylonObject> stack) throws NylonException {
-        return new NylonDouble(this.toDouble(stack) * object.toDouble(stack));
+    public NylonObject multiply(NylonObject object) throws NylonException {
+        return new NylonDouble(this.toDouble() * object.toDouble());
     }
 
-    public NylonObject divide(NylonObject object, Stack<NylonObject> stack) throws NylonException {
-        return new NylonDouble(this.toDouble(stack) / object.toDouble(stack));
+    public NylonObject divide(NylonObject object) throws NylonException {
+        return new NylonDouble(this.toDouble() / object.toDouble());
     }
 
-    public NylonObject to(Type type, Stack<NylonObject> stack) throws NylonException {
+    public NylonObject to(Type type) throws NylonException {
         switch (type) {
             case BOOL:
-                return new NylonBoolean(this.toBoolean(stack));
+                return new NylonBoolean(this.toBoolean());
             case CHAR:
-                return new NylonCharacter(this.toCharacter(stack));
+                return new NylonCharacter(this.toCharacter());
             case LONG:
-                return new NylonLong(this.toLong(stack));
+                return new NylonLong(this.toLong());
             case DOUBLE:
-                return new NylonDouble(this.toDouble(stack));
+                return new NylonDouble(this.toDouble());
             case ARRAY:
-                return this.toArray(stack);
+                return this.toArray();
             case STRING:
-                return this.toNylonString(stack);
+                return this.toNylonString();
             case FUNCTION:
-                return this.toFunction(stack);
+                return this.toFunction();
             case FILE:
                 return new NylonFile(new File(this.toString()));
             default:
@@ -120,9 +108,9 @@ public abstract class NylonObject<T> {
         }
     }
 
-    public NylonObject promote(NylonObject object, Stack<NylonObject> stack) throws NylonException {
+    public NylonObject promote(NylonObject object) throws NylonException {
         if (this.type.promotionLevel < object.type.promotionLevel) {
-            return this.to(object.type, stack);
+            return this.to(object.type);
         } else {
             return this;
         }

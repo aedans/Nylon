@@ -9,7 +9,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.Iterator;
-import java.util.Stack;
 
 /**
  * Created by Aedan Smith.
@@ -21,17 +20,17 @@ public class NylonFile extends NylonObject<File> {
     }
 
     @Override
-    public boolean toBoolean(Stack<NylonObject> stack) {
+    public boolean toBoolean() {
         return this.value.exists();
     }
 
     @Override
-    public double toDouble(Stack<NylonObject> stack) {
+    public double toDouble() {
         return this.value.getTotalSpace();
     }
 
     @Override
-    public Iterator<NylonObject> toIterator(Stack<NylonObject> stack) throws NylonException {
+    public Iterator<NylonObject> toIterator() throws NylonException {
         try {
             if (this.value.isDirectory()) {
                 return new Iterator<NylonObject>() {
@@ -74,9 +73,9 @@ public class NylonFile extends NylonObject<File> {
     }
 
     @Override
-    public NylonArray toArray(Stack<NylonObject> stack) throws NylonException {
+    public NylonArray toArray() throws NylonException {
         NylonArray nylonArray = new NylonArray();
-        this.toIterator(stack).forEachRemaining(nylonArray::add);
+        this.toIterator().forEachRemaining(nylonArray.value::add);
         return nylonArray;
     }
 

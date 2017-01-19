@@ -3,8 +3,6 @@ package nylon.nylonobjects;
 import nylon.NylonException;
 import nylon.NylonObject;
 
-import java.util.Stack;
-
 /**
  * Created by Aedan Smith.
  */
@@ -15,12 +13,12 @@ public class NylonBoolean extends NylonObject<Boolean> {
     }
 
     @Override
-    public double toDouble(Stack<NylonObject> stack) {
+    public double toDouble() {
         return this.value ? 1 : 0;
     }
 
     @Override
-    public boolean toBoolean(Stack<NylonObject> stack) throws NylonException {
+    public boolean toBoolean() throws NylonException {
         return this.value;
     }
 }

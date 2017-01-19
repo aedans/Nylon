@@ -1,10 +1,10 @@
 package nylon.parser.parsers;
 
 import nylon.nylonobjects.NylonFunction;
+import nylon.parser.CharIterator;
 import nylon.parser.NylonParser;
 import nylon.parser.ParseUtils;
 import nylon.parser.Parser;
-import nylon.parser.StringIterator;
 
 import java.util.ArrayList;
 import java.util.function.Supplier;
@@ -23,12 +23,12 @@ public class ExternalFunctionParser {
         }
     }
 
-    public static NylonFunction parse(StringIterator in, NylonParser nylonParser) {
+    public static NylonFunction parse(CharIterator in, NylonParser nylonParser) {
         String name = ParseUtils.parseNextName(in);
 
-            Supplier<NylonFunction> function = nylonParser.functions.get(name);
-            if (function == null)
-                throw new RuntimeException("Could not find function with name \"" + name + "\"");
+        Supplier<NylonFunction> function = nylonParser.functions.get(name);
+        if (function == null)
+            throw new RuntimeException("Could not find function with name \"" + name + "\"");
 
         return function.get();
     }

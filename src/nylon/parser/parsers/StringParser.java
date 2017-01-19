@@ -3,9 +3,9 @@ package nylon.parser.parsers;
 import nylon.NylonObject;
 import nylon.nylonobjects.NylonFunction;
 import nylon.nylonobjects.NylonString;
+import nylon.parser.CharIterator;
 import nylon.parser.NylonParser;
 import nylon.parser.Parser;
-import nylon.parser.StringIterator;
 
 import java.util.ArrayList;
 import java.util.Stack;
@@ -15,15 +15,17 @@ import java.util.Stack;
  */
 
 public class StringParser {
+    public static char BEGIN_STRING = '"', END_STRING = '"';
+
     public static void addTo(ArrayList<Parser> parsers) {
-        parsers.set('"', StringParser::parse);
+        parsers.set(BEGIN_STRING, StringParser::parse);
     }
 
-    public static NylonFunction parse(StringIterator in, NylonParser nylonParser) {
+    public static NylonFunction parse(CharIterator in, NylonParser nylonParser) {
         in.skip();
 
         String s = "";
-        while (in.hasNext() && in.peek() != '"') {
+        while (in.hasNext() && in.peek() != END_STRING) {
             if (in.peek() == '\\') {
                 in.skip();
                 s += in.next();

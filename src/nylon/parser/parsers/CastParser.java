@@ -2,10 +2,13 @@ package nylon.parser.parsers;
 
 import nylon.NylonException;
 import nylon.NylonObject;
-import nylon.nylonobjects.*;
+import nylon.nylonobjects.NylonCharacter;
+import nylon.nylonobjects.NylonDouble;
+import nylon.nylonobjects.NylonFunction;
+import nylon.nylonobjects.NylonLong;
+import nylon.parser.CharIterator;
 import nylon.parser.NylonParser;
 import nylon.parser.Parser;
-import nylon.parser.StringIterator;
 
 import java.util.ArrayList;
 import java.util.Stack;
@@ -15,44 +18,56 @@ import java.util.Stack;
  */
 
 public class CastParser {
+    public static final char
+            TO_ARRAY = 'ä',
+            TO_DOUBLE = 'à',
+            TO_LONG = 'á',
+            TO_CHAR = 'â',
+            TO_STRING = 'ã',
+            TO_FUNCTION = 'å';
+
     public static void addTo(ArrayList<Parser> parsers) {
-        parsers.set('~', CastParser::parse);
+        parsers.set(TO_ARRAY, CastParser::parse);
+        parsers.set(TO_DOUBLE, CastParser::parse);
+        parsers.set(TO_LONG, CastParser::parse);
+        parsers.set(TO_CHAR, CastParser::parse);
+        parsers.set(TO_STRING, CastParser::parse);
+        parsers.set(TO_FUNCTION, CastParser::parse);
     }
 
-    public static NylonFunction parse(StringIterator in, NylonParser parser) {
-        in.skip();
-
+    public static NylonFunction parse(CharIterator in, NylonParser parser) {
         char c = in.next();
 
-        // TODO Be decent
+        Caster caster;
+
+        switch (c) {
+            case TO_ARRAY:
+                caster = (nylonObject1, stack1) -> nylonObject1.toArray();
+                break;
+            case TO_DOUBLE:
+                caster = (nylonObject, stack) -> new NylonDouble(nylonObject.toDouble());
+                break;
+            case TO_LONG:
+                caster = (nylonObject, stack) -> new NylonLong(nylonObject.toLong());
+                break;
+            case TO_CHAR:
+                caster = (nylonObject, stack) -> new NylonCharacter(nylonObject.toCharacter());
+                break;
+            case TO_STRING:
+                caster = (nylonObject1, stack1) -> nylonObject1.toNylonString();
+                break;
+            case TO_FUNCTION:
+                caster = (nylonObject, stack) -> nylonObject.toFunction();
+                break;
+            default:
+                throw new RuntimeException("Could not create casting function of type '" + c + "'");
+        }
+
+        Caster finalCaster = caster;
         return new NylonFunction("CastToObject('" + c + "')") {
             @Override
             public void applyImpl(Stack<NylonObject> stack) throws NylonException {
-                switch (c) {
-                    case 'a':
-                        stack.add(stack.pop().toArray(stack));
-                        break;
-                    case 'b':
-                        stack.add(new NylonBoolean(stack.pop().toBoolean(stack)));
-                        break;
-                    case 'c':
-                        stack.add(new NylonCharacter(stack.pop().toCharacter(stack)));
-                        break;
-                    case 'd':
-                        stack.add(new NylonDouble(stack.pop().toDouble(stack)));
-                        break;
-                    case 'f':
-                        stack.add(stack.pop().toFunction(stack));
-                        break;
-                    case 'l':
-                        stack.add(new NylonLong(stack.pop().toLong(stack)));
-                        break;
-                    case 's':
-                        stack.add(stack.pop().toNylonString(stack));
-                        break;
-                    default:
-                        throw new NylonException("Cannot cast object to '" + c + "'", this);
-                }
+                stack.add(finalCaster.cast(stack.pop(), stack));
             }
 
             @Override
@@ -60,5 +75,9 @@ public class CastParser {
                 return id;
             }
         };
+    }
+
+    private interface Caster {
+        NylonObject cast(NylonObject nylonObject, Stack<NylonObject> stack) throws NylonException;
     }
 }

@@ -35,7 +35,7 @@ public class NylonParser {
                 NumberParser::addTo,
                 NylonFunctionParser::addTo,
                 StringParser::addTo,
-                WhileNotEmptyLoop::addTo
+                WhileLoopParser::addTo
         );
     }
 
@@ -47,7 +47,7 @@ public class NylonParser {
         Builtins.build(this, stdl);
     }
 
-    public void parse(StringIterator in, InlineFunction inlineFunction) {
+    public void parse(CharIterator in, InlineFunction inlineFunction) {
         while (in.hasNext()) {
             NylonFunction parse = parse(in);
             if (parse != null) {
@@ -56,7 +56,7 @@ public class NylonParser {
         }
     }
 
-    public NylonFunction parse(StringIterator in) {
+    public NylonFunction parse(CharIterator in) {
         NylonFunction nylonFunction = null;
         while (in.hasNext() && nylonFunction == null) {
             if (in.hasNext(2) && Objects.equals(in.peekString(2), "//"))
@@ -66,7 +66,7 @@ public class NylonParser {
         return nylonFunction;
     }
 
-    public void parseUntil(InlineFunction inlineFunction, StringIterator in, char c) {
+    public void parseUntil(InlineFunction inlineFunction, CharIterator in, char c) {
         loop:
         while (in.hasNext()) {
             NylonFunction nylonFunction = null;

@@ -3,8 +3,8 @@ package nylon;
 import nylon.builtins.*;
 import nylon.builtins.objects.LibraryFunction;
 import nylon.nylonobjects.NylonFunction;
+import nylon.parser.CharIterator;
 import nylon.parser.NylonParser;
-import nylon.parser.StringIterator;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -22,8 +22,8 @@ public final class Builtins {
 
         MathBuiltins.build(nylonParser.parsers);
         StackBuiltins.build(nylonParser.parsers);
-        FunctionBuiltins.build(nylonParser.parsers);
-        AsciiCanvas.build(nylonParser.parsers);
+        IOBuiltins.build(nylonParser.parsers);
+        MiscBuiltins.build(nylonParser.parsers);
 
         RandomBuiltins.build(nylonParser.functions);
         FileLibrary.build(nylonParser.functions);
@@ -76,7 +76,7 @@ public final class Builtins {
                             }
                         };
                     } finally {
-                        nylonParser.parse(new StringIterator(content.toString()), inlineFunction);
+                        nylonParser.parse(new CharIterator(content.toString()), inlineFunction);
                     }
                 } catch (IOException e) {
                     throw new RuntimeException(e.getMessage());

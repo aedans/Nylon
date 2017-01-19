@@ -3,9 +3,9 @@ package nylon.parser.parsers;
 import nylon.NylonException;
 import nylon.NylonObject;
 import nylon.nylonobjects.NylonFunction;
+import nylon.parser.CharIterator;
 import nylon.parser.NylonParser;
 import nylon.parser.Parser;
-import nylon.parser.StringIterator;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -16,17 +16,23 @@ import java.util.Stack;
  */
 
 public class ForLoopParser {
+    public static final char
+            PC_FOR = 'î',
+            P_FOR = 'ì',
+            C_FOR = 'í',
+            _FOR = 'ï';
+
     public static void addTo(ArrayList<Parser> parsers) {
         // TODO separate methods
-        parsers.set('î', ForLoopParser::parse);
-        parsers.set('ì', ForLoopParser::parse);
-        parsers.set('î', ForLoopParser::parse);
-        parsers.set('í', ForLoopParser::parse);
+        parsers.set(PC_FOR, ForLoopParser::parse);
+        parsers.set(P_FOR, ForLoopParser::parse);
+        parsers.set(C_FOR, ForLoopParser::parse);
+        parsers.set(_FOR, ForLoopParser::parse);
     }
 
-    public static NylonFunction parse(StringIterator in, NylonParser nylonParser) {
-        boolean push = in.peek() == 'î' || in.peek() == 'ì';
-        boolean consume = in.peek() == 'î' || in.peek() == 'í';
+    public static NylonFunction parse(CharIterator in, NylonParser nylonParser) {
+        boolean push = in.peek() == PC_FOR || in.peek() == P_FOR;
+        boolean consume = in.peek() == PC_FOR || in.peek() == C_FOR;
         in.skip();
 
         NylonFunction wrapped = nylonParser.parse(in);
@@ -34,7 +40,7 @@ public class ForLoopParser {
         return new NylonFunction("ForLoop(" + wrapped.getId() + ")") {
             @Override
             public void applyImpl(Stack<NylonObject> stack) throws NylonException {
-                Iterator<NylonObject> iterator = consume ? stack.pop().toIterator(stack) : stack.peek().toIterator(stack);
+                Iterator<NylonObject> iterator = consume ? stack.pop().toIterator() : stack.peek().toIterator();
                 while (iterator.hasNext()) {
                     if (push)
                         stack.push(iterator.next());

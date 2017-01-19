@@ -55,31 +55,62 @@ public abstract class NylonFunction extends NylonObject<NylonFunction> {
         } catch (NylonException e) {
             e.add(this);
             throw e;
-        } catch (Exception e) {
+        } catch (Throwable e) {
             throw new NylonException(e.getClass().getCanonicalName() + ": " + e.getMessage(), this);
         }
     }
 
-    public abstract void applyImpl(Stack<NylonObject> stack) throws NylonException;
+    protected abstract void applyImpl(Stack<NylonObject> stack) throws NylonException;
 
-    @Override
-    public double toDouble(Stack<NylonObject> stack) throws NylonException {
-        throw new NylonException("Cannot cast function to non-function objects", this);
+    public Stack<NylonObject> toStack() throws NylonException {
+        Stack<NylonObject> stack = new Stack<>();
+        this.apply(stack);
+        return stack;
     }
 
     @Override
-    public NylonFunction toFunction(Stack<NylonObject> stack) {
+    public double toDouble() throws NylonException {
+        return toStack().peek().toDouble();
+    }
+
+    @Override
+    public long toLong() throws NylonException {
+        return toStack().peek().toLong();
+    }
+
+    @Override
+    public char toCharacter() throws NylonException {
+        return toStack().peek().toCharacter();
+    }
+
+    @Override
+    public boolean toBoolean() throws NylonException {
+        return toStack().peek().toBoolean();
+    }
+
+    @Override
+    public NylonArray toArray() throws NylonException {
+        return new NylonArray(toStack());
+    }
+
+    @Override
+    public NylonString toNylonString() throws NylonException {
+        return toStack().peek().toNylonString();
+    }
+
+    @Override
+    public NylonFunction toFunction() {
         return this;
     }
 
     @Override
-    public NylonFunction concatenate(NylonObject object, Stack<NylonObject> stack) {
+    public NylonFunction concatenate(NylonObject object) {
         return new InlineFunction("ConcatenatedFunction(" + this.id + ", " + object.getId() + ")",
-                this, object.toFunction(stack));
+                this, object.toFunction());
     }
 
     @Override
-    public NylonObject subtract(NylonObject object, Stack<NylonObject> stack) throws NylonException {
+    public NylonObject subtract(NylonObject object) throws NylonException {
         throw new NylonException("Cannot subtract functions", this);
     }
 

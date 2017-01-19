@@ -4,9 +4,9 @@ import nylon.NylonObject;
 import nylon.nylonobjects.NylonDouble;
 import nylon.nylonobjects.NylonFunction;
 import nylon.nylonobjects.NylonLong;
+import nylon.parser.CharIterator;
 import nylon.parser.NylonParser;
 import nylon.parser.Parser;
-import nylon.parser.StringIterator;
 
 import java.util.ArrayList;
 import java.util.Stack;
@@ -22,11 +22,11 @@ public class NumberParser {
         }
     }
 
-    public static NylonFunction parse(StringIterator in, NylonParser nylonParser) {
+    public static NylonFunction parse(CharIterator in, NylonParser nylonParser) {
         boolean isDouble = false;
         String s = "";
         while (in.hasNext() && ((in.peek() >= '0' && in.peek() <= '9') || in.peek() == '.' || in.peek() == 'E')) {
-            if (in.peek() == '.')
+            if (in.peek() == '.' || in.peek() == 'E')
                 isDouble = true;
             s += in.next();
         }
