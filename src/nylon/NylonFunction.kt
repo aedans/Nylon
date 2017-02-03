@@ -8,7 +8,7 @@ import java.util.function.Supplier
  */
 
 abstract class NylonFunction(val string: String, var argNum: Int = 0) {
-    private var args: ArrayList<NylonFunction> = ArrayList(argNum)
+    protected var args: ArrayList<NylonFunction> = ArrayList(argNum)
 
     protected abstract fun apply(stack: NylonStack, args: ArrayList<NylonFunction>)
 

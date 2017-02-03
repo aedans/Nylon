@@ -21,9 +21,14 @@ class ArgumentParserBuilder : ParserBuilder {
 class ArgumentParser : Parser {
     override fun apply(src: CharIterator, parser: NylonParser): NylonFunction? {
         src.next()
-        return object : NylonFunction("Arg", 1) {
-            override fun apply(stack: NylonStack, args: ArrayList<NylonFunction>) {
-                args[0].apply(stack)
+        return object : NylonFunction("_", 1) {
+            override fun apply(stack: NylonStack, args: ArrayList<NylonFunction>) = args[0].apply(stack)
+
+            override fun toString(): String {
+                if (args.size == 0)
+                    return "_"
+                else
+                    return args[0].toString()
             }
         }
     }
