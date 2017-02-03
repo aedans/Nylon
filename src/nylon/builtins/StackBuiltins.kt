@@ -11,13 +11,13 @@ import java.util.*
  * Created by Aedan Smith.
  */
 
-class PushStackParserBuilder : BuiltinParserBuilder(object : NylonFunction("(") {
+class PushStackParserBuilder : BuiltinParserBuilder(object : NylonFunction("PushStack") {
     override fun apply(stack: NylonStack, args: ArrayList<NylonFunction>) {
         stack.stacks.push(Stack<NylonObject<*>>())
     }
 }, '(')
 
-class PopStackParserBuilder : BuiltinParserBuilder(object : NylonFunction(")") {
+class PopStackParserBuilder : BuiltinParserBuilder(object : NylonFunction("PopStack") {
     override fun apply(stack: NylonStack, args: ArrayList<NylonFunction>) {
         stack.stacks.pop()
     }

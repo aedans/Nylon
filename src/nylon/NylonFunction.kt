@@ -40,13 +40,21 @@ abstract class NylonFunction(val string: String, var argNum: Int = 0) {
             override fun apply(stack: NylonStack, args: ArrayList<NylonFunction>) {
                 this@NylonFunction.apply(stack, args)
             }
+
+            override fun toString(args: ArrayList<NylonFunction>): String {
+                return this@NylonFunction.toString(args)
+            }
         }
     }
 
-    override fun toString(): String {
+    open fun toString(args: ArrayList<NylonFunction>): String {
         var s = string
         args.forEach { s += "<$it>" }
         return s
+    }
+
+    override fun toString(): String {
+        return toString(args)
     }
 }
 
@@ -68,7 +76,7 @@ fun concatenate(nylonFunctions: ArrayList<NylonFunction>): NylonFunction {
             args.forEach { it.apply(stack) }
         }
 
-        override fun toString(): String {
+        override fun toString(args: ArrayList<NylonFunction>): String {
             var s = string + "("
             s += args.toString()
             return s + ")"

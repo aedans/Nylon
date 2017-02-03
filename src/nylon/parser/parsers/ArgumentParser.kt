@@ -24,7 +24,7 @@ class ArgumentParser : Parser {
         return object : NylonFunction("_", 1) {
             override fun apply(stack: NylonStack, args: ArrayList<NylonFunction>) = args[0].apply(stack)
 
-            override fun toString(): String {
+            override fun toString(args: ArrayList<NylonFunction>): String {
                 if (args.size == 0)
                     return "_"
                 else

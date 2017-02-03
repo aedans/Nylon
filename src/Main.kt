@@ -11,7 +11,9 @@ import java.io.FileReader
 fun main(args: Array<String>) {
     val parser = NylonParser()
     buildLibrary(parser, File(args[0]))
+    val time = System.nanoTime()
     val runtime = NylonRuntime(FileReader(args[1]).readText(), parser)
+    System.out.printf("Program compiled in %f milliseconds\n", (System.nanoTime() - time).toDouble() / 1000000.0)
     runtime.run()
     runtime.write(System.out)
 }
