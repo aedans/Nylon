@@ -134,10 +134,7 @@ Example:
 @d
 
 Output:
-LibraryFunction("d.nl")[
-	PushNylonDouble("1.0"),
-	BuiltinFunction('-')
-]
+Function([Push(Long(1)), -])
 </pre>
 
 ## Function Macros
