@@ -15,10 +15,10 @@ import java.util.function.Supplier
 
 interface Parser : BiFunction<CharIterator, NylonParser, NylonFunction?>
 
-interface ParserBuilder : Consumer<ArrayList<Parser>>
+interface ParserBuilder : Consumer<HashMap<Char, Parser>>
 
 class NylonParser(vararg builders: ParserBuilder) {
-    val parsers = ArrayList<Parser>(256)
+    val parsers = HashMap<Char, Parser>(256)
 
     val functions = HashMap<String, Supplier<NylonFunction>>()
 
@@ -60,7 +60,7 @@ class NylonParser(vararg builders: ParserBuilder) {
             src.skipUntilStatement()
             if (!src.hasNext())
                 break
-            val nylonFunction = parsers[src.peek().toInt()].apply(src, this)
+            val nylonFunction = parsers[src.peek()]!!.apply(src, this)
             if (nylonFunction != null) {
                 return nylonFunction
             }
@@ -73,7 +73,7 @@ class NylonParser(vararg builders: ParserBuilder) {
         while (src.hasNext()) {
             if (!src.hasNext() || src.peek() == c)
                 break
-            val nylonFunction = parsers[src.peek().toInt()].apply(src, this)
+            val nylonFunction = parsers[src.peek()]!!.apply(src, this)
             if (nylonFunction != null) {
                 nylonFunctions.add(nylonFunction)
             }

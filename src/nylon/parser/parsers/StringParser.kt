@@ -14,8 +14,8 @@ import java.util.*
  */
 
 class StringParserBuilder : ParserBuilder {
-    override fun accept(parsers: ArrayList<Parser>) {
-        parsers['"'.toInt()] = StringParser()
+    override fun accept(parsers: HashMap<Char, Parser>) {
+        parsers['"'] = StringParser()
     }
 }
 

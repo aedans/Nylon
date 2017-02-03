@@ -12,9 +12,9 @@ import java.util.*
  */
 
 class DefaultParserBuilder : ParserBuilder {
-    override fun accept(parsers: ArrayList<Parser>) {
-        for (i: Int in 0..255) {
-            parsers.add(DefaultParser())
+    override fun accept(parsers: HashMap<Char, Parser>) {
+        for (i in 0..255) {
+            parsers.put(i.toChar(), DefaultParser())
         }
     }
 }

@@ -13,8 +13,8 @@ import java.util.function.Supplier
  */
 
 class MacroParserBuilder : ParserBuilder {
-    override fun accept(parsers: ArrayList<Parser>) {
-        parsers['#'.toInt()] = MacroParser()
+    override fun accept(parsers: HashMap<Char, Parser>) {
+        parsers['#'] = MacroParser()
     }
 }
 

@@ -15,9 +15,9 @@ import java.util.*
  */
 
 class NumberParserBuilder : ParserBuilder {
-    override fun accept(parsers: ArrayList<Parser>) {
+    override fun accept(parsers: HashMap<Char, Parser>) {
         for (i in '0'..'9') {
-            parsers[i.toInt()] = NumberParser()
+            parsers[i] = NumberParser()
         }
     }
 }

@@ -12,12 +12,12 @@ import java.util.*
  */
 
 class IfStatementParserBuilder : ParserBuilder {
-    override fun accept(parsers: ArrayList<Parser>) {
-        parsers['?'.toInt()] = IfStatementParser()
-        parsers['¿'.toInt()] = IfStatementParser()
-        parsers['>'.toInt()] = IfStatementParser()
-        parsers['<'.toInt()] = IfStatementParser()
-        parsers['='.toInt()] = IfStatementParser()
+    override fun accept(parsers: HashMap<Char, Parser>) {
+        parsers['?'] = IfStatementParser()
+        parsers['¿'] = IfStatementParser()
+        parsers['>'] = IfStatementParser()
+        parsers['<'] = IfStatementParser()
+        parsers['='] = IfStatementParser()
     }
 }
 

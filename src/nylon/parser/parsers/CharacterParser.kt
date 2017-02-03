@@ -14,8 +14,8 @@ import java.util.*
  */
 
 class CharacterParserBuilder : ParserBuilder {
-    override fun accept(parsers: ArrayList<Parser>) {
-        parsers['\''.toInt()] = CharacterParser()
+    override fun accept(parsers: HashMap<Char, Parser>) {
+        parsers['\''] = CharacterParser()
     }
 }
 

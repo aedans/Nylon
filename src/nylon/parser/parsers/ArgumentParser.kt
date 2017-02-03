@@ -13,8 +13,8 @@ import java.util.*
  */
 
 class ArgumentParserBuilder : ParserBuilder {
-    override fun accept(parsers: ArrayList<Parser>) {
-        parsers['_'.toInt()] = ArgumentParser()
+    override fun accept(parsers: HashMap<Char, Parser>) {
+        parsers['_'] = ArgumentParser()
     }
 }
 

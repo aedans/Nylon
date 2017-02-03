@@ -13,12 +13,12 @@ import java.util.function.Supplier
  */
 
 class FunctionCallParserBuilder : ParserBuilder {
-    override fun accept(parsers: ArrayList<Parser>) {
+    override fun accept(parsers: HashMap<Char, Parser>) {
         for (c in 'a'..'z') {
-            parsers[c.toInt()] = FunctionCallParser()
+            parsers[c] = FunctionCallParser()
         }
         for (c in 'A'..'Z') {
-            parsers[c.toInt()] = FunctionCallParser()
+            parsers[c] = FunctionCallParser()
         }
     }
 }
@@ -26,11 +26,7 @@ class FunctionCallParserBuilder : ParserBuilder {
 class FunctionCallParser : Parser {
     override fun apply(src: CharIterator, parser: NylonParser): NylonFunction? {
         val name = src.parseNextName()
-        val function = try {
-            parser.functions[name]!!.get()
-        } catch (e: NullPointerException) {
-            throw RuntimeException("Could not find function with name \"$name\"")
-        }
+        val function = parser.functions[name]!!.get()
         function.resolveNestedArgs(Supplier { parser.parse(src)!! })
         return function
     }

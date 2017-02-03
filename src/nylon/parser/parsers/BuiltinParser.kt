@@ -13,8 +13,8 @@ import java.util.function.Supplier
  */
 
 open class BuiltinParserBuilder(val nylonFunction: NylonFunction, val identifier: Char) : ParserBuilder {
-    override fun accept(parsers: ArrayList<Parser>) {
-        parsers[identifier.toInt()] = BuiltinParser(nylonFunction)
+    override fun accept(parsers: HashMap<Char, Parser>) {
+        parsers[identifier] = BuiltinParser(nylonFunction)
     }
 }
 
