@@ -9,7 +9,7 @@ import nylon.parser.parsers.BuiltinParserBuilder
  */
 
 class AsciiCanvasParserBuilder : BuiltinParserBuilder(object : NylonFunction("ð") {
-    override fun apply(stack: NylonStack) {
+    override fun apply(stack: NylonStack, args: Array<NylonFunction>) {
         throw RuntimeException("Ascii canvas (ð) is currently not implemented.")
     }
 }, 'ð')

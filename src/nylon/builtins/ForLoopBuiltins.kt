@@ -1,48 +1,47 @@
 package nylon.builtins
 
 import nylon.NylonFunction
-import nylon.NylonFunctionPrototype
 import nylon.NylonStack
-import nylon.parser.parsers.BuiltinTemplateParserBuilder
+import nylon.parser.parsers.BuiltinParserBuilder
 
 /**
  * Created by Aedan Smith.
  */
 
 // Consuming, pushing
-class ForîLoopBuiltinParserBuilder : BuiltinTemplateParserBuilder(object : NylonFunctionPrototype("Forî") {
+class ForîLoopBuiltinParserBuilder : BuiltinParserBuilder(object : NylonFunction("Forî", 1) {
     override fun apply(stack: NylonStack, args: Array<NylonFunction>) {
         stack.pop().iterator().forEach {
             stack.push(it)
             args[0].apply(stack)
         }
     }
-}, 1, 'î')
+}, 'î')
 
 // Non-consuming, pushing
-class ForìLoopBuiltinParserBuilder : BuiltinTemplateParserBuilder(object : NylonFunctionPrototype("Forì") {
+class ForìLoopBuiltinParserBuilder : BuiltinParserBuilder(object : NylonFunction("Forì", 1) {
     override fun apply(stack: NylonStack, args: Array<NylonFunction>) {
         stack.peek().iterator().forEach {
             stack.push(it)
             args[0].apply(stack)
         }
     }
-}, 1, 'ì')
+}, 'ì')
 
 // Consuming, non-pushing
-class ForíLoopBuiltinParserBuilder : BuiltinTemplateParserBuilder(object : NylonFunctionPrototype("Forí") {
+class ForíLoopBuiltinParserBuilder : BuiltinParserBuilder(object : NylonFunction("Forí", 1) {
     override fun apply(stack: NylonStack, args: Array<NylonFunction>) {
         stack.pop().iterator().forEach {
             args[0].apply(stack)
         }
     }
-}, 1, 'í')
+}, 'í')
 
 // Non-consuming, non-pushing
-class ForïLoopBuiltinParserBuilder : BuiltinTemplateParserBuilder(object : NylonFunctionPrototype("Forï") {
+class ForïLoopBuiltinParserBuilder : BuiltinParserBuilder(object : NylonFunction("Forï", 1) {
     override fun apply(stack: NylonStack, args: Array<NylonFunction>) {
         stack.peek().iterator().forEach {
             args[0].apply(stack)
         }
     }
-}, 1, 'ï')
+}, 'ï')

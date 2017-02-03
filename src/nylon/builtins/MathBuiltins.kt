@@ -10,7 +10,7 @@ import nylon.parser.parsers.BuiltinParserBuilder
  */
 
 class AdditionParserBuilder : BuiltinParserBuilder(object : NylonFunction("+") {
-    override fun apply(stack: NylonStack) {
+    override fun apply(stack: NylonStack, args: Array<NylonFunction>) {
         val o2 = stack.pop()
         val o1 = stack.pop()
         stack.add(o1 + o2)
@@ -18,7 +18,7 @@ class AdditionParserBuilder : BuiltinParserBuilder(object : NylonFunction("+") {
 }, '+')
 
 class SubtractionParserBuilder : BuiltinParserBuilder(object : NylonFunction("-") {
-    override fun apply(stack: NylonStack) {
+    override fun apply(stack: NylonStack, args: Array<NylonFunction>) {
         val o2 = stack.pop()
         val o1 = stack.pop()
         stack.add(o1 - o2)
@@ -26,7 +26,7 @@ class SubtractionParserBuilder : BuiltinParserBuilder(object : NylonFunction("-"
 }, '-')
 
 class MultiplicationParserBuilder : BuiltinParserBuilder(object : NylonFunction("*") {
-    override fun apply(stack: NylonStack) {
+    override fun apply(stack: NylonStack, args: Array<NylonFunction>) {
         val o2 = stack.pop()
         val o1 = stack.pop()
         stack.add(o1 * o2)
@@ -34,7 +34,7 @@ class MultiplicationParserBuilder : BuiltinParserBuilder(object : NylonFunction(
 }, '*')
 
 class DivisionParserBuilder : BuiltinParserBuilder(object : NylonFunction("/") {
-    override fun apply(stack: NylonStack) {
+    override fun apply(stack: NylonStack, args: Array<NylonFunction>) {
         val o2 = stack.pop()
         val o1 = stack.pop()
         stack.add(o1 / o2)
@@ -42,7 +42,7 @@ class DivisionParserBuilder : BuiltinParserBuilder(object : NylonFunction("/") {
 }, '/')
 
 class ModParserBuilder : BuiltinParserBuilder(object : NylonFunction("%") {
-    override fun apply(stack: NylonStack) {
+    override fun apply(stack: NylonStack, args: Array<NylonFunction>) {
         val o2 = stack.pop()
         val o1 = stack.pop()
         // TODO
@@ -51,7 +51,7 @@ class ModParserBuilder : BuiltinParserBuilder(object : NylonFunction("%") {
 }, '%')
 
 class ExponentParserBuilder : BuiltinParserBuilder(object : NylonFunction("^") {
-    override fun apply(stack: NylonStack) {
+    override fun apply(stack: NylonStack, args: Array<NylonFunction>) {
         val o2 = stack.pop()
         val o1 = stack.pop()
         stack.add(DoubleObject(Math.pow(o1.toDouble(), o2.toDouble())))

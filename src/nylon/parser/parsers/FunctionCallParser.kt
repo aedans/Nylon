@@ -26,7 +26,9 @@ class FunctionCallParser : Parser {
     override fun apply(src: CharIterator, parser: NylonParser): NylonFunction? {
         val name = src.parseNextName()
         try {
-            return parser.functions[name]!!.get()
+            val function = parser.functions[name]!!.get()
+            function.args = Array(function.argNum) { parser.parse(src)!! }
+            return function
         } catch (e: NullPointerException) {
             throw RuntimeException("Could not find function with name \"$name\"")
         }

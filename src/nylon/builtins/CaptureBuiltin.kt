@@ -1,17 +1,16 @@
 package nylon.builtins
 
 import nylon.NylonFunction
-import nylon.NylonFunctionPrototype
 import nylon.NylonStack
 import nylon.nylonobjects.FunctionObject
-import nylon.parser.parsers.BuiltinTemplateParserBuilder
+import nylon.parser.parsers.BuiltinParserBuilder
 
 /**
  * Created by Aedan Smith.
  */
 
-class CaptureBuiltinBuilder : BuiltinTemplateParserBuilder(object : NylonFunctionPrototype("Capture") {
+class CaptureBuiltinBuilder : BuiltinParserBuilder(object : NylonFunction("Capture", 1) {
     override fun apply(stack: NylonStack, args: Array<NylonFunction>) {
         stack.push(FunctionObject(args[0]))
     }
-}, 1, '@')
+}, '@')

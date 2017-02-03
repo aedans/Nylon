@@ -9,7 +9,7 @@ import nylon.parser.parsers.BuiltinParserBuilder
  */
 
 class CallFunctionParserBuilder : BuiltinParserBuilder(object : NylonFunction("Call") {
-    override fun apply(stack: NylonStack) {
+    override fun apply(stack: NylonStack, args: Array<NylonFunction>) {
         stack.pop().toFunction().apply(stack)
     }
 }, ',')

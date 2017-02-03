@@ -9,7 +9,7 @@ import nylon.nylonobjects.ListObject
  */
 
 class CreateListFromStack : NylonFunction("l.nl") {
-    override fun apply(stack: NylonStack) {
+    override fun apply(stack: NylonStack, args: Array<NylonFunction>) {
         val list = ListObject(stack.toList())
         stack.clear()
         stack.add(list)

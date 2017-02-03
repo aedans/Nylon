@@ -19,7 +19,10 @@ class FunctionObject(value: NylonFunction) : NylonObject<NylonFunction>(value, "
     override fun toList(): List<NylonObject<*>> = value.apply().toList()
 
     override fun add(nylonObject: NylonObject<*>): FunctionObject {
-        return FunctionObject(concatenate(value, nylonObject.toFunction()))
+        val functions = ArrayList<NylonFunction>(2)
+        functions.add(value)
+        functions.add(nylonObject.toFunction())
+        return FunctionObject(concatenate(functions))
     }
 
     override fun subt(nylonObject: NylonObject<*>): NylonObject<*> {
