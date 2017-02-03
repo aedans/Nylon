@@ -3,6 +3,7 @@ A list of libraries and functions contained in the Nylon Standard Library.
 ## Libraries
 
 #### - C: Constants:
+- Ca: Literal a-z
 - Ce: Literal e = 2.718281828459045.
 - Cg: Literal phi = 1.618033988749894.
 - Ch: Literal 100.
