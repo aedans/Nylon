@@ -35,6 +35,6 @@ class LibraryFunctionSupplier(parser: NylonParser, file: File) : Supplier<NylonF
     }
 
     override fun get(): NylonFunction {
-        return function
+        return function.clone()
     }
 }

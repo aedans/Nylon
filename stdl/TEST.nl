@@ -37,6 +37,7 @@
 'a'b'c'e'ds                             ENDL
 tt*3-âtt*2-âtt*1-âtt*âtt*1+â            ENDL
 "abc"exis3+                             ENDL
+5fm{'a+â}ã
 'a'b'c'd'e5zã
 "edcba"Urã
 "caedb"Usã

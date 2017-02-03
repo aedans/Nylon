@@ -20,7 +20,7 @@ abstract class NylonFunction(val string: String, var argNum: Int = 0) {
         return stack
     }
 
-    open fun resolveArgs(argumentSupplier: Supplier<NylonFunction>) {
+    fun resolveArgs(argumentSupplier: Supplier<NylonFunction>) {
         while (args.size < argNum) {
             args.add(argumentSupplier.get())
         }
@@ -33,7 +33,13 @@ abstract class NylonFunction(val string: String, var argNum: Int = 0) {
 
     fun clone(): NylonFunction {
         return object : NylonFunction(string, argNum) {
-            override fun apply(stack: NylonStack, args: ArrayList<NylonFunction>) = this@NylonFunction.apply(stack, args)
+            init {
+                this@NylonFunction.args.forEach { this.args.add(it.clone()) }
+            }
+
+            override fun apply(stack: NylonStack, args: ArrayList<NylonFunction>) {
+                this@NylonFunction.apply(stack, args)
+            }
         }
     }
 
@@ -52,20 +58,19 @@ fun createProvider(nylonObject: NylonObject<*>): NylonFunction {
     }
 }
 
-fun concatenate(nylonFunctions: Collection<NylonFunction>): NylonFunction {
+fun concatenate(nylonFunctions: ArrayList<NylonFunction>): NylonFunction {
     return object : NylonFunction("Function") {
-        override fun apply(stack: NylonStack, args: ArrayList<NylonFunction>) {
-            nylonFunctions.forEach { it.apply(stack) }
+        init {
+            args = nylonFunctions
         }
 
-        override fun resolveArgs(argumentSupplier: Supplier<NylonFunction>) {
-            super.resolveArgs(argumentSupplier)
-            nylonFunctions.forEach { it.resolveNestedArgs(argumentSupplier) }
+        override fun apply(stack: NylonStack, args: ArrayList<NylonFunction>) {
+            args.forEach { it.apply(stack) }
         }
 
         override fun toString(): String {
             var s = string + "("
-            s += nylonFunctions.toString()
+            s += args.toString()
             return s + ")"
         }
     }
