@@ -9,7 +9,7 @@ import java.util.*
  * Created by Aedan Smith.
  */
 
-class CreateListFromStack : NylonFunction("l.nl") {
+class CreateListFromStack : NylonFunction("l") {
     override fun apply(stack: NylonStack, args: ArrayList<NylonFunction>) {
         val list = ListObject(stack.toList())
         stack.clear()

@@ -49,7 +49,7 @@ abstract class NylonFunction(val string: String, var argNum: Int = 0) {
 
     open fun toString(args: ArrayList<NylonFunction>): String {
         var s = string
-        args.forEach { s += "<$it>" }
+        args.forEach { s += "$it" }
         return s
     }
 
@@ -58,8 +58,8 @@ abstract class NylonFunction(val string: String, var argNum: Int = 0) {
     }
 }
 
-fun createProvider(nylonObject: NylonObject<*>): NylonFunction {
-    return object : NylonFunction("Push($nylonObject)") {
+fun createProvider(nylonObject: NylonObject<*>, string: String): NylonFunction {
+    return object : NylonFunction(string) {
         override fun apply(stack: NylonStack, args: ArrayList<NylonFunction>) {
             stack.push(nylonObject.clone())
         }
@@ -67,7 +67,7 @@ fun createProvider(nylonObject: NylonObject<*>): NylonFunction {
 }
 
 fun concatenate(nylonFunctions: ArrayList<NylonFunction>): NylonFunction {
-    return object : NylonFunction("Function") {
+    return object : NylonFunction("") {
         init {
             args = nylonFunctions
         }
@@ -77,13 +77,13 @@ fun concatenate(nylonFunctions: ArrayList<NylonFunction>): NylonFunction {
         }
 
         override fun toString(args: ArrayList<NylonFunction>): String {
-            var s = string + "("
-            s += args.toString()
-            return s + ")"
+            var s = string
+            args.forEach { s += " "; s += it }
+            return "{" + (if (s.isNotEmpty()) s.substring(1) else s) + "}"
         }
     }
 }
 
-fun emptyFunction(): NylonFunction = object : NylonFunction("Void") {
+fun emptyFunction(): NylonFunction = object : NylonFunction("{}") {
     override fun apply(stack: NylonStack, args: ArrayList<NylonFunction>) {}
 }

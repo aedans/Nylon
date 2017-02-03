@@ -22,6 +22,7 @@ class CharacterParserBuilder : ParserBuilder {
 class CharacterParser : Parser {
     override fun apply(src: CharIterator, parser: NylonParser): NylonFunction? {
         src.next()
-        return createProvider(CharObject(src.next()))
+        val c = src.next()
+        return createProvider(CharObject(c), "'" + c)
     }
 }

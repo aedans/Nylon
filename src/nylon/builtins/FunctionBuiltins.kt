@@ -9,7 +9,7 @@ import java.util.*
  * Created by Aedan Smith.
  */
 
-class CallFunctionParserBuilder : BuiltinParserBuilder(object : NylonFunction("Call") {
+class CallFunctionParserBuilder : BuiltinParserBuilder(object : NylonFunction(",") {
     override fun apply(stack: NylonStack, args: ArrayList<NylonFunction>) {
         stack.pop().toFunction().apply(stack)
     }

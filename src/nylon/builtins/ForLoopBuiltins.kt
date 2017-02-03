@@ -10,7 +10,7 @@ import java.util.*
  */
 
 // Consuming, pushing
-class ForîLoopBuiltinParserBuilder : BuiltinParserBuilder(object : NylonFunction("Forî", 1) {
+class ForîLoopBuiltinParserBuilder : BuiltinParserBuilder(object : NylonFunction("î", 1) {
     override fun apply(stack: NylonStack, args: ArrayList<NylonFunction>) {
         stack.pop().iterator().forEach {
             stack.push(it)
@@ -20,7 +20,7 @@ class ForîLoopBuiltinParserBuilder : BuiltinParserBuilder(object : NylonFunctio
 }, 'î')
 
 // Non-consuming, pushing
-class ForìLoopBuiltinParserBuilder : BuiltinParserBuilder(object : NylonFunction("Forì", 1) {
+class ForìLoopBuiltinParserBuilder : BuiltinParserBuilder(object : NylonFunction("ì", 1) {
     override fun apply(stack: NylonStack, args: ArrayList<NylonFunction>) {
         stack.peek().iterator().forEach {
             stack.push(it)
@@ -30,7 +30,7 @@ class ForìLoopBuiltinParserBuilder : BuiltinParserBuilder(object : NylonFunctio
 }, 'ì')
 
 // Consuming, non-pushing
-class ForíLoopBuiltinParserBuilder : BuiltinParserBuilder(object : NylonFunction("Forí", 1) {
+class ForíLoopBuiltinParserBuilder : BuiltinParserBuilder(object : NylonFunction("í", 1) {
     override fun apply(stack: NylonStack, args: ArrayList<NylonFunction>) {
         stack.pop().iterator().forEach {
             args[0].apply(stack)
@@ -39,7 +39,7 @@ class ForíLoopBuiltinParserBuilder : BuiltinParserBuilder(object : NylonFunctio
 }, 'í')
 
 // Non-consuming, non-pushing
-class ForïLoopBuiltinParserBuilder : BuiltinParserBuilder(object : NylonFunction("Forï", 1) {
+class ForïLoopBuiltinParserBuilder : BuiltinParserBuilder(object : NylonFunction("ï", 1) {
     override fun apply(stack: NylonStack, args: ArrayList<NylonFunction>) {
         stack.peek().iterator().forEach {
             args[0].apply(stack)

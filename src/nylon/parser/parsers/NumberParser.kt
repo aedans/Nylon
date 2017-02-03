@@ -32,9 +32,9 @@ class NumberParser : Parser {
             num += src.next()
         }
         if (isDouble) {
-            return createProvider(DoubleObject(num.toDouble()))
+            return createProvider(DoubleObject(num.toDouble()), num)
         } else {
-            return createProvider(LongObject(num.toLong()))
+            return createProvider(LongObject(num.toLong()), num)
         }
     }
 }

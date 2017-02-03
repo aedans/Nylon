@@ -10,37 +10,37 @@ import java.util.*
  * Created by Aedan Smith.
  */
 
-class CastToDoubleParserBuilder : BuiltinParserBuilder(object : NylonFunction("ToDouble") {
+class CastToDoubleParserBuilder : BuiltinParserBuilder(object : NylonFunction("à") {
     override fun apply(stack: NylonStack, args: ArrayList<NylonFunction>) {
         stack.push(DoubleObject(stack.pop().toDouble()))
     }
 }, 'à')
 
-class CastToLongParserBuilder : BuiltinParserBuilder(object : NylonFunction("ToLong") {
+class CastToLongParserBuilder : BuiltinParserBuilder(object : NylonFunction("á") {
     override fun apply(stack: NylonStack, args: ArrayList<NylonFunction>) {
         stack.push(LongObject(stack.pop().toLong()))
     }
 }, 'á')
 
-class CastToCharParserBuilder : BuiltinParserBuilder(object : NylonFunction("ToChar") {
+class CastToCharParserBuilder : BuiltinParserBuilder(object : NylonFunction("â") {
     override fun apply(stack: NylonStack, args: ArrayList<NylonFunction>) {
         stack.push(CharObject(stack.pop().toChar()))
     }
 }, 'â')
 
-class CastToListParserBuilder : BuiltinParserBuilder(object : NylonFunction("ToList") {
+class CastToListParserBuilder : BuiltinParserBuilder(object : NylonFunction("ä") {
     override fun apply(stack: NylonStack, args: ArrayList<NylonFunction>) {
         stack.push(ListObject(stack.pop().toList()))
     }
 }, 'ä')
 
-class CastToStringParserBuilder : BuiltinParserBuilder(object : NylonFunction("ToString") {
+class CastToStringParserBuilder : BuiltinParserBuilder(object : NylonFunction("ã") {
     override fun apply(stack: NylonStack, args: ArrayList<NylonFunction>) {
         stack.push(StringObject(stack.pop().toList()))
     }
 }, 'ã')
 
-class CastToFunctionParserBuilder : BuiltinParserBuilder(object : NylonFunction("ToFunction") {
+class CastToFunctionParserBuilder : BuiltinParserBuilder(object : NylonFunction("å") {
     override fun apply(stack: NylonStack, args: ArrayList<NylonFunction>) {
         stack.push(FunctionObject(stack.pop().toFunction()))
     }
