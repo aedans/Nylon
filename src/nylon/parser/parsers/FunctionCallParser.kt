@@ -31,7 +31,7 @@ class FunctionCallParser : Parser {
         } catch (e: NullPointerException) {
             throw RuntimeException("Could not find function with name \"$name\"")
         }
-        function.resolveArgs(Supplier { parser.parse(src)!! })
+        function.resolveNestedArgs(Supplier { parser.parse(src)!! })
         return function
     }
 }

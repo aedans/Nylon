@@ -30,6 +30,7 @@ class NylonParser(vararg builders: ParserBuilder) {
             FunctionParserBuilder(),
             IfStatementParserBuilder(),
             FunctionCallParserBuilder(),
+            ArgumentParserBuilder(),
             MacroParserBuilder()
     ) {
         buildBuiltins(this)

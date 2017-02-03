@@ -33,7 +33,7 @@
 'bd'cd'dd'ed'fd                         ENDL
 "abcde"e                                ENDL
 '`i'ai'bi'ci'di                         ENDL
-"`abcd"@ime                             ENDL
+"`abcd"mie                              ENDL
 'a'b'c'e'ds                             ENDL
 tt*3-âtt*2-âtt*1-âtt*âtt*1+â            ENDL
 "abc"exis3+                             ENDL

@@ -26,6 +26,11 @@ abstract class NylonFunction(val string: String, var argNum: Int = 0) {
         }
     }
 
+    fun resolveNestedArgs(argumentSupplier: Supplier<NylonFunction>) {
+        resolveArgs(argumentSupplier)
+        args.forEach { it.resolveNestedArgs(argumentSupplier) }
+    }
+
     fun clone(): NylonFunction {
         return object : NylonFunction(string, argNum) {
             override fun apply(stack: NylonStack, args: ArrayList<NylonFunction>) = this@NylonFunction.apply(stack, args)
@@ -48,9 +53,20 @@ fun createProvider(nylonObject: NylonObject<*>): NylonFunction {
 }
 
 fun concatenate(nylonFunctions: Collection<NylonFunction>): NylonFunction {
-    return object : NylonFunction("Function($nylonFunctions)") {
+    return object : NylonFunction("Function") {
         override fun apply(stack: NylonStack, args: ArrayList<NylonFunction>) {
             nylonFunctions.forEach { it.apply(stack) }
+        }
+
+        override fun resolveArgs(argumentSupplier: Supplier<NylonFunction>) {
+            super.resolveArgs(argumentSupplier)
+            nylonFunctions.forEach { it.resolveNestedArgs(argumentSupplier) }
+        }
+
+        override fun toString(): String {
+            var s = string + "("
+            s += nylonFunctions.toString()
+            return s + ")"
         }
     }
 }
