@@ -41,7 +41,7 @@ class IfStatementParser : Parser {
         val pop = statement[statement.size - 1] != '!'
 
         return object : NylonFunction("If(${String(statement)})<$ifTrue>!<$ifFalse>") {
-            override fun apply(stack: NylonStack, args: Array<NylonFunction>) {
+            override fun apply(stack: NylonStack, args: ArrayList<NylonFunction>) {
                 var b = false
                 for (it in statement) {
                     when (it) {

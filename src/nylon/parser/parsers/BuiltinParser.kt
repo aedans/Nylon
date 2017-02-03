@@ -6,6 +6,7 @@ import nylon.parser.NylonParser
 import nylon.parser.Parser
 import nylon.parser.ParserBuilder
 import java.util.*
+import java.util.function.Supplier
 
 /**
  * Created by Aedan Smith.
@@ -21,7 +22,7 @@ class BuiltinParser(val nylonFunction: NylonFunction) : Parser {
     override fun apply(src: CharIterator, parser: NylonParser): NylonFunction? {
         src.next()
         val function = nylonFunction.clone()
-        function.args = Array(function.argNum) { parser.parse(src)!! }
+        function.resolveArgs(Supplier { parser.parse(src)!! })
         return function
     }
 }

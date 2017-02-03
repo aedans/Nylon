@@ -6,6 +6,7 @@ import nylon.parser.NylonParser
 import nylon.parser.Parser
 import nylon.parser.ParserBuilder
 import java.util.*
+import java.util.function.Supplier
 
 /**
  * Created by Aedan Smith.
@@ -25,13 +26,13 @@ class FunctionCallParserBuilder : ParserBuilder {
 class FunctionCallParser : Parser {
     override fun apply(src: CharIterator, parser: NylonParser): NylonFunction? {
         val name = src.parseNextName()
-        try {
-            val function = parser.functions[name]!!.get()
-            function.args = Array(function.argNum) { parser.parse(src)!! }
-            return function
+        val function = try {
+            parser.functions[name]!!.get()
         } catch (e: NullPointerException) {
             throw RuntimeException("Could not find function with name \"$name\"")
         }
+        function.resolveArgs(Supplier { parser.parse(src)!! })
+        return function
     }
 }
 
