@@ -1,2 +1,2 @@
-// Creates an empty array.
+// Creates an empty list.
 @{}ä

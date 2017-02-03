@@ -83,7 +83,7 @@ of object consumed.
 
 - [number]: Treated as a for loop from 0 to the number.
 - [function]: Iterates once for each object returned by the function.
-- [array]: Iterates once for each object in the array.
+- [list]: Iterates once for each object in the list.
 
 There are four types of for loops, one for each permutation of consuming the top of the stack and pushing the current
 loop value.
@@ -94,13 +94,13 @@ loop value.
 - 'ï': Creates a non-consuming, non-pushing for loop.
 
 ## Casting
-Casting is done via the builtins 'ä' (array), 'à' (double), 'á' (long), 'â', (char), 'ã' (string), or 'å' (function). 
+Casting is done via the builtins 'ä' (list), 'à' (double), 'á' (long), 'â' (char), 'ã' (string), or 'å' (function). 
 Casting casts the top object of the stack to the given type, and each type has unique methods of casting.
 
-- array -> double: Creates a double with size equal to the length of the array.
+- list -> double: Creates a double equal to the size of the list.
 - string -> double: Attempts to parse the string to a double.
 - function -> anything: Calls the function on an empty stack, then casts the top of the stack to the result.
-- anything -> array: Creates a 1-element array containing the object.
+- anything -> list: Creates a 1-element list containing the object.
 - anything -> long: Casts the object to a double, then casts that to a long.
 - anything -> char: Casts the object to a double, then casts that to a char.
 - anything -> function: Creates a function that pushes clones of the object to the stack.

@@ -1,2 +1,2 @@
-// Reverses an array.
-ä(ÀîùaÁ)
+// Reverses a list.
+ä(ÀîùlÁ)

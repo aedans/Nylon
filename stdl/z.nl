@@ -1,3 +1,3 @@
-// Removes the top n elements of the stack and creates an array from them.
+// Removes the top n elements of the stack and creates a list from them.
 // N is given as the top element of the stack.
-(ÀíÀaUrÁ)
+(ÀíÀlUrÁ)

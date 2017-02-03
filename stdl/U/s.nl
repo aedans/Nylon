@@ -1,4 +1,4 @@
-// Sorts an array.
+// Sorts a list.
 ä(À(Àe
     Ïd
     í{
@@ -10,4 +10,4 @@
         Á
     }
     Á
-)aÁ)
+)lÁ)
