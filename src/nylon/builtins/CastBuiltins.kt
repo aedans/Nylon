@@ -11,37 +11,37 @@ import java.util.*
  */
 
 class CastToDoubleParserBuilder : BuiltinParserBuilder(object : NylonFunction("à") {
-    override fun apply(stack: NylonStack, args: ArrayList<NylonFunction>) {
+    override fun applyImpl(stack: NylonStack, args: ArrayList<NylonFunction>) {
         stack.push(DoubleObject(stack.pop().toDouble()))
     }
 }, 'à')
 
 class CastToLongParserBuilder : BuiltinParserBuilder(object : NylonFunction("á") {
-    override fun apply(stack: NylonStack, args: ArrayList<NylonFunction>) {
+    override fun applyImpl(stack: NylonStack, args: ArrayList<NylonFunction>) {
         stack.push(LongObject(stack.pop().toLong()))
     }
 }, 'á')
 
 class CastToCharParserBuilder : BuiltinParserBuilder(object : NylonFunction("â") {
-    override fun apply(stack: NylonStack, args: ArrayList<NylonFunction>) {
+    override fun applyImpl(stack: NylonStack, args: ArrayList<NylonFunction>) {
         stack.push(CharObject(stack.pop().toChar()))
     }
 }, 'â')
 
 class CastToListParserBuilder : BuiltinParserBuilder(object : NylonFunction("ä") {
-    override fun apply(stack: NylonStack, args: ArrayList<NylonFunction>) {
+    override fun applyImpl(stack: NylonStack, args: ArrayList<NylonFunction>) {
         stack.push(ListObject(stack.pop().toList()))
     }
 }, 'ä')
 
 class CastToStringParserBuilder : BuiltinParserBuilder(object : NylonFunction("ã") {
-    override fun apply(stack: NylonStack, args: ArrayList<NylonFunction>) {
+    override fun applyImpl(stack: NylonStack, args: ArrayList<NylonFunction>) {
         stack.push(StringObject(stack.pop().toList()))
     }
 }, 'ã')
 
 class CastToFunctionParserBuilder : BuiltinParserBuilder(object : NylonFunction("å") {
-    override fun apply(stack: NylonStack, args: ArrayList<NylonFunction>) {
+    override fun applyImpl(stack: NylonStack, args: ArrayList<NylonFunction>) {
         stack.push(FunctionObject(stack.pop().toFunction()))
     }
 }, 'å')

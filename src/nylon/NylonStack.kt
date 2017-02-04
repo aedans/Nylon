@@ -13,25 +13,55 @@ class NylonStack {
         stacks.add(Stack<NylonObject<*>>())
     }
 
-    fun peek(i: Int = 1) = stacks.peek()[stacks.peek().size - i]!!
+    fun getStack() = try {
+        stacks.peek()!!
+    } catch (e: Exception) {
+        throw NylonException("No active stack found")
+    }
 
-    fun push(o: NylonObject<*>) = stacks.peek().push(o)!!
+    fun peek(i: Int = 1) = try {
+        getStack()[getStack().size - i]!!
+    } catch (e: Exception) {
+        throw NylonException("Could not find object at depth $i in stack ${getStack()}")
+    }
 
-    fun pop() = stacks.peek().pop()!!
+    fun push(o: NylonObject<*>) = try {
+        getStack().push(o)!!
+    } catch (e: Exception) {
+        throw NylonException("Could not push object $o to stack ${getStack()}")
+    }
 
-    fun add(o: NylonObject<*>) = stacks.peek().add(o)
+    fun pop() = try {
+        getStack().pop()!!
+    } catch (e: Exception) {
+        throw NylonException("Could not pop object from stack ${getStack()}")
+    }
 
-    fun add(i: Int, o: NylonObject<*>) = stacks.peek().add(i, o)
+    fun add(o: NylonObject<*>) = try {
+        getStack().add(o)
+    } catch (e: Exception) {
+        throw NylonException("Could not add object $o to stack ${getStack()}")
+    }
 
-    fun removeAt(i: Int) = stacks.peek().removeAt(i)!!
+    fun add(i: Int, o: NylonObject<*>) = try {
+        getStack().add(i, o)
+    } catch (e: Exception) {
+        throw NylonException("Could not add object $o to stack ${getStack()} at index $i")
+    }
 
-    fun getSize() = stacks.peek().size
+    fun removeAt(i: Int) = try {
+        getStack().removeAt(i)!!
+    } catch (e: Exception) {
+        throw NylonException("Could not remove object at index $i from stack ${getStack()}")
+    }
 
-    fun iterator() = stacks.peek().iterator()
+    fun getSize() = getStack().size
 
-    fun toList() = stacks.peek().toList()
+    fun iterator() = getStack().iterator()
 
-    fun clear() = stacks.peek().clear()
+    fun toList() = getStack().toList()
 
-    override fun toString() = stacks.peek().toString()
+    fun clear() = getStack().clear()
+
+    override fun toString() = getStack().toString()
 }

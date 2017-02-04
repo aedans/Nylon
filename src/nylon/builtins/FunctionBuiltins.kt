@@ -10,7 +10,7 @@ import java.util.*
  */
 
 class CallFunctionParserBuilder : BuiltinParserBuilder(object : NylonFunction(",") {
-    override fun apply(stack: NylonStack, args: ArrayList<NylonFunction>) {
+    override fun applyImpl(stack: NylonStack, args: ArrayList<NylonFunction>) {
         stack.pop().toFunction().apply(stack)
     }
 }, ',')

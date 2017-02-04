@@ -10,7 +10,15 @@ import java.util.function.Supplier
 abstract class NylonFunction(val string: String, var argNum: Int = 0) {
     protected var args: ArrayList<NylonFunction> = ArrayList(argNum)
 
-    protected abstract fun apply(stack: NylonStack, args: ArrayList<NylonFunction>)
+    protected abstract fun applyImpl(stack: NylonStack, args: ArrayList<NylonFunction>)
+
+    fun apply(stack: NylonStack, args: ArrayList<NylonFunction>) {
+        return try {
+            applyImpl(stack, args)
+        } catch (e: Exception) {
+            throw NylonException(e, this)
+        }
+    }
 
     fun apply(stack: NylonStack) = apply(stack, args)
 
@@ -37,8 +45,8 @@ abstract class NylonFunction(val string: String, var argNum: Int = 0) {
                 this@NylonFunction.args.forEach { this.args.add(it.clone()) }
             }
 
-            override fun apply(stack: NylonStack, args: ArrayList<NylonFunction>) {
-                this@NylonFunction.apply(stack, args)
+            override fun applyImpl(stack: NylonStack, args: ArrayList<NylonFunction>) {
+                this@NylonFunction.applyImpl(stack, args)
             }
 
             override fun toString(args: ArrayList<NylonFunction>): String {
@@ -60,7 +68,7 @@ abstract class NylonFunction(val string: String, var argNum: Int = 0) {
 
 fun createProvider(nylonObject: NylonObject<*>, string: String): NylonFunction {
     return object : NylonFunction(string) {
-        override fun apply(stack: NylonStack, args: ArrayList<NylonFunction>) {
+        override fun applyImpl(stack: NylonStack, args: ArrayList<NylonFunction>) {
             stack.push(nylonObject.clone())
         }
     }
@@ -72,7 +80,7 @@ fun concatenate(nylonFunctions: ArrayList<NylonFunction>): NylonFunction {
             args = nylonFunctions
         }
 
-        override fun apply(stack: NylonStack, args: ArrayList<NylonFunction>) {
+        override fun applyImpl(stack: NylonStack, args: ArrayList<NylonFunction>) {
             args.forEach { it.apply(stack) }
         }
 
@@ -85,5 +93,5 @@ fun concatenate(nylonFunctions: ArrayList<NylonFunction>): NylonFunction {
 }
 
 fun emptyFunction(): NylonFunction = object : NylonFunction("{}") {
-    override fun apply(stack: NylonStack, args: ArrayList<NylonFunction>) {}
+    override fun applyImpl(stack: NylonStack, args: ArrayList<NylonFunction>) {}
 }

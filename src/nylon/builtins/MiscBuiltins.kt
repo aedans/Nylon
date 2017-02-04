@@ -10,7 +10,7 @@ import java.util.*
  */
 
 class AsciiCanvasParserBuilder : BuiltinParserBuilder(object : NylonFunction("ð") {
-    override fun apply(stack: NylonStack, args: ArrayList<NylonFunction>) {
+    override fun applyImpl(stack: NylonStack, args: ArrayList<NylonFunction>) {
         throw RuntimeException("Ascii canvas (ð) is currently not implemented.")
     }
 }, 'ð')

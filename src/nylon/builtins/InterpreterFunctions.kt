@@ -10,7 +10,7 @@ import java.util.*
  */
 
 class CreateListFromStack : NylonFunction("l") {
-    override fun apply(stack: NylonStack, args: ArrayList<NylonFunction>) {
+    override fun applyImpl(stack: NylonStack, args: ArrayList<NylonFunction>) {
         val list = ListObject(stack.toList())
         stack.clear()
         stack.add(list)

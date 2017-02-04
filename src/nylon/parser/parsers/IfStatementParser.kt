@@ -24,7 +24,7 @@ class IfStatementParserBuilder : ParserBuilder {
 class IfStatementParser : Parser {
     override fun apply(src: CharIterator, parser: NylonParser): NylonFunction? {
         val statement = ArrayList<Char>()
-        while (src.peek() == '?' || src.peek() == '¿' || src.peek() == '>' || src.peek() == '<' || src.peek() == '=' || src.peek() == '!') {
+        while (src.hasNext() && (src.peek() == '?' || src.peek() == '¿' || src.peek() == '>' || src.peek() == '<' || src.peek() == '=' || src.peek() == '!')) {
             statement.add(src.next())
         }
         val ifTrue = parser.parse(src)
@@ -41,7 +41,7 @@ class IfStatementParser : Parser {
         val pop = statement[statement.size - 1] != '!'
 
         return object : NylonFunction("${String(statement)}$ifTrue!$ifFalse") {
-            override fun apply(stack: NylonStack, args: ArrayList<NylonFunction>) {
+            override fun applyImpl(stack: NylonStack, args: ArrayList<NylonFunction>) {
                 var b = false
                 for (it in statement) {
                     when (it) {

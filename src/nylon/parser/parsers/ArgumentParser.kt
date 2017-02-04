@@ -22,7 +22,7 @@ class ArgumentParser : Parser {
     override fun apply(src: CharIterator, parser: NylonParser): NylonFunction? {
         src.next()
         return object : NylonFunction("_", 1) {
-            override fun apply(stack: NylonStack, args: ArrayList<NylonFunction>) = args[0].apply(stack)
+            override fun applyImpl(stack: NylonStack, args: ArrayList<NylonFunction>) = args[0].apply(stack)
 
             override fun toString(args: ArrayList<NylonFunction>): String {
                 if (args.size == 0)

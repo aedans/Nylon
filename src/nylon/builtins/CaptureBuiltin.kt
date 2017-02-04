@@ -11,7 +11,7 @@ import java.util.*
  */
 
 class CaptureBuiltinBuilder : BuiltinParserBuilder(object : NylonFunction("@", 1) {
-    override fun apply(stack: NylonStack, args: ArrayList<NylonFunction>) {
+    override fun applyImpl(stack: NylonStack, args: ArrayList<NylonFunction>) {
         stack.push(FunctionObject(args[0]))
     }
 }, '@')
