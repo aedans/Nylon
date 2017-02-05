@@ -10,6 +10,7 @@ A list of libraries and functions contained in the Nylon Standard Library.
 - i: Increments the top item of the stack by 1.
 - l: Replaces the stack with a list containing the stack.
 - m: Maps a function to a list.
+- n: Multiplies the top of the stack by -1.
 - p: Pops the top object of the stack.
 - s: Swaps the top two items of the stack.
 - t: Literal 10.
@@ -20,16 +21,17 @@ A list of libraries and functions contained in the Nylon Standard Library.
 ## Libraries
 
 #### - C: Constants:
-- Ca: Literal a-z
+- Ca: Literal a-z.
+- Cb: Literal 1000000000.
 - Ce: Literal e = 2.718281828459045.
 - Cg: Literal phi = 1.618033988749894.
 - Ch: Literal 100.
 - Cm: Literal 1000000.
+- Co: Literal -1.
 - Cp: Literal pi = 3.141592653589793.
 - Ct: Literal 1000.
 
 #### - U: Utilities:
-- Ur: Reverses a list.
 - Us: Sorts a list.
 
 ## Misc. Functions

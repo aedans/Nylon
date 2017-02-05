@@ -30,6 +30,10 @@ class StringObject(value: List<NylonObject<*>>) : ListObject<Char>(toCharObjectL
         return StringObject(toString(super.subt(nylonObject).toList()))
     }
 
+    override fun mult(nylonObject: NylonObject<*>): ListObject<Char> {
+        return StringObject(toString(super.mult(nylonObject).toList()))
+    }
+
     override fun outputString(): String {
         return toString(value)
     }

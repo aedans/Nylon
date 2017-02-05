@@ -14,6 +14,12 @@ import java.util.*
  * Created by Aedan Smith.
  */
 
+class CallFunctionParserBuilder : BuiltinParserBuilder(object : NylonFunction(",") {
+    override fun applyImpl(stack: NylonStack, args: ArrayList<NylonFunction>) {
+        stack.pop().toFunction().apply(stack)
+    }
+}, ',')
+
 class PrintParserBuilder : BuiltinParserBuilder(object : NylonFunction("`") {
     override fun applyImpl(stack: NylonStack, args: ArrayList<NylonFunction>) {
         print(stack.pop().outputString())

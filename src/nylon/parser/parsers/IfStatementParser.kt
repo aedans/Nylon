@@ -52,7 +52,7 @@ class IfStatementParser : Parser {
                         '=' -> b = stack.peek() == stack.peek(2)
                         '!' -> {
                         }
-                        else -> throw RuntimeException("Unrecognized if statement '$it'")
+                        else -> throw RuntimeException("Unrecognized if statement \"$it\"")
                     }
                     if (b) break
                 }

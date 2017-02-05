@@ -27,5 +27,3 @@ class MacroParser : Parser {
         return null
     }
 }
-
-

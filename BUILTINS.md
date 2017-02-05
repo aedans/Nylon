@@ -18,10 +18,8 @@ A list of builtins that are not discussed in README.md.
 - 'ú': Moves the bottom of the stack to the top.
 - 'Ï': Pushes the length of the stack to the stack.
 
-## Functions
-- ',': Casts the top of the stack to a function, then calls it.
-
 ## Misc
+- ',': Casts the top of the stack to a function, then calls it.
 - '`': Writes the top object of the stack to stdout.
 - 'ƒ': Compiles the top of the stack to a function.
 - 'ð': "Paints" the top string of the stack on 4th string of the stack at coordinate points

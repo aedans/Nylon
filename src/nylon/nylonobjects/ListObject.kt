@@ -32,9 +32,14 @@ open class ListObject<out T>(value: List<NylonObject<T>>) : NylonObject<List<Nyl
 
     override fun mult(nylonObject: NylonObject<*>): ListObject<T> {
         val n = nylonObject.toInt()
-        val objectList = ArrayList<NylonObject<T>>(n)
-        for (i in 0..n - 1) {
-            objectList.addAll(value)
+        val pn = Math.abs(n)
+        val objectList = ArrayList<NylonObject<T>>(pn)
+        for (i in 0..pn - 1) {
+            if (n > 0) {
+                objectList += value
+            } else {
+                objectList += value.reversed()
+            }
         }
         return ListObject(objectList)
     }

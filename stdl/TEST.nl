@@ -37,9 +37,10 @@
 'a'b'c'e'ds                             ENDL
 tt*3-âtt*2-âtt*1-âtt*âtt*1+â            ENDL
 "abc"exis3+                             ENDL
+v'e+'d+'c+'b+'a+nã
 5fm{'a+â}ã
 'a'b'c'd'e5zã
-"edcba"Urã
 "caedb"Usã
-"abcde"5î{a+}5b"abcde"5î{a+}6b"abcde"5î{a+}7b"abcde"5î{a+}8b"abcde"5î{a+}9b
+"abcde"5î{a+}5b"abcde"5î{a+}6b"abcde"5î{a+}7b"abcde"5î{a+}8b"abcde"5î{a+}9b     ENDL
 "\"abcde\""ƒ,
+#A{__}#B{@_@_+}B A A'a'bA'c'd'e,
