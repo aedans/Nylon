@@ -41,3 +41,5 @@ tt*3-âtt*2-âtt*1-âtt*âtt*1+â            ENDL
 'a'b'c'd'e5zã
 "edcba"Urã
 "caedb"Usã
+"abcde"5î{a+}5b"abcde"5î{a+}6b"abcde"5î{a+}7b"abcde"5î{a+}8b"abcde"5î{a+}9b
+"\"abcde\""ƒ,
