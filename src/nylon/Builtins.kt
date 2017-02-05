@@ -14,6 +14,7 @@ fun buildBuiltins(parser: NylonParser) {
     ForìLoopBuiltinParserBuilder().accept(parser.parsers)
     ForíLoopBuiltinParserBuilder().accept(parser.parsers)
     ForïLoopBuiltinParserBuilder().accept(parser.parsers)
+    WhileLoopBuiltinParser().accept(parser.parsers)
 
     CastToDoubleParserBuilder().accept(parser.parsers)
     CastToLongParserBuilder().accept(parser.parsers)

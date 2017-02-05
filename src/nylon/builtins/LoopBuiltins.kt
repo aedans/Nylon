@@ -46,3 +46,16 @@ class ForïLoopBuiltinParserBuilder : BuiltinParserBuilder(object : NylonFunctio
         }
     }
 }, 'ï')
+
+class WhileLoopBuiltinParser : BuiltinParserBuilder(object : NylonFunction("&", 2) {
+    override fun applyImpl(stack: NylonStack, args: ArrayList<NylonFunction>) {
+        while (true) {
+            args[0].apply(stack)
+            if (stack.pop().toBoolean()) {
+                args[1].apply(stack)
+            } else {
+                break
+            }
+        }
+    }
+}, '&')
