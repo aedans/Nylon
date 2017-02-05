@@ -1,6 +1,8 @@
 A list of libraries and functions contained in the Nylon Standard Library.
 
 #### 1-char functions:
+- a: Pushes the element at index n in a list to the stack.
+- b: Replaces a list with the element at index n in the list.
 - c: Concatenates all items on the stack.
 - d: Decrements the top item of the stack by 1.
 - e: Adds all iterations of an object to the stack.
