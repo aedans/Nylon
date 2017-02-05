@@ -40,5 +40,7 @@ fun buildBuiltins(parser: NylonParser) {
 
     CallFunctionParserBuilder().accept(parser.parsers)
 
+    PrintParserBuilder().accept(parser.parsers)
     AsciiCanvasParserBuilder().accept(parser.parsers)
+    ParserParserBuilder().accept(parser.parsers)
 }
