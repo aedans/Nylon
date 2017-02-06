@@ -8,7 +8,7 @@ import java.io.PrintStream
  * Created by Aedan Smith.
  */
 
-class NylonRuntime(src: String, val parser: NylonParser) : Runnable {
+class NylonRuntime(src: String, parser: NylonParser) : Runnable {
     val main = parser.parseAll(nylon.parser.CharIterator(src))
     val stack = NylonStack()
 

@@ -4,6 +4,7 @@ import nylon.NylonFunction
 import nylon.buildBuiltins
 import nylon.concatenate
 import nylon.parser.parsers.*
+import java.io.Reader
 import java.util.*
 import java.util.function.BiFunction
 import java.util.function.Consumer
@@ -95,4 +96,38 @@ fun CharIterator.skipUntilStatement() {
         }
         next()
     }
+}
+
+fun Reader.readExtendedText(): String {
+    var s = ""
+    while (ready()) {
+        val c = read().toChar()
+        if (c == '\\') {
+            val n = read().toChar().toString() + read().toChar().toString()
+            s += when (n) {
+                "al" -> 'À'
+                "ar" -> 'Á'
+                "cc" -> 'â'
+                "cd" -> 'à'
+                "cf" -> 'å'
+                "ci" -> 'á'
+                "cl" -> 'ä'
+                "cs" -> 'ã'
+                "fn" -> 'ƒ'
+                "ld" -> 'ï'
+                "lp" -> 'ì'
+                "lh" -> 'î'
+                "lc" -> 'í'
+                "ps" -> 'ð'
+                "mt" -> 'ù'
+                "mb" -> 'ú'
+                "ss" -> 'Ï'
+                "uq" -> '¿'
+                else -> "\\" + n
+            }
+        } else {
+            s += c
+        }
+    }
+    return s
 }

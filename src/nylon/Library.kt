@@ -2,6 +2,7 @@ package nylon
 
 import nylon.builtins.CreateListFromStack
 import nylon.parser.NylonParser
+import nylon.parser.readExtendedText
 import java.io.File
 import java.io.FileReader
 import java.util.function.Supplier
@@ -31,7 +32,7 @@ private fun build(parser: NylonParser, library: File, path: String) {
 
 class LibraryFunctionSupplier(parser: NylonParser, file: File) : Supplier<NylonFunction> {
     val function: NylonFunction by lazy {
-        parser.parseAll(FileReader(file).readText())
+        parser.parseAll(FileReader(file).readExtendedText())
     }
 
     override fun get(): NylonFunction {
