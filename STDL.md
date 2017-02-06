@@ -32,6 +32,7 @@ A list of libraries and functions contained in the Nylon Standard Library.
 - Ct: Literal 1000.
 
 #### - U: Utilities:
+- Ul: Pushes the length of a list to the stack.
 - Us: Sorts a list.
 
 ## Misc. Functions

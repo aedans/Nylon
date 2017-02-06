@@ -15,7 +15,7 @@ fun main(args: Array<String>) {
     buildLibrary(parser, File(args[0]))
     val time = System.nanoTime()
     val runtime = NylonRuntime(FileReader(args[1]).readExtendedText(), parser)
-    for (i in 2..args.size) {
+    for (i in 2..args.size - 1) {
         runtime.stack.add(StringObject(args[i]))
     }
     System.out.printf("Program compiled in %f milliseconds\n", (System.nanoTime() - time).toDouble() / 1000000.0)
