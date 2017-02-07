@@ -15,6 +15,10 @@ class CharIterator(val chars: String) : Iterator<Char> {
         return index < chars.length
     }
 
+    fun hasNext(i: Int): Boolean {
+        return index + i < chars.length
+    }
+
     fun peek(i: Int = 0): Char {
         return chars[index + i]
     }

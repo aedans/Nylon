@@ -88,7 +88,7 @@ class NylonParser(vararg builders: ParserBuilder) {
 fun CharIterator.skipUntilStatement() {
     while (hasNext() && (peek() <= ' ' || peek() == '/')) {
         if (peek() == '/') {
-            if (peek(1) == '/') {
+            if (hasNext(1) && peek(1) == '/') {
                 while (hasNext() && next() != '\n') {
                 }
                 continue
