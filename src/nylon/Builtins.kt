@@ -8,7 +8,7 @@ import nylon.parser.NylonParser
  */
 
 fun buildBuiltins(parser: NylonParser) {
-    CaptureBuiltinBuilder().accept(parser.parsers)
+    CaptureBuiltinParserBuilder().accept(parser.parsers)
 
     ForîLoopBuiltinParserBuilder().accept(parser.parsers)
     ForìLoopBuiltinParserBuilder().accept(parser.parsers)

@@ -35,7 +35,5 @@ class LibraryFunctionSupplier(parser: NylonParser, file: File) : Supplier<NylonF
         parser.parseAll(FileReader(file).readExtendedText())
     }
 
-    override fun get(): NylonFunction {
-        return function.clone()
-    }
+    override fun get() = function.clone()
 }

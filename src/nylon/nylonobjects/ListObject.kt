@@ -8,11 +8,11 @@ import java.util.*
  */
 
 open class ListObject<out T>(value: List<NylonObject<T>>) : NylonObject<List<NylonObject<T>>>(value, "List($value)") {
-    override fun toDouble(): Double = value.size.toDouble()
+    override fun toDouble() = value.size.toDouble()
 
-    override fun toList(): List<NylonObject<T>> = value
+    override fun toList() = value
 
-    override fun iterator(): Iterator<NylonObject<*>> = value.iterator()
+    override fun iterator() = value.iterator()
 
     override fun add(nylonObject: NylonObject<*>): ListObject<*> {
         val objectList = nylonObject.toList()
@@ -44,9 +44,7 @@ open class ListObject<out T>(value: List<NylonObject<T>>) : NylonObject<List<Nyl
         return ListObject(objectList)
     }
 
-    override fun divd(nylonObject: NylonObject<*>): NylonObject<*> {
-        throw RuntimeException("Cannot divide list.")
-    }
+    override fun divd(nylonObject: NylonObject<*>) = throw RuntimeException("Cannot divide list.")
 
     override fun clone(): ListObject<*> {
         val newValue = ArrayList<NylonObject<*>>(value.size)

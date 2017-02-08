@@ -10,7 +10,7 @@ import java.util.*
  * Created by Aedan Smith.
  */
 
-class CaptureBuiltinBuilder : BuiltinParserBuilder(object : NylonFunction("@", 1) {
+class CaptureBuiltinParserBuilder : BuiltinParserBuilder(object : NylonFunction("@", 1) {
     override fun applyImpl(stack: NylonStack, args: ArrayList<NylonFunction>) {
         stack.push(FunctionObject(args[0]))
     }

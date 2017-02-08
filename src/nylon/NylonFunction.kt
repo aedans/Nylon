@@ -39,19 +39,17 @@ abstract class NylonFunction(val string: String, var argNum: Int = 0) {
         args.forEach { it.resolveNestedArgs(argumentSupplier) }
     }
 
-    fun clone(): NylonFunction {
-        return object : NylonFunction(string, argNum) {
-            init {
-                this@NylonFunction.args.forEach { this.args.add(it.clone()) }
-            }
+    fun clone(): NylonFunction = object : NylonFunction(string, argNum) {
+        init {
+            this@NylonFunction.args.forEach { this.args.add(it.clone()) }
+        }
 
-            override fun applyImpl(stack: NylonStack, args: ArrayList<NylonFunction>) {
-                this@NylonFunction.applyImpl(stack, args)
-            }
+        override fun applyImpl(stack: NylonStack, args: ArrayList<NylonFunction>) {
+            this@NylonFunction.applyImpl(stack, args)
+        }
 
-            override fun toString(args: ArrayList<NylonFunction>): String {
-                return this@NylonFunction.toString(args)
-            }
+        override fun toString(args: ArrayList<NylonFunction>): String {
+            return this@NylonFunction.toString(args)
         }
     }
 
@@ -61,34 +59,28 @@ abstract class NylonFunction(val string: String, var argNum: Int = 0) {
         return s
     }
 
-    override fun toString(): String {
-        return toString(args)
+    override fun toString() = toString(args)
+}
+
+fun createProvider(nylonObject: NylonObject<*>, string: String) = object : NylonFunction(string) {
+    override fun applyImpl(stack: NylonStack, args: ArrayList<NylonFunction>) {
+        stack.push(nylonObject.clone())
     }
 }
 
-fun createProvider(nylonObject: NylonObject<*>, string: String): NylonFunction {
-    return object : NylonFunction(string) {
-        override fun applyImpl(stack: NylonStack, args: ArrayList<NylonFunction>) {
-            stack.push(nylonObject.clone())
-        }
+fun concatenate(nylonFunctions: ArrayList<NylonFunction>) = object : NylonFunction("") {
+    init {
+        args = nylonFunctions
     }
-}
 
-fun concatenate(nylonFunctions: ArrayList<NylonFunction>): NylonFunction {
-    return object : NylonFunction("") {
-        init {
-            args = nylonFunctions
-        }
+    override fun applyImpl(stack: NylonStack, args: ArrayList<NylonFunction>) {
+        args.forEach { it.apply(stack) }
+    }
 
-        override fun applyImpl(stack: NylonStack, args: ArrayList<NylonFunction>) {
-            args.forEach { it.apply(stack) }
-        }
-
-        override fun toString(args: ArrayList<NylonFunction>): String {
-            var s = string
-            args.forEach { s += " "; s += it }
-            return "{" + (if (s.isNotEmpty()) s.substring(1) else s) + "}"
-        }
+    override fun toString(args: ArrayList<NylonFunction>): String {
+        var s = string
+        args.forEach { s += " "; s += it }
+        return "{${if (s.isNotEmpty()) s.substring(1) else s}}"
     }
 }
 

@@ -41,7 +41,7 @@ class NylonParser(vararg builders: ParserBuilder) {
         builders.forEach { it.accept(parsers) }
     }
 
-    fun parseAll(src: String): NylonFunction = parseAll(CharIterator(src))
+    fun parseAll(src: String) = parseAll(CharIterator(src))
 
     fun parseAll(src: CharIterator): NylonFunction {
         val functions = ArrayList<NylonFunction>()
@@ -110,8 +110,8 @@ fun Reader.readExtendedText(): String {
                 "cc" -> 'â'
                 "cd" -> 'à'
                 "cf" -> 'å'
-                "ci" -> 'á'
                 "cl" -> 'ä'
+                "cn" -> 'á'
                 "cs" -> 'ã'
                 "fn" -> 'ƒ'
                 "ld" -> 'ï'

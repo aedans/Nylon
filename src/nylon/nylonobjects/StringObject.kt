@@ -12,31 +12,19 @@ class StringObject(value: List<NylonObject<*>>) : ListObject<Char>(toCharObjectL
 
     override fun toDouble(): Double = toString(value).toDouble()
 
-    override fun toLong(): Long = toString(value).toLong()
+    override fun toLong() = toString(value).toLong()
 
-    override fun clone(): StringObject {
-        return StringObject(value)
-    }
+    override fun clone() = StringObject(value)
 
-    override fun toString(): String {
-        return "String(\"${toString(value)}\")"
-    }
+    override fun toString() = "String(\"${toString(value)}\")"
 
-    override fun add(nylonObject: NylonObject<*>): ListObject<*> {
-        return StringObject(toString(super.add(nylonObject).toList()))
-    }
+    override fun add(nylonObject: NylonObject<*>) = StringObject(toString(super.add(nylonObject).toList()))
 
-    override fun subt(nylonObject: NylonObject<*>): ListObject<*> {
-        return StringObject(toString(super.subt(nylonObject).toList()))
-    }
+    override fun subt(nylonObject: NylonObject<*>) = StringObject(toString(super.subt(nylonObject).toList()))
 
-    override fun mult(nylonObject: NylonObject<*>): ListObject<Char> {
-        return StringObject(toString(super.mult(nylonObject).toList()))
-    }
+    override fun mult(nylonObject: NylonObject<*>) = StringObject(toString(super.mult(nylonObject).toList()))
 
-    override fun outputString(): String {
-        return toString(value)
-    }
+    override fun outputString() = toString(value)
 }
 
 fun toCharObjectList(s: String): List<NylonObject<Char>> {

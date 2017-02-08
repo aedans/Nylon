@@ -26,6 +26,8 @@ class FunctionCallParserBuilder : ParserBuilder {
 class FunctionCallParser : Parser {
     override fun apply(src: CharIterator, parser: NylonParser): NylonFunction? {
         val name = src.parseNextName()
+        if (!parser.functions.contains(name))
+            throw RuntimeException("Could not find function with name \"$name\"")
         val function = parser.functions[name]!!.get()
         function.resolveNestedArgs(Supplier { parser.parse(src)!! })
         return function

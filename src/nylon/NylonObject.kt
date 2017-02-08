@@ -10,7 +10,7 @@ abstract class NylonObject<out T>(val value: T, val string: String) : Iterable<N
 
     fun toFloat() = toDouble().toFloat()
 
-    open fun toLong(): Long = toDouble().toLong()
+    open fun toLong() = toDouble().toLong()
 
     fun toInt() = toLong().toInt()
 
@@ -18,33 +18,33 @@ abstract class NylonObject<out T>(val value: T, val string: String) : Iterable<N
 
     fun toByte() = toLong().toByte()
 
-    open fun toChar(): Char = toDouble().toChar()
+    open fun toChar() = toDouble().toChar()
 
-    open fun toBoolean(): Boolean = toDouble().toInt() != 0
+    open fun toBoolean() = toDouble().toInt() != 0
 
     open fun toList(): List<NylonObject<*>> = listOf(this)
 
-    open fun toFunction(): NylonFunction = createProvider(this, "@$this")
+    open fun toFunction() = createProvider(this, "@$this")
 
-    operator fun plus(other: NylonObject<*>): NylonObject<*> = add(other)
+    operator fun plus(other: NylonObject<*>) = add(other)
     abstract fun add(nylonObject: NylonObject<*>): NylonObject<*>
 
-    operator fun minus(other: NylonObject<*>): NylonObject<*> = subt(other)
+    operator fun minus(other: NylonObject<*>) = subt(other)
     abstract fun subt(nylonObject: NylonObject<*>): NylonObject<*>
 
-    operator fun times(other: NylonObject<*>): NylonObject<*> = mult(other)
+    operator fun times(other: NylonObject<*>) = mult(other)
     abstract fun mult(nylonObject: NylonObject<*>): NylonObject<*>
 
-    operator fun div(other: NylonObject<*>): NylonObject<*> = divd(other)
+    operator fun div(other: NylonObject<*>) = divd(other)
     abstract fun divd(nylonObject: NylonObject<*>): NylonObject<*>
 
     abstract fun clone(): NylonObject<*>
 
-    override fun equals(other: Any?): Boolean = if (other is NylonObject<*>) this.value == other.value else false
+    override fun equals(other: Any?) = if (other is NylonObject<*>) this.value == other.value else false
 
-    override operator fun compareTo(other: NylonObject<*>): Int = java.lang.Double.compare(toDouble(), other.toDouble())
+    override operator fun compareTo(other: NylonObject<*>) = java.lang.Double.compare(toDouble(), other.toDouble())
 
-    override fun toString(): String = string
+    override fun toString() = string
 
-    open fun outputString(): String = value.toString()
+    open fun outputString() = value.toString()
 }

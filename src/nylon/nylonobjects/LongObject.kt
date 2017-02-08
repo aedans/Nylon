@@ -7,35 +7,23 @@ import nylon.NylonObject
  */
 
 class LongObject(value: Long) : NylonObject<Long>(value, "Long($value)") {
-    override fun toDouble(): Double = value.toDouble()
+    override fun toDouble() = value.toDouble()
 
-    override fun iterator(): Iterator<NylonObject<*>> {
-        return object : Iterator<LongObject> {
-            var l = 0.toLong()
+    override fun iterator() = object : Iterator<LongObject> {
+        var l = 0.toLong()
 
-            override fun hasNext(): Boolean = l < value
+        override fun hasNext() = l < value
 
-            override fun next(): LongObject = LongObject(l++)
-        }
+        override fun next() = LongObject(l++)
     }
 
-    override fun add(nylonObject: NylonObject<*>): NylonObject<*> {
-        return LongObject(value + nylonObject.toLong())
-    }
+    override fun add(nylonObject: NylonObject<*>) = LongObject(value + nylonObject.toLong())
 
-    override fun subt(nylonObject: NylonObject<*>): NylonObject<*> {
-        return LongObject(value - nylonObject.toLong())
-    }
+    override fun subt(nylonObject: NylonObject<*>) = LongObject(value - nylonObject.toLong())
 
-    override fun mult(nylonObject: NylonObject<*>): NylonObject<*> {
-        return LongObject(value * nylonObject.toLong())
-    }
+    override fun mult(nylonObject: NylonObject<*>) = LongObject(value * nylonObject.toLong())
 
-    override fun divd(nylonObject: NylonObject<*>): NylonObject<*> {
-        return LongObject(value / nylonObject.toLong())
-    }
+    override fun divd(nylonObject: NylonObject<*>) = LongObject(value / nylonObject.toLong())
 
-    override fun clone(): LongObject {
-        return LongObject(value)
-    }
+    override fun clone() = LongObject(value)
 }
