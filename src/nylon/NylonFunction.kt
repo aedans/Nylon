@@ -35,8 +35,8 @@ abstract class NylonFunction(val string: String, var argNum: Int = 0) {
     }
 
     fun resolveNestedArgs(argumentSupplier: Supplier<NylonFunction>) {
-        resolveArgs(argumentSupplier)
         args.forEach { it.resolveNestedArgs(argumentSupplier) }
+        resolveArgs(argumentSupplier)
     }
 
     fun clone(): NylonFunction = object : NylonFunction(string, argNum) {

@@ -37,6 +37,6 @@ class StringParser : Parser {
         if (src.hasNext()) {
             src.next()
         }
-        return createProvider(StringObject(string), "\"$string\"")
+        return createProvider(StringObject(string), "\"${string.replace("\"", "\\\"")}\"")
     }
 }
