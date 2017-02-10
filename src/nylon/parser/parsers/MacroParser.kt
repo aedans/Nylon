@@ -24,7 +24,6 @@ class MacroParser : Parser {
         val name = src.parseNextName()
         val function = parser.parse(src)
         parser.functions.put(name, Supplier { function!!.clone() })
-        println(name)
         return null
     }
 }
