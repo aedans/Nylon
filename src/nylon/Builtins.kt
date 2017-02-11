@@ -8,8 +8,6 @@ import nylon.parser.NylonParser
  */
 
 fun buildBuiltins(parser: NylonParser) {
-    CaptureBuiltinParserBuilder().accept(parser.parsers)
-
     ForîLoopBuiltinParserBuilder().accept(parser.parsers)
     ForìLoopBuiltinParserBuilder().accept(parser.parsers)
     ForíLoopBuiltinParserBuilder().accept(parser.parsers)
@@ -39,6 +37,7 @@ fun buildBuiltins(parser: NylonParser) {
     MoveToTopParserBuilder().accept(parser.parsers)
     LengthOfStackParserBuilder().accept(parser.parsers)
 
+    CaptureBuiltinParserBuilder().accept(parser.parsers)
     CallFunctionParserBuilder().accept(parser.parsers)
     PrintParserBuilder().accept(parser.parsers)
     AsciiCanvasParserBuilder().accept(parser.parsers)

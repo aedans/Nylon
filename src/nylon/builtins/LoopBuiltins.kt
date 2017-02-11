@@ -9,7 +9,6 @@ import java.util.*
  * Created by Aedan Smith.
  */
 
-// Consuming, pushing
 class ForîLoopBuiltinParserBuilder : BuiltinParserBuilder(object : NylonFunction("î", 1) {
     override fun applyImpl(stack: NylonStack, args: ArrayList<NylonFunction>) {
         stack.pop().iterator().forEach {
@@ -19,7 +18,6 @@ class ForîLoopBuiltinParserBuilder : BuiltinParserBuilder(object : NylonFunctio
     }
 }, 'î')
 
-// Non-consuming, pushing
 class ForìLoopBuiltinParserBuilder : BuiltinParserBuilder(object : NylonFunction("ì", 1) {
     override fun applyImpl(stack: NylonStack, args: ArrayList<NylonFunction>) {
         stack.peek().iterator().forEach {
@@ -29,7 +27,6 @@ class ForìLoopBuiltinParserBuilder : BuiltinParserBuilder(object : NylonFunctio
     }
 }, 'ì')
 
-// Consuming, non-pushing
 class ForíLoopBuiltinParserBuilder : BuiltinParserBuilder(object : NylonFunction("í", 1) {
     override fun applyImpl(stack: NylonStack, args: ArrayList<NylonFunction>) {
         stack.pop().iterator().forEach {
@@ -38,7 +35,6 @@ class ForíLoopBuiltinParserBuilder : BuiltinParserBuilder(object : NylonFunctio
     }
 }, 'í')
 
-// Non-consuming, non-pushing
 class ForïLoopBuiltinParserBuilder : BuiltinParserBuilder(object : NylonFunction("ï", 1) {
     override fun applyImpl(stack: NylonStack, args: ArrayList<NylonFunction>) {
         stack.peek().iterator().forEach {

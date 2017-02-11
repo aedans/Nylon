@@ -1,7 +1,6 @@
 package nylon.nylonobjects
 
 import nylon.NylonObject
-import java.util.*
 
 /**
  * Created by Aedan Smith.
@@ -28,9 +27,7 @@ class StringObject(value: List<NylonObject<*>>) : ListObject<Char>(toCharObjectL
 }
 
 fun toCharObjectList(s: String): List<NylonObject<Char>> {
-    val list = ArrayList<NylonObject<Char>>(s.length)
-    s.forEach { list.add(CharObject(it)) }
-    return list
+    return s.map(::CharObject)
 }
 
 fun toString(s: List<NylonObject<*>>): String {

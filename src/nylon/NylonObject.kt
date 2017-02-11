@@ -8,19 +8,19 @@ package nylon
 abstract class NylonObject<out T>(val value: T, val string: String) : Iterable<NylonObject<*>>, Comparable<NylonObject<*>> {
     abstract fun toDouble(): Double
 
-    fun toFloat() = toDouble().toFloat()
+    open fun toFloat() = toDouble().toFloat()
 
     open fun toLong() = toDouble().toLong()
 
-    fun toInt() = toLong().toInt()
+    open fun toInt() = toLong().toInt()
 
-    fun toShort() = toLong().toShort()
+    open fun toShort() = toLong().toShort()
 
-    fun toByte() = toLong().toByte()
+    open fun toByte() = toLong().toByte()
 
-    open fun toChar() = toDouble().toChar()
+    open fun toChar() = toLong().toChar()
 
-    open fun toBoolean() = toDouble().toInt() != 0
+    open fun toBoolean() = toLong().toInt() != 0
 
     open fun toList(): List<NylonObject<*>> = listOf(this)
 

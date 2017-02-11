@@ -1,6 +1,7 @@
 package nylon
 
 import nylon.nylonobjects.CharObject
+import nylon.parser.CharIterator
 import nylon.parser.NylonParser
 import java.io.PrintStream
 
@@ -8,8 +9,8 @@ import java.io.PrintStream
  * Created by Aedan Smith.
  */
 
-class NylonRuntime(src: String, parser: NylonParser) : Runnable {
-    val main = parser.parseAll(nylon.parser.CharIterator(src))
+class NylonRuntime(src: CharIterator, parser: NylonParser) : Runnable {
+    val main = parser.parseAll(src)
     val stack = NylonStack()
 
     override fun run() {

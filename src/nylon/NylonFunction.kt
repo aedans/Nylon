@@ -8,12 +8,12 @@ import java.util.function.Supplier
  */
 
 abstract class NylonFunction(val string: String, var argNum: Int = 0) {
-    protected var args: ArrayList<NylonFunction> = ArrayList(argNum)
+    protected var args = ArrayList<NylonFunction>(argNum)
 
     protected abstract fun applyImpl(stack: NylonStack, args: ArrayList<NylonFunction>)
 
     fun apply(stack: NylonStack, args: ArrayList<NylonFunction>) {
-        return try {
+        try {
             applyImpl(stack, args)
         } catch (e: Exception) {
             throw NylonException(e, this)
@@ -68,9 +68,11 @@ fun createProvider(nylonObject: NylonObject<*>, string: String) = object : Nylon
     }
 }
 
-fun concatenate(nylonFunctions: ArrayList<NylonFunction>) = object : NylonFunction("") {
+fun concatenate(vararg nylonFunctions: NylonFunction) = concatenate(nylonFunctions.map { it })
+
+fun concatenate(nylonFunctions: List<NylonFunction>) = object : NylonFunction("") {
     init {
-        args = nylonFunctions
+        args.addAll(nylonFunctions)
     }
 
     override fun applyImpl(stack: NylonStack, args: ArrayList<NylonFunction>) {

@@ -22,9 +22,9 @@ open class ListObject<out T>(value: List<NylonObject<T>>) : NylonObject<List<Nyl
         return ListObject(newList)
     }
 
-    override fun subt(nylonObject: NylonObject<*>): ListObject<*> {
+    override fun subt(nylonObject: NylonObject<*>): ListObject<T> {
         val objectList = nylonObject.toList()
-        val newList = ArrayList<NylonObject<*>>(value.size)
+        val newList = ArrayList<NylonObject<T>>(value.size)
         newList.addAll(value)
         newList.removeAll(objectList)
         return ListObject(newList)
@@ -46,11 +46,7 @@ open class ListObject<out T>(value: List<NylonObject<T>>) : NylonObject<List<Nyl
 
     override fun divd(nylonObject: NylonObject<*>) = throw RuntimeException("Cannot divide list.")
 
-    override fun clone(): ListObject<*> {
-        val newValue = ArrayList<NylonObject<*>>(value.size)
-        value.forEach { newValue.add(it.clone()) }
-        return ListObject(newValue)
-    }
+    override fun clone() = ListObject(value.map { it.clone() })
 
     // Copied from AbstractCollection.toString()
     override fun outputString(): String {

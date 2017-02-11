@@ -18,11 +18,8 @@ class LongObject(value: Long) : NylonObject<Long>(value, "Long($value)") {
     }
 
     override fun add(nylonObject: NylonObject<*>) = LongObject(value + nylonObject.toLong())
-
     override fun subt(nylonObject: NylonObject<*>) = LongObject(value - nylonObject.toLong())
-
     override fun mult(nylonObject: NylonObject<*>) = LongObject(value * nylonObject.toLong())
-
     override fun divd(nylonObject: NylonObject<*>) = LongObject(value / nylonObject.toLong())
 
     override fun clone() = LongObject(value)

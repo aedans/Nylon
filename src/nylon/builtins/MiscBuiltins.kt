@@ -14,6 +14,12 @@ import java.util.*
  * Created by Aedan Smith.
  */
 
+class CaptureBuiltinParserBuilder : BuiltinParserBuilder(object : NylonFunction("@", 1) {
+    override fun applyImpl(stack: NylonStack, args: ArrayList<NylonFunction>) {
+        stack.push(FunctionObject(args[0]))
+    }
+}, '@')
+
 class CallFunctionParserBuilder : BuiltinParserBuilder(object : NylonFunction(",") {
     override fun applyImpl(stack: NylonStack, args: ArrayList<NylonFunction>) {
         stack.pop().toFunction().apply(stack)
