@@ -9,13 +9,7 @@ import nylon.NylonObject
 class CharObject(value: Char) : NylonObject<Char>(value, "Char($value)") {
     override fun toDouble() = value.toDouble()
 
-    override fun iterator() = object : Iterator<CharObject> {
-        var c = 0
-
-        override fun hasNext() = c < value.toInt()
-
-        override fun next() = CharObject(c++.toChar())
-    }
+    override fun iterator() = (0..value.toInt() - 1).map { CharObject(it.toChar()) }.iterator()
 
     override fun add(nylonObject: NylonObject<*>) = CharObject(value + nylonObject.toChar().toInt())
     override fun subt(nylonObject: NylonObject<*>) = CharObject(value - nylonObject.toInt())

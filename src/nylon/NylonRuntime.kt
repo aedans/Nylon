@@ -18,7 +18,7 @@ class NylonRuntime(src: CharIterator, parser: NylonParser) : Runnable {
     }
 
     fun write(printStream: PrintStream) {
-        stack.stacks.peek().forEach {
+        for (it in stack.stacks.peek()) {
             if (it.shouldOutputNewline) {
                 printStream.println(it.outputString())
             } else {

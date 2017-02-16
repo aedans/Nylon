@@ -4,22 +4,15 @@ package nylon
  * Created by Aedan Smith.
  */
 
-@Suppress("EqualsOrHashCode")
 abstract class NylonObject<out T>(val value: T, val string: String) : Iterable<NylonObject<*>>, Comparable<NylonObject<*>> {
     abstract fun toDouble(): Double
 
     open fun toFloat() = toDouble().toFloat()
-
     open fun toLong() = toDouble().toLong()
-
     open fun toInt() = toLong().toInt()
-
     open fun toShort() = toLong().toShort()
-
     open fun toByte() = toLong().toByte()
-
     open fun toChar() = toLong().toChar()
-
     open fun toBoolean() = toLong().toInt() != 0
 
     open fun toList(): List<NylonObject<*>> = listOf(this)
@@ -41,6 +34,8 @@ abstract class NylonObject<out T>(val value: T, val string: String) : Iterable<N
     abstract fun clone(): NylonObject<*>
 
     override fun equals(other: Any?) = if (other is NylonObject<*>) this.value == other.value else false
+
+    override fun hashCode(): Int = value!!.hashCode() * 31
 
     override operator fun compareTo(other: NylonObject<*>) = java.lang.Double.compare(toDouble(), other.toDouble())
 

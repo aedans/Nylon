@@ -9,13 +9,7 @@ import nylon.NylonObject
 class LongObject(value: Long) : NylonObject<Long>(value, "Long($value)") {
     override fun toDouble() = value.toDouble()
 
-    override fun iterator() = object : Iterator<LongObject> {
-        var l = 0.toLong()
-
-        override fun hasNext() = l < value
-
-        override fun next() = LongObject(l++)
-    }
+    override fun iterator() = (0..value - 1).map(::LongObject).iterator()
 
     override fun add(nylonObject: NylonObject<*>) = LongObject(value + nylonObject.toLong())
     override fun subt(nylonObject: NylonObject<*>) = LongObject(value - nylonObject.toLong())
