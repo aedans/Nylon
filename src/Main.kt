@@ -1,4 +1,3 @@
-
 import nylon.NylonRuntime
 import nylon.buildLibrary
 import nylon.nylonobjects.StringObject
@@ -17,7 +16,7 @@ fun main(args: Array<String>) {
     val time = System.nanoTime()
     val runtime = NylonRuntime(nylon.parser.CharIterator(FileReader(args[1]).readExtendedText()), parser)
     (2..args.size - 1).forEach { i -> runtime.stack.add(StringObject(args[i])) }
-    System.out.printf("Program compiled in %f milliseconds\n", (System.nanoTime() - time).toDouble() / 1000000.0)
+    println("Program compiled in ${(System.nanoTime() - time).toDouble() / 1000000.0} milliseconds\n")
     runtime.run()
     runtime.write(System.out)
 }

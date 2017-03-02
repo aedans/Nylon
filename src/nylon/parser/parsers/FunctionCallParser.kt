@@ -14,10 +14,7 @@ import java.util.function.Supplier
 
 class FunctionCallParserBuilder : ParserBuilder {
     override fun accept(parsers: HashMap<Char, Parser>) {
-        for (c in 'a'..'z') {
-            parsers[c] = FunctionCallParser()
-        }
-        for (c in 'A'..'Z') {
+        for (c in ('a'..'z') + ('A'..'Z')) {
             parsers[c] = FunctionCallParser()
         }
     }
@@ -37,7 +34,7 @@ class FunctionCallParser : Parser {
 fun CharIterator.parseNextName(): String {
     var name = ""
     while (this.hasNext()) {
-        if (peek() in 'A'..'Z' || peek() == '_' || peek() == '-') {
+        if (peek() in ('A'..'Z') + '_' + '-') {
             name += next()
         } else if (peek() in 'a'..'z') {
             name += next()

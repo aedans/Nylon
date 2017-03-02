@@ -14,9 +14,7 @@ abstract class NylonObject<out T>(val value: T, val string: String) : Iterable<N
     open fun toByte() = toLong().toByte()
     open fun toChar() = toLong().toChar()
     open fun toBoolean() = toLong().toInt() != 0
-
     open fun toList(): List<NylonObject<*>> = listOf(this)
-
     open fun toFunction() = createProvider(this, "@$this")
 
     operator fun plus(other: NylonObject<*>) = add(other)
